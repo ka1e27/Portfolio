@@ -625,11 +625,8 @@
       background-position: center !important;
       background-repeat: no-repeat !important;
     }
-    .flip-front-art.has-img .flip-front-icon {
-      background: rgba(0,0,0,.45);
-      padding: 12px 16px; border-radius: 12px;
-      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-    }
+    .flip-front-art.has-img .flip-front-icon { display: none; }
+    .flip-front-art.has-img::before { display: none !important; }
 
     /* ================================================================
        ABOUT TAB
