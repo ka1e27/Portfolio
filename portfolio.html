@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kyle Tran — Mechanical Engineering</title>
+  <meta name="description" content="Kyle Tran — Mechanical Engineering student at Northeastern University. Robotics, embedded systems, autonomous vehicles.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Manrope:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --transition-theme: background .45s cubic-bezier(.4,0,.2,1),
+                          color .35s cubic-bezier(.4,0,.2,1),
+                          border-color .35s cubic-bezier(.4,0,.2,1),
+                          box-shadow .35s cubic-bezier(.4,0,.2,1);
+    }
+
+    [data-theme="light"] {
+      --bg:            #F4F2ED;
+      --bg-surface:    #FFFFFF;
+      --bg-surface-hover: #F9F8F5;
+      --text:          #111110;
+      --text-secondary:#4A4A46;
+      --text-tertiary: #6B6964;
+      --accent:        #A8501E;
+      --accent-hover:  #8E4318;
+      --accent-soft:   rgba(168,80,30,.09);
+      --border:        #D4D0C8;
+      --border-hover:  #B8B3AA;
+      --shadow:        rgba(30,28,24,.08);
+      --shadow-heavy:  rgba(30,28,24,.15);
+      --grain-opacity: .02;
+      --nav-bg:        rgba(244,242,237,.88);
+      --selection-bg:  #A8501E;
+      --selection-text: #fff;
+      --scrollbar-thumb:#C8C3BB;
+      --scrollbar-track:#F4F2ED;
+      --flip-back-bg:  rgba(255,255,255,.96);
+      --flip-back-border: var(--border);
+      --hero-overlay:  rgba(244,242,237,.55);
+      --hero-name:     #111110;
+    }
+
+    [data-theme="dark"] {
+      --bg:            #0E0E0D;
+      --bg-surface:    #181816;
+      --bg-surface-hover: #1E1E1B;
+      --text:          #E4E0D8;
+      --text-secondary:#8A8680;
+      --text-tertiary: #706C66;
+      --accent:        #D4783C;
+      --accent-hover:  #E08848;
+      --accent-soft:   rgba(212,120,60,.1);
+      --border:        #2A2926;
+      --border-hover:  #3A3936;
+      --shadow:        rgba(0,0,0,.2);
+      --shadow-heavy:  rgba(0,0,0,.4);
+      --grain-opacity: .02;
+      --nav-bg:        rgba(14,14,13,.85);
+      --selection-bg:  #D4783C;
+      --selection-text: #fff;
+      --scrollbar-thumb:#2A2926;
+      --scrollbar-track:#0E0E0D;
+      --flip-back-bg:  rgba(24,24,22,.95);
+      --flip-back-border: var(--border);
+      --hero-overlay:  rgba(14,14,13,.45);
+      --hero-name:     #E4E0D8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); }
+
+    body {
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: var(--transition-theme);
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 9999;
+      opacity: var(--grain-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px;
+    }
+    ::selection { background: var(--selection-bg); color: var(--selection-text); }
+    a { color: var(--accent); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--accent-hover); }
+    img { display: block; max-width: 100%; }
+
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    .container-wide { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 32px; }
+
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .76rem; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px; display: inline-block;
+    }
+    .section-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 700; letter-spacing: -.01em; line-height: 1.15;
+      color: var(--text); margin-bottom: 56px;
+    }
+    .section-heading em { font-style: italic; color: var(--accent); }
+    .icon-svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -.1em; }
+
+    /* ── TAB SYSTEM ───────────────────────────────────────────────── */
+    .tab-content {
+      display: none; opacity: 0;
+      min-height: calc(100vh - 80px);
+    }
+    .tab-content.active { display: block; animation: tabIn .55s cubic-bezier(.16,1,.3,1) forwards; }
+    .tab-content.exiting { display: block; animation: tabOut .25s cubic-bezier(.4,0,1,1) forwards; pointer-events: none; }
+
+    @keyframes tabIn { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes tabOut { from { opacity:1; transform:translateY(0); } to { opacity:0; transform:translateY(-20px); } }
+
+    .tab-content.active .stagger { opacity: 0; animation: staggerIn .6s cubic-bezier(.16,1,.3,1) forwards; }
+    .tab-content.active .stagger:nth-child(1) { animation-delay:.05s }
+    .tab-content.active .stagger:nth-child(2) { animation-delay:.1s }
+    .tab-content.active .stagger:nth-child(3) { animation-delay:.12s }
+    .tab-content.active .stagger:nth-child(4) { animation-delay:.16s }
+    .tab-content.active .stagger:nth-child(5) { animation-delay:.2s }
+    .tab-content.active .stagger:nth-child(6) { animation-delay:.24s }
+    .tab-content.active .stagger:nth-child(7) { animation-delay:.28s }
+    .tab-content.active .stagger:nth-child(8) { animation-delay:.32s }
+    .tab-content.active .stagger:nth-child(9) { animation-delay:.36s }
+    .tab-content.active .stagger:nth-child(10) { animation-delay:.4s }
+    @keyframes staggerIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── HEADER ───────────────────────────────────────────────────── */
+    #header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: blur(24px) saturate(1.3);
+      -webkit-backdrop-filter: blur(24px) saturate(1.3);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition-theme);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+    .nav-logo {
+      display: flex; flex-direction: column;
+      cursor: pointer; user-select: none; transition: color .2s;
+      text-decoration: none; color: var(--text);
+    }
+    .nav-logo:hover { color: var(--accent); }
+    .nav-logo-name {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 1.9rem;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+    }
+    .nav-logo-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      transition: color .2s;
+    }
+    .nav-logo:hover .nav-logo-sub { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 8px; }
+    .nav-links { display: flex; gap: 2px; list-style: none; }
+    .nav-links a {
+      display: block; padding: 7px 16px; font-size: .82rem; font-weight: 500;
+      color: var(--text-secondary); border-radius: 8px; cursor: pointer; user-select: none;
+      transition: color .2s, background .2s; position: relative;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--accent-soft); }
+    .nav-links a.active { color: var(--accent); }
+    .nav-links a.active::after {
+      content: ''; position: absolute; bottom: -1px; left: 16px; right: 16px;
+      height: 2px; background: var(--accent); border-radius: 2px 2px 0 0;
+    }
+
+    .theme-toggle {
+      width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 10px;
+      background: var(--bg-surface); color: var(--text-secondary);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; margin-left: 12px; transition: var(--transition-theme); position: relative; overflow: hidden;
+    }
+    .theme-toggle:hover { border-color: var(--border-hover); color: var(--accent); }
+    .theme-toggle svg { width: 18px; height: 18px; transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .3s; position: absolute; }
+    [data-theme="dark"] .theme-toggle .icon-sun { opacity: 1; transform: rotate(0); }
+    [data-theme="dark"] .theme-toggle .icon-moon { opacity: 0; transform: rotate(-90deg) scale(.5); }
+    [data-theme="light"] .theme-toggle .icon-sun { opacity: 0; transform: rotate(90deg) scale(.5); }
+    [data-theme="light"] .theme-toggle .icon-moon { opacity: 1; transform: rotate(0); }
+
+    .nav-toggle {
+      display: none; background: none; border: 1px solid var(--border); border-radius: 8px;
+      cursor: pointer; width: 40px; height: 40px; position: relative; margin-left: 8px;
+    }
+    .nav-toggle span {
+      display: block; position: absolute; left: 10px; width: 20px; height: 1.5px;
+      background: var(--text); border-radius: 2px; transition: .3s cubic-bezier(.4,0,.2,1);
+    }
+    .nav-toggle span:nth-child(1) { top: 14px; }
+    .nav-toggle span:nth-child(2) { top: 20px; }
+    .nav-toggle span:nth-child(3) { top: 26px; }
+    .nav-toggle.open span:nth-child(1) { top: 20px; transform: rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { top: 20px; transform: rotate(-45deg); }
+
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        position: fixed; inset: 72px 0 0 0; flex-direction: column;
+        padding: 24px 32px; gap: 4px; background: var(--nav-bg);
+        backdrop-filter: blur(24px); border-top: 1px solid var(--border);
+        transform: translateY(-12px); opacity: 0; pointer-events: none;
+        transition: .35s cubic-bezier(.4,0,.2,1); z-index: 999;
+      }
+      .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+      .nav-links a { font-size: .95rem; padding: 12px 16px; }
+      .nav-links a.active::after { display: none; }
+      .container, .container-wide { padding: 0 20px; }
+    }
+
+    /* ================================================================
+       HOME — full-bleed hero with background art + name across top
+       ================================================================ */
+    .home-tab {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      padding: 0 !important;
+    }
+
+    /* large background art */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-bg-art {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* workshop/engineering atmosphere */
+    [data-theme="dark"] .hero-bg-art {
+      background:
+        radial-gradient(ellipse 80% 60% at 65% 40%, rgba(212,120,60,.06) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 20% 60%, rgba(80,120,180,.05) 0%, transparent 50%),
+        linear-gradient(180deg, #0a0a09 0%, #141412 40%, #1a1816 100%);
+    }
+    [data-theme="light"] .hero-bg-art {
+      background:
+        radial-gradient(ellipse 80% 60% at 65% 40%, rgba(181,90,48,.06) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 20% 60%, rgba(80,120,180,.04) 0%, transparent 50%),
+        linear-gradient(180deg, #eae6de 0%, #f0ece4 40%, #f4f2ed 100%);
+    }
+
+    /* grid lines */
+    .hero-bg-art::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, var(--border) 1px, transparent 1px),
+        linear-gradient(var(--border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: .25;
+      mask-image: radial-gradient(ellipse 70% 70% at 60% 50%, rgba(0,0,0,.3) 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 70% at 60% 50%, rgba(0,0,0,.3) 0%, transparent 70%);
+    }
+
+    /* large decorative circle */
+    .hero-bg-art::after {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      right: -100px; top: 50%;
+      transform: translateY(-50%);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      opacity: .35;
+    }
+
+    .hero-bg-circle-2 {
+      position: absolute;
+      width: 420px; height: 420px;
+      right: -10px; top: 50%;
+      transform: translateY(-50%);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      opacity: .2;
+    }
+    .hero-bg-circle-3 {
+      position: absolute;
+      width: 240px; height: 240px;
+      right: 80px; top: 50%;
+      transform: translateY(-50%);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      opacity: .12;
+    }
+
+    /* overlay for readability */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, var(--hero-overlay) 0%, transparent 35%, transparent 50%, var(--hero-overlay) 100%);
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .hero-bg-art::after, .hero-bg-circle-2, .hero-bg-circle-3 { display: none; }
+    }
+
+    /* ================================================================
+       FLIP CARDS — PROJECTS GRID
+       ================================================================ */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      padding-top: 100px;
+      padding-bottom: 80px;
+    }
+    .flip-card { perspective: 1200px; }
+    .flip-card-inner {
+      position: relative; width: 100%; aspect-ratio: 4/3;
+      transition: transform .75s cubic-bezier(.175,.885,.32,1.05);
+      transform-style: preserve-3d; border-radius: 16px; cursor: pointer;
+    }
+    .flip-card:hover .flip-card-inner,
+    .flip-card.tapped .flip-card-inner { transform: rotateY(180deg); }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute; inset: 0;
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      border-radius: 16px; overflow: hidden;
+    }
+    .flip-card-front { border: 1px solid var(--border); }
+
+    .flip-front-art {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; transition: transform .6s cubic-bezier(.4,0,.2,1);
+    }
+    .flip-card:hover .flip-front-art { transform: scale(1.05); }
+    .flip-front-icon { font-size: 3rem; position: relative; z-index: 2; }
+
+    /* card art */
+    .flip-card[data-project="boat"] .flip-front-art { background: linear-gradient(145deg, #0d2844, #1a3a5c); }
+    .flip-card[data-project="boat"] .flip-front-art::before {
+      content: ''; position: absolute; width: 200px; height: 200px;
+      border: 1.5px solid rgba(100,180,255,.12); border-radius: 50%; animation: pulse-ring 4s ease-in-out infinite;
+    }
+    .flip-card[data-project="boat"] .flip-front-icon { filter: drop-shadow(0 0 30px rgba(100,180,255,.3)); }
+
+    .flip-card[data-project="combat"] .flip-front-art { background: linear-gradient(145deg, #2a0f0f, #3a1a1a); }
+    .flip-card[data-project="combat"] .flip-front-art::before {
+      content: ''; position: absolute; width: 220px; height: 220px;
+      background: conic-gradient(from 0deg, transparent, rgba(255,80,50,.12), transparent, rgba(255,150,50,.08), transparent);
+      border-radius: 50%; animation: spin-slow 10s linear infinite;
+    }
+    .flip-card[data-project="combat"] .flip-front-icon { filter: drop-shadow(0 0 30px rgba(255,100,60,.3)); }
+
+    .flip-card[data-project="maze"] .flip-front-art { background: linear-gradient(145deg, #0f1f0f, #1a2a1a); }
+    .flip-card[data-project="maze"] .flip-front-art::before {
+      content: ''; position: absolute; width: 130px; height: 130px;
+      border: 1.5px solid rgba(100,220,120,.12); transform: rotate(45deg);
+    }
+    .flip-card[data-project="maze"] .flip-front-icon { filter: drop-shadow(0 0 30px rgba(100,220,120,.3)); }
+
+    .flip-card[data-project="ceramic"] .flip-front-art { background: linear-gradient(145deg, #1f1a10, #2a2215); }
+    .flip-card[data-project="ceramic"] .flip-front-art::before {
+      content: ''; position: absolute; width: 110px; height: 110px;
+      border-radius: 24px; border: 1.5px solid rgba(220,180,100,.12); transform: rotate(15deg);
+    }
+    .flip-card[data-project="ceramic"] .flip-front-icon { filter: drop-shadow(0 0 30px rgba(220,180,100,.3)); }
+
+    [data-theme="light"] .flip-card[data-project="boat"] .flip-front-art { background: linear-gradient(145deg, #c8ddf0, #a8c8e4); }
+    [data-theme="light"] .flip-card[data-project="combat"] .flip-front-art { background: linear-gradient(145deg, #f0d0c0, #e6baa8); }
+    [data-theme="light"] .flip-card[data-project="maze"] .flip-front-art { background: linear-gradient(145deg, #c8e8cc, #b0dab6); }
+    [data-theme="light"] .flip-card[data-project="ceramic"] .flip-front-art { background: linear-gradient(145deg, #e8dcc0, #dcd0b0); }
+
+    /* placeholder cards — muted, dashed style */
+    .flip-card[data-project="placeholder1"] .flip-front-art,
+    .flip-card[data-project="placeholder2"] .flip-front-art {
+      background: var(--bg-surface);
+      border: 2px dashed var(--border);
+      border-radius: 14px;
+    }
+    .flip-card[data-project="placeholder1"] .flip-front-icon,
+    .flip-card[data-project="placeholder2"] .flip-front-icon {
+      color: var(--text-tertiary);
+      font-size: 2rem;
+      filter: none;
+    }
+    .flip-card[data-project="placeholder1"] .flip-card-front,
+    .flip-card[data-project="placeholder2"] .flip-card-front {
+      border: none;
+    }
+
+    @keyframes pulse-ring { 0%,100% { transform:scale(1); opacity:.6; } 50% { transform:scale(1.12); opacity:.2; } }
+    @keyframes spin-slow { to { transform:rotate(360deg); } }
+
+    /* back — entire card clickable */
+    .flip-card-back {
+      transform: rotateY(180deg);
+      background: var(--flip-back-bg);
+      border: 1px solid var(--flip-back-border);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 32px; text-align: center;
+      transition: background .2s;
+    }
+    .flip-card-back:hover { background: var(--bg-surface-hover); }
+    .flip-back-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 700; color: var(--text); margin-bottom: 8px; line-height: 1.2;
+    }
+    .flip-back-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .75rem; color: var(--text-tertiary); letter-spacing: .04em; margin-bottom: 20px;
+    }
+    .flip-back-arrow {
+      display: flex; align-items: center; gap: 6px;
+      font-size: .8rem; font-weight: 600; color: var(--accent);
+    }
+    .flip-back-arrow svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; transition: transform .2s; }
+    .flip-card-back:hover .flip-back-arrow svg { transform: translateX(4px); }
+
+    @media (max-width: 600px) { .projects-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+    /* ================================================================
+       PROJECT DETAIL — long editorial layout
+       ================================================================ */
+    .pd { padding-top: 100px; padding-bottom: 80px; }
+
+    .pd-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .84rem; font-weight: 500; color: var(--text-secondary);
+      cursor: pointer; background: none; border: none; font-family: 'Manrope', sans-serif;
+      padding: 0; margin-bottom: 48px; transition: color .2s;
+    }
+    .pd-back:hover { color: var(--accent); }
+    .pd-back svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* hero image — full bleed */
+    .pd-hero {
+      width: 100%; aspect-ratio: 21/9;
+      border-radius: 20px; overflow: hidden; margin-bottom: 64px;
+      position: relative;
+    }
+    .pd-hero-art {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+    .pd-hero-icon { font-size: 4.5rem; position: relative; z-index: 2; }
+
+    /* title block */
+    .pd-title-block { margin-bottom: 64px; max-width: 800px; }
+    .pd-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700; color: var(--text); margin-bottom: 12px; line-height: 1.1;
+    }
+    .pd-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .78rem; color: var(--accent); letter-spacing: .04em; margin-bottom: 20px;
+    }
+    .pd-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pd-tag {
+      padding: 6px 14px; font-size: .76rem; font-weight: 500;
+      color: var(--accent); background: var(--accent-soft); border-radius: 6px;
+    }
+
+    /* large intro text */
+    .pd-intro {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text); line-height: 1.8;
+      max-width: 750px; margin-bottom: 80px;
+    }
+
+    /* full-width image section */
+    .pd-full-img {
+      width: 100%; aspect-ratio: 16/7;
+      border-radius: 16px; overflow: hidden; margin-bottom: 80px;
+      border: 1px solid var(--border);
+    }
+    .pd-full-img-art {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+    .pd-img-label {
+      font-size: .8rem; color: var(--text-tertiary); font-weight: 500;
+      position: relative; z-index: 2; text-align: center; padding: 8px;
+    }
+
+    /* two-column section: text + image */
+    .pd-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: center; margin-bottom: 80px;
+    }
+    .pd-split-text {
+      font-size: .95rem; color: var(--text-secondary); line-height: 1.8;
+    }
+    .pd-split-text p { margin-bottom: 16px; }
+    .pd-split-text p:first-child { color: var(--text); font-size: 1rem; }
+    .pd-split-img {
+      aspect-ratio: 4/3; border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .pd-split-img-art {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+
+    .pd-split.reverse { direction: rtl; }
+    .pd-split.reverse > * { direction: ltr; }
+
+    /* gallery row */
+    .pd-gallery {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; margin-bottom: 80px;
+    }
+    .pd-gallery-item {
+      aspect-ratio: 1; border-radius: 14px; overflow: hidden;
+      border: 1px solid var(--border); transition: transform .3s, border-color .3s;
+    }
+    .pd-gallery-item:hover { transform: scale(1.03); border-color: var(--border-hover); }
+    .pd-gallery-item-art {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+
+    /* closing text */
+    .pd-closing {
+      font-size: .95rem; color: var(--text-secondary); line-height: 1.8;
+      max-width: 700px; margin-bottom: 40px;
+    }
+    .pd-closing p { margin-bottom: 16px; }
+
+    @media (max-width: 768px) {
+      .pd-split, .pd-split.reverse { grid-template-columns: 1fr; direction: ltr; }
+      .pd-gallery { grid-template-columns: 1fr 1fr; }
+      .pd-hero { aspect-ratio: 16/9; }
+    }
+
+    /* art base classes */
+    .art-boat { background: linear-gradient(145deg, #0d2844, #1a3a5c); }
+    .art-combat { background: linear-gradient(145deg, #2a0f0f, #3a1a1a); }
+    .art-maze { background: linear-gradient(145deg, #0f1f0f, #1a2a1a); }
+    .art-ceramic { background: linear-gradient(145deg, #1f1a10, #2a2215); }
+    [data-theme="light"] .art-boat { background: linear-gradient(145deg, #c8ddf0, #a8c8e4); }
+    [data-theme="light"] .art-combat { background: linear-gradient(145deg, #f0d0c0, #e6baa8); }
+    [data-theme="light"] .art-maze { background: linear-gradient(145deg, #c8e8cc, #b0dab6); }
+    [data-theme="light"] .art-ceramic { background: linear-gradient(145deg, #e8dcc0, #dcd0b0); }
+
+    /* subtle variations */
+    .art-v2 { filter: brightness(1.1) saturate(.85); }
+    .art-v3 { filter: hue-rotate(10deg) brightness(1.05); }
+    .art-v4 { filter: brightness(.9) saturate(1.1); }
+
+    /* ================================================================
+       ABOUT TAB
+       ================================================================ */
+    .about-wrap { padding-top: 100px; padding-bottom: 80px; }
+    .about-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 72px; align-items: center; }
+    .about-photo {
+      aspect-ratio: 4/5; background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: 14px; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; transition: var(--transition-theme);
+    }
+    .about-photo::after { content: 'Photo'; color: var(--text-tertiary); font-size: .82rem; font-weight: 500; }
+    .about-text p { font-size: .95rem; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.75; }
+    .about-text p:first-of-type { color: var(--text); font-size: 1.02rem; }
+    .about-details { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 32px; }
+    .about-detail {
+      padding: 18px 20px; background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: 10px; transition: var(--transition-theme), border-color .2s;
+    }
+    .about-detail:hover { border-color: var(--border-hover); }
+    .about-detail-label { font-size: .73rem; text-transform: uppercase; letter-spacing: .1em; color: var(--text-tertiary); margin-bottom: 4px; font-weight: 500; }
+    .about-detail-value { font-size: .9rem; font-weight: 600; color: var(--text); }
+
+    @media (max-width: 768px) {
+      .about-layout { grid-template-columns: 1fr; gap: 36px; }
+      .about-photo { max-height: 300px; }
+    }
+
+    /* ================================================================
+       EXPERIENCE TAB (with images)
+       ================================================================ */
+    .exp-wrap { padding-top: 100px; padding-bottom: 80px; }
+
+    /* timeline layout */
+    .exp-timeline {
+      position: relative;
+      max-width: 860px;
+    }
+    /* vertical line */
+    .exp-timeline::before {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: linear-gradient(180deg, var(--accent), var(--border) 30%, var(--border) 70%, var(--accent));
+    }
+
+    .exp-entry {
+      display: flex;
+      gap: 36px;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .exp-entry:last-child { margin-bottom: 0; }
+
+    /* timeline dot */
+    .exp-marker {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      position: relative;
+      z-index: 2;
+      transition: var(--transition-theme), transform .3s, box-shadow .3s;
+    }
+    .exp-entry:hover .exp-marker {
+      transform: scale(1.12);
+      box-shadow: 0 0 0 6px var(--accent-soft);
+    }
+
+    .exp-body {
+      flex: 1;
+      padding-top: 6px;
+    }
+
+    .exp-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .76rem;
+      color: var(--accent);
+      letter-spacing: .05em;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .exp-role {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+      line-height: 1.2;
+    }
+    .exp-org {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+    .exp-desc {
+      font-size: .9rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 600px;
+    }
+
+    /* highlights row under each entry */
+    .exp-highlights {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .exp-highlight {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--accent-soft);
+      border-radius: 8px;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      .exp-timeline::before { left: 19px; }
+      .exp-entry { gap: 24px; }
+      .exp-marker { width: 40px; height: 40px; font-size: 1rem; }
+    }
+
+    /* awards — clean table style */
+    .awards-table {
+      max-width: 760px;
+    }
+
+    .award-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      transition: padding-left .2s;
+    }
+    .award-row:first-child {
+      border-top: 1px solid var(--border);
+    }
+    .award-row:hover {
+      padding-left: 8px;
+    }
+
+    .award-place {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      min-width: 52px;
+      flex-shrink: 0;
+    }
+    .award-row:nth-child(1) .award-place { color: #d4aa32; }
+    .award-row:nth-child(2) .award-place { color: var(--accent); }
+    .award-row:nth-child(3) .award-place { color: var(--accent); }
+
+    .award-info {
+      flex: 1;
+    }
+    .award-name {
+      font-size: .92rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .award-detail {
+      font-size: .78rem;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+
+    /* ── FOOTER ────────────────────────────────────────────────────── */
+    footer {
+      padding: 40px 0 32px;
+      border-top: 1px solid var(--border);
+      transition: var(--transition-theme);
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-size: .78rem;
+      color: var(--text-tertiary);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-secondary);
+      font-size: .8rem;
+      font-weight: 500;
+      padding: 4px 0;
+      transition: color .2s;
+      text-decoration: none;
+    }
+    .footer-link:hover { color: var(--accent); }
+
+    .footer-link svg {
+      width: 15px; height: 15px;
+      stroke: currentColor; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .footer-sep {
+      width: 1px;
+      height: 14px;
+      background: var(--border);
+      margin: 0 8px;
+    }
+
+    @media (max-width: 600px) {
+      .footer-row { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="container">
+    <nav class="nav-inner">
+      <a class="nav-logo" data-tab="projects">
+        <span class="nav-logo-name">Kyle Tran</span>
+        <span class="nav-logo-sub">Mechanical Engineer</span>
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links" id="nav-links">
+          <li><a data-tab="projects">Projects</a></li>
+          <li><a data-tab="about">About</a></li>
+          <li><a data-tab="experience">Experience</a></li>
+        </ul>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     TAB: HOME — clean, dramatic, name across screen
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="tab-content" data-tab="home">
+  <div class="home-tab">
+    <div class="hero-bg">
+      <div class="hero-bg-art">
+        <div class="hero-bg-circle-2"></div>
+        <div class="hero-bg-circle-3"></div>
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     TAB: PROJECTS (flip card grid — entire back clickable)
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="tab-content active" data-tab="projects">
+  <div class="container">
+    <div class="projects-grid">
+      <div class="flip-card stagger" data-project="boat" data-goto="project-boat">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><div class="flip-front-art"><span class="flip-front-icon">&#9978;</span></div></div>
+          <div class="flip-card-back">
+            <div class="flip-back-title">Autonomous Environmental Survey Boat</div>
+            <div class="flip-back-date">Jan 2026 &mdash; Present</div>
+            <div class="flip-back-arrow">View Project <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card stagger" data-project="combat" data-goto="project-combat">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><div class="flip-front-art"><span class="flip-front-icon">&#9881;</span></div></div>
+          <div class="flip-card-back">
+            <div class="flip-back-title">Combat Robotics &mdash; Team DHM</div>
+            <div class="flip-back-date">Mar 2023 &mdash; Jun 2025</div>
+            <div class="flip-back-arrow">View Project <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card stagger" data-project="maze" data-goto="project-maze">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><div class="flip-front-art"><span class="flip-front-icon">&#9776;</span></div></div>
+          <div class="flip-card-back">
+            <div class="flip-back-title">Autonomous Maze-Solving Robot</div>
+            <div class="flip-back-date">Oct 2025 &mdash; Dec 2025</div>
+            <div class="flip-back-arrow">View Project <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card stagger" data-project="ceramic" data-goto="project-ceramic">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><div class="flip-front-art"><span class="flip-front-icon">&#9883;</span></div></div>
+          <div class="flip-card-back">
+            <div class="flip-back-title">Ceramic Tools R&amp;D</div>
+            <div class="flip-back-date">Oct 2023 &mdash; May 2025</div>
+            <div class="flip-back-arrow">View Project <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card stagger" data-project="placeholder1" data-goto="project-placeholder1">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><div class="flip-front-art"><span class="flip-front-icon">&#10010;</span></div></div>
+          <div class="flip-card-back">
+            <div class="flip-back-title">Coming Soon</div>
+            <div class="flip-back-date">In Progress</div>
+            <div class="flip-back-arrow">View Project <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card stagger" data-project="placeholder2" data-goto="project-placeholder2">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><div class="flip-front-art"><span class="flip-front-icon">&#10010;</span></div></div>
+          <div class="flip-card-back">
+            <div class="flip-back-title">Coming Soon</div>
+            <div class="flip-back-date">In Progress</div>
+            <div class="flip-back-arrow">View Project <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PROJECT DETAIL: BOAT — long editorial
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="tab-content" data-tab="project-boat">
+  <div class="container-wide pd">
+    <button class="pd-back stagger" data-tab="projects"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Projects</button>
+
+    <div class="pd-hero stagger">
+      <div class="pd-hero-art art-boat" style="position:relative">
+        <span class="pd-hero-icon">&#9978;</span>
+        <div style="position:absolute;width:300px;height:300px;border:1.5px solid rgba(100,180,255,.08);border-radius:50%;animation:pulse-ring 4s ease-in-out infinite"></div>
+        <div style="position:absolute;width:180px;height:180px;border:1px solid rgba(100,180,255,.05);border-radius:50%;animation:pulse-ring 4s ease-in-out 1.5s infinite"></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="pd-title-block stagger">
+        <h1 class="pd-title">Autonomous Environmental Survey Boat</h1>
+        <div class="pd-date">Jan 2026 &mdash; Present</div>
+        <div class="pd-tags">
+          <span class="pd-tag">MicroPython</span><span class="pd-tag">Raspberry Pi Pico</span>
+          <span class="pd-tag">GPS / Compass</span><span class="pd-tag">HC-12 Radio</span><span class="pd-tag">Sensor Systems</span>
+        </div>
+      </div>
+
+      <p class="pd-intro stagger">
+        An autonomous catamaran built from scratch to monitor water quality in local lakes and reservoirs.
+        GPS waypoint navigation, compass heading control, and a 30-foot motorized sensor deployment winch
+        enable fully autonomous environmental survey missions.
+      </p>
+    </div>
+
+    <div class="container-wide">
+      <div class="pd-full-img stagger"><div class="pd-full-img-art art-boat"><span class="pd-img-label">Catamaran hull design &mdash; twin pontoon configuration for stability</span></div></div>
+    </div>
+
+    <div class="container">
+      <div class="pd-split stagger">
+        <div class="pd-split-text">
+          <p>The dual-hull design provides exceptional stability on open water, critical for accurate sensor readings. Each pontoon houses waterproof compartments for batteries and electronics.</p>
+          <p>The modular waterproof sensor pods measure temperature, salinity, light penetration, and depth. Pods connect to the main bus via waterproof magnetic connectors, enabling quick field swaps without tools.</p>
+        </div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-boat art-v2"><span class="pd-img-label">Sensor pod assembly with waterproof connectors</span></div></div>
+      </div>
+
+      <div class="pd-split reverse stagger">
+        <div class="pd-split-text">
+          <p>The control system runs on dual Raspberry Pi Pico microcontrollers — one dedicated to navigation and motor control, the other managing sensor acquisition and data logging.</p>
+          <p>The picos communicate over a shared UART bus, while the shore station receives real-time telemetry via an HC-12 433 MHz radio link with a range of over 1 km across open water.</p>
+        </div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-boat art-v3"><span class="pd-img-label">Electronics bay — dual Pico control system</span></div></div>
+      </div>
+    </div>
+
+    <div class="container-wide">
+      <div class="pd-full-img stagger"><div class="pd-full-img-art art-boat art-v4"><span class="pd-img-label">Shore station dashboard showing real-time GPS track and sensor data</span></div></div>
+    </div>
+
+    <div class="container">
+      <div class="pd-gallery stagger">
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-boat"><span class="pd-img-label">Winch mechanism</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-boat art-v2"><span class="pd-img-label">GPS module mount</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-boat art-v3"><span class="pd-img-label">Water testing deployment</span></div></div>
+      </div>
+
+      <div class="pd-closing stagger">
+        <p>The full firmware stack is written in MicroPython with mission planning, geo-fenced safety boundaries, automatic return-to-home on low battery, and range estimation based on current draw and remaining capacity.</p>
+        <p>The project is ongoing, with plans to add dissolved oxygen sensing, current profiling, and multi-boat swarm coordination for larger survey areas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PROJECT DETAIL: COMBAT — long editorial
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="tab-content" data-tab="project-combat">
+  <div class="container-wide pd">
+    <button class="pd-back stagger" data-tab="projects"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Projects</button>
+
+    <div class="pd-hero stagger">
+      <div class="pd-hero-art art-combat" style="position:relative">
+        <span class="pd-hero-icon">&#9881;</span>
+        <div style="position:absolute;width:300px;height:300px;background:conic-gradient(from 0deg,transparent,rgba(255,80,50,.08),transparent,rgba(255,150,50,.05),transparent);border-radius:50%;animation:spin-slow 10s linear infinite"></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="pd-title-block stagger">
+        <h1 class="pd-title">Combat Robotics &mdash; Team Dihydrogen Monoxide</h1>
+        <div class="pd-date">Mar 2023 &mdash; Jun 2025</div>
+        <div class="pd-tags">
+          <span class="pd-tag">CAD</span><span class="pd-tag">CNC Machining</span>
+          <span class="pd-tag">3D Printing</span><span class="pd-tag">Competition</span>
+        </div>
+      </div>
+
+      <p class="pd-intro stagger">
+        Founded and led Team Dihydrogen Monoxide through two years of competitive combat robotics.
+        Designed and fabricated 4 robots across 5 weight classes, earning Top 50 national placements
+        and 16+ podium finishes at regional and national events.
+      </p>
+    </div>
+
+    <div class="container-wide">
+      <div class="pd-full-img stagger"><div class="pd-full-img-art art-combat"><span class="pd-img-label">Full robot lineup &mdash; antweight through beetleweight</span></div></div>
+    </div>
+
+    <div class="container">
+      <div class="pd-split stagger">
+        <div class="pd-split-text">
+          <p>Every robot was designed from scratch in CAD, with custom weapon systems optimized through iterative simulation and real-world testing. Weapon types included horizontal spinners, vertical drums, and overhead hammers.</p>
+          <p>Manufacturing combined CNC-machined aluminum frames with 3D-printed armor panels in reinforced nylon and polycarbonate. Critical joints used press-fit bushings and custom fastener patterns.</p>
+        </div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-combat art-v2"><span class="pd-img-label">CAD render of antweight spinner design</span></div></div>
+      </div>
+
+      <div class="pd-split reverse stagger">
+        <div class="pd-split-text">
+          <p>Competed at the 2024 and 2025 Robot Combat League National Championships. Achieved 4th place nationally in Plastic Antweight at the 2024 event — the team's best national result.</p>
+          <p>Across 5 regional competition events, the team earned 8 podium finishes including multiple 1st-place results. Each competition informed the next generation of designs through post-match damage analysis.</p>
+        </div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-combat art-v3"><span class="pd-img-label">Competition arena at RCL Nationals 2024</span></div></div>
+      </div>
+    </div>
+
+    <div class="container-wide">
+      <div class="pd-full-img stagger"><div class="pd-full-img-art art-combat art-v4"><span class="pd-img-label">CNC machining aluminum chassis plates on the Tormach</span></div></div>
+    </div>
+
+    <div class="container">
+      <div class="pd-gallery stagger">
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-combat"><span class="pd-img-label">Weapon assembly</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-combat art-v2"><span class="pd-img-label">3D printed armor</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-combat art-v3"><span class="pd-img-label">Post-match damage</span></div></div>
+      </div>
+
+      <div class="pd-closing stagger">
+        <p>Beyond the engineering, the project built a community. As club president, I taught CAD, soldering, physics, and fabrication to dozens of members, many of whom went on to build their own competition robots.</p>
+        <p>The experience cemented a deep understanding of design-for-combat: optimizing for repairability, weight distribution, weapon energy storage, and the unpredictable reality of physical competition.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PROJECT DETAIL: MAZE — long editorial
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="tab-content" data-tab="project-maze">
+  <div class="container-wide pd">
+    <button class="pd-back stagger" data-tab="projects"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Projects</button>
+
+    <div class="pd-hero stagger">
+      <div class="pd-hero-art art-maze" style="position:relative">
+        <span class="pd-hero-icon">&#9776;</span>
+        <div style="position:absolute;width:180px;height:180px;border:1.5px solid rgba(100,220,120,.07);transform:rotate(45deg)"></div>
+        <div style="position:absolute;width:110px;height:110px;border:1px solid rgba(100,220,120,.05);transform:rotate(22.5deg)"></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="pd-title-block stagger">
+        <h1 class="pd-title">Autonomous Maze-Solving Robot</h1>
+        <div class="pd-date">Oct 2025 &mdash; Dec 2025</div>
+        <div class="pd-tags">
+          <span class="pd-tag">Onshape</span><span class="pd-tag">MicroPython</span>
+          <span class="pd-tag">Asyncio</span><span class="pd-tag">Pathfinding</span>
+        </div>
+      </div>
+
+      <p class="pd-intro stagger">
+        Led the design and programming of an autonomous maze-navigation robot for Northeastern's
+        Cornerstone of Engineering course. Full ownership of mechanical CAD and the entire MicroPython
+        firmware stack, from sensor fusion to real-time pathfinding.
+      </p>
+    </div>
+
+    <div class="container-wide">
+      <div class="pd-full-img stagger"><div class="pd-full-img-art art-maze"><span class="pd-img-label">Complete robot assembly with sensor array and differential drive</span></div></div>
+    </div>
+
+    <div class="container">
+      <div class="pd-split stagger">
+        <div class="pd-split-text">
+          <p>The robot's chassis was designed in Onshape with a focus on compactness and low center of gravity. The differential drive system used micro gear motors with optical encoders for precise odometry.</p>
+          <p>Five IR distance sensors provided a 180-degree forward view, with two side-mounted sensors for wall tracking. Sensor readings were fused using a weighted averaging algorithm to reject noise.</p>
+        </div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-maze art-v2"><span class="pd-img-label">Onshape CAD model — exploded view</span></div></div>
+      </div>
+
+      <div class="pd-split reverse stagger">
+        <div class="pd-split-text">
+          <p>The asyncio-based control architecture ran sensor polling, motor control, and navigation logic as concurrent tasks on a single Raspberry Pi Pico. This enabled responsive obstacle avoidance without blocking the main navigation loop.</p>
+          <p>Navigation strategy combined right-wall-following with shortest-path optimization. The robot built an internal map of visited cells and could backtrack to explore unexplored branches.</p>
+        </div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-maze art-v3"><span class="pd-img-label">Sensor wiring and Pico controller</span></div></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="pd-gallery stagger">
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-maze"><span class="pd-img-label">IR sensor array</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-maze art-v2"><span class="pd-img-label">Drive train detail</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-maze art-v3"><span class="pd-img-label">Maze test run</span></div></div>
+      </div>
+
+      <div class="pd-closing stagger">
+        <p>The modular code architecture allowed rapid iteration on PID tuning and navigation strategies during testing sessions. Configurable parameters were exposed via a serial debug interface.</p>
+        <p>The project demonstrated the power of concurrent embedded programming for real-time robotics — a pattern I've since applied to the autonomous survey boat's control system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PROJECT DETAIL: CERAMIC — long editorial
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="tab-content" data-tab="project-ceramic">
+  <div class="container-wide pd">
+    <button class="pd-back stagger" data-tab="projects"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Projects</button>
+
+    <div class="pd-hero stagger">
+      <div class="pd-hero-art art-ceramic" style="position:relative">
+        <span class="pd-hero-icon">&#9883;</span>
+        <div style="position:absolute;width:160px;height:160px;border-radius:32px;border:1.5px solid rgba(220,180,100,.07);transform:rotate(15deg)"></div>
+        <div style="position:absolute;width:100px;height:100px;border-radius:20px;border:1px solid rgba(220,180,100,.05);transform:rotate(-15deg)"></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="pd-title-block stagger">
+        <h1 class="pd-title">Ceramic Tools R&amp;D</h1>
+        <div class="pd-date">Oct 2023 &mdash; May 2025</div>
+        <div class="pd-tags">
+          <span class="pd-tag">CAD</span><span class="pd-tag">3D Printing</span><span class="pd-tag">Design for Manufacturing</span>
+        </div>
+      </div>
+
+      <p class="pd-intro stagger">
+        A research and development project creating specialized 3D-printed tools for ceramics education.
+        Over 10 custom tools designed, prototyped, and deployed at Burlingame High School, with designs
+        published online for the maker community.
+      </p>
+    </div>
+
+    <div class="container-wide">
+      <div class="pd-full-img stagger"><div class="pd-full-img-art art-ceramic"><span class="pd-img-label">Complete tool set &mdash; trimming tools, ribs, wire guides, and custom stamps</span></div></div>
+    </div>
+
+    <div class="container">
+      <div class="pd-split stagger">
+        <div class="pd-split-text">
+          <p>Each tool went through 3-5 design iterations, testing ergonomics and durability with ceramics students and teachers. Grip profiles were refined using hand measurements and clay resistance testing.</p>
+          <p>Print orientation and infill strategies were optimized for each tool's primary stress direction. PETG was selected for its chemical resistance to clay slip and glaze materials.</p>
+        </div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-ceramic art-v2"><span class="pd-img-label">CAD models showing iteration history</span></div></div>
+      </div>
+
+      <div class="pd-split reverse stagger">
+        <div class="pd-split-text">
+          <p>Tools were designed with ease of printing in mind — minimal supports, flat bases for bed adhesion, and wall thicknesses optimized for 0.4mm nozzles. This made them accessible to anyone with a basic FDM printer.</p>
+          <p>All final designs were published online with detailed print settings, material recommendations, and usage guides. The files have been downloaded by educators and makers around the world.</p>
+        </div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-ceramic art-v3"><span class="pd-img-label">Printed tools on the build plate</span></div></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="pd-gallery stagger">
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-ceramic"><span class="pd-img-label">Trimming tool in use</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-ceramic art-v2"><span class="pd-img-label">Custom stamp design</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-ceramic art-v3"><span class="pd-img-label">Student feedback session</span></div></div>
+      </div>
+
+      <div class="pd-closing stagger">
+        <p>This project taught me that great design serves its users. The most successful tools weren't the most complex — they were the ones that felt right in a potter's hand and solved a real frustration in the studio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PROJECT DETAIL: PLACEHOLDER 1
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="tab-content" data-tab="project-placeholder1">
+  <div class="container pd">
+    <button class="pd-back stagger" data-tab="projects"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Projects</button>
+    <div class="pd-title-block stagger">
+      <h1 class="pd-title">Coming Soon</h1>
+      <div class="pd-date">In Progress</div>
+    </div>
+    <p class="pd-intro stagger" style="color:var(--text-tertiary);">This project is currently in development. Check back soon for details.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PROJECT DETAIL: PLACEHOLDER 2
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="tab-content" data-tab="project-placeholder2">
+  <div class="container pd">
+    <button class="pd-back stagger" data-tab="projects"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Projects</button>
+    <div class="pd-title-block stagger">
+      <h1 class="pd-title">Coming Soon</h1>
+      <div class="pd-date">In Progress</div>
+    </div>
+    <p class="pd-intro stagger" style="color:var(--text-tertiary);">This project is currently in development. Check back soon for details.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     TAB: ABOUT
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="tab-content" data-tab="about">
+  <div class="container about-wrap">
+    <div class="about-layout">
+      <div class="about-photo stagger"></div>
+      <div class="about-text">
+        <div class="section-label stagger">About</div>
+        <h2 class="section-heading stagger">Engineer, Builder,<br><em>Competitor</em></h2>
+        <p class="stagger">I'm a Mechanical Engineering student at Northeastern University in Boston with a passion for turning ideas into real, working machines. From combat robots to autonomous survey boats, I thrive at the intersection of design, fabrication, and embedded systems.</p>
+        <p class="stagger">I founded a combat robotics club, led teams to national competitions, and I'm currently developing an autonomous catamaran for environmental water quality monitoring. I care deeply about engineering that makes a tangible impact.</p>
+        <div class="about-details stagger">
+          <div class="about-detail"><div class="about-detail-label">University</div><div class="about-detail-value">Northeastern</div></div>
+          <div class="about-detail"><div class="about-detail-label">Major</div><div class="about-detail-value">Mechanical Eng.</div></div>
+          <div class="about-detail"><div class="about-detail-label">GPA</div><div class="about-detail-value">3.92</div></div>
+          <div class="about-detail"><div class="about-detail-label">Based in</div><div class="about-detail-value">Burlingame, CA</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     TAB: EXPERIENCE (timeline + awards)
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="tab-content" data-tab="experience">
+  <div class="container exp-wrap">
+    <div class="section-label stagger">Experience</div>
+    <h2 class="section-heading stagger">Leadership &amp; <em>Teams</em></h2>
+
+    <div class="exp-timeline">
+      <div class="exp-entry stagger">
+        <div class="exp-marker">&#9881;</div>
+        <div class="exp-body">
+          <div class="exp-date">Oct 2023 &mdash; Jun 2025</div>
+          <div class="exp-role">President</div>
+          <div class="exp-org">Combat Robots Club, Burlingame</div>
+          <p class="exp-desc">Taught CAD, soldering, physics, material science, and 3D printing to club members. Secured sponsorships and managed club finances. Led the team to 16 podium finishes across 5 competition events.</p>
+          <div class="exp-highlights">
+            <span class="exp-highlight">16 Podium Finishes</span>
+            <span class="exp-highlight">5 Events</span>
+            <span class="exp-highlight">Sponsorships Secured</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-entry stagger">
+        <div class="exp-marker">&#9878;</div>
+        <div class="exp-body">
+          <div class="exp-date">Sep 2021 &mdash; May 2024</div>
+          <div class="exp-role">Subsystem Lead</div>
+          <div class="exp-org">Iron Panthers FRC #5026</div>
+          <p class="exp-desc">Designed the spindexer mechanism for the team's competition robot. Managed 10+ team members and collaborated with 5 professional mentors on design reviews, manufacturing processes, and competition strategy.</p>
+          <div class="exp-highlights">
+            <span class="exp-highlight">10+ Members Managed</span>
+            <span class="exp-highlight">5 Mentors</span>
+            <span class="exp-highlight">Spindexer Design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label stagger" style="margin-top:64px">Awards</div>
+    <h2 class="section-heading stagger">Competition <em>Results</em></h2>
+
+    <div class="awards-table">
+      <div class="award-row stagger">
+        <div class="award-place">4th</div>
+        <div class="award-info">
+          <div class="award-name">Robot Combat League National Championship 2024</div>
+          <div class="award-detail">Plastic Antweight &mdash; National</div>
+        </div>
+      </div>
+      <div class="award-row stagger">
+        <div class="award-place">1st</div>
+        <div class="award-info">
+          <div class="award-name">CROS March Madness</div>
+          <div class="award-detail">Antweight &mdash; Regional</div>
+        </div>
+      </div>
+      <div class="award-row stagger">
+        <div class="award-place">1st</div>
+        <div class="award-info">
+          <div class="award-name">BCRC Bell Brawls</div>
+          <div class="award-detail">Regional Competition</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <span class="footer-copy">&copy; 2026 Kyle Tran</span>
+      <div class="footer-links">
+        <a href="mailto:kylegtran2007@gmail.com" class="footer-link">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
+          Email
+        </a>
+        <div class="footer-sep"></div>
+        <a href="tel:+16507624160" class="footer-link">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Phone
+        </a>
+        <div class="footer-sep"></div>
+        <a href="https://www.linkedin.com/in/kyle-tran-06a18b277/" target="_blank" rel="noopener" class="footer-link">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <div class="footer-sep"></div>
+        <a href="https://github.com/ka1e27" target="_blank" rel="noopener" class="footer-link">
+          <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+(function() {
+  'use strict';
+
+  // ── Theme ────────────────────────────────────────────────────────
+  const html = document.documentElement;
+  const stored = localStorage.getItem('theme');
+  if (stored) html.setAttribute('data-theme', stored);
+  else if (window.matchMedia('(prefers-color-scheme: light)').matches) html.setAttribute('data-theme', 'light');
+
+  document.getElementById('theme-toggle').addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+
+  // ── Tab Router ───────────────────────────────────────────────────
+  const navAnchors = document.querySelectorAll('.nav-links a[data-tab]');
+  let currentTab = 'projects';
+  let transitioning = false;
+
+  function switchTab(tabId, push) {
+    if (tabId === currentTab || transitioning) return;
+    transitioning = true;
+
+    const out = document.querySelector('.tab-content.active');
+    const inc = document.querySelector('.tab-content[data-tab="' + tabId + '"]');
+    if (!inc) { transitioning = false; return; }
+
+    navAnchors.forEach(a => {
+      const t = a.getAttribute('data-tab');
+      a.classList.toggle('active', tabId.startsWith('project-') ? t === 'projects' : t === tabId);
+    });
+
+    if (out) { out.classList.add('exiting'); out.classList.remove('active'); }
+
+    setTimeout(() => {
+      if (out) out.classList.remove('exiting');
+      inc.classList.add('active');
+      currentTab = tabId;
+      transitioning = false;
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, out ? 250 : 0);
+
+    if (push !== false) history.pushState(null, '', '#' + tabId);
+  }
+
+  // all clickable tab triggers
+  document.querySelectorAll('[data-tab]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      switchTab(el.getAttribute('data-tab'), true);
+      document.getElementById('nav-toggle').classList.remove('open');
+      document.getElementById('nav-links').classList.remove('open');
+    });
+  });
+
+  // flip cards — entire back is clickable, navigates via data-goto
+  document.querySelectorAll('.flip-card[data-goto]').forEach(card => {
+    const inner = card.querySelector('.flip-card-inner');
+    // on click when flipped, navigate
+    inner.addEventListener('click', () => {
+      // check if card is flipped (either via hover/tapped)
+      const isFlipped = card.classList.contains('tapped') ||
+        (window.getComputedStyle(inner).transform !== 'none' &&
+         window.getComputedStyle(inner).transform !== 'matrix(1, 0, 0, 1, 0, 0)');
+
+      if (isFlipped || !isTouchDevice) {
+        // on desktop the card auto-flips on hover, so any click on it should navigate
+        // small delay to let the user see the back
+        const goto = card.getAttribute('data-goto');
+        if (goto) switchTab(goto, true);
+      }
+    });
+  });
+
+  // hash on load
+  const hash = location.hash.replace('#', '') || 'projects';
+  if (hash !== 'home') {
+    const active = document.querySelector('.tab-content.active');
+    const target = document.querySelector('.tab-content[data-tab="' + hash + '"]');
+    if (target) {
+      if (active) { active.classList.remove('active'); active.classList.remove('exiting'); }
+      target.classList.add('active');
+      currentTab = hash;
+      navAnchors.forEach(a => {
+        const t = a.getAttribute('data-tab');
+        a.classList.toggle('active', hash.startsWith('project-') ? t === 'projects' : t === hash);
+      });
+    }
+  } else {
+    navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('data-tab') === 'projects'));
+  }
+
+  window.addEventListener('popstate', () => switchTab(location.hash.replace('#', '') || 'projects', false));
+
+  // ── Mobile Nav ───────────────────────────────────────────────────
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => { toggle.classList.toggle('open'); links.classList.toggle('open'); });
+
+  // ── Touch ────────────────────────────────────────────────────────
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  if (isTouchDevice) {
+    document.querySelectorAll('.flip-card').forEach(card => {
+      card.addEventListener('touchstart', e => {
+        if (!card.classList.contains('tapped')) {
+          e.preventDefault();
+          // un-tap others
+          document.querySelectorAll('.flip-card.tapped').forEach(c => { if (c !== card) c.classList.remove('tapped'); });
+          card.classList.add('tapped');
+        }
+        // if already tapped, the click handler above will navigate
+      }, { passive: false });
+    });
+  }
+
+})();
+</script>
+</body>
+</html>
