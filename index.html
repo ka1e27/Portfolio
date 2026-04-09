@@ -1,3 +1,33 @@
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  HOW TO ADD IMAGES                                          ║
+  ║                                                              ║
+  ║  1. Put your image files in the "images/" folder             ║
+  ║  2. Find the data-img="..." attribute for the spot you want  ║
+  ║  3. Replace the filename with yours, e.g.:                   ║
+  ║       data-img="images/boat-hero.jpg"                        ║
+  ║                                                              ║
+  ║  Image spots per project (boat, combat, maze, ceramic):      ║
+  ║    {project}-hero.jpg     — large hero banner                ║
+  ║    {project}-1.jpg        — full-width image                 ║
+  ║    {project}-2.jpg        — side image (left text)           ║
+  ║    {project}-3.jpg        — side image (right text)          ║
+  ║    {project}-4.jpg        — second full-width image          ║
+  ║    {project}-g1.jpg       — gallery left                     ║
+  ║    {project}-g2.jpg       — gallery center                   ║
+  ║    {project}-g3.jpg       — gallery right                    ║
+  ║                                                              ║
+  ║  Other spots:                                                ║
+  ║    about-photo.jpg        — your photo on the About page     ║
+  ║    boat-card.jpg          — project card thumbnail           ║
+  ║    combat-card.jpg        — project card thumbnail           ║
+  ║    maze-card.jpg          — project card thumbnail           ║
+  ║    ceramic-card.jpg       — project card thumbnail           ║
+  ║                                                              ║
+  ║  Tip: Use JPG/WebP under 500KB for fast loading.             ║
+  ║  The gradient placeholder shows until you add an image.      ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -564,10 +594,19 @@
     [data-theme="light"] .art-maze { background: linear-gradient(145deg, #c8e8cc, #b0dab6); }
     [data-theme="light"] .art-ceramic { background: linear-gradient(145deg, #e8dcc0, #dcd0b0); }
 
-    /* subtle variations */
-    .art-v2 { filter: brightness(1.1) saturate(.85); }
-    .art-v3 { filter: hue-rotate(10deg) brightness(1.05); }
-    .art-v4 { filter: brightness(.9) saturate(1.1); }
+    /* subtle variations (only applied when no image is loaded) */
+    .art-v2:not(.has-img) { filter: brightness(1.1) saturate(.85); }
+    .art-v3:not(.has-img) { filter: hue-rotate(10deg) brightness(1.05); }
+    .art-v4:not(.has-img) { filter: brightness(.9) saturate(1.1); }
+
+    /* data-img loaded images */
+    [data-img].has-img { background-size: cover; background-position: center; background-repeat: no-repeat; }
+    [data-img].has-img .pd-img-label { background: rgba(0,0,0,.55); color: #fff; padding: 6px 14px; border-radius: 8px; backdrop-filter: blur(4px); }
+    [data-img].has-img .pd-hero-icon { display: none; }
+    .about-photo.has-img { background-size: cover; background-position: center; background-repeat: no-repeat; }
+    .about-photo.has-img::after { display: none; }
+    .flip-front-art.has-img { background-size: cover; background-position: center; background-repeat: no-repeat; }
+    .flip-front-art.has-img .flip-front-icon { background: rgba(0,0,0,.4); backdrop-filter: blur(4px); }
 
     /* ================================================================
        ABOUT TAB
@@ -859,7 +898,7 @@
     <div class="projects-grid">
       <div class="flip-card stagger" data-project="boat" data-goto="project-boat">
         <div class="flip-card-inner">
-          <div class="flip-card-front"><div class="flip-front-art"><span class="flip-front-icon">&#9978;</span></div></div>
+          <div class="flip-card-front"><div class="flip-front-art" data-img="images/boat-card.jpg"><span class="flip-front-icon">&#9978;</span></div></div>
           <div class="flip-card-back">
             <div class="flip-back-title">Autonomous Environmental Survey Boat</div>
             <div class="flip-back-date">Jan 2026 &mdash; Present</div>
@@ -870,7 +909,7 @@
 
       <div class="flip-card stagger" data-project="combat" data-goto="project-combat">
         <div class="flip-card-inner">
-          <div class="flip-card-front"><div class="flip-front-art"><span class="flip-front-icon">&#9881;</span></div></div>
+          <div class="flip-card-front"><div class="flip-front-art" data-img="images/combat-card.jpg"><span class="flip-front-icon">&#9881;</span></div></div>
           <div class="flip-card-back">
             <div class="flip-back-title">Combat Robotics &mdash; Team DHM</div>
             <div class="flip-back-date">Mar 2023 &mdash; Jun 2025</div>
@@ -881,7 +920,7 @@
 
       <div class="flip-card stagger" data-project="maze" data-goto="project-maze">
         <div class="flip-card-inner">
-          <div class="flip-card-front"><div class="flip-front-art"><span class="flip-front-icon">&#9776;</span></div></div>
+          <div class="flip-card-front"><div class="flip-front-art" data-img="images/maze-card.jpg"><span class="flip-front-icon">&#9776;</span></div></div>
           <div class="flip-card-back">
             <div class="flip-back-title">Autonomous Maze-Solving Robot</div>
             <div class="flip-back-date">Oct 2025 &mdash; Dec 2025</div>
@@ -892,7 +931,7 @@
 
       <div class="flip-card stagger" data-project="ceramic" data-goto="project-ceramic">
         <div class="flip-card-inner">
-          <div class="flip-card-front"><div class="flip-front-art"><span class="flip-front-icon">&#9883;</span></div></div>
+          <div class="flip-card-front"><div class="flip-front-art" data-img="images/ceramic-card.jpg"><span class="flip-front-icon">&#9883;</span></div></div>
           <div class="flip-card-back">
             <div class="flip-back-title">Ceramic Tools R&amp;D</div>
             <div class="flip-back-date">Oct 2023 &mdash; May 2025</div>
@@ -934,7 +973,7 @@
     <button class="pd-back stagger" data-tab="projects"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Projects</button>
 
     <div class="pd-hero stagger">
-      <div class="pd-hero-art art-boat" style="position:relative">
+      <div class="pd-hero-art art-boat" data-img="images/boat-hero.jpg" style="position:relative">
         <span class="pd-hero-icon">&#9978;</span>
         <div style="position:absolute;width:300px;height:300px;border:1.5px solid rgba(100,180,255,.08);border-radius:50%;animation:pulse-ring 4s ease-in-out infinite"></div>
         <div style="position:absolute;width:180px;height:180px;border:1px solid rgba(100,180,255,.05);border-radius:50%;animation:pulse-ring 4s ease-in-out 1.5s infinite"></div>
@@ -959,7 +998,7 @@
     </div>
 
     <div class="container-wide">
-      <div class="pd-full-img stagger"><div class="pd-full-img-art art-boat"><span class="pd-img-label">Catamaran hull design &mdash; twin pontoon configuration for stability</span></div></div>
+      <div class="pd-full-img stagger"><div class="pd-full-img-art art-boat" data-img="images/boat-1.jpg"><span class="pd-img-label">Catamaran hull design &mdash; twin pontoon configuration for stability</span></div></div>
     </div>
 
     <div class="container">
@@ -968,7 +1007,7 @@
           <p>The dual-hull design provides exceptional stability on open water, critical for accurate sensor readings. Each pontoon houses waterproof compartments for batteries and electronics.</p>
           <p>The modular waterproof sensor pods measure temperature, salinity, light penetration, and depth. Pods connect to the main bus via waterproof magnetic connectors, enabling quick field swaps without tools.</p>
         </div>
-        <div class="pd-split-img"><div class="pd-split-img-art art-boat art-v2"><span class="pd-img-label">Sensor pod assembly with waterproof connectors</span></div></div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-boat art-v2" data-img="images/boat-2.jpg"><span class="pd-img-label">Sensor pod assembly with waterproof connectors</span></div></div>
       </div>
 
       <div class="pd-split reverse stagger">
@@ -976,19 +1015,19 @@
           <p>The control system runs on dual Raspberry Pi Pico microcontrollers — one dedicated to navigation and motor control, the other managing sensor acquisition and data logging.</p>
           <p>The picos communicate over a shared UART bus, while the shore station receives real-time telemetry via an HC-12 433 MHz radio link with a range of over 1 km across open water.</p>
         </div>
-        <div class="pd-split-img"><div class="pd-split-img-art art-boat art-v3"><span class="pd-img-label">Electronics bay — dual Pico control system</span></div></div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-boat art-v3" data-img="images/boat-3.jpg"><span class="pd-img-label">Electronics bay — dual Pico control system</span></div></div>
       </div>
     </div>
 
     <div class="container-wide">
-      <div class="pd-full-img stagger"><div class="pd-full-img-art art-boat art-v4"><span class="pd-img-label">Shore station dashboard showing real-time GPS track and sensor data</span></div></div>
+      <div class="pd-full-img stagger"><div class="pd-full-img-art art-boat art-v4" data-img="images/boat-4.jpg"><span class="pd-img-label">Shore station dashboard showing real-time GPS track and sensor data</span></div></div>
     </div>
 
     <div class="container">
       <div class="pd-gallery stagger">
-        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-boat"><span class="pd-img-label">Winch mechanism</span></div></div>
-        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-boat art-v2"><span class="pd-img-label">GPS module mount</span></div></div>
-        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-boat art-v3"><span class="pd-img-label">Water testing deployment</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-boat" data-img="images/boat-g1.jpg"><span class="pd-img-label">Winch mechanism</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-boat art-v2" data-img="images/boat-g2.jpg"><span class="pd-img-label">GPS module mount</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-boat art-v3" data-img="images/boat-g3.jpg"><span class="pd-img-label">Water testing deployment</span></div></div>
       </div>
 
       <div class="pd-closing stagger">
@@ -1007,7 +1046,7 @@
     <button class="pd-back stagger" data-tab="projects"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Projects</button>
 
     <div class="pd-hero stagger">
-      <div class="pd-hero-art art-combat" style="position:relative">
+      <div class="pd-hero-art art-combat" data-img="images/combat-hero.jpg" style="position:relative">
         <span class="pd-hero-icon">&#9881;</span>
         <div style="position:absolute;width:300px;height:300px;background:conic-gradient(from 0deg,transparent,rgba(255,80,50,.08),transparent,rgba(255,150,50,.05),transparent);border-radius:50%;animation:spin-slow 10s linear infinite"></div>
       </div>
@@ -1031,7 +1070,7 @@
     </div>
 
     <div class="container-wide">
-      <div class="pd-full-img stagger"><div class="pd-full-img-art art-combat"><span class="pd-img-label">Full robot lineup &mdash; antweight through beetleweight</span></div></div>
+      <div class="pd-full-img stagger"><div class="pd-full-img-art art-combat" data-img="images/combat-1.jpg"><span class="pd-img-label">Full robot lineup &mdash; antweight through beetleweight</span></div></div>
     </div>
 
     <div class="container">
@@ -1040,7 +1079,7 @@
           <p>Every robot was designed from scratch in CAD, with custom weapon systems optimized through iterative simulation and real-world testing. Weapon types included horizontal spinners, vertical drums, and overhead hammers.</p>
           <p>Manufacturing combined CNC-machined aluminum frames with 3D-printed armor panels in reinforced nylon and polycarbonate. Critical joints used press-fit bushings and custom fastener patterns.</p>
         </div>
-        <div class="pd-split-img"><div class="pd-split-img-art art-combat art-v2"><span class="pd-img-label">CAD render of antweight spinner design</span></div></div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-combat art-v2" data-img="images/combat-2.jpg"><span class="pd-img-label">CAD render of antweight spinner design</span></div></div>
       </div>
 
       <div class="pd-split reverse stagger">
@@ -1048,19 +1087,19 @@
           <p>Competed at the 2024 and 2025 Robot Combat League National Championships. Achieved 4th place nationally in Plastic Antweight at the 2024 event — the team's best national result.</p>
           <p>Across 5 regional competition events, the team earned 8 podium finishes including multiple 1st-place results. Each competition informed the next generation of designs through post-match damage analysis.</p>
         </div>
-        <div class="pd-split-img"><div class="pd-split-img-art art-combat art-v3"><span class="pd-img-label">Competition arena at RCL Nationals 2024</span></div></div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-combat art-v3" data-img="images/combat-3.jpg"><span class="pd-img-label">Competition arena at RCL Nationals 2024</span></div></div>
       </div>
     </div>
 
     <div class="container-wide">
-      <div class="pd-full-img stagger"><div class="pd-full-img-art art-combat art-v4"><span class="pd-img-label">CNC machining aluminum chassis plates on the Tormach</span></div></div>
+      <div class="pd-full-img stagger"><div class="pd-full-img-art art-combat art-v4" data-img="images/combat-4.jpg"><span class="pd-img-label">CNC machining aluminum chassis plates on the Tormach</span></div></div>
     </div>
 
     <div class="container">
       <div class="pd-gallery stagger">
-        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-combat"><span class="pd-img-label">Weapon assembly</span></div></div>
-        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-combat art-v2"><span class="pd-img-label">3D printed armor</span></div></div>
-        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-combat art-v3"><span class="pd-img-label">Post-match damage</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-combat" data-img="images/combat-g1.jpg"><span class="pd-img-label">Weapon assembly</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-combat art-v2" data-img="images/combat-g2.jpg"><span class="pd-img-label">3D printed armor</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-combat art-v3" data-img="images/combat-g3.jpg"><span class="pd-img-label">Post-match damage</span></div></div>
       </div>
 
       <div class="pd-closing stagger">
@@ -1079,7 +1118,7 @@
     <button class="pd-back stagger" data-tab="projects"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Projects</button>
 
     <div class="pd-hero stagger">
-      <div class="pd-hero-art art-maze" style="position:relative">
+      <div class="pd-hero-art art-maze" data-img="images/maze-hero.jpg" style="position:relative">
         <span class="pd-hero-icon">&#9776;</span>
         <div style="position:absolute;width:180px;height:180px;border:1.5px solid rgba(100,220,120,.07);transform:rotate(45deg)"></div>
         <div style="position:absolute;width:110px;height:110px;border:1px solid rgba(100,220,120,.05);transform:rotate(22.5deg)"></div>
@@ -1104,7 +1143,7 @@
     </div>
 
     <div class="container-wide">
-      <div class="pd-full-img stagger"><div class="pd-full-img-art art-maze"><span class="pd-img-label">Complete robot assembly with sensor array and differential drive</span></div></div>
+      <div class="pd-full-img stagger"><div class="pd-full-img-art art-maze" data-img="images/maze-1.jpg"><span class="pd-img-label">Complete robot assembly with sensor array and differential drive</span></div></div>
     </div>
 
     <div class="container">
@@ -1113,7 +1152,7 @@
           <p>The robot's chassis was designed in Onshape with a focus on compactness and low center of gravity. The differential drive system used micro gear motors with optical encoders for precise odometry.</p>
           <p>Five IR distance sensors provided a 180-degree forward view, with two side-mounted sensors for wall tracking. Sensor readings were fused using a weighted averaging algorithm to reject noise.</p>
         </div>
-        <div class="pd-split-img"><div class="pd-split-img-art art-maze art-v2"><span class="pd-img-label">Onshape CAD model — exploded view</span></div></div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-maze art-v2" data-img="images/maze-2.jpg"><span class="pd-img-label">Onshape CAD model — exploded view</span></div></div>
       </div>
 
       <div class="pd-split reverse stagger">
@@ -1121,15 +1160,15 @@
           <p>The asyncio-based control architecture ran sensor polling, motor control, and navigation logic as concurrent tasks on a single Raspberry Pi Pico. This enabled responsive obstacle avoidance without blocking the main navigation loop.</p>
           <p>Navigation strategy combined right-wall-following with shortest-path optimization. The robot built an internal map of visited cells and could backtrack to explore unexplored branches.</p>
         </div>
-        <div class="pd-split-img"><div class="pd-split-img-art art-maze art-v3"><span class="pd-img-label">Sensor wiring and Pico controller</span></div></div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-maze art-v3" data-img="images/maze-3.jpg"><span class="pd-img-label">Sensor wiring and Pico controller</span></div></div>
       </div>
     </div>
 
     <div class="container">
       <div class="pd-gallery stagger">
-        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-maze"><span class="pd-img-label">IR sensor array</span></div></div>
-        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-maze art-v2"><span class="pd-img-label">Drive train detail</span></div></div>
-        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-maze art-v3"><span class="pd-img-label">Maze test run</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-maze" data-img="images/maze-g1.jpg"><span class="pd-img-label">IR sensor array</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-maze art-v2" data-img="images/maze-g2.jpg"><span class="pd-img-label">Drive train detail</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-maze art-v3" data-img="images/maze-g3.jpg"><span class="pd-img-label">Maze test run</span></div></div>
       </div>
 
       <div class="pd-closing stagger">
@@ -1148,7 +1187,7 @@
     <button class="pd-back stagger" data-tab="projects"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Projects</button>
 
     <div class="pd-hero stagger">
-      <div class="pd-hero-art art-ceramic" style="position:relative">
+      <div class="pd-hero-art art-ceramic" data-img="images/ceramic-hero.jpg" style="position:relative">
         <span class="pd-hero-icon">&#9883;</span>
         <div style="position:absolute;width:160px;height:160px;border-radius:32px;border:1.5px solid rgba(220,180,100,.07);transform:rotate(15deg)"></div>
         <div style="position:absolute;width:100px;height:100px;border-radius:20px;border:1px solid rgba(220,180,100,.05);transform:rotate(-15deg)"></div>
@@ -1172,7 +1211,7 @@
     </div>
 
     <div class="container-wide">
-      <div class="pd-full-img stagger"><div class="pd-full-img-art art-ceramic"><span class="pd-img-label">Complete tool set &mdash; trimming tools, ribs, wire guides, and custom stamps</span></div></div>
+      <div class="pd-full-img stagger"><div class="pd-full-img-art art-ceramic" data-img="images/ceramic-1.jpg"><span class="pd-img-label">Complete tool set &mdash; trimming tools, ribs, wire guides, and custom stamps</span></div></div>
     </div>
 
     <div class="container">
@@ -1181,7 +1220,7 @@
           <p>Each tool went through 3-5 design iterations, testing ergonomics and durability with ceramics students and teachers. Grip profiles were refined using hand measurements and clay resistance testing.</p>
           <p>Print orientation and infill strategies were optimized for each tool's primary stress direction. PETG was selected for its chemical resistance to clay slip and glaze materials.</p>
         </div>
-        <div class="pd-split-img"><div class="pd-split-img-art art-ceramic art-v2"><span class="pd-img-label">CAD models showing iteration history</span></div></div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-ceramic art-v2" data-img="images/ceramic-2.jpg"><span class="pd-img-label">CAD models showing iteration history</span></div></div>
       </div>
 
       <div class="pd-split reverse stagger">
@@ -1189,15 +1228,15 @@
           <p>Tools were designed with ease of printing in mind — minimal supports, flat bases for bed adhesion, and wall thicknesses optimized for 0.4mm nozzles. This made them accessible to anyone with a basic FDM printer.</p>
           <p>All final designs were published online with detailed print settings, material recommendations, and usage guides. The files have been downloaded by educators and makers around the world.</p>
         </div>
-        <div class="pd-split-img"><div class="pd-split-img-art art-ceramic art-v3"><span class="pd-img-label">Printed tools on the build plate</span></div></div>
+        <div class="pd-split-img"><div class="pd-split-img-art art-ceramic art-v3" data-img="images/ceramic-3.jpg"><span class="pd-img-label">Printed tools on the build plate</span></div></div>
       </div>
     </div>
 
     <div class="container">
       <div class="pd-gallery stagger">
-        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-ceramic"><span class="pd-img-label">Trimming tool in use</span></div></div>
-        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-ceramic art-v2"><span class="pd-img-label">Custom stamp design</span></div></div>
-        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-ceramic art-v3"><span class="pd-img-label">Student feedback session</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-ceramic" data-img="images/ceramic-g1.jpg"><span class="pd-img-label">Trimming tool in use</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-ceramic art-v2" data-img="images/ceramic-g2.jpg"><span class="pd-img-label">Custom stamp design</span></div></div>
+        <div class="pd-gallery-item"><div class="pd-gallery-item-art art-ceramic art-v3" data-img="images/ceramic-g3.jpg"><span class="pd-img-label">Student feedback session</span></div></div>
       </div>
 
       <div class="pd-closing stagger">
@@ -1241,7 +1280,7 @@
 <section class="tab-content" data-tab="about">
   <div class="container about-wrap">
     <div class="about-layout">
-      <div class="about-photo stagger"></div>
+      <div class="about-photo stagger" data-img="images/about-photo.jpg"></div>
       <div class="about-text">
         <div class="section-label stagger">About</div>
         <h2 class="section-heading stagger">Engineer, Builder,<br><em>Competitor</em></h2>
@@ -1460,6 +1499,15 @@
   const toggle = document.getElementById('nav-toggle');
   const links = document.getElementById('nav-links');
   toggle.addEventListener('click', () => { toggle.classList.toggle('open'); links.classList.toggle('open'); });
+
+  // ── Image Loader (data-img) ──────────────────────────────────────
+  document.querySelectorAll('[data-img]').forEach(el => {
+    const src = el.getAttribute('data-img');
+    if (!src) return;
+    const img = new Image();
+    img.onload = () => { el.style.backgroundImage = 'url(' + src + ')'; el.classList.add('has-img'); };
+    img.src = src;
+  });
 
   // ── Touch ────────────────────────────────────────────────────────
   const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
