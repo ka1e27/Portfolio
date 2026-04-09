@@ -600,13 +600,36 @@
     .art-v4:not(.has-img) { filter: brightness(.9) saturate(1.1); }
 
     /* data-img loaded images */
-    [data-img].has-img { background-size: cover; background-position: center; background-repeat: no-repeat; }
-    [data-img].has-img .pd-img-label { background: rgba(0,0,0,.55); color: #fff; padding: 6px 14px; border-radius: 8px; backdrop-filter: blur(4px); }
+    [data-img].has-img {
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+    }
+    [data-img].has-img .pd-img-label {
+      background: rgba(0,0,0,.55); color: #fff;
+      padding: 6px 14px; border-radius: 8px;
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    }
     [data-img].has-img .pd-hero-icon { display: none; }
-    .about-photo.has-img { background-size: cover; background-position: center; background-repeat: no-repeat; }
+    /* hide decorative overlays when image is loaded */
+    [data-img].has-img > div[style] { display: none; }
+    .flip-front-art.has-img::before { display: none; }
+
+    .about-photo.has-img {
+      background-size: cover; background-position: center top; background-repeat: no-repeat;
+    }
     .about-photo.has-img::after { display: none; }
-    .flip-front-art.has-img { background-size: cover; background-position: center; background-repeat: no-repeat; }
-    .flip-front-art.has-img .flip-front-icon { background: rgba(0,0,0,.4); backdrop-filter: blur(4px); }
+
+    .flip-front-art.has-img {
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+    }
+    .flip-front-art.has-img .flip-front-icon {
+      background: rgba(0,0,0,.45);
+      padding: 12px 16px; border-radius: 12px;
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
 
     /* ================================================================
        ABOUT TAB
