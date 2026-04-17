@@ -22,7 +22,7 @@
   ║    boat-card.jpg          — project card thumbnail           ║
   ║    combat-card.jpg        — project card thumbnail           ║
   ║    maze-card.jpg          — project card thumbnail           ║
-  ║    ceramic-card.jpg       — project card thumbnail           ║
+  ║    ceramic-card.png       — project card thumbnail           ║
   ║                                                              ║
   ║  Tip: Use JPG/WebP under 500KB for fast loading.             ║
   ║  The gradient placeholder shows until you add an image.      ║
@@ -68,8 +68,6 @@
       --scrollbar-track:#F4F2ED;
       --flip-back-bg:  rgba(255,255,255,.96);
       --flip-back-border: var(--border);
-      --hero-overlay:  rgba(244,242,237,.55);
-      --hero-name:     #111110;
     }
 
     [data-theme="dark"] {
@@ -94,8 +92,6 @@
       --scrollbar-track:#0E0E0D;
       --flip-back-bg:  rgba(24,24,22,.95);
       --flip-back-border: var(--border);
-      --hero-overlay:  rgba(14,14,13,.45);
-      --hero-name:     #E4E0D8;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -254,100 +250,6 @@
       .nav-links a { font-size: .95rem; padding: 12px 16px; }
       .nav-links a.active::after { display: none; }
       .container, .container-wide { padding: 0 20px; }
-    }
-
-    /* ================================================================
-       HOME — full-bleed hero with background art + name across top
-       ================================================================ */
-    .home-tab {
-      min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-      padding: 0 !important;
-    }
-
-    /* large background art */
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
-    .hero-bg-art {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* workshop/engineering atmosphere */
-    [data-theme="dark"] .hero-bg-art {
-      background:
-        radial-gradient(ellipse 80% 60% at 65% 40%, rgba(212,120,60,.06) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 70% at 20% 60%, rgba(80,120,180,.05) 0%, transparent 50%),
-        linear-gradient(180deg, #0a0a09 0%, #141412 40%, #1a1816 100%);
-    }
-    [data-theme="light"] .hero-bg-art {
-      background:
-        radial-gradient(ellipse 80% 60% at 65% 40%, rgba(181,90,48,.06) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 70% at 20% 60%, rgba(80,120,180,.04) 0%, transparent 50%),
-        linear-gradient(180deg, #eae6de 0%, #f0ece4 40%, #f4f2ed 100%);
-    }
-
-    /* grid lines */
-    .hero-bg-art::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(90deg, var(--border) 1px, transparent 1px),
-        linear-gradient(var(--border) 1px, transparent 1px);
-      background-size: 80px 80px;
-      opacity: .25;
-      mask-image: radial-gradient(ellipse 70% 70% at 60% 50%, rgba(0,0,0,.3) 0%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse 70% 70% at 60% 50%, rgba(0,0,0,.3) 0%, transparent 70%);
-    }
-
-    /* large decorative circle */
-    .hero-bg-art::after {
-      content: '';
-      position: absolute;
-      width: 600px; height: 600px;
-      right: -100px; top: 50%;
-      transform: translateY(-50%);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      opacity: .35;
-    }
-
-    .hero-bg-circle-2 {
-      position: absolute;
-      width: 420px; height: 420px;
-      right: -10px; top: 50%;
-      transform: translateY(-50%);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      opacity: .2;
-    }
-    .hero-bg-circle-3 {
-      position: absolute;
-      width: 240px; height: 240px;
-      right: 80px; top: 50%;
-      transform: translateY(-50%);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      opacity: .12;
-    }
-
-    /* overlay for readability */
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, var(--hero-overlay) 0%, transparent 35%, transparent 50%, var(--hero-overlay) 100%);
-      z-index: 1;
-    }
-
-    @media (max-width: 768px) {
-      .hero-bg-art::after, .hero-bg-circle-2, .hero-bg-circle-3 { display: none; }
     }
 
     /* ================================================================
@@ -896,22 +798,6 @@
     </nav>
   </div>
 </header>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     TAB: HOME — clean, dramatic, name across screen
-     ═══════════════════════════════════════════════════════════════ -->
-<section class="tab-content" data-tab="home">
-  <div class="home-tab">
-    <div class="hero-bg">
-      <div class="hero-bg-art">
-        <div class="hero-bg-circle-2"></div>
-        <div class="hero-bg-circle-3"></div>
-      </div>
-    </div>
-    <div class="hero-overlay"></div>
-
-  </div>
-</section>
 
 <!-- ═══════════════════════════════════════════════════════════════
      TAB: PROJECTS (flip card grid — entire back clickable)
@@ -1500,20 +1386,16 @@
 
   // hash on load
   const hash = location.hash.replace('#', '') || 'projects';
-  if (hash !== 'home') {
-    const active = document.querySelector('.tab-content.active');
-    const target = document.querySelector('.tab-content[data-tab="' + hash + '"]');
-    if (target) {
-      if (active) { active.classList.remove('active'); active.classList.remove('exiting'); }
-      target.classList.add('active');
-      currentTab = hash;
-      navAnchors.forEach(a => {
-        const t = a.getAttribute('data-tab');
-        a.classList.toggle('active', hash.startsWith('project-') ? t === 'projects' : t === hash);
-      });
-    }
-  } else {
-    navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('data-tab') === 'projects'));
+  const active = document.querySelector('.tab-content.active');
+  const target = document.querySelector('.tab-content[data-tab="' + hash + '"]');
+  if (target) {
+    if (active) { active.classList.remove('active'); active.classList.remove('exiting'); }
+    target.classList.add('active');
+    currentTab = hash;
+    navAnchors.forEach(a => {
+      const t = a.getAttribute('data-tab');
+      a.classList.toggle('active', hash.startsWith('project-') ? t === 'projects' : t === hash);
+    });
   }
 
   window.addEventListener('popstate', () => switchTab(location.hash.replace('#', '') || 'projects', false));
