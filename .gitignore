@@ -1,1 +1,6 @@
 .claude/
+.agents/
+skills-lock.json
+
+# Large local video (exceeds GitHub 100MB limit)
+images/Video of subtasks for dreams v1.mov
