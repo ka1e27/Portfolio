@@ -28,6 +28,24 @@
   <meta property="og:image" content="images/web/dreams-field.jpg">
   <meta name="twitter:image" content="images/web/dreams-field.jpg">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230E0E0E'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='700' fill='%23EDEDED' text-anchor='middle'%3EKT%3C/text%3E%3C/svg%3E">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Kyle Tran",
+    "jobTitle":"Mechanical Engineer",
+    "description":"Mechanical Engineering student at Northeastern University — autonomous survey boats, combat robots, embedded systems, and CAD.",
+    "alumniOf":{"@type":"CollegeOrUniversity","name":"Northeastern University"},
+    "knowsAbout":["Mechanical Engineering","Robotics","CAD","Embedded Systems","Combat Robotics","Computer Vision","PCB Design","3D Printing"],
+    "email":"mailto:kylegtran2007@gmail.com",
+    "sameAs":[
+      "https://github.com/ka1e27",
+      "https://www.linkedin.com/in/kyle-tran-06a18b277/",
+      "https://www.instagram.com/ktprojdumps/",
+      "https://makerworld.com/en/@kylegtran2007"
+    ]
+  }
+  </script>
   <script>
     /* Resolve theme before first paint (no flash for light-mode users). */
     (function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#0E0E0E':'#F3F1EC');}catch(e){}})();
@@ -77,7 +95,7 @@
       --border:#E3DFD6; --border-strong:#CDC8BC; --border-frame:#D2CDC1;
       --nav-bg:rgba(243,241,236,.72);
       --signal:#A8481A; --signal-soft:rgba(168,72,26,.12); --signal-strong:#8F3D15;
-      --grid-line:rgba(20,19,18,.05);
+      --grid-line:rgba(20,19,18,.05); --grid-line-strong:rgba(20,19,18,.09);
       --selection-bg:#141312; --selection-text:#FFFFFF;
       --scrollbar-thumb:#CBC6BA; --scrollbar-track:#F3F1EC;
       --grain-opacity:.018;
@@ -92,7 +110,7 @@
       --border:#282824; --border-strong:#3B3A35; --border-frame:#333330;
       --nav-bg:rgba(13,13,12,.7);
       --signal:#F2703C; --signal-soft:rgba(242,112,60,.15); --signal-strong:#FF7E4D;
-      --grid-line:rgba(237,237,234,.045);
+      --grid-line:rgba(237,237,234,.045); --grid-line-strong:rgba(237,237,234,.085);
       --selection-bg:#F2703C; --selection-text:#0D0D0C;
       --scrollbar-thumb:#2A2A26; --scrollbar-track:#0D0D0C;
       --grain-opacity:.026;
@@ -148,8 +166,8 @@
 
     /* ── scroll reveal + choreography ─────────────────────────────────── */
     @media (prefers-reduced-motion: no-preference) {
-      body.js-reveal .reveal { opacity:0; transform:translateY(26px); filter:blur(5px);
-        transition:opacity .8s var(--ease), transform .9s var(--ease), filter .8s var(--ease); }
+      body.js-reveal .reveal { opacity:0; transform:translateY(22px);
+        transition:opacity .7s var(--ease), transform .8s var(--ease); }
       body.js-reveal .reveal[data-reveal="left"]  { transform:translateX(-28px); }
       body.js-reveal .reveal[data-reveal="right"] { transform:translateX(28px); }
       body.js-reveal .reveal[data-reveal="none"]  { transform:none; filter:none; }
@@ -250,7 +268,7 @@
     .hero-inner { position:relative; z-index:2; max-width:1000px; }
     /* faint bathymetric/contour motif — on-theme (depth sounding) */
     .hero-motif { position:absolute; z-index:1; top:40px; right:-6%; width:min(760px,72vw); aspect-ratio:1; pointer-events:none;
-      opacity:.9; color:var(--grid-line); will-change:transform; }
+      opacity:1; color:var(--grid-line-strong); will-change:transform; }
     .hero-motif svg { width:100%; height:100%; overflow:visible; }
     .hero-motif svg * { stroke:currentColor; fill:none; vector-effect:non-scaling-stroke; }
     @media (max-width:900px){ .hero-motif { right:-30%; top:70px; width:130vw; } }
@@ -305,6 +323,7 @@
     .proj-media { position:relative; overflow:hidden; border-radius:var(--r-frame); border:1px solid var(--border-frame); background:var(--bg-elev); }
     .proj-media .cover { position:absolute; inset:0; background-size:cover; background-position:center; transition:transform .8s var(--ease); }
     .proj:hover .proj-media .cover { transform:scale(1.045); }
+    .proj-media .cover.cover-contain { background-size:contain; background-repeat:no-repeat; background-position:center; padding:6% 4%; }
     .proj:hover .proj-media { border-color:var(--border-strong); }
     .proj-num { position:absolute; top:14px; left:15px; z-index:2; font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); letter-spacing:.14em; color:#fff; mix-blend-mode:difference; }
     .proj-cat { position:absolute; top:12px; right:12px; z-index:2; font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.1em; text-transform:uppercase; color:var(--text);
@@ -321,6 +340,10 @@
     .work-featured { margin-bottom:var(--s6); }
     .work-featured .proj-media { aspect-ratio:16/9; }
     .work-featured .proj-title { font-size:var(--fs-700); }
+    @media (max-width:560px){
+      .work-featured .proj-body { flex-direction:column; align-items:flex-start; gap:var(--s3); }
+      .work-featured .proj-meta { flex-direction:row; align-items:center; justify-content:space-between; width:100%; padding-top:0; }
+    }
 
     .work-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:var(--s6) var(--s5); padding-bottom:var(--s8); }
     .work-grid .proj-title { font-size:var(--fs-600); }
@@ -421,6 +444,7 @@
     /* content figures — never cropped; auto figure numbers */
     .img-fig { margin:0; display:block; }
     .img-el { display:block; width:100%; height:auto; border-radius:var(--r-frame); border:1px solid var(--border-frame); background:var(--bg-elev); }
+    .img-el[data-src$=".png"] { padding:16px; }
     .img-clickable { cursor:zoom-in; }
     .img-cap { margin-top:12px; padding:0 2px; font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); font-weight:400; letter-spacing:.02em; line-height:1.5; color:var(--text-secondary); display:flex; gap:10px; }
     .pd .img-cap::before { counter-increment:fig; content:"FIG." counter(fig,decimal-leading-zero); color:var(--signal); flex-shrink:0; }
@@ -570,10 +594,24 @@
     .award-name { font-size:1rem; font-weight:600; color:var(--text); }
     .award-detail { font-size:var(--fs-label); color:var(--text-tertiary); margin-top:3px; font-family:'IBM Plex Mono',monospace; letter-spacing:.03em; }
 
+    .exp-summary { font-size:var(--fs-500); color:var(--text-secondary); line-height:1.7; max-width:66ch; margin-bottom:var(--s8); }
+    /* education block */
+    .edu { border:1px solid var(--border); border-radius:var(--r-panel); background:var(--bg-elev); padding:var(--s5) var(--s6); margin-top:var(--s5); }
+    .edu-head { display:flex; align-items:flex-start; justify-content:space-between; gap:var(--s5); flex-wrap:wrap; padding-bottom:var(--s4); border-bottom:1px solid var(--border); margin-bottom:var(--s4); }
+    .edu-degree { font-family:'Fraunces',serif; font-size:var(--fs-600); font-weight:600; color:var(--text); letter-spacing:-.01em; line-height:1.2; }
+    .edu-school { font-size:var(--fs-300); color:var(--text-secondary); margin-top:5px; }
+    .edu-meta { display:flex; flex-direction:column; align-items:flex-end; gap:6px; text-align:right; flex-shrink:0; }
+    .edu-gpa { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); letter-spacing:.06em; text-transform:uppercase; color:var(--text-tertiary); }
+    .edu-gpa b { color:var(--signal); font-weight:600; }
+    .edu-date { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); color:var(--text-tertiary); letter-spacing:.04em; }
+    .edu-courses { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+    .edu-courses-k { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.14em; text-transform:uppercase; color:var(--text-tertiary); margin-right:4px; }
+    @media (max-width:600px){ .edu-meta{ align-items:flex-start; text-align:left; } }
+
     /* ================================================================
        MISC
        ================================================================ */
-    .misc-list { display:flex; flex-direction:column; gap:var(--s6); max-width:980px; }
+    .misc-list { display:flex; flex-direction:column; gap:var(--s6); }
     .misc-entry { padding:30px 32px; background:var(--bg-elev); border:1px solid var(--border); border-radius:var(--r-panel); transition:border-color .25s var(--ease); }
     .misc-entry:hover { border-color:var(--border-strong); }
     .misc-entry-head { display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:10px; }
@@ -662,6 +700,31 @@
     body.edit-mode [contenteditable]:focus { outline:2px solid var(--signal); outline-offset:4px; }
     body.edit-mode [data-edit-id].dragging { outline:2px solid var(--signal); opacity:.9; position:relative; z-index:500; box-shadow:var(--shadow-pop); }
 
+    /* ── skip link (a11y) ─────────────────────────────────────────────── */
+    .skip-link { position:fixed; left:16px; top:-72px; z-index:2000; background:var(--accent); color:var(--accent-contrast);
+      font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); font-weight:500; letter-spacing:.1em; text-transform:uppercase;
+      padding:11px 18px; border-radius:var(--r-pill); box-shadow:var(--shadow-pop); transition:top .25s var(--ease); }
+    .skip-link:focus { top:16px; color:var(--accent-contrast); }
+
+    /* ── capabilities matrix (experience) ─────────────────────────────── */
+    .cap-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r-panel); overflow:hidden; margin-top:var(--s5); }
+    .cap-cell { background:var(--bg); padding:var(--s5); transition:background .25s var(--ease); }
+    .cap-cell:hover { background:var(--bg-elev); }
+    .cap-k { display:flex; align-items:center; gap:9px; font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.14em; text-transform:uppercase; color:var(--text-tertiary); margin-bottom:14px; }
+    .cap-k::before { content:''; width:6px; height:6px; border-radius:var(--r-pill); background:var(--signal); flex-shrink:0; }
+    .cap-list { display:flex; flex-wrap:wrap; gap:8px; }
+    .cap-item { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); font-weight:500; color:var(--text); background:var(--accent-soft); border-radius:var(--r-pill); padding:6px 13px; letter-spacing:.02em; }
+    @media (max-width:640px){ .cap-grid{ grid-template-columns:1fr; } }
+
+    /* ── closing contact band (global) ────────────────────────────────── */
+    .contact-cta { border-top:1px solid var(--border); }
+    .contact-cta-inner { padding:var(--s10) var(--gutter) var(--s9); display:grid; grid-template-columns:1.35fr 1fr; gap:var(--s7); align-items:end; }
+    .contact-cta h2 { font-family:'Fraunces',serif; font-optical-sizing:auto; font-size:var(--fs-900); font-weight:600; letter-spacing:-.02em; line-height:1.02; color:var(--text); }
+    .contact-cta h2 em { font-style:italic; font-weight:500; }
+    .contact-cta-lead { font-size:var(--fs-500); color:var(--text-secondary); line-height:1.6; max-width:46ch; margin-top:var(--s4); }
+    .contact-cta-actions { display:flex; flex-wrap:wrap; gap:14px; }
+    @media (max-width:820px){ .contact-cta-inner{ grid-template-columns:1fr; gap:var(--s5); align-items:start; padding-top:var(--s9); } }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior:auto; }
       .telem-k .dot::after { animation:none; }
@@ -670,6 +733,7 @@
   </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <div class="scroll-progress" aria-hidden="true"></div>
 
@@ -697,6 +761,7 @@
   </div>
 </header>
 
+<main id="main" tabindex="-1">
 <!-- ═══════════════════════ TAB: WORK ═══════════════════════ -->
 <section class="tab-content active" data-tab="work">
   <div class="container-wide">
@@ -720,6 +785,7 @@
           <p class="hero-lead reveal">I build <strong>robots, autonomous vehicles, and embedded systems</strong> &mdash; drawn in CAD, machined and printed, wired and coded, then tested until they hold up.</p>
           <div class="hero-cta reveal">
             <button type="button" class="btn btn-primary" id="hero-cta-work">View Work <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button>
+            <a class="btn btn-ghost" href="Kyle_Tran_Resume.pdf" target="_blank" rel="noopener">Résumé <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
             <a class="btn btn-ghost" href="mailto:kylegtran2007@gmail.com">Get in touch</a>
           </div>
           <div class="hero-telemetry reveal" aria-label="Current status">
@@ -733,7 +799,7 @@
 
     <div class="marquee" aria-label="Tools and skills">
       <div class="marquee-track" id="marquee-track">
-        <span><b>CAD</b> · Onshape · KiCad · MicroPython · Python · asyncio · Raspberry Pi · VESC · OpenCV · YOLOv8 · FastAPI · PostGIS · CNC machining · FDM printing · Stereo vision · PCB design &nbsp;·&nbsp; </span>
+        <span><b>CAD</b> · SolidWorks · Onshape · Fusion 360 · KiCad · MicroPython · Python · asyncio · Raspberry Pi · VESC · OpenCV · YOLOv8 · FastAPI · PostGIS · CNC machining · FDM printing · Stereo vision · PCB design &nbsp;·&nbsp; </span>
       </div>
     </div>
 
@@ -786,7 +852,7 @@
       <article class="proj reveal col-12" data-goto="project-misc" role="link" tabindex="0" aria-label="Miscellaneous smaller builds">
         <div class="proj-media">
           <span class="proj-num" aria-hidden="true">04</span><span class="proj-cat">Assorted</span>
-          <div class="cover" data-img="images/web/ceramic-tools.jpg" role="img" aria-label="Assorted smaller builds"></div>
+          <div class="cover cover-contain" data-img="images/web/plane-v1.png" role="img" aria-label="Assorted smaller builds — 3D-printed plane, ceramics, CAD"></div>
         </div>
         <div class="proj-body"><h3 class="proj-title">Miscellaneous Builds</h3>
           <div class="proj-meta"><span class="proj-date">2023 — now · ceramics, planes, CAD studies</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
@@ -797,8 +863,8 @@
     <!-- CREDIBILITY -->
     <div class="cred-strip reveal">
       <div class="cred-cell"><div class="cred-num">2<span class="u">+</span></div><div class="cred-label">Years combat robotics</div></div>
-      <div class="cred-cell"><div class="cred-num">4</div><div class="cred-label">Robots designed &amp; built</div></div>
-      <div class="cred-cell"><div class="cred-num">3.92</div><div class="cred-label">GPA · Mechanical Eng.</div></div>
+      <div class="cred-cell"><div class="cred-num">10</div><div class="cred-label">Robots designed &amp; built</div></div>
+      <div class="cred-cell"><div class="cred-num">3.87</div><div class="cred-label">GPA · Mechanical Eng.</div></div>
       <div class="cred-cell"><div class="cred-num">4<span class="u">th</span></div><div class="cred-label">National · Plastic AW '24</div></div>
     </div>
   </div>
@@ -878,7 +944,7 @@
     <div class="container">
       <div class="pd-split media-left reveal">
         <figure class="img-fig is-portrait">
-          <img class="img-el img-clickable" data-src="images/web/dreams-v1-cad-pod.jpg" width="511" height="640" alt="CAD of the v1 sensor pod" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <img class="img-el img-clickable" data-src="images/web/dreams-v1-cad-pod.png" width="511" height="640" alt="CAD of the v1 sensor pod" loading="lazy" decoding="async" onerror="imgFallback(this)">
           <figcaption class="img-cap">CAD — v1 sensor pod</figcaption>
         </figure>
         <div class="pd-split-text">
@@ -911,6 +977,7 @@
     <!-- VERSION 2 -->
     <div class="container">
       <div class="reveal pd-section-label"><span class="section-label">Version 2 · In progress</span></div>
+      <p class="pd-closing reveal" style="margin-bottom:var(--s5)">v1 proved the concept on the water &mdash; and showed where it ran out of room. It couldn't see or avoid obstacles, the 433&nbsp;MHz radio was short-range and half-duplex, the hand-wired loom was a tangle of failure points, and a PLA hull isn't built for long days on the water. v2 answers each one:</p>
       <div class="diff-wrap reveal">
         <table class="diff-table">
           <thead><tr><th class="aspect">System</th><th>v1</th><th>v2</th></tr></thead>
@@ -920,7 +987,7 @@
             <tr><td class="aspect">Electronics</td><td class="v1">Hand-wired</td><td class="v2">Custom KiCad PCB</td></tr>
             <tr><td class="aspect">Vision</td><td class="v1">—</td><td class="v2">Stereo depth + YOLOv8 avoidance <span class="rev">NEW</span></td></tr>
             <tr><td class="aspect">Comms</td><td class="v1">HC-12 433 MHz half-duplex</td><td class="v2">4G LTE → PostGIS cloud</td></tr>
-            <tr><td class="aspect">Power</td><td class="v1">LiPo packs</td><td class="v2">3× isolated Milwaukee M18 domains</td></tr>
+            <tr><td class="aspect">Power</td><td class="v1">LiPo packs</td><td class="v2">M18 for electronics + winch · 12S LiPo drive planned</td></tr>
           </tbody>
         </table>
       </div>
@@ -928,7 +995,7 @@
       <div class="pd-sticky">
         <div class="pd-sticky-media reveal">
           <figure class="img-fig">
-            <img class="img-el img-clickable" data-src="images/web/dreams-v2-cad-hull.jpg" width="1057" height="819" alt="CAD design of the v2 hull" loading="lazy" decoding="async" onerror="imgFallback(this)">
+            <img class="img-el img-clickable" data-src="images/web/dreams-v2-cad-hull.png" width="1057" height="819" alt="CAD design of the v2 hull" loading="lazy" decoding="async" onerror="imgFallback(this)">
             <figcaption class="img-cap">CAD — v2 hull geometry, refined for stability and flow</figcaption>
           </figure>
         </div>
@@ -993,7 +1060,7 @@
           <div class="bom-row"><span class="b-name">u-blox M10Q GPS · BNO085 IMU</span><span class="b-note">position + fused heading</span></div>
           <div class="bom-row"><span class="b-name">SIM7600G-H 4G LTE</span><span class="b-note">primary telemetry link</span></div>
           <div class="bom-row"><span class="b-name">Instrumented pod on slip-ring tether</span><span class="b-note">salinity · temp · depth · light</span></div>
-          <div class="bom-row"><span class="b-name">5× Milwaukee M18 packs</span><span class="b-note">3 isolated power domains</span></div>
+          <div class="bom-row"><span class="b-name">Milwaukee M18 (electronics + winch)</span><span class="b-note">+ 12S LiPo drive · 3 isolated domains</span></div>
           <div class="bom-row"><span class="b-name">Custom KiCad PCB · 3D-printed ASA hull</span><span class="b-note">fiberglass + epoxy skin</span></div>
         </div>
       </details>
@@ -1138,7 +1205,7 @@
       <div class="reveal pd-section-label"><span class="section-label">Shuffler drive · custom cam geometry</span></div>
       <div class="pd-split media-left reveal">
         <figure class="img-fig">
-          <img class="img-el img-clickable" data-src="images/web/achilles-shuffler.jpg" width="833" height="720" alt="CAD of Achilles' single-cam shuffler drive" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <img class="img-el img-clickable" data-src="images/web/achilles-shuffler.png" width="833" height="720" alt="CAD of Achilles' single-cam shuffler drive" loading="lazy" decoding="async" onerror="imgFallback(this)">
           <figcaption class="img-cap">Single-cam shuffler drive &mdash; CAD</figcaption>
         </figure>
         <div class="pd-split-text">
@@ -1192,7 +1259,7 @@
     </div>
 
     <figure class="img-fig pd-hero-fig reveal">
-      <img class="img-el img-clickable" data-src="images/web/maze-cad.jpg" width="993" height="612" alt="Onshape CAD model of the maze robot" loading="lazy" decoding="async" onerror="imgFallback(this)">
+      <img class="img-el img-clickable" data-src="images/web/maze-cad.png" width="993" height="612" alt="Onshape CAD model of the maze robot" loading="lazy" decoding="async" onerror="imgFallback(this)">
     </figure>
 
     <div class="container">
@@ -1273,8 +1340,8 @@
         <p class="misc-entry-blurb">Over ten custom 3D-printed tools for ceramics classrooms &mdash; trimming tools, ribs, wire guides, and stamps. Each was iterated with students at Burlingame High School and published online for anyone with an FDM printer.</p>
         <div class="misc-media-row">
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-tools.jpg" width="1196" height="657" alt="3D-printed ceramic tool set" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">The ceramic tool set</figcaption></figure>
-          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-loom.jpg" width="930" height="563" alt="3D-printed loom for a ceramics class" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">3D-printed loom</figcaption></figure>
-          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-clay-cutter.jpg" width="1194" height="647" alt="3D-printed clay-cutter stencil" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Clay-cutter stencil</figcaption></figure>
+          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-loom.png" width="930" height="563" alt="3D-printed loom for a ceramics class" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">3D-printed loom</figcaption></figure>
+          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-clay-cutter.png" width="1194" height="647" alt="3D-printed clay-cutter stencil" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Clay-cutter stencil</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-stamps.jpg" width="1500" height="2000" alt="3D-printed A to Z and 0 to 9 ceramic stamps" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">3D-printed A–Z &amp; 0–9 stamps</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-casserole.jpg" width="1500" height="2000" alt="Clay casserole dish cut with the clay-cutter" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Casserole dish, cut with the clay-cutter</figcaption></figure>
         </div>
@@ -1284,7 +1351,7 @@
         <div class="misc-entry-head"><h2 class="misc-entry-title">3D-Printed Plane</h2><span class="misc-entry-date">2024</span></div>
         <p class="misc-entry-blurb">A first attempt at designing and printing a flyable model plane &mdash; chasing the lightest airframe I could print that would still hold together. A learning build, with more revisions to come.</p>
         <div class="misc-media-row">
-          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/plane-v1.jpg" width="1075" height="498" alt="First attempt at a 3D-printed model plane" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">First airframe attempt</figcaption></figure>
+          <figure class="img-fig"><img class="img-el img-clickable plane-fig" data-src="images/web/plane-v1.png" width="1075" height="498" alt="First attempt at a 3D-printed model plane" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">First airframe attempt</figcaption></figure>
         </div>
       </article>
 
@@ -1292,16 +1359,16 @@
         <div class="misc-entry-head"><h2 class="misc-entry-title">Sewing Machine (CAD)</h2><span class="misc-entry-date">2024</span></div>
         <p class="misc-entry-blurb">A full sewing machine modeled in CAD &mdash; an exercise in reverse-engineering a real mechanism, from the outer housing down to the internal drive.</p>
         <div class="misc-media-row">
-          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/sewing-corner.jpg" width="572" height="595" alt="Corner view of the sewing machine CAD model" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Corner view</figcaption></figure>
+          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/sewing-corner.png" width="572" height="595" alt="Corner view of the sewing machine CAD model" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Corner view</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/sewing-translucent.jpg" width="923" height="555" alt="Translucent side view showing the internal mechanism" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Translucent side view — internal mechanism</figcaption></figure>
         </div>
       </article>
 
       <article class="misc-entry reveal">
         <div class="misc-entry-head"><h2 class="misc-entry-title">Crimp Battle Board</h2><span class="misc-entry-date">2024</span></div>
-        <p class="misc-entry-blurb">A flexible, X-ribbed board I 3D-printed for Crimp Battle &mdash; the lattice is tuned to flex and spring back under load instead of cracking.</p>
+        <p class="misc-entry-blurb">A head-to-head crimp-strength game for climbers &mdash; two people pull on it to see who has the stronger crimp. I 3D-printed it with an X-rib lattice to take two climbers yanking on it as hard as they can.</p>
         <div class="misc-media-row">
-          <figure class="img-fig" style="max-width:440px"><img class="img-el img-clickable" data-src="images/web/crimp-board.jpg" width="1500" height="2000" alt="Flexible X-ribbed 3D-printed Crimp Battle board being flexed by hand" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Flexing the printed X-rib board by hand</figcaption></figure>
+          <figure class="img-fig" style="max-width:440px"><img class="img-el img-clickable" data-src="images/web/crimp-board.jpg" width="1500" height="2000" alt="3D-printed X-ribbed crimp-strength battle board flexed by hand" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Flexing the printed X-rib crimp board by hand</figcaption></figure>
         </div>
       </article>
     </div>
@@ -1324,7 +1391,7 @@
         <div class="about-details reveal">
           <div class="about-detail"><div class="about-detail-label">University</div><div class="about-detail-value">Northeastern</div></div>
           <div class="about-detail"><div class="about-detail-label">Major</div><div class="about-detail-value">Mechanical Eng.</div></div>
-          <div class="about-detail"><div class="about-detail-label">GPA</div><div class="about-detail-value"><span class="u">3.92</span></div></div>
+          <div class="about-detail"><div class="about-detail-label">GPA</div><div class="about-detail-value"><span class="u">3.87</span></div></div>
           <div class="about-detail"><div class="about-detail-label">Based in</div><div class="about-detail-value">Burlingame, CA</div></div>
         </div>
       </div>
@@ -1358,7 +1425,8 @@
 <section class="tab-content" data-tab="experience">
   <div class="container exp-wrap">
     <div class="section-label reveal">Experience</div>
-    <h2 class="section-heading reveal">Leadership &amp; <em>teams</em></h2>
+    <h2 class="section-heading reveal" style="margin-bottom:var(--s4)">Leadership &amp; <em>teams</em></h2>
+    <p class="exp-summary reveal">Hardware-first mechanical engineering &mdash; hands-on across CAD, composite fabrication, PCB design, and embedded systems, from nationally ranked combat robots to an autonomous survey vessel built from scratch.</p>
     <div class="exp-timeline">
       <div class="exp-entry reveal">
         <div class="exp-marker" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div>
@@ -1366,11 +1434,25 @@
           <div class="exp-date">Oct 2023 — Jun 2025</div>
           <div class="exp-role">President</div>
           <div class="exp-org">Combat Robots Club, Burlingame</div>
-          <p class="exp-desc">Ran workshops on CAD, soldering, physics, material science, and 3D printing. Handled sponsorships and club finances. The team placed on the podium 16 times across 5 competition events.</p>
+          <p class="exp-desc">Ran workshops on CAD, soldering, physics, material science, and 3D printing. Handled sponsorships and club finances. The team placed on the podium 16 times &mdash; 4 firsts, 7 seconds, 5 thirds &mdash; across 5 competition events.</p>
           <div class="exp-highlights">
             <span class="exp-highlight" data-count="16" data-suffix=" Podium Finishes">16 Podium Finishes</span>
             <span class="exp-highlight">5 Events</span>
             <span class="exp-highlight">Sponsorships Secured</span>
+          </div>
+        </div>
+      </div>
+      <div class="exp-entry reveal">
+        <div class="exp-marker" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 2h6"/><path d="M10 2v6l-4.5 8a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 8V2"/><path d="M6.8 14h10.4"/></svg></div>
+        <div class="exp-body">
+          <div class="exp-date">Oct 2023 — May 2025</div>
+          <div class="exp-role">Ceramic Tools R&amp;D</div>
+          <div class="exp-org">Burlingame High School · Ceramics Program</div>
+          <p class="exp-desc">Researched, designed in CAD, and 3D-printed 10+ custom tools for the ceramics classes &mdash; trimming tools, ribs, wire guides, and stamps &mdash; then published them online for anyone to print.</p>
+          <div class="exp-highlights">
+            <span class="exp-highlight" data-count="10" data-suffix="+ Tools published">10+ Tools published</span>
+            <span class="exp-highlight">CAD → FDM</span>
+            <span class="exp-highlight">Open-sourced</span>
           </div>
         </div>
       </div>
@@ -1390,12 +1472,80 @@
       </div>
     </div>
 
+    <div class="section-label reveal" style="margin-top:72px">Education</div>
+    <h2 class="section-heading reveal">Northeastern <em>University</em></h2>
+    <div class="edu reveal">
+      <div class="edu-head">
+        <div>
+          <div class="edu-degree">B.S. Mechanical Engineering</div>
+          <div class="edu-school">Northeastern University · Boston, MA</div>
+        </div>
+        <div class="edu-meta">
+          <span class="edu-gpa">GPA <b>3.87</b></span>
+          <span class="edu-date">Sep 2025 — Present</span>
+        </div>
+      </div>
+      <div class="edu-courses">
+        <span class="edu-courses-k">Coursework</span>
+        <span class="cap-item">Thermodynamics</span>
+        <span class="cap-item">Materials Science</span>
+        <span class="cap-item">Statics</span>
+        <span class="cap-item">Probability &amp; Statistics</span>
+      </div>
+    </div>
+
     <div class="section-label reveal" style="margin-top:72px">Awards</div>
     <h2 class="section-heading reveal">Competition <em>results</em></h2>
     <div class="awards-table">
       <div class="award-row reveal"><div class="award-place">4<span class="u">th</span></div><div class="award-info"><div class="award-name">Robot Combat League National Championship 2024</div><div class="award-detail">Plastic Antweight — National</div></div></div>
       <div class="award-row reveal"><div class="award-place">1<span class="u">st</span></div><div class="award-info"><div class="award-name">CROS March Madness</div><div class="award-detail">Antweight — Regional</div></div></div>
       <div class="award-row reveal"><div class="award-place">1<span class="u">st</span></div><div class="award-info"><div class="award-name">BCRC Bell Brawls</div><div class="award-detail">Regional Competition</div></div></div>
+    </div>
+
+    <div class="section-label reveal" style="margin-top:72px">Capabilities</div>
+    <h2 class="section-heading reveal">Hands-on <em>skills</em></h2>
+    <div class="cap-grid stagger">
+      <div class="cap-cell reveal">
+        <div class="cap-k">Design &amp; CAD</div>
+        <div class="cap-list"><span class="cap-item">SolidWorks</span><span class="cap-item">Onshape</span><span class="cap-item">Fusion 360</span><span class="cap-item">Mechanism design</span><span class="cap-item">DFM</span></div>
+      </div>
+      <div class="cap-cell reveal">
+        <div class="cap-k">Electronics &amp; firmware</div>
+        <div class="cap-list"><span class="cap-item">KiCad</span><span class="cap-item">Custom PCB</span><span class="cap-item">Raspberry Pi · RP2040</span><span class="cap-item">MicroPython</span><span class="cap-item">Python · asyncio</span><span class="cap-item">Java</span><span class="cap-item">Soldering &amp; wiring</span></div>
+      </div>
+      <div class="cap-cell reveal">
+        <div class="cap-k">Fabrication</div>
+        <div class="cap-list"><span class="cap-item">FDM 3D printing</span><span class="cap-item">CNC machining</span><span class="cap-item">Composite layup (FG/CF)</span><span class="cap-item">Laser-cut Ti / steel</span></div>
+      </div>
+      <div class="cap-cell reveal">
+        <div class="cap-k">Robotics &amp; autonomy</div>
+        <div class="cap-list"><span class="cap-item">Stereo vision</span><span class="cap-item">OpenCV</span><span class="cap-item">YOLOv8</span><span class="cap-item">GPS + IMU fusion</span><span class="cap-item">VESC drive</span><span class="cap-item">State machines</span></div>
+      </div>
+      <div class="cap-cell reveal">
+        <div class="cap-k">Systems &amp; cloud</div>
+        <div class="cap-list"><span class="cap-item">FastAPI</span><span class="cap-item">PostGIS</span><span class="cap-item">4G telemetry</span><span class="cap-item">Simulation-first dev</span></div>
+      </div>
+      <div class="cap-cell reveal">
+        <div class="cap-k">Leadership</div>
+        <div class="cap-list"><span class="cap-item">Club president</span><span class="cap-item">Workshops</span><span class="cap-item">Sponsorships</span><span class="cap-item">Mentoring</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ═══════════════════════ CLOSING CONTACT ═══════════════════════ -->
+<section class="contact-cta">
+  <div class="container-wide contact-cta-inner">
+    <div>
+      <div class="section-label reveal">Contact</div>
+      <h2 class="reveal">Let's build <em>something</em>.</h2>
+      <p class="contact-cta-lead reveal">Looking for co-op and hardware / robotics roles &mdash; or just to talk shop about boats, bots, and stubborn brackets.</p>
+    </div>
+    <div class="contact-cta-actions reveal">
+      <a class="btn btn-primary" href="mailto:kylegtran2007@gmail.com">Email me <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
+      <a class="btn btn-ghost" href="Kyle_Tran_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/kyle-tran-06a18b277/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
 </section>
@@ -1404,9 +1554,11 @@
 <footer>
   <div class="container-wide">
     <div class="footer-row">
-      <span class="footer-copy">© 2026 Kyle Tran — designed &amp; built by hand</span>
+      <span class="footer-copy">© 2026 Kyle Tran — designed &amp; built by hand · Updated Jul 2026</span>
       <div class="footer-links">
         <a href="mailto:kylegtran2007@gmail.com" class="footer-link"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>Email</a>
+        <div class="footer-sep"></div>
+        <a href="Kyle_Tran_Resume.pdf" target="_blank" rel="noopener" class="footer-link"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Résumé</a>
         <div class="footer-sep"></div>
         <a href="tel:+16507624160" class="footer-link"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Phone</a>
         <div class="footer-sep"></div>
@@ -1648,7 +1800,9 @@
     '.award-name', '.award-detail', '.award-place',
     '.misc-entry-title', '.misc-entry-date', '.misc-entry-blurb',
     '.hobby-card-title', '.hobby-card-blurb', '.img-cap', '.vid-item .img-cap',
-    '.ig-feature-handle', '.ig-feature-sub', '.maker-cta-title', '.maker-cta-sub'
+    '.ig-feature-handle', '.ig-feature-sub', '.maker-cta-title', '.maker-cta-sub',
+    '.cap-k', '.cap-item', '.contact-cta h2', '.contact-cta-lead',
+    '.exp-summary', '.edu-degree', '.edu-school', '.edu-gpa', '.edu-date', '.edu-courses-k'
   ].join(',');
   const counters = {};
   function tabOf(el) { const t = el.closest('.tab-content'); return t ? t.getAttribute('data-tab') : 'site'; }
