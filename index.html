@@ -93,7 +93,7 @@
       --accent:#141312; --accent-hover:#000000; --accent-contrast:#FFFFFF;
       --accent-soft:rgba(0,0,0,.055); --accent-tint:rgba(0,0,0,.09);
       --border:#E3DFD6; --border-strong:#CDC8BC; --border-frame:#D2CDC1;
-      --nav-bg:rgba(243,241,236,.72);
+      --nav-bg:rgba(243,241,236,.72); --nav-menu-bg:rgba(243,241,236,.97);
       --signal:#A8481A; --signal-soft:rgba(168,72,26,.12); --signal-strong:#8F3D15;
       --grid-line:rgba(20,19,18,.05); --grid-line-strong:rgba(20,19,18,.09);
       --selection-bg:#141312; --selection-text:#FFFFFF;
@@ -108,7 +108,7 @@
       --accent:#EDEDEA; --accent-hover:#FFFFFF; --accent-contrast:#0D0D0C;
       --accent-soft:rgba(255,255,255,.07); --accent-tint:rgba(255,255,255,.12);
       --border:#282824; --border-strong:#3B3A35; --border-frame:#333330;
-      --nav-bg:rgba(13,13,12,.7);
+      --nav-bg:rgba(13,13,12,.7); --nav-menu-bg:rgba(13,13,12,.97);
       --signal:#F2703C; --signal-soft:rgba(242,112,60,.15); --signal-strong:#FF7E4D;
       --grid-line:rgba(237,237,234,.045); --grid-line-strong:rgba(237,237,234,.085);
       --selection-bg:#F2703C; --selection-text:#0D0D0C;
@@ -239,8 +239,12 @@
     .nav-toggle.open span:nth-child(3){top:20px;transform:rotate(-45deg)}
     @media (max-width:768px){
       .nav-toggle{display:block}
-      .nav-links{ position:fixed; inset:78px 0 0 0; flex-direction:column; padding:28px 32px; gap:4px;
-        background:var(--nav-bg); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+      /* Full-height overlay. The header's backdrop-filter makes it the containing block for
+         fixed descendants, so `bottom:0` would collapse to the header — size with viewport
+         units (immune to that) and never rely on backdrop-filter alone for legibility. */
+      .nav-links{ position:fixed; top:78px; left:0; right:0; height:calc(100vh - 78px); height:calc(100dvh - 78px); overflow-y:auto;
+        flex-direction:column; padding:28px 32px; gap:4px;
+        background:var(--nav-menu-bg); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
         border-top:1px solid var(--border); transform:translateY(-12px); opacity:0; pointer-events:none; transition:.4s var(--ease); z-index:999; }
       .nav-links.open{ transform:translateY(0); opacity:1; pointer-events:all; }
       .nav-links a{ font-size:1.05rem; padding:14px 18px; }
@@ -540,7 +544,7 @@
     /* ================================================================
        ABOUT
        ================================================================ */
-    .about-wrap { padding:94px 0 var(--s9); }
+    .about-wrap { padding-top:94px; padding-bottom:var(--s9); }
     .about-layout { display:grid; grid-template-columns:.82fr 1.18fr; gap:var(--s8); align-items:start; }
     .about-fig .img-el { border-radius:var(--r-frame); }
     .about-cap { margin-top:12px; font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); color:var(--text-tertiary); letter-spacing:.04em; }
@@ -567,7 +571,7 @@
     /* ================================================================
        EXPERIENCE
        ================================================================ */
-    .exp-wrap { padding:94px 0 var(--s9); }
+    .exp-wrap { padding-top:94px; padding-bottom:var(--s9); }
     .exp-timeline { position:relative; max-width:880px; }
     .exp-timeline::before { content:''; position:absolute; left:25px; top:10px; bottom:10px; width:1.5px; background:linear-gradient(180deg,var(--signal),var(--border) 22%,var(--border) 78%,var(--signal)); }
     .exp-entry { display:flex; gap:var(--s7); margin-bottom:var(--s7); position:relative; }
