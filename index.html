@@ -526,6 +526,19 @@
     .build-strip .img-el { filter:grayscale(.9) contrast(1.03); transition:filter .5s var(--ease); }
     .build-strip .img-fig:hover .img-el { filter:grayscale(0) contrast(1); }
     @media (max-width:560px){ .build-strip{ grid-auto-columns:minmax(240px,82%); } }
+    /* translucent scroll arrows for the build strip */
+    .build-strip-wrap { position:relative; }
+    .strip-nav { position:absolute; top:50%; transform:translateY(-50%); z-index:4; width:46px; height:46px; border-radius:var(--r-pill);
+      display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--text);
+      background:var(--nav-bg); backdrop-filter:blur(12px) saturate(1.4); -webkit-backdrop-filter:blur(12px) saturate(1.4);
+      border:1px solid var(--border-strong); box-shadow:var(--shadow-pop);
+      transition:opacity .3s var(--ease), background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease), transform .35s var(--ease-spring); }
+    .strip-nav:hover { border-color:var(--accent); color:var(--accent); }
+    .strip-nav:active { transform:translateY(-50%) scale(.92); }
+    .strip-nav:disabled { opacity:0; pointer-events:none; }
+    .strip-nav svg { width:22px; height:22px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+    .strip-prev { left:12px; } .strip-next { right:12px; }
+    @media (max-width:560px){ .strip-nav{ width:42px; height:42px; } .strip-prev{ left:8px; } .strip-next{ right:8px; } }
 
     .pd-closing { color:var(--text-secondary); line-height:1.85; max-width:66ch; margin-bottom:var(--s6); }
     .pd-closing p { margin-bottom:16px; } .pd-closing p:last-child{ margin-bottom:0; }
@@ -963,12 +976,16 @@
       <div class="reveal pd-section-label"><span class="section-label">Printed &amp; assembled</span></div>
     </div>
     <div class="container-wide">
-      <div class="build-strip reveal">
-        <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-assembly.jpg" width="340" height="450" alt="Assembling the v1 hull outdoors" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Assembling the hull outdoors</figcaption></figure>
+      <div class="build-strip-wrap reveal">
+        <div class="build-strip">
+        <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-assembly.jpg" width="340" height="450" alt="Getting the v1 boat ready to test outdoors" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Getting ready to test outdoors</figcaption></figure>
         <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-epoxy.jpg" width="1500" height="2000" alt="Epoxy-sealing the v1 hull" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Epoxy-sealing the hull</figcaption></figure>
         <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-pod-print.jpg" width="363" height="495" alt="Printed v1 sensor pod" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Sensor pod, printed</figcaption></figure>
         <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-winch.jpg" width="380" height="507" alt="v1 sensor-deployment winch" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Sensor-deployment winch</figcaption></figure>
         <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-jet.jpg" width="377" height="641" alt="Early jet-propulsion experiment on v1" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Early jet-propulsion experiment — a dead end, but a useful one</figcaption></figure>
+        </div>
+        <button type="button" class="strip-nav strip-prev" aria-label="Scroll images left" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button type="button" class="strip-nav strip-next" aria-label="Scroll images right"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
       </div>
     </div>
 
@@ -1807,6 +1824,28 @@
   // touch swipe
   let tx = 0; lb.addEventListener('touchstart', e => tx = e.changedTouches[0].clientX, { passive: true });
   lb.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 45) show(idx + (dx < 0 ? 1 : -1)); }, { passive: true });
+
+  // ── Build-strip scroll arrows (translucent) ──
+  document.querySelectorAll('.build-strip-wrap').forEach(wrap => {
+    const strip = wrap.querySelector('.build-strip'), prev = wrap.querySelector('.strip-prev'), next = wrap.querySelector('.strip-next');
+    if (!strip || !prev || !next) return;
+    const update = () => {
+      const max = strip.scrollWidth - strip.clientWidth, scrollable = max > 4;
+      prev.disabled = !scrollable || strip.scrollLeft <= 2;
+      next.disabled = !scrollable || strip.scrollLeft >= max - 2;
+    };
+    const step = dir => strip.scrollBy({ left: dir * Math.max(strip.clientWidth * 0.8, 260), behavior: reduce ? 'auto' : 'smooth' });
+    prev.addEventListener('click', () => step(-1));
+    next.addEventListener('click', () => step(1));
+    let raf = 0;
+    strip.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
+    window.addEventListener('resize', update);
+    window.addEventListener('load', update);
+    // recompute when the strip becomes visible (its tab is switched in) or resizes
+    if ('IntersectionObserver' in window) new IntersectionObserver(update).observe(strip);
+    if ('ResizeObserver' in window) new ResizeObserver(update).observe(strip);
+    update();
+  });
 })();
 </script>
 
