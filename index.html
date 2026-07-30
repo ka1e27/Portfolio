@@ -25,8 +25,12 @@
   <meta property="og:title" content="Kyle Tran — Mechanical Engineer">
   <meta property="og:description" content="Autonomous survey boats, combat robots, embedded systems, and CAD. Mechanical Engineering at Northeastern.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta property="og:image" content="images/web/dreams-field.jpg">
-  <meta name="twitter:image" content="images/web/dreams-field.jpg">
+  <!-- OG/Twitter images must be absolute URLs — crawlers don't resolve relative paths -->
+  <meta property="og:url" content="https://ka1e27.github.io/Portfolio/">
+  <meta property="og:image" content="https://ka1e27.github.io/Portfolio/images/web/dreams-field.jpg">
+  <meta property="og:image:alt" content="Kyle Tran's D.R.E.A.M.S autonomous survey boat on the water">
+  <meta name="twitter:image" content="https://ka1e27.github.io/Portfolio/images/web/dreams-field.jpg">
+  <link rel="canonical" href="https://ka1e27.github.io/Portfolio/">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230E0E0E'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='700' fill='%23EDEDED' text-anchor='middle'%3EKT%3C/text%3E%3C/svg%3E">
   <script type="application/ld+json">
   {
@@ -288,7 +292,8 @@
     @media (max-width:600px){ .hero-eyebrow { border-radius:var(--r-chrome); letter-spacing:.14em; line-height:1.65; padding:8px 14px; margin-bottom:var(--s5); } }
     .hero-title { font-family:'Fraunces',serif; font-optical-sizing:auto; font-weight:600; font-size:var(--fs-hero); line-height:.9; letter-spacing:-.035em; color:var(--text);
       margin-bottom:var(--s6); font-variation-settings:'opsz' 144,'wght' 600; }
-    .hero-title em { font-style:italic; font-weight:500; font-variation-settings:'opsz' 144,'wght' 500; }
+    /* surname carries weight contrast instead of italics — same upright roman */
+    .hero-title .hero-last { font-style:normal; font-weight:400; font-variation-settings:'opsz' 144,'wght' 400; }
     .hero-title .line { display:block; overflow:hidden; padding-bottom:.16em; margin-bottom:-.12em; }
     .hero-title .line-inner { display:block; }
     @media (prefers-reduced-motion: no-preference) {
@@ -320,6 +325,8 @@
       .hero-telemetry .telem-cell { flex:none; width:100%; padding:15px 20px; }
       .hero-telemetry .telem-cell + .telem-cell { border-left:0; border-top:1px solid var(--border); }
     }
+    /* the sideways entrance only makes sense while it's the right-hand column */
+    @media (max-width:1079px){ body.js-reveal .hero-telemetry.reveal[data-reveal="right"] { transform:translateY(22px); } }
 
     /* ── tool marquee (real content) ──────────────────────────────────── */
     .marquee { border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:clip; padding:16px 0; margin-top:var(--s6); -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
@@ -503,12 +510,12 @@
     .pd-sticky-media { position:sticky; top:104px; }
     .pd-sticky-text { display:flex; flex-direction:column; gap:var(--s6); }
     .pd-sticky-step .step-n { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); letter-spacing:.12em; color:var(--signal); margin-bottom:8px; }
-    .pd-sticky-step h4 { font-family:'Fraunces',serif; font-size:var(--fs-600); font-weight:600; color:var(--text); margin-bottom:8px; letter-spacing:-.01em; }
+    .pd-sticky-step h3 { font-family:'Fraunces',serif; font-size:var(--fs-600); font-weight:600; color:var(--text); margin-bottom:8px; letter-spacing:-.01em; }
     .pd-sticky-step p { color:var(--text-secondary); line-height:1.8; max-width:52ch; }
     @media (max-width:820px){ .pd-sticky{ grid-template-columns:1fr; gap:var(--s6);} .pd-sticky-media{ position:static; } }
 
-    /* iteration diff table */
-    .diff-wrap { margin-bottom:var(--s9); }
+    /* iteration diff table — scrolls inside its own box rather than widening the page */
+    .diff-wrap { margin-bottom:var(--s9); overflow-x:auto; -webkit-overflow-scrolling:touch; }
     .diff-table { width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--border); border-radius:var(--r-panel); overflow:hidden; font-size:var(--fs-300); }
     .diff-table th, .diff-table td { text-align:left; padding:var(--s4) var(--s5); border-bottom:1px solid var(--border); vertical-align:top; }
     .diff-table thead th { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.1em; text-transform:uppercase; color:var(--text-tertiary); background:var(--bg-elev); font-weight:500; }
@@ -819,7 +826,7 @@
       <div class="hero-inner">
         <div class="hero-text stagger">
           <span class="hero-eyebrow reveal" data-reveal="none">Mechanical Engineer · Northeastern University</span>
-          <h1 class="hero-title reveal" data-reveal="none"><span class="line"><span class="line-inner">Kyle <em>Tran</em></span></span></h1>
+          <h1 class="hero-title reveal" data-reveal="none"><span class="line"><span class="line-inner">Kyle <span class="hero-last">Tran</span></span></span></h1>
           <p class="hero-lead reveal">I build <strong>robots, autonomous vehicles, and embedded systems</strong> &mdash; drawn in CAD, machined and printed, wired and coded, then tested until they hold up.</p>
           <div class="hero-cta reveal">
             <button type="button" class="btn btn-primary" id="hero-cta-work">View Work <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button>
@@ -915,7 +922,7 @@
       <button class="pd-back reveal" data-tab="work"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Work</button>
       <div class="pd-title-block reveal">
         <div class="pd-kicker">Project 01 · Robotics &amp; Embedded</div>
-        <h1 class="pd-title">Autonomous Environmental Survey Boat</h1>
+        <h2 class="pd-title">Autonomous Environmental Survey Boat</h2>
         <div class="pd-tags">
           <span class="pd-tag">Raspberry Pi 5</span><span class="pd-tag">Computer Vision</span><span class="pd-tag">MicroPython</span><span class="pd-tag">VESC</span><span class="pd-tag">4G · PostGIS Cloud</span><span class="pd-tag">Custom PCB</span>
         </div>
@@ -1042,9 +1049,9 @@
           </figure>
         </div>
         <div class="pd-sticky-text">
-          <div class="pd-sticky-step reveal"><div class="step-n">STEP 01 — HULL</div><h4>A hull tuned for the water</h4><p>The twin-hull geometry is refined in CAD for stability and clean flow, then printed in bolt-together sections. v1 printed in PLA; v2 moves to tougher ASA with a fiberglass-and-epoxy skin for stiffness and water resistance.</p></div>
-          <div class="pd-sticky-step reveal"><div class="step-n">STEP 02 — BOARD</div><h4>One board instead of a harness</h4><p>A custom KiCad carrier board replaces v1's hand-wired loom &mdash; consolidating three isolated battery domains, the two drive ESCs, and every sensor header in one place. Fewer failure points, faster to service.</p></div>
-          <div class="pd-sticky-step reveal"><div class="step-n">STEP 03 — BRAIN</div><h4>A Pi 5 that can see</h4><p>A Raspberry Pi 5 runs navigation, the mission state machine, and a stereo-camera vision pipeline &mdash; YOLO detection gated by a cheap water-anomaly screen &mdash; while the two RP2040s stay down at the real-time layer, driving motors and reading sensors.</p></div>
+          <div class="pd-sticky-step reveal"><div class="step-n">STEP 01 — HULL</div><h3>A hull tuned for the water</h3><p>The twin-hull geometry is refined in CAD for stability and clean flow, then printed in bolt-together sections. v1 printed in PLA; v2 moves to tougher ASA with a fiberglass-and-epoxy skin for stiffness and water resistance.</p></div>
+          <div class="pd-sticky-step reveal"><div class="step-n">STEP 02 — BOARD</div><h3>One board instead of a harness</h3><p>A custom KiCad carrier board replaces v1's hand-wired loom &mdash; consolidating three isolated battery domains, the two drive ESCs, and every sensor header in one place. Fewer failure points, faster to service.</p></div>
+          <div class="pd-sticky-step reveal"><div class="step-n">STEP 03 — BRAIN</div><h3>A Pi 5 that can see</h3><p>A Raspberry Pi 5 runs navigation, the mission state machine, and a stereo-camera vision pipeline &mdash; YOLO detection gated by a cheap water-anomaly screen &mdash; while the two RP2040s stay down at the real-time layer, driving motors and reading sensors.</p></div>
         </div>
       </div>
     </div>
@@ -1123,7 +1130,7 @@
       <button class="pd-back reveal" data-tab="work"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Work</button>
       <div class="pd-title-block reveal">
         <div class="pd-kicker">Project 02 · Competition Robotics</div>
-        <h1 class="pd-title">Combat Robotics — Team Dihydrogen Monoxide</h1>
+        <h2 class="pd-title">Combat Robotics — Team Dihydrogen Monoxide</h2>
         <div class="pd-tags"><span class="pd-tag">CAD</span><span class="pd-tag">CNC Machining</span><span class="pd-tag">3D Printing</span><span class="pd-tag">Weapon Design</span></div>
       </div>
     </div>
@@ -1298,7 +1305,7 @@
       <button class="pd-back reveal" data-tab="work"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Work</button>
       <div class="pd-title-block reveal">
         <div class="pd-kicker">Project 03 · Mechatronics &amp; Firmware</div>
-        <h1 class="pd-title">Autonomous Maze-Solving Robot</h1>
+        <h2 class="pd-title">Autonomous Maze-Solving Robot</h2>
         <div class="pd-tags"><span class="pd-tag">Onshape</span><span class="pd-tag">MicroPython</span><span class="pd-tag">asyncio</span><span class="pd-tag">Pathfinding</span></div>
       </div>
     </div>
@@ -1369,7 +1376,7 @@
     <button class="pd-back reveal" data-tab="work"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Work</button>
     <div class="pd-title-block reveal">
       <div class="pd-kicker">Project 04 · Assorted</div>
-      <h1 class="pd-title">Miscellaneous Builds</h1>
+      <h2 class="pd-title">Miscellaneous Builds</h2>
     </div>
     <p class="pd-intro reveal">Smaller builds and side projects that don't need a page of their own &mdash; each a short write-up with a photo or two.</p>
 
@@ -1381,7 +1388,7 @@
 
     <div class="misc-list">
       <article class="misc-entry reveal">
-        <div class="misc-entry-head"><h2 class="misc-entry-title">Ceramic Tools R&amp;D</h2><span class="misc-entry-date">Oct 2023 — May 2025</span></div>
+        <div class="misc-entry-head"><h3 class="misc-entry-title">Ceramic Tools R&amp;D</h3><span class="misc-entry-date">Oct 2023 — May 2025</span></div>
         <p class="misc-entry-blurb">Over ten custom 3D-printed tools for ceramics classrooms &mdash; trimming tools, ribs, wire guides, and stamps. Each was iterated with students at Burlingame High School and published online for anyone with an FDM printer.</p>
         <div class="misc-media-row">
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-tools.jpg" width="1196" height="657" alt="3D-printed ceramic tool set" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">The ceramic tool set</figcaption></figure>
@@ -1393,7 +1400,7 @@
       </article>
 
       <article class="misc-entry reveal">
-        <div class="misc-entry-head"><h2 class="misc-entry-title">3D-Printed Plane</h2><span class="misc-entry-date">2023</span></div>
+        <div class="misc-entry-head"><h3 class="misc-entry-title">3D-Printed Plane</h3><span class="misc-entry-date">2023</span></div>
         <p class="misc-entry-blurb">A first attempt at designing and printing a flyable model plane &mdash; chasing the lightest airframe I could print that would still hold together. A learning build, with more revisions to come.</p>
         <div class="misc-media-row">
           <figure class="img-fig"><img class="img-el img-clickable plane-fig" data-src="images/web/plane-v1.png" width="1075" height="498" alt="First attempt at a 3D-printed model plane" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">First airframe attempt</figcaption></figure>
@@ -1401,7 +1408,7 @@
       </article>
 
       <article class="misc-entry reveal">
-        <div class="misc-entry-head"><h2 class="misc-entry-title">Sewing Machine (CAD)</h2><span class="misc-entry-date">2026</span></div>
+        <div class="misc-entry-head"><h3 class="misc-entry-title">Sewing Machine (CAD)</h3><span class="misc-entry-date">2026</span></div>
         <p class="misc-entry-blurb">A full sewing machine modeled in CAD &mdash; an exercise in reverse-engineering a real mechanism, from the outer housing down to the internal drive.</p>
         <div class="misc-media-row">
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/sewing-corner.png" width="572" height="595" alt="Corner view of the sewing machine CAD model" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Corner view</figcaption></figure>
@@ -1410,7 +1417,7 @@
       </article>
 
       <article class="misc-entry reveal">
-        <div class="misc-entry-head"><h2 class="misc-entry-title">Climbing Accessories</h2><span class="misc-entry-date">2026</span></div>
+        <div class="misc-entry-head"><h3 class="misc-entry-title">Climbing Accessories</h3><span class="misc-entry-date">2026</span></div>
         <p class="misc-entry-blurb">3D-printed gear I made for climbing. The Crimp Battle Board is a head-to-head crimp-strength game &mdash; two people pull on it to see who has the stronger crimp, and its X-rib lattice takes the abuse. The doorway hangboard is a printed grip trainer for building finger strength at home.</p>
         <div class="misc-media-row">
           <figure class="img-fig" style="max-width:420px"><img class="img-el img-clickable" data-src="images/web/crimp-board.jpg" width="1500" height="2000" alt="3D-printed X-ribbed crimp-strength battle board" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Testing crimp strength on the board</figcaption></figure>
@@ -1687,7 +1694,12 @@
   let currentTab = 'work';
   let transitioning = false;
   function setActiveNav(tabId) {
-    navAnchors.forEach(a => { const t = a.getAttribute('data-tab'); a.classList.toggle('active', tabId.startsWith('project-') ? t === 'work' : t === tabId); });
+    navAnchors.forEach(a => {
+      const t = a.getAttribute('data-tab');
+      const on = tabId.startsWith('project-') ? t === 'work' : t === tabId;
+      a.classList.toggle('active', on);
+      if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
   }
   function switchTab(tabId, push) {
     if (tabId === currentTab || transitioning) return;
