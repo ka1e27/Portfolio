@@ -65,7 +65,7 @@
       --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px;
       --s7:48px; --s8:64px; --s9:96px; --s10:128px; --s11:184px;
 
-      --fs-hero: clamp(3.1rem, 9.2vw, 7.2rem);
+      --fs-hero: clamp(3.1rem, 9.2vw, 8.2rem);
       --fs-900:  clamp(2.3rem, 5.1vw, 3.9rem);
       --fs-800:  clamp(1.95rem, 3.8vw, 2.9rem);
       --fs-700:  clamp(1.55rem, 2.4vw, 2.05rem);
@@ -95,7 +95,7 @@
       --border:#E3DFD6; --border-strong:#CDC8BC; --border-frame:#D2CDC1;
       --nav-bg:rgba(243,241,236,.72); --nav-menu-bg:rgba(243,241,236,.97);
       --signal:#A8481A; --signal-soft:rgba(168,72,26,.12); --signal-strong:#8F3D15;
-      --grid-line:rgba(20,19,18,.05); --grid-line-strong:rgba(20,19,18,.09);
+      --grid-line:rgba(20,19,18,.05); --grid-line-strong:rgba(20,19,18,.09); --motif:rgba(20,19,18,.15);
       --selection-bg:#141312; --selection-text:#FFFFFF;
       --scrollbar-thumb:#CBC6BA; --scrollbar-track:#F3F1EC;
       --grain-opacity:.018;
@@ -110,7 +110,7 @@
       --border:#282824; --border-strong:#3B3A35; --border-frame:#333330;
       --nav-bg:rgba(13,13,12,.7); --nav-menu-bg:rgba(13,13,12,.97);
       --signal:#F2703C; --signal-soft:rgba(242,112,60,.15); --signal-strong:#FF7E4D;
-      --grid-line:rgba(237,237,234,.045); --grid-line-strong:rgba(237,237,234,.085);
+      --grid-line:rgba(237,237,234,.045); --grid-line-strong:rgba(237,237,234,.085); --motif:rgba(237,237,234,.17);
       --selection-bg:#F2703C; --selection-text:#0D0D0C;
       --scrollbar-thumb:#2A2A26; --scrollbar-track:#0D0D0C;
       --grain-opacity:.026;
@@ -270,16 +270,22 @@
        ================================================================ */
     .hero { position:relative; padding:116px 0 40px; overflow:clip; }
     .hero-inner { position:relative; z-index:2; max-width:1000px; }
-    /* faint bathymetric/contour motif — on-theme (depth sounding) */
+    /* bathymetric/contour motif — on-theme (depth sounding); anchors the open right side */
     .hero-motif { position:absolute; z-index:1; top:40px; right:-6%; width:min(760px,72vw); aspect-ratio:1; pointer-events:none;
-      opacity:1; color:var(--grid-line-strong); will-change:transform; }
+      opacity:1; color:var(--motif); will-change:transform;
+      /* fade the contours out toward the copy so they never compete with reading */
+      -webkit-mask-image:linear-gradient(90deg,transparent 8%,rgba(0,0,0,.5) 34%,#000 64%);
+      mask-image:linear-gradient(90deg,transparent 8%,rgba(0,0,0,.5) 34%,#000 64%); }
     .hero-motif svg { width:100%; height:100%; overflow:visible; }
     .hero-motif svg * { stroke:currentColor; fill:none; vector-effect:non-scaling-stroke; }
-    @media (max-width:900px){ .hero-motif { right:-30%; top:70px; width:130vw; } }
+    /* keep the contours off the copy on narrow screens — legibility first */
+    @media (max-width:900px){ .hero-motif { right:-34%; top:56px; width:118vw; opacity:.5; } }
     .hero-eyebrow { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); font-weight:500; letter-spacing:.2em; text-transform:uppercase;
       color:var(--text-secondary); display:inline-flex; align-items:center; gap:9px; padding:7px 15px; border-radius:var(--r-pill); background:var(--accent-soft); margin-bottom:var(--s6);
       font-variation-settings:'wght' var(--wght); transition:--wght .35s var(--ease); }
     .hero-eyebrow:hover { --wght:640; }
+    /* it wraps to two lines on phones — a squared badge reads deliberate, a lozenge doesn't */
+    @media (max-width:600px){ .hero-eyebrow { border-radius:var(--r-chrome); letter-spacing:.14em; line-height:1.65; padding:8px 14px; margin-bottom:var(--s5); } }
     .hero-title { font-family:'Fraunces',serif; font-optical-sizing:auto; font-weight:600; font-size:var(--fs-hero); line-height:.9; letter-spacing:-.035em; color:var(--text);
       margin-bottom:var(--s6); font-variation-settings:'opsz' 144,'wght' 600; }
     .hero-title em { font-style:italic; font-weight:500; font-variation-settings:'opsz' 144,'wght' 500; }
@@ -304,6 +310,16 @@
     .telem-v { font-size:.95rem; font-weight:600; color:var(--text); margin-top:4px; line-height:1.25; }
     @media (max-width:560px){ .telem-cell{ flex-basis:100%; } .telem-cell + .telem-cell{ border-left:0; border-top:1px solid var(--border);} }
     @media (max-width:900px){ .hero{ padding-top:120px; padding-bottom:48px; } }
+    /* ≥1080px: split the hero — copy left, instrument panel right, contours between.
+       Fills what was dead space instead of letting the composition trail off. */
+    @media (min-width:1080px){
+      .hero-inner { max-width:none; display:grid; grid-template-columns:minmax(0,1fr) 332px; gap:var(--s7); align-items:start; }
+      .hero-text { min-width:0; }
+      .hero-cta { margin-bottom:0; }
+      .hero-telemetry { flex-direction:column; max-width:none; margin-top:var(--s2); }
+      .hero-telemetry .telem-cell { flex:none; width:100%; padding:15px 20px; }
+      .hero-telemetry .telem-cell + .telem-cell { border-left:0; border-top:1px solid var(--border); }
+    }
 
     /* ── tool marquee (real content) ──────────────────────────────────── */
     .marquee { border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:clip; padding:16px 0; margin-top:var(--s6); -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
@@ -319,16 +335,17 @@
     /* ================================================================
        WORK INDEX — bento-broken grid
        ================================================================ */
-    .work-head { margin:var(--s6) 0 var(--s6); display:flex; align-items:flex-end; justify-content:space-between; gap:var(--s5); flex-wrap:wrap; scroll-margin-top:100px; }
+    .work-head { margin:var(--s8) 0 var(--s7); display:flex; align-items:flex-end; justify-content:space-between; gap:var(--s5); flex-wrap:wrap; scroll-margin-top:100px; }
     .work-head .section-heading { margin-bottom:0; }
     .work-count { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); color:var(--text-tertiary); letter-spacing:.1em; }
 
     .proj { cursor:pointer; display:block; }
-    .proj-media { position:relative; overflow:hidden; border-radius:var(--r-frame); border:1px solid var(--border-frame); background:var(--bg-elev); }
+    .proj-media { position:relative; overflow:hidden; border-radius:var(--r-frame); border:1px solid var(--border-frame); background:var(--bg-elev);
+      transition:border-color .3s var(--ease), transform .55s var(--ease), box-shadow .55s var(--ease); }
     .proj-media .cover { position:absolute; inset:0; background-size:cover; background-position:center; transition:transform .8s var(--ease); }
     .proj:hover .proj-media .cover { transform:scale(1.045); }
     .proj-media .cover.cover-contain { background-size:contain; background-repeat:no-repeat; background-position:center; padding:6% 4%; }
-    .proj:hover .proj-media { border-color:var(--border-strong); }
+    .proj:hover .proj-media { border-color:var(--border-strong); transform:translateY(-5px); box-shadow:var(--shadow-pop); }
     .proj-num { position:absolute; top:14px; left:15px; z-index:2; font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); letter-spacing:.14em; color:#fff; mix-blend-mode:difference; }
     .proj-cat { position:absolute; top:12px; right:12px; z-index:2; font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.1em; text-transform:uppercase; color:var(--text);
       background:var(--nav-bg); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid var(--border); padding:6px 11px; border-radius:var(--r-pill); }
@@ -344,9 +361,13 @@
     .work-featured { margin-bottom:var(--s6); }
     .work-featured .proj-media { aspect-ratio:16/9; }
     .work-featured .proj-title { font-size:var(--fs-700); }
+    .work-featured .proj-desc { font-size:var(--fs-400); margin-top:10px; }
     @media (max-width:560px){
       .work-featured .proj-body { flex-direction:column; align-items:flex-start; gap:var(--s3); }
       .work-featured .proj-meta { flex-direction:row; align-items:center; justify-content:space-between; width:100%; padding-top:0; }
+      /* two nowrap chips in one row overflowed narrow phones — let them wrap */
+      .proj-meta { flex-wrap:wrap; gap:var(--s2) var(--s4); }
+      .proj-date { white-space:normal; }
     }
 
     .work-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:var(--s6) var(--s5); padding-bottom:var(--s8); }
@@ -408,8 +429,8 @@
        PROJECT DETAIL
        ================================================================ */
     .pd { padding-top:94px; padding-bottom:var(--s9); counter-reset:fig; }
-    .pd-back { display:inline-flex; align-items:center; gap:8px; font-size:.86rem; font-weight:500; color:var(--text-secondary); cursor:pointer;
-      background:var(--bg-elev); border:1px solid var(--border); font-family:'Manrope',sans-serif; padding:9px 18px 9px 14px; border-radius:var(--r-pill);
+    .pd-back { display:inline-flex; align-items:center; gap:8px; min-height:44px; font-size:.86rem; font-weight:500; color:var(--text-secondary); cursor:pointer;
+      background:var(--bg-elev); border:1px solid var(--border); font-family:'Manrope',sans-serif; padding:9px 20px 9px 16px; border-radius:var(--r-pill);
       margin-bottom:var(--s7); box-shadow:var(--shadow-sm); transition:color .25s var(--ease), border-color .25s var(--ease); }
     .pd-back:hover { color:var(--accent); border-color:var(--accent); }
     .pd-back svg { width:17px; height:17px; stroke:currentColor; fill:none; stroke-width:2; }
@@ -805,11 +826,11 @@
             <a class="btn btn-ghost" href="Kyle_Tran_Resume.pdf" target="_blank" rel="noopener">Résumé <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
             <a class="btn btn-ghost" href="mailto:kylegtran2007@gmail.com">Get in touch</a>
           </div>
-          <div class="hero-telemetry reveal" aria-label="Current status">
-            <div class="telem-cell"><div class="telem-k"><span class="dot"></span>Currently building</div><div class="telem-v">D.R.E.A.M.S v2 — survey boat</div></div>
-            <div class="telem-cell"><div class="telem-k">Discipline</div><div class="telem-v">Robotics · embedded · CAD</div></div>
-            <div class="telem-cell"><div class="telem-k">Based in</div><div class="telem-v">Boston · Burlingame, CA</div></div>
-          </div>
+        </div>
+        <div class="hero-telemetry reveal" data-reveal="right" data-reveal-delay="240" aria-label="Current status">
+          <div class="telem-cell"><div class="telem-k"><span class="dot"></span>Currently building</div><div class="telem-v">D.R.E.A.M.S v2 — survey boat</div></div>
+          <div class="telem-cell"><div class="telem-k">Discipline</div><div class="telem-v">Robotics · embedded · CAD</div></div>
+          <div class="telem-cell"><div class="telem-k">Based in</div><div class="telem-v">Boston · Burlingame, CA</div></div>
         </div>
       </div>
     </div>
