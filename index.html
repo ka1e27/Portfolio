@@ -825,7 +825,7 @@
       :root { --gutter:0; }
       html, body { background:#fff !important; color:#000 !important; }
       body::after, .scroll-progress, #header, #dev-toolbar, .marquee, .nav-toggle,
-      .theme-toggle, .skip-link, .strip-nav, .lightbox, .hero-motif { display:none !important; }
+      .theme-toggle, .skip-link, .strip-nav, .lightbox, .hero-motif, #save-pdf { display:none !important; }
       .tab-content { display:block !important; }        /* print the whole portfolio */
       .pd, .about-wrap, .exp-wrap, .hero { padding-top:0 !important; }
       a { color:#000 !important; text-decoration:underline; }
@@ -1709,6 +1709,7 @@
     <div class="contact-cta-actions reveal">
       <a class="btn btn-primary" href="mailto:kylegtran2007@gmail.com">Email me <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
       <a class="btn btn-ghost" href="Kyle_Tran_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+      <button type="button" class="btn btn-ghost" id="save-pdf">Save portfolio as PDF <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/kyle-tran-06a18b277/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
@@ -1760,6 +1761,17 @@
   const stored = localStorage.getItem('theme');
   if (stored) html.setAttribute('data-theme', stored);
   else if (window.matchMedia('(prefers-color-scheme: light)').matches) html.setAttribute('data-theme', 'light');
+  // Save-as-PDF: hand off to the browser's print pipeline, which uses the @media print
+  // stylesheet. Beats shipping a static PDF — it can't go stale, and it renders with the
+  // real webfonts and whatever the reader already has loaded.
+  const savePdf = document.getElementById('save-pdf');
+  if (savePdf) savePdf.addEventListener('click', () => {
+    document.querySelectorAll('.reveal:not(.reveal-in)').forEach(el => el.classList.add('reveal-in'));
+    document.querySelectorAll('img[data-src]').forEach(i => { if (!i.getAttribute('src')) i.src = i.getAttribute('data-src'); });
+    document.querySelectorAll('[data-img]:not(.has-img)').forEach(c => { c.style.backgroundImage = 'url("' + c.getAttribute('data-img') + '")'; c.classList.add('has-img'); });
+    setTimeout(() => window.print(), 250);
+  });
+
   const themeBtn = document.getElementById('theme-toggle');
   // announce what the control will do, not just that it exists
   function labelTheme() {
