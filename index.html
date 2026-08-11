@@ -820,21 +820,69 @@
     .contact-cta-actions { display:flex; flex-wrap:wrap; gap:14px; }
     @media (max-width:820px){ .contact-cta-inner{ grid-template-columns:1fr; gap:var(--s5); align-items:start; padding-top:var(--s9); } }
 
-    /* ── print (recruiters do print these) ───────────────────────────── */
+    /* ================================================================
+       PDF SHEET — a two-page brief, screen-hidden, printed instead of
+       the site. Rendering it in the browser means real webfonts and no
+       stale committed artifact.
+       ================================================================ */
+    .pdf-sheet { display:none; }
     @media print {
-      :root { --gutter:0; }
-      html, body { background:#fff !important; color:#000 !important; }
-      body::after, .scroll-progress, #header, #dev-toolbar, .marquee, .nav-toggle,
-      .theme-toggle, .skip-link, .strip-nav, .lightbox, .hero-motif, #save-pdf { display:none !important; }
-      .tab-content { display:block !important; }        /* print the whole portfolio */
-      .pd, .about-wrap, .exp-wrap, .hero { padding-top:0 !important; }
-      a { color:#000 !important; text-decoration:underline; }
-      .img-fig, .fig-annotated, .proj, .exp-entry, .misc-entry, .hobby-card, .award-row,
-      .edu, .spec-strip, .cred-strip, figure, table { break-inside:avoid; page-break-inside:avoid; }
-      .section-heading, .pd-title, h1, h2, h3 { break-after:avoid; page-break-after:avoid; }
-      .img-el { max-height:52vh; object-fit:contain; }
-      .build-strip { display:block !important; overflow:visible !important; }
-      * { box-shadow:none !important; text-shadow:none !important; }
+      @page { size:A4; margin:11mm 12mm; }
+      html, body { background:#fff !important; color:#111 !important; }
+      /* print the brief, not the website */
+      body > *:not(.pdf-sheet) { display:none !important; }
+      body::after { display:none !important; }
+      .pdf-sheet { display:block !important; font-size:9.1pt; line-height:1.42; color:#111; }
+      .pdf-sheet * { box-shadow:none !important; text-shadow:none !important; }
+      .ps-page { break-after:page; page-break-after:always; }
+      .ps-page:last-child { break-after:auto; page-break-after:auto; }
+      .pdf-sheet a { color:#111 !important; text-decoration:none; }
+
+      .ps-head { display:flex; justify-content:space-between; align-items:flex-end; gap:10mm;
+        border-bottom:1.4pt solid #111; padding-bottom:2.6mm; margin-bottom:3.4mm; }
+      .ps-name { font-family:'Fraunces',serif; font-size:25pt; font-weight:600; line-height:.95; letter-spacing:-.02em; }
+      .ps-role { font-family:'IBM Plex Mono',monospace; font-size:7.6pt; letter-spacing:.16em; text-transform:uppercase; color:#555; margin-top:1.4mm; }
+      /* not nowrap: different font metrics must wrap, never clip off the page */
+      .ps-contact { font-family:'IBM Plex Mono',monospace; font-size:7.2pt; line-height:1.62; text-align:right; color:#333; }
+      .ps-lead { font-size:9.6pt; line-height:1.5; margin-bottom:4mm; max-width:none; }
+      .ps-lead b { font-weight:700; }
+
+      .ps-h { font-family:'IBM Plex Mono',monospace; font-size:7.4pt; letter-spacing:.18em; text-transform:uppercase;
+        color:#111; border-bottom:.6pt solid #bbb; padding-bottom:1.1mm; margin:0 0 2.6mm; }
+      .ps-sec { margin-bottom:4.2mm; }
+      .ps-sec:last-child { margin-bottom:0; }
+
+      .ps-item { margin-bottom:2.9mm; break-inside:avoid; page-break-inside:avoid; }
+      .ps-item:last-child { margin-bottom:0; }
+      .ps-item-top { display:flex; justify-content:space-between; align-items:baseline; gap:5mm; }
+      .ps-title { font-family:'Fraunces',serif; font-size:11pt; font-weight:600; line-height:1.16; }
+      .ps-when { font-family:'IBM Plex Mono',monospace; font-size:7pt; color:#666; white-space:nowrap; }
+      .ps-org { font-size:8.6pt; font-weight:600; color:#333; margin-top:.5mm; }
+      .ps-desc { margin-top:1mm; color:#333; }
+      .ps-tech { font-family:'IBM Plex Mono',monospace; font-size:6.9pt; letter-spacing:.03em; color:#666; margin-top:1.1mm; }
+
+      .ps-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:2.6mm; margin:0 0 4mm; break-inside:avoid; }
+      .ps-strip figure { margin:0; }
+      .ps-strip img { display:block; width:100%; height:31mm; object-fit:cover; border:.5pt solid #ccc; }
+      .ps-strip figcaption { font-family:'IBM Plex Mono',monospace; font-size:6.4pt; color:#666; margin-top:.9mm; letter-spacing:.02em; }
+
+      .ps-cols { display:grid; grid-template-columns:1fr 1fr; gap:3mm 7mm; }
+      .ps-facts { display:grid; grid-template-columns:repeat(4,1fr); gap:2mm; margin-bottom:4mm; border:.5pt solid #ccc; }
+      .ps-fact { padding:1.8mm 2.4mm; border-right:.5pt solid #ccc; }
+      .ps-fact:last-child { border-right:0; }
+      .ps-fact-k { font-family:'IBM Plex Mono',monospace; font-size:6.4pt; letter-spacing:.1em; text-transform:uppercase; color:#777; }
+      .ps-fact-v { font-size:9pt; font-weight:700; margin-top:.5mm; }
+      .ps-skill { margin-bottom:1.7mm; }
+      .ps-skill-k { font-family:'IBM Plex Mono',monospace; font-size:6.7pt; letter-spacing:.1em; text-transform:uppercase; color:#777; }
+      .ps-skill-v { color:#222; }
+      .ps-award { display:flex; gap:3mm; align-items:baseline; padding:.85mm 0; border-bottom:.4pt dotted #ccc; }
+      .ps-award:last-child { border-bottom:0; }
+      .ps-award-p { font-family:'Fraunces',serif; font-weight:600; font-size:9.4pt; min-width:9mm; }
+      .ps-award-n { flex:1; }
+      .ps-award-d { font-family:'IBM Plex Mono',monospace; font-size:6.7pt; color:#777; white-space:nowrap; }
+      .ps-foot { margin-top:3.6mm; padding-top:1.8mm; border-top:.5pt solid #ccc;
+        font-family:'IBM Plex Mono',monospace; font-size:6.6pt; letter-spacing:.06em; color:#777;
+        display:flex; justify-content:space-between; gap:6mm; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1749,6 +1797,157 @@
   <div class="lb-cap" id="lb-cap"></div>
 </div>
 
+<!-- ════════════════════ TWO-PAGE PDF BRIEF (print only) ════════════════════ -->
+<section class="pdf-sheet" aria-hidden="true">
+  <!-- ─────────── PAGE 1 · who + work ─────────── -->
+  <div class="ps-page">
+    <div class="ps-head">
+      <div>
+        <div class="ps-name">Kyle Tran</div>
+        <div class="ps-role">Mechanical Engineer · Northeastern University</div>
+      </div>
+      <div class="ps-contact">
+        kylegtran2007@gmail.com<br>
+        ka1e27.github.io/Portfolio<br>
+        github.com/ka1e27 · Boston / Burlingame, CA
+      </div>
+    </div>
+
+    <p class="ps-lead">I build <b>robots, autonomous vehicles, and embedded systems</b> &mdash; drawn in CAD, machined and printed, wired and coded, then tested until they hold up. Two years of competitive combat robotics, and an autonomous survey boat built from scratch.</p>
+
+    <div class="ps-facts">
+      <div class="ps-fact"><div class="ps-fact-k">Major</div><div class="ps-fact-v">Mechanical Eng.</div></div>
+      <div class="ps-fact"><div class="ps-fact-k">GPA</div><div class="ps-fact-v">3.87</div></div>
+      <div class="ps-fact"><div class="ps-fact-k">Robots built</div><div class="ps-fact-v">10</div></div>
+      <div class="ps-fact"><div class="ps-fact-k">Podium finishes</div><div class="ps-fact-v">16</div></div>
+    </div>
+
+    <div class="ps-strip">
+      <figure><img data-src="images/web/dreams-v1-lake.jpg" alt="D.R.E.A.M.S survey boat on the water" onerror="this.style.display='none'"><figcaption>D.R.E.A.M.S — autonomous survey boat</figcaption></figure>
+      <figure><img data-src="images/web/combat-card.jpg" alt="Combat robots built for competition" onerror="this.style.display='none'"><figcaption>Combat robots — Team DHM</figcaption></figure>
+      <figure><img data-src="images/web/maze-card.jpg" alt="Autonomous maze-solving robot" onerror="this.style.display='none'"><figcaption>Maze-solving robot</figcaption></figure>
+    </div>
+
+    <div class="ps-sec">
+      <div class="ps-h">Selected work</div>
+
+      <div class="ps-item">
+        <div class="ps-item-top">
+          <div class="ps-title">Autonomous Environmental Survey Boat — D.R.E.A.M.S</div>
+          <div class="ps-when">Jan 2026 — Present</div>
+        </div>
+        <div class="ps-desc">A twin-hull catamaran that surveys lakes and rivers on its own: plans a route from a cloud dashboard, avoids obstacles with stereo-camera vision, and winches an instrumented pod to sample water quality at depth. v1 completed autonomous waypoint surveys on local lakes; v2 rebuilds it around a Raspberry&nbsp;Pi&nbsp;5 brain, a custom PCB, and a 4G command centre, validated end-to-end in simulation first.</div>
+        <div class="ps-tech">Raspberry Pi 5 + 2× RP2040 · MicroPython · StereoSGBM + YOLOv8 · VESC · GPS/IMU fusion · KiCad PCB · ASA + fibreglass hull · FastAPI + PostGIS over 4G</div>
+      </div>
+
+      <div class="ps-item">
+        <div class="ps-item-top">
+          <div class="ps-title">Combat Robotics — Team DHM</div>
+          <div class="ps-when">2023 — 2025</div>
+        </div>
+        <div class="ps-desc">Designed and built ten competition robots across the 1&nbsp;lb antweight and 3&nbsp;lb beetleweight classes — weapon and drivetrain design, titanium and steel armour, composite layup, and iteration driven by what broke in the arena. 16 podium finishes over 5 events, including 4th nationally.</div>
+        <div class="ps-tech">SolidWorks · laser-cut Ti / steel · brushless drive · FDM printing · DFM under a strict weight budget</div>
+      </div>
+
+      <div class="ps-item">
+        <div class="ps-item-top">
+          <div class="ps-title">Autonomous Maze-Solving Robot</div>
+          <div class="ps-when">Oct — Dec 2025</div>
+        </div>
+        <div class="ps-desc">A mechatronics build that maps and solves a maze unaided — sensor-driven wall following and a decision loop tuned against repeated physical runs rather than simulation alone.</div>
+        <div class="ps-tech">Embedded control · sensor fusion · state machines</div>
+      </div>
+
+      <div class="ps-item">
+        <div class="ps-item-top">
+          <div class="ps-title">Miscellaneous Builds</div>
+          <div class="ps-when">2023 — now</div>
+        </div>
+        <div class="ps-desc">10+ custom ceramics tools designed in CAD, printed, and open-sourced for anyone to print; 3D-printed RC aircraft with carbon-fibre spars; a full sewing machine reverse-engineered in CAD; printed climbing hardware; and two browser games.</div>
+        <div class="ps-tech">CAD → FDM · published on MakerWorld · github.com/ka1e27</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────── PAGE 2 · experience + skills + results ─────────── -->
+  <div class="ps-page">
+    <div class="ps-head">
+      <div>
+        <div class="ps-name">Experience &amp; Skills</div>
+        <div class="ps-role">Kyle Tran · page 2 of 2</div>
+      </div>
+      <div class="ps-contact">
+        kylegtran2007@gmail.com<br>
+        ka1e27.github.io/Portfolio
+      </div>
+    </div>
+
+    <div class="ps-sec">
+      <div class="ps-h">Leadership &amp; teams</div>
+      <div class="ps-item">
+        <div class="ps-item-top"><div class="ps-title">President</div><div class="ps-when">Oct 2023 — Jun 2025</div></div>
+        <div class="ps-org">Combat Robots Club, Burlingame</div>
+        <div class="ps-desc">Ran workshops on CAD, soldering, physics, materials, and 3D printing; handled sponsorships and club finances. The team placed on the podium 16 times — 4 firsts, 7 seconds, 5 thirds — across 5 events.</div>
+      </div>
+      <div class="ps-item">
+        <div class="ps-item-top"><div class="ps-title">Ceramic Tools R&amp;D</div><div class="ps-when">Oct 2023 — May 2025</div></div>
+        <div class="ps-org">Burlingame High School · Ceramics Program</div>
+        <div class="ps-desc">Researched, modelled, and printed 10+ custom tools for the ceramics classes — trimming tools, ribs, wire guides, stamps — then published them online.</div>
+      </div>
+      <div class="ps-item">
+        <div class="ps-item-top"><div class="ps-title">Secretary · Co-founder</div><div class="ps-when">Jan 2024 — May 2025</div></div>
+        <div class="ps-org">Burlingame Aeronautics Club</div>
+        <div class="ps-desc">Helped found the club and taught the physics of flight — aerodynamics, lift, drag — then put it into practice designing 3D-printed RC aircraft.</div>
+      </div>
+      <div class="ps-item">
+        <div class="ps-item-top"><div class="ps-title">Subsystem Lead</div><div class="ps-when">Sep 2021 — May 2024</div></div>
+        <div class="ps-org">Iron Panthers FRC #5026</div>
+        <div class="ps-desc">Designed the spindexer mechanism for the competition robot, working with 10+ team members and 5 professional mentors through design reviews and manufacturing.</div>
+      </div>
+    </div>
+
+    <div class="ps-sec">
+      <div class="ps-h">Education</div>
+      <div class="ps-item">
+        <div class="ps-item-top"><div class="ps-title">B.S. Mechanical Engineering</div><div class="ps-when">Sep 2025 — Present · GPA 3.87</div></div>
+        <div class="ps-org">Northeastern University · Boston, MA</div>
+        <div class="ps-tech">Thermodynamics · Materials Science · Statics · Probability &amp; Statistics</div>
+      </div>
+    </div>
+
+    <div class="ps-sec">
+      <div class="ps-h">Capabilities</div>
+      <div class="ps-cols">
+        <div>
+          <div class="ps-skill"><div class="ps-skill-k">Design &amp; CAD</div><div class="ps-skill-v">SolidWorks · Onshape · Fusion 360 · mechanism design · DFM</div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Electronics &amp; firmware</div><div class="ps-skill-v">KiCad · custom PCB · Raspberry Pi · RP2040 · MicroPython · Python/asyncio · Java · soldering</div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Fabrication</div><div class="ps-skill-v">FDM printing · CNC machining · composite layup (FG/CF) · laser-cut Ti / steel</div></div>
+        </div>
+        <div>
+          <div class="ps-skill"><div class="ps-skill-k">Robotics &amp; autonomy</div><div class="ps-skill-v">Stereo vision · OpenCV · YOLOv8 · GPS + IMU fusion · VESC drive · state machines</div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Systems &amp; cloud</div><div class="ps-skill-v">FastAPI · PostGIS · 4G telemetry · simulation-first development</div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Leadership</div><div class="ps-skill-v">Club president · workshops · sponsorships · mentoring</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ps-sec">
+      <div class="ps-h">Selected competition results</div>
+      <div class="ps-award"><div class="ps-award-p">4th</div><div class="ps-award-n">Robot Combat League National Championship</div><div class="ps-award-d">1 lb plastic antweight · 2024</div></div>
+      <div class="ps-award"><div class="ps-award-p">1st</div><div class="ps-award-n">CROS — March Madness</div><div class="ps-award-d">1 lb antweight · 2024</div></div>
+      <div class="ps-award"><div class="ps-award-p">1st</div><div class="ps-award-n">BCRC Bell Brawls IV</div><div class="ps-award-d">3 lb beetleweight · 2024</div></div>
+      <div class="ps-award"><div class="ps-award-p">1st</div><div class="ps-award-n">Spartan Bell Slugfest</div><div class="ps-award-d">1 lb plastic antweight · 2024</div></div>
+      <div class="ps-award"><div class="ps-award-p">1st</div><div class="ps-award-n">NorCal Robotics Expo</div><div class="ps-award-d">1 lb plastic antweight · 2023</div></div>
+      <div class="ps-award"><div class="ps-award-p">2nd</div><div class="ps-award-n">Eight further second-place finishes</div><div class="ps-award-d">ant / beetleweight · 2024</div></div>
+    </div>
+
+    <div class="ps-foot">
+      <span>Full case studies, CAD, and video — ka1e27.github.io/Portfolio</span>
+      <span>Kyle Tran · Mechanical Engineer</span>
+    </div>
+  </div>
+</section>
+
 <!-- ════════════════════ SITE SCRIPT ════════════════════ -->
 <script>
 (function () {
@@ -1761,16 +1960,30 @@
   const stored = localStorage.getItem('theme');
   if (stored) html.setAttribute('data-theme', stored);
   else if (window.matchMedia('(prefers-color-scheme: light)').matches) html.setAttribute('data-theme', 'light');
-  // Save-as-PDF: hand off to the browser's print pipeline, which uses the @media print
-  // stylesheet. Beats shipping a static PDF — it can't go stale, and it renders with the
-  // real webfonts and whatever the reader already has loaded.
+  // Save-as-PDF: printing renders the two-page brief (.pdf-sheet), not the site.
+  // Done in the browser so it uses the real webfonts and can never go stale.
+  // The sheet's thumbnails are data-src (they'd otherwise download on every visit
+  // for a section nobody sees), so resolve them before the dialog opens.
+  function primeSheet() {
+    document.querySelectorAll('.pdf-sheet img[data-src]').forEach(i => {
+      if (!i.getAttribute('src')) i.src = i.getAttribute('data-src');
+    });
+  }
+  function sheetReady(ms) {
+    return Promise.all(Array.from(document.querySelectorAll('.pdf-sheet img'))
+      .filter(i => !i.complete)
+      .map(i => new Promise(r => { i.onload = i.onerror = r; setTimeout(r, ms); })));
+  }
   const savePdf = document.getElementById('save-pdf');
-  if (savePdf) savePdf.addEventListener('click', () => {
-    document.querySelectorAll('.reveal:not(.reveal-in)').forEach(el => el.classList.add('reveal-in'));
-    document.querySelectorAll('img[data-src]').forEach(i => { if (!i.getAttribute('src')) i.src = i.getAttribute('data-src'); });
-    document.querySelectorAll('[data-img]:not(.has-img)').forEach(c => { c.style.backgroundImage = 'url("' + c.getAttribute('data-img') + '")'; c.classList.add('has-img'); });
-    setTimeout(() => window.print(), 250);
+  if (savePdf) savePdf.addEventListener('click', async () => {
+    savePdf.disabled = true;
+    primeSheet();
+    await sheetReady(4000);
+    window.print();
+    savePdf.disabled = false;
   });
+  // Ctrl/Cmd+P should produce the same document
+  window.addEventListener('beforeprint', primeSheet);
 
   const themeBtn = document.getElementById('theme-toggle');
   // announce what the control will do, not just that it exists
