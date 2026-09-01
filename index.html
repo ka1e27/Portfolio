@@ -713,6 +713,9 @@
     .misc-entry-blurb { font-size:var(--fs-400); color:var(--text-secondary); line-height:1.8; max-width:80ch; }
     .misc-media-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:20px; align-items:start; }
     .misc-media-row .img-cap::before { content:""; counter-increment:none; } /* misc uses plain caption line */
+    /* videos aren't numbered figures. The counter lives on ::before, so an inline
+       counter-increment on the <p> never suppressed it — this does. */
+    .vid-item .img-cap::before { content:""; counter-increment:none; }
     .misc-media-row .img-cap { color:var(--text-tertiary); }
 
     /* MakerWorld CTA */
@@ -1218,6 +1221,16 @@
     </div>
 
     <div class="container">
+      <div class="vid-block reveal">
+        <span class="section-label">Watch · stereo tracking</span>
+        <div class="vid-item">
+          <figure class="video-spot" data-video="https://youtu.be/xFhxlYJ-JWs" data-poster="" aria-label="Stereo cameras tracking a person moving around a garage"></figure>
+          <p class="img-cap">The stereo pair picking me up and following me around the garage. Detection runs on the Pi itself, so the frame rate is low — but it is the first end-to-end look at the vision pipeline actually working.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
       <div class="reveal pd-section-label"><span class="section-label">Autonomy stack</span></div>
       <div class="spec-strip cols-2 reveal">
         <div class="spec-cell"><div class="spec-key">Brain · Pi 5</div><div class="spec-val">Navigation, mission FSM, the vision pipeline, and the web command center — Python + asyncio</div></div>
@@ -1291,11 +1304,11 @@
         <div class="vid-grid">
           <div class="vid-item">
             <figure class="video-spot" data-video="https://www.youtube.com/watch?v=q6rDVlaWAPA" data-poster="" aria-label="Achilles at the 2024 RCL National Championship"></figure>
-            <p class="img-cap" style="counter-increment:none">Achilles — 4th, Plastic Antweight · 2024 RCL National Championship</p>
+            <p class="img-cap">Achilles — 4th, Plastic Antweight · 2024 RCL National Championship</p>
           </div>
           <div class="vid-item">
             <figure class="video-spot" data-video="https://www.youtube.com/watch?v=FAmyypelQZA" data-poster="" aria-label="Korybantes v1 at the NorCal Robotics Expo"></figure>
-            <p class="img-cap" style="counter-increment:none">Korybantes v1 — 2nd · NorCal Robotics Expo</p>
+            <p class="img-cap">Korybantes v1 — 2nd · NorCal Robotics Expo</p>
           </div>
         </div>
       </div>
