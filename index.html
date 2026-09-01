@@ -460,7 +460,7 @@
     .video-ph-icon svg { width:22px; height:22px; stroke:currentColor; fill:none; stroke-width:1.5; }
     .video-ph-title { font-family:'Fraunces',serif; font-size:1.1rem; font-weight:600; color:var(--text); }
     .video-ph-text { font-size:.86rem; color:var(--text-tertiary); max-width:30ch; line-height:1.6; }
-    .vid-block { margin-bottom:var(--s9); }
+    .vid-block { margin-bottom:var(--s8); }
     .vid-block .section-label { margin-bottom:var(--s5); }
     .vid-grid { display:grid; grid-template-columns:1fr 1fr; gap:var(--s5); }
     @media (max-width:760px){ .vid-grid { grid-template-columns:1fr; } }
@@ -491,7 +491,7 @@
     @media (max-width:440px){ .spec-strip, .spec-strip.cols-2{ grid-template-columns:1fr;} }
 
     .pd-intro { font-size:clamp(1.14rem,1.9vw,1.42rem); color:var(--text); line-height:1.6; max-width:60ch; margin-bottom:var(--s5); font-weight:400; }
-    .pd-result { display:flex; align-items:flex-start; gap:14px; max-width:72ch; margin-bottom:var(--s9); padding:var(--s4) var(--s5);
+    .pd-result { display:flex; align-items:flex-start; gap:14px; max-width:72ch; margin-bottom:var(--s8); padding:var(--s4) var(--s5);
       border:1px solid var(--border); border-left:2px solid var(--signal); border-radius:0 var(--r-panel) var(--r-panel) 0; background:var(--bg-elev); }
     .pd-result .r-key { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.14em; text-transform:uppercase; color:var(--signal); padding-top:3px; flex-shrink:0; }
     .pd-result .r-text { font-size:var(--fs-300); color:var(--text); line-height:1.55; }
@@ -519,7 +519,7 @@
     .img-ph-icon svg { width:22px; height:22px; stroke:currentColor; fill:none; stroke-width:1.5; }
     .img-ph-label { font-size:.82rem; font-weight:500; color:var(--text-tertiary); max-width:26em; line-height:1.5; }
 
-    .pd-full-fig { margin-bottom:var(--s9); }
+    .pd-full-fig { margin-bottom:var(--s8); }
     .pd-full-fig.is-portrait .img-el { max-width:min(var(--cap-lg),100%); margin-inline:auto; }
     /* the ONE full-bleed, frameless moment per case study */
     .pd-bleed { margin:0 0 var(--s9); }
@@ -530,7 +530,7 @@
     .pd-hero-fig .img-el { width:auto; max-width:100%; height:auto; max-height:76vh; margin-inline:auto; }
 
     /* asymmetric split */
-    .pd-split { display:grid; grid-template-columns:5fr 7fr; gap:var(--s8); align-items:center; margin-bottom:var(--s9); }
+    .pd-split { display:grid; grid-template-columns:5fr 7fr; gap:var(--s8); align-items:center; margin-bottom:var(--s8); }
     .pd-split.media-left { grid-template-columns:7fr 5fr; }
     .pd-split-text { color:var(--text-secondary); line-height:1.85; max-width:56ch; }
     .pd-split-text p { margin-bottom:16px; } .pd-split-text p:last-child{ margin-bottom:0; }
@@ -539,7 +539,7 @@
     @media (max-width:820px){ .pd-split, .pd-split.media-left{ grid-template-columns:1fr; gap:var(--s6); } }
 
     /* sticky build steps */
-    .pd-sticky { display:grid; grid-template-columns:1fr 1fr; gap:var(--s8); align-items:start; margin-bottom:var(--s9); }
+    .pd-sticky { display:grid; grid-template-columns:1fr 1fr; gap:var(--s8); align-items:start; margin-bottom:var(--s8); }
     .pd-sticky-media { position:sticky; top:104px; }
     .pd-sticky-text { display:flex; flex-direction:column; gap:var(--s6); }
     .pd-sticky-step .step-n { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); letter-spacing:.12em; color:var(--signal); margin-bottom:8px; }
@@ -548,7 +548,7 @@
     @media (max-width:820px){ .pd-sticky{ grid-template-columns:1fr; gap:var(--s6);} .pd-sticky-media{ position:static; } }
 
     /* iteration diff table — scrolls inside its own box rather than widening the page */
-    .diff-wrap { margin-bottom:var(--s9); overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .diff-wrap { margin-bottom:var(--s8); overflow-x:auto; -webkit-overflow-scrolling:touch; }
     .diff-table { width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--border); border-radius:var(--r-panel); overflow:hidden; font-size:var(--fs-300); }
     .diff-table th, .diff-table td { text-align:left; padding:var(--s4) var(--s5); border-bottom:1px solid var(--border); vertical-align:top; }
     .diff-table thead th { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.1em; text-transform:uppercase; color:var(--text-tertiary); background:var(--bg-elev); font-weight:500; }
@@ -560,7 +560,7 @@
     @media (max-width:600px){ .diff-table .aspect{ width:32%;} .diff-table th,.diff-table td{ padding:12px 14px;} }
 
     /* key components accordion */
-    .spec-details { border:1px solid var(--border); border-radius:var(--r-panel); background:var(--bg-elev); margin-bottom:var(--s9); overflow:hidden; }
+    .spec-details { border:1px solid var(--border); border-radius:var(--r-panel); background:var(--bg-elev); margin-bottom:var(--s8); overflow:hidden; }
     .spec-details summary { cursor:pointer; list-style:none; padding:var(--s4) var(--s5); display:flex; align-items:center; justify-content:space-between; gap:12px;
       font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); letter-spacing:.1em; text-transform:uppercase; color:var(--text); }
     .spec-details summary::-webkit-details-marker { display:none; }
@@ -573,7 +573,7 @@
 
     /* galleries */
     .pd-section-label { margin:0 0 var(--s6); }
-    .pd-gallery { columns:3; column-gap:var(--s5); margin-bottom:var(--s9); }
+    .pd-gallery { columns:3; column-gap:var(--s5); margin-bottom:var(--s8); }
     .pd-gallery .img-fig { margin:0 0 var(--s5); break-inside:avoid; -webkit-column-break-inside:avoid; }
     .pd-gallery .img-el { transition:transform .5s var(--ease); }
     .pd-gallery .img-fig:hover .img-el { transform:translateY(-4px); }
@@ -677,6 +677,11 @@
     @media (max-width:600px){ .exp-timeline::before{ left:20px;} .exp-entry{ gap:22px;} .exp-marker{ width:42px; height:42px;} }
 
     .awards-table { max-width:820px; margin-top:var(--s5); }
+    /* the eight second places read as repetition inline; keep the record,
+       collapse the tail */
+    .awards-more { max-width:820px; margin-top:var(--s4); }
+    .awards-table-more { margin-top:0; padding:0 var(--s4) var(--s3); }
+    .awards-table-more .award-row:first-child { border-top:0; }
     .award-row { display:flex; align-items:baseline; gap:20px; padding:15px 16px; border-radius:var(--r-panel); transition:background .25s var(--ease), transform .35s var(--ease); }
     .award-row + .award-row { border-top:1px solid var(--border); }
     /* row highlight aids scanning; the slide implied these rows were links */
@@ -1191,8 +1196,8 @@
 
     <div class="container">
       <div class="reveal pd-section-label"><span class="section-label">Custom PCB · rev 01 → rev 02</span></div>
-      <div class="pd-split reveal">
-        <figure class="img-fig is-portrait">
+      <div class="pd-gallery reveal">
+        <figure class="img-fig">
           <img class="img-el img-clickable" data-src="images/web/dreams-v2-pcb-r1.jpg" width="559" height="762" alt="v2 custom PCB, first revision" loading="lazy" decoding="async" onerror="imgFallback(this)">
           <figcaption class="img-cap">PCB — REV 01</figcaption>
         </figure>
@@ -1200,11 +1205,11 @@
           <img class="img-el img-clickable" data-src="images/web/dreams-v2-pcb-r2.jpg" width="832" height="549" alt="v2 custom PCB, second revision" loading="lazy" decoding="async" onerror="imgFallback(this)">
           <figcaption class="img-cap">PCB — REV 02, consolidated power, radio, and sensor headers</figcaption>
         </figure>
-      </div>
-      <figure class="img-fig pd-full-fig is-portrait reveal">
+        <figure class="img-fig">
         <img class="img-el img-clickable" data-src="images/web/dreams-v2-pcb-bringup.jpg" width="1500" height="2000" alt="REV 02 board on the bench with a Raspberry Pi and Pico seated, batteries and a motor wired in" loading="lazy" decoding="async" onerror="imgFallback(this)">
         <figcaption class="img-cap">REV 02 on the bench during bring-up — Pi and RP2040 seated, battery domains and a motor wired in for testing</figcaption>
-      </figure>
+        </figure>
+      </div>
     </div>
 
     <div class="container">
@@ -1727,6 +1732,10 @@
       <div class="award-row reveal"><div class="award-place">1<span class="u">st</span></div><div class="award-info"><div class="award-name">BCRC Bell Brawls IV</div><div class="award-detail">Korybantes Mk2 · 3 lb beetleweight · 2024</div></div></div>
       <div class="award-row reveal"><div class="award-place">1<span class="u">st</span></div><div class="award-info"><div class="award-name">Spartan Bell Slugfest</div><div class="award-detail">Achilles · 1 lb plastic antweight · 2024</div></div></div>
       <div class="award-row reveal"><div class="award-place">1<span class="u">st</span></div><div class="award-info"><div class="award-name">NorCal Robotics Expo</div><div class="award-detail">Achilles · 1 lb plastic antweight · 2023</div></div></div>
+    </div>
+    <details class="spec-details awards-more reveal">
+      <summary>8 more second-place finishes <svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <div class="awards-table awards-table-more">
       <div class="award-row reveal"><div class="award-place">2<span class="u">nd</span></div><div class="award-info"><div class="award-name">NorCal Knockout</div><div class="award-detail">Achilles · 1 lb plastic antweight · 2024</div></div></div>
       <div class="award-row reveal"><div class="award-place">2<span class="u">nd</span></div><div class="award-info"><div class="award-name">West Coast Combat Robotic League — Competition #1</div><div class="award-detail">Achilles · 1 lb plastic antweight · 2024</div></div></div>
       <div class="award-row reveal"><div class="award-place">2<span class="u">nd</span></div><div class="award-info"><div class="award-name">Bot'Geddon at the Rocklin Maker Faire</div><div class="award-detail">Achilles · 1 lb plastic antweight · 2024</div></div></div>
@@ -1735,7 +1744,8 @@
       <div class="award-row reveal"><div class="award-place">2<span class="u">nd</span></div><div class="award-info"><div class="award-name">CROS / WCCRL — Summer Meltdown</div><div class="award-detail">Artemisia · 1 lb plastic antweight · 2024</div></div></div>
       <div class="award-row reveal"><div class="award-place">2<span class="u">nd</span></div><div class="award-info"><div class="award-name">Nexus Knockout</div><div class="award-detail">Korybantes Mk2 · 3 lb beetleweight · 2024</div></div></div>
       <div class="award-row reveal"><div class="award-place">2<span class="u">nd</span></div><div class="award-info"><div class="award-name">NorCal Robotics Expo</div><div class="award-detail">Korybantes Mk2 · 3 lb beetleweight · 2024</div></div></div>
-    </div>
+      </div>
+    </details>
 
     <div class="section-label reveal" style="margin-top:72px">Capabilities</div>
     <h2 class="section-heading reveal">Hands-on <em>skills</em></h2>
