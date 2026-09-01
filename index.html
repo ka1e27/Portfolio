@@ -567,6 +567,43 @@
     .spec-details summary .chev { width:16px; height:16px; stroke:var(--text-secondary); fill:none; stroke-width:2; transition:transform .3s var(--ease); }
     .spec-details[open] summary .chev { transform:rotate(180deg); }
     .spec-details .bom { padding:0 var(--s5) var(--s5); }
+    .spec-details .spec-strip { margin:0 var(--s5) var(--s5); }
+
+    /* ── collapsible chapter, for case studies that run many screens ──── */
+    /* ── in-page nav for long case studies ───────────────────────────── */
+    .pd-nav { position:sticky; top:78px; z-index:900; display:flex; gap:var(--s2); overflow-x:auto;
+      scrollbar-width:none; -ms-overflow-style:none;
+      max-width:calc(var(--maxw) - (var(--gutter) * 2)); margin:0 auto var(--s7); padding:10px 0;
+      background:var(--nav-menu-bg); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border); }
+    .pd-nav::-webkit-scrollbar { display:none; }
+    .pd-nav button { flex:0 0 auto; font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm);
+      letter-spacing:.1em; text-transform:uppercase; color:var(--text-tertiary); background:transparent;
+      border:1px solid transparent; border-radius:var(--r-pill); padding:9px 14px; cursor:pointer;
+      transition:color .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease); }
+    .pd-nav button:hover { color:var(--text); background:var(--accent-soft); }
+    .pd-nav button.is-current { color:var(--text); background:var(--accent-soft); border-color:var(--border-strong); }
+    @media (hover:none){ .pd-nav button { min-height:40px; } }
+    /* clear the fixed header + sticky nav when jumping */
+    .pd > [id] { scroll-margin-top:150px; }
+
+    .pd-chapter { margin:0 0 var(--s8); }
+    .pd-chapter > summary { cursor:pointer; list-style:none; display:flex; align-items:center; gap:var(--s4);
+      max-width:calc(var(--maxw) - (var(--gutter) * 2)); margin-inline:auto;
+      padding:var(--s4) var(--s5); border:1px solid var(--border-strong); border-radius:var(--r-panel);
+      background:var(--bg-elev); box-shadow:var(--shadow-sm);
+      transition:border-color .25s var(--ease); }
+    .pd-chapter > summary::-webkit-details-marker { display:none; }
+    .pd-chapter > summary:hover { border-color:var(--accent); }
+    .pd-chapter-t { font-family:'Fraunces',serif; font-size:var(--fs-600); font-weight:600; color:var(--text); letter-spacing:-.01em; }
+    .pd-chapter-s { font-size:var(--fs-300); color:var(--text-secondary); flex:1; }
+    .pd-chapter > summary .chev { width:20px; height:20px; stroke:var(--text-secondary); fill:none; stroke-width:2; flex-shrink:0; transition:transform .3s var(--ease); }
+    .pd-chapter[open] > summary { margin-bottom:var(--s7); }
+    .pd-chapter[open] > summary .chev { transform:rotate(180deg); }
+    @media (max-width:600px){
+      .pd-chapter > summary { flex-wrap:wrap; gap:var(--s2) var(--s3); padding:var(--s4); }
+      .pd-chapter-s { flex-basis:100%; }
+    }
     .bom-row { display:grid; grid-template-columns:1fr auto; gap:12px; padding:11px 0; border-top:1px dashed var(--border); font-size:var(--fs-300); }
     .bom-row .b-name { color:var(--text); }
     .bom-row .b-note { color:var(--text-tertiary); font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); text-align:right; }
@@ -1054,11 +1091,20 @@
       </div>
     </div>
 
+    <nav class="pd-nav" aria-label="Jump to a section">
+      <button type="button" data-jump="boat-overview">Overview</button>
+      <button type="button" data-jump="boat-v1">Version 1</button>
+      <button type="button" data-jump="boat-v2">Version 2</button>
+      <button type="button" data-jump="boat-pcb">PCB</button>
+      <button type="button" data-jump="boat-vision">Vision</button>
+      <button type="button" data-jump="boat-stack">Stack</button>
+    </nav>
+
     <figure class="img-fig pd-hero-fig reveal">
       <img class="img-el img-clickable" data-src="images/web/dreams-v1-lake.jpg" width="1500" height="2000" alt="D.R.E.A.M.S v1 on the lake" loading="lazy" decoding="async" onerror="imgFallback(this)">
     </figure>
 
-    <div class="container">
+    <div class="container" id="boat-overview">
       <div class="spec-strip reveal">
         <div class="spec-cell" data-spec="status"><div class="spec-key">Status</div><div class="spec-val"><span class="st-dot"></span>In progress · simulation-first</div></div>
         <div class="spec-cell" data-spec="platform"><div class="spec-key">Platform</div><div class="spec-val">Twin-hull catamaran · diff-drive</div></div>
@@ -1078,69 +1124,76 @@
       </div>
     </div>
 
-    <div class="container">
-      <div class="vid-block reveal">
-        <span class="section-label">Watch</span>
-        <figure class="video-spot vertical" data-video="https://www.youtube.com/shorts/imz_c7FyrhM" data-poster="" aria-label="D.R.E.A.M.S v1 on the water"></figure>
-      </div>
-    </div>
-
-    <!-- VERSION 1 -->
-    <div class="container">
-      <div class="reveal pd-section-label"><span class="section-label">Version 1 · Field-tested</span></div>
-      <div class="pd-split reveal is-portrait">
-        <div class="pd-split-text">
-          <p>It started as a sketch: a stable, twin-hull platform that could carry sensitive instruments across open water and still sit calm enough to take clean readings.</p>
-          <p>The dual-hull layout keeps the boat steady; each pontoon houses waterproof compartments for batteries and electronics. The winch lowers an instrumented pod on a tethered slip ring until it registers bottom contact, then samples water temperature, conductivity (salinity), and light before retracting and moving to the next waypoint.</p>
+    <details class="pd-chapter reveal" id="boat-v1">
+      <summary>
+        <span class="pd-chapter-t">Version 1 &mdash; field-tested</span>
+        <span class="pd-chapter-s">Concept sketch, annotated CAD, the sensor pod, and the first build</span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="container">
+        <div class="vid-block reveal">
+          <span class="section-label">Watch</span>
+          <figure class="video-spot vertical" data-video="https://www.youtube.com/shorts/imz_c7FyrhM" data-poster="" aria-label="D.R.E.A.M.S v1 on the water"></figure>
         </div>
-        <figure class="img-fig">
-          <img class="img-el img-clickable" data-src="images/web/dreams-v1-sketch.jpg" width="1415" height="2000" alt="D.R.E.A.M.S v1 first concept sketch" loading="lazy" decoding="async" onerror="imgFallback(this)">
-          <figcaption class="img-cap">First concept sketch — v1</figcaption>
+      </div>
+
+      <!-- VERSION 1 -->
+      <div class="container">
+        <div class="reveal pd-section-label"><span class="section-label">Version 1 · Field-tested</span></div>
+        <div class="pd-split reveal is-portrait">
+          <div class="pd-split-text">
+            <p>It started as a sketch: a stable, twin-hull platform that could carry sensitive instruments across open water and still sit calm enough to take clean readings.</p>
+            <p>The dual-hull layout keeps the boat steady; each pontoon houses waterproof compartments for batteries and electronics. The winch lowers an instrumented pod on a tethered slip ring until it registers bottom contact, then samples water temperature, conductivity (salinity), and light before retracting and moving to the next waypoint.</p>
+          </div>
+          <figure class="img-fig">
+            <img class="img-el img-clickable" data-src="images/web/dreams-v1-sketch.jpg" width="1415" height="2000" alt="D.R.E.A.M.S v1 first concept sketch" loading="lazy" decoding="async" onerror="imgFallback(this)">
+            <figcaption class="img-cap">First concept sketch — v1</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- annotated CAD -->
+      <div class="container">
+        <div class="reveal pd-section-label"><span class="section-label">CAD · v1 platform</span></div>
+        <figure class="fig-annotated reveal">
+          <img class="img-el img-clickable" data-src="images/web/dreams-v1-cad-bridge.jpg" width="1414" height="881" alt="CAD model of the v1 catamaran bridge and winch" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <span class="callout" style="top:53%;left:19%" data-target="platform"><span class="c-dot"></span><span class="c-label">Catamaran bridge</span></span>
+          <span class="callout" style="top:40%;left:47%" data-target="sensing"><span class="c-dot"></span><span class="c-label">Sensor winch</span></span>
         </figure>
+        <figcaption class="img-cap">CAD — the bridge ties the two hulls together and carries the winch that lowers the sensor pod. (Hover or tap a marker.)</figcaption>
       </div>
-    </div>
 
-    <!-- annotated CAD -->
-    <div class="container">
-      <div class="reveal pd-section-label"><span class="section-label">CAD · v1 platform</span></div>
-      <figure class="fig-annotated reveal">
-        <img class="img-el img-clickable" data-src="images/web/dreams-v1-cad-bridge.jpg" width="1414" height="881" alt="CAD model of the v1 catamaran bridge and winch" loading="lazy" decoding="async" onerror="imgFallback(this)">
-        <span class="callout" style="top:53%;left:19%" data-target="platform"><span class="c-dot"></span><span class="c-label">Catamaran bridge</span></span>
-        <span class="callout" style="top:40%;left:47%" data-target="sensing"><span class="c-dot"></span><span class="c-label">Sensor winch</span></span>
-      </figure>
-      <figcaption class="img-cap">CAD — the bridge ties the two hulls together and carries the winch that lowers the sensor pod. (Hover or tap a marker.)</figcaption>
-    </div>
-
-    <div class="container">
-      <div class="pd-split media-left reveal">
-        <figure class="img-fig is-portrait">
-          <img class="img-el img-clickable" data-src="images/web/dreams-v1-cad-pod.png" width="511" height="640" alt="CAD of the v1 sensor pod" loading="lazy" decoding="async" onerror="imgFallback(this)">
-          <figcaption class="img-cap">CAD — v1 sensor pod</figcaption>
-        </figure>
-        <div class="pd-split-text">
-          <p>v1 runs on three Raspberry Pi Picos in MicroPython: a boat controller juggling nine concurrent async tasks &mdash; GPS navigation, heading, dual-brushless drive, winch, mission logic, and safety &mdash; plus a shore operator station and the underwater pod.</p>
-          <p>They talk over an HC-12 433&nbsp;MHz half-duplex radio with XOR-checksummed frames and burst/listen timing. The shore station loads a JSON mission, shows live telemetry, logs everything to CSV, and can e-stop or take manual control at any moment.</p>
+      <div class="container">
+        <div class="pd-split media-left reveal">
+          <figure class="img-fig is-portrait">
+            <img class="img-el img-clickable" data-src="images/web/dreams-v1-cad-pod.png" width="511" height="640" alt="CAD of the v1 sensor pod" loading="lazy" decoding="async" onerror="imgFallback(this)">
+            <figcaption class="img-cap">CAD — v1 sensor pod</figcaption>
+          </figure>
+          <div class="pd-split-text">
+            <p>v1 runs on three Raspberry Pi Picos in MicroPython: a boat controller juggling nine concurrent async tasks &mdash; GPS navigation, heading, dual-brushless drive, winch, mission logic, and safety &mdash; plus a shore operator station and the underwater pod.</p>
+            <p>They talk over an HC-12 433&nbsp;MHz half-duplex radio with XOR-checksummed frames and burst/listen timing. The shore station loads a JSON mission, shows live telemetry, logs everything to CSV, and can e-stop or take manual control at any moment.</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- build strip (chronological, grayscale process) -->
-    <div class="container">
-      <div class="reveal pd-section-label"><span class="section-label">Printed &amp; assembled</span></div>
-    </div>
-    <div class="container-wide">
-      <div class="build-strip-wrap reveal">
-        <div class="build-strip">
-        <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-assembly.jpg" width="340" height="450" alt="Getting the v1 boat ready to test outdoors" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Getting ready to test outdoors</figcaption></figure>
-        <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-epoxy.jpg" width="1500" height="2000" alt="Epoxy-sealing the v1 hull" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Epoxy-sealing the hull</figcaption></figure>
-        <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-pod-print.jpg" width="363" height="495" alt="Printed v1 sensor pod" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Sensor pod, printed</figcaption></figure>
-        <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-winch.jpg" width="380" height="507" alt="v1 sensor-deployment winch" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Sensor-deployment winch</figcaption></figure>
-        <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-jet.jpg" width="377" height="641" alt="Early jet-propulsion experiment on v1" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Early jet-propulsion experiment — a dead end, but a useful one</figcaption></figure>
-        </div>
-        <button type="button" class="strip-nav strip-prev" aria-label="Scroll images left" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></button>
-        <button type="button" class="strip-nav strip-next" aria-label="Scroll images right"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <!-- build strip (chronological, grayscale process) -->
+      <div class="container">
+        <div class="reveal pd-section-label"><span class="section-label">Printed &amp; assembled</span></div>
       </div>
-    </div>
+      <div class="container-wide">
+        <div class="build-strip-wrap reveal">
+          <div class="build-strip">
+          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-assembly.jpg" width="340" height="450" alt="Getting the v1 boat ready to test outdoors" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Getting ready to test outdoors</figcaption></figure>
+          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-epoxy.jpg" width="1500" height="2000" alt="Epoxy-sealing the v1 hull" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Epoxy-sealing the hull</figcaption></figure>
+          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-pod-print.jpg" width="363" height="495" alt="Printed v1 sensor pod" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Sensor pod, printed</figcaption></figure>
+          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-winch.jpg" width="380" height="507" alt="v1 sensor-deployment winch" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Sensor-deployment winch</figcaption></figure>
+          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-jet.jpg" width="377" height="641" alt="Early jet-propulsion experiment on v1" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Early jet-propulsion experiment — a dead end, but a useful one</figcaption></figure>
+          </div>
+          <button type="button" class="strip-nav strip-prev" aria-label="Scroll images left" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button type="button" class="strip-nav strip-next" aria-label="Scroll images right"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+      </div>
+    </details>
 
     <!-- the ONE full-bleed moment: dedication -->
     <figure class="img-fig pd-bleed reveal">
@@ -1149,7 +1202,7 @@
     </figure>
 
     <!-- VERSION 2 -->
-    <div class="container">
+    <div class="container" id="boat-v2">
       <div class="reveal pd-section-label"><span class="section-label">Version 2 · In progress</span></div>
       <p class="pd-closing reveal" style="margin-bottom:var(--s5)">v1 proved the concept on the water &mdash; and showed where it ran out of room. It couldn't see or avoid obstacles, the 433&nbsp;MHz radio was short-range and half-duplex, the hand-wired loom was a tangle of failure points, and a PLA hull isn't built for long days on the water. v2 answers each one:</p>
       <div class="diff-wrap reveal">
@@ -1194,7 +1247,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="boat-pcb">
       <div class="reveal pd-section-label"><span class="section-label">Custom PCB · rev 01 → rev 02</span></div>
       <div class="pd-gallery reveal">
         <figure class="img-fig">
@@ -1212,7 +1265,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="boat-vision">
       <div class="pd-split media-left reveal is-portrait">
         <figure class="img-fig">
           <img class="img-el img-clickable" data-src="images/web/dreams-v2-stereo.jpg" width="1500" height="2000" alt="Stereo camera for onboard tracking on v2" loading="lazy" decoding="async" onerror="imgFallback(this)">
@@ -1235,17 +1288,17 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="boat-stack">
       <div class="reveal pd-section-label"><span class="section-label">Autonomy stack</span></div>
-      <div class="spec-strip cols-2 reveal">
-        <div class="spec-cell"><div class="spec-key">Brain · Pi 5</div><div class="spec-val">Navigation, mission FSM, the vision pipeline, and the web command center — Python + asyncio</div></div>
-        <div class="spec-cell"><div class="spec-key">Executors · 2× RP2040</div><div class="spec-val">Real-time motor control and sensor I/O in MicroPython; a 3 s watchdog trips ESTOP if the brain goes quiet</div></div>
-        <div class="spec-cell"><div class="spec-key">Vision · three tiers</div><div class="spec-val">Water-anomaly screen → YOLOv8-nano detection → threat scoring that aims a panning radar bar</div></div>
-        <div class="spec-cell"><div class="spec-key">Cloud · FastAPI + PostGIS</div><div class="spec-val">Georeferenced readings stream over 4G into a live command center and post-mission heatmaps</div></div>
-      </div>
-
       <details class="spec-details reveal">
-        <summary>Key components <svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <summary>Autonomy stack &amp; key components <svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="spec-strip cols-2 reveal">
+          <div class="spec-cell"><div class="spec-key">Brain · Pi 5</div><div class="spec-val">Navigation, mission FSM, the vision pipeline, and the web command center — Python + asyncio</div></div>
+          <div class="spec-cell"><div class="spec-key">Executors · 2× RP2040</div><div class="spec-val">Real-time motor control and sensor I/O in MicroPython; a 3 s watchdog trips ESTOP if the brain goes quiet</div></div>
+          <div class="spec-cell"><div class="spec-key">Vision · three tiers</div><div class="spec-val">Water-anomaly screen → YOLOv8-nano detection → threat scoring that aims a panning radar bar</div></div>
+          <div class="spec-cell"><div class="spec-key">Cloud · FastAPI + PostGIS</div><div class="spec-val">Georeferenced readings stream over 4G into a live command center and post-mission heatmaps</div></div>
+        </div>
+
         <div class="bom">
           <div class="bom-row"><span class="b-name">Raspberry Pi 5</span><span class="b-note">nav · vision · mission · web</span></div>
           <div class="bom-row"><span class="b-name">2× RP2040 Pico</span><span class="b-note">boat + underwater pod executors</span></div>
@@ -1280,11 +1333,19 @@
       </div>
     </div>
 
+    <nav class="pd-nav" aria-label="Jump to a section">
+      <button type="button" data-jump="combat-overview">Overview</button>
+      <button type="button" data-jump="combat-footage">Footage</button>
+      <button type="button" data-jump="combat-design">Design</button>
+      <button type="button" data-jump="combat-robots">The robots</button>
+      <button type="button" data-jump="combat-roster">Roster</button>
+    </nav>
+
     <figure class="img-fig pd-hero-fig reveal">
       <img class="img-el img-clickable" data-src="images/web/combat-lineup.jpg" width="2000" height="1500" alt="Team DHM combat robots lined up" loading="lazy" decoding="async" onerror="imgFallback(this)">
     </figure>
 
-    <div class="container">
+    <div class="container" id="combat-overview">
       <div class="spec-strip reveal">
         <div class="spec-cell"><div class="spec-key">Team</div><div class="spec-val">Dihydrogen Monoxide</div></div>
         <div class="spec-cell"><div class="spec-key">Active</div><div class="spec-val">2023 – 2025</div></div>
@@ -1303,7 +1364,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="combat-footage">
       <div class="vid-block reveal">
         <span class="section-label">Match footage</span>
         <div class="vid-grid">
@@ -1341,7 +1402,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="combat-design">
       <div class="reveal pd-section-label"><span class="section-label">Design &amp; manufacturing</span></div>
       <div class="pd-split reveal">
         <div class="pd-split-text">
@@ -1361,7 +1422,7 @@
       <figcaption class="img-cap">Achilles — a first- and second-place finish in one weekend</figcaption>
     </figure>
 
-    <div class="container">
+    <div class="container" id="combat-robots">
       <div class="reveal pd-section-label"><span class="section-label">The robots</span></div>
 
       <!-- Korybantes -->
@@ -1426,7 +1487,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="combat-roster">
       <div class="reveal pd-section-label"><span class="section-label">More of the roster</span></div>
       <div class="pd-gallery reveal">
         <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/combat-korybantes-v1.jpg" width="2000" height="1500" alt="Korybantes v1 with trophy" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Korybantes v1, with trophy</figcaption></figure>
@@ -2212,7 +2273,8 @@
   let group = [], idx = 0, lastFocus = null;
   function capOf(img){ const fig = img.closest('.img-fig, .fig-annotated'); const c = fig && fig.querySelector('.img-cap'); return c ? c.textContent.trim().replace(/^FIG\.\d+\s*/, '') : (img.alt || ''); }
   function show(i){ if (!group.length) return; idx = (i + group.length) % group.length; const img = group[idx]; const src = img.getAttribute('src') || img.getAttribute('data-src'); lbImg.src = src; lbImg.alt = img.alt || ''; lbCap.textContent = capOf(img); lbCounter.textContent = String(idx+1).padStart(2,'0') + ' / ' + String(group.length).padStart(2,'0'); const multi = group.length > 1; lbPrev.style.display = lbNext.style.display = multi ? '' : 'none'; }
-  function openLb(img){ const scope = document.querySelector('.tab-content.active') || document; group = Array.from(scope.querySelectorAll('.img-clickable')); idx = group.indexOf(img); if (idx < 0) { group = [img]; idx = 0; } lastFocus = document.activeElement; show(idx); lb.classList.add('open'); document.body.style.overflow = 'hidden'; lbClose.focus(); }
+  function openLb(img){ const scope = document.querySelector('.tab-content.active') || document; // skip figures inside collapsed chapters — they aren't on screen
+    group = Array.from(scope.querySelectorAll('.img-clickable')).filter(el => el.offsetParent !== null || el === img); idx = group.indexOf(img); if (idx < 0) { group = [img]; idx = 0; } lastFocus = document.activeElement; show(idx); lb.classList.add('open'); document.body.style.overflow = 'hidden'; lbClose.focus(); }
   function closeLb(){ lb.classList.remove('open'); lbImg.src = ''; document.body.style.overflow = ''; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
   document.addEventListener('click', e => { const img = e.target.closest('.img-clickable'); if (img && !document.body.classList.contains('edit-mode')) { e.preventDefault(); openLb(img); } });
   lbClose.addEventListener('click', closeLb);
@@ -2239,6 +2301,29 @@
   // touch swipe
   let tx = 0; lb.addEventListener('touchstart', e => tx = e.changedTouches[0].clientX, { passive: true });
   lb.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 45) show(idx + (dx < 0 ? 1 : -1)); }, { passive: true });
+
+  // ── Case-study section nav ──
+  // Buttons rather than hash links: the tab router owns location.hash, so an
+  // anchor like #boat-pcb would look like an unknown tab and strand the reader.
+  document.querySelectorAll('.pd-nav').forEach(nav => {
+    const btns = Array.from(nav.querySelectorAll('button[data-jump]'));
+    btns.forEach(btn => btn.addEventListener('click', () => {
+      const el = document.getElementById(btn.dataset.jump);
+      if (!el) return;
+      // a jump into a collapsed chapter should open it first, or it lands nowhere
+      const det = el.tagName === 'DETAILS' ? el : el.closest('details');
+      if (det && !det.open) det.open = true;
+      el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    }));
+    const targets = btns.map(b => document.getElementById(b.dataset.jump)).filter(Boolean);
+    if ('IntersectionObserver' in window && targets.length) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) btns.forEach(b =>
+          b.classList.toggle('is-current', b.dataset.jump === e.target.id)); });
+      }, { rootMargin: '-150px 0px -68% 0px' });
+      targets.forEach(t => io.observe(t));
+    }
+  });
 
   // ── Build-strip scroll arrows (translucent) ──
   document.querySelectorAll('.build-strip-wrap').forEach(wrap => {
