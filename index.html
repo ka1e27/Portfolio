@@ -18,7 +18,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kyle Tran — Mechanical Engineer</title>
-  <meta name="description" content="Kyle Tran — Mechanical Engineering at Northeastern. Autonomous survey boats, combat robots, embedded systems, and CAD.">
+  <meta name="description" content="Kyle Tran — Mechanical Engineering, Robotics minor, at Northeastern. Autonomous survey boats, combat robots, embedded systems, and CAD.">
   <meta name="author" content="Kyle Tran">
   <meta name="theme-color" content="#0E0E0E">
   <meta property="og:type" content="website">
@@ -38,7 +38,7 @@
     "@type":"Person",
     "name":"Kyle Tran",
     "jobTitle":"Mechanical Engineer",
-    "description":"Mechanical Engineering student at Northeastern University — autonomous survey boats, combat robots, embedded systems, and CAD.",
+    "description":"Mechanical Engineering student (Robotics minor) at Northeastern University — autonomous survey boats, combat robots, embedded systems, and CAD.",
     "alumniOf":{"@type":"CollegeOrUniversity","name":"Northeastern University"},
     "knowsAbout":["Mechanical Engineering","Robotics","CAD","Embedded Systems","Combat Robotics","Computer Vision","PCB Design","3D Printing"],
     "email":"mailto:kylegtran2007@gmail.com",
@@ -666,6 +666,8 @@
     .about-details { display:grid; grid-template-columns:1fr 1fr; gap:1px; margin-top:var(--s6); background:var(--border); border:1px solid var(--border); border-radius:var(--r-panel); overflow:hidden; }
     .about-detail { padding:18px 20px; background:var(--bg); transition:background .25s var(--ease); }
     .about-detail:hover { background:var(--bg-elev); }
+    /* odd cell count leaves a hole in the 2-col grid; let the last one span */
+    .about-detail:last-child:nth-child(odd) { grid-column:1 / -1; }
     .about-detail-label { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); text-transform:uppercase; letter-spacing:.1em; color:var(--text-tertiary); margin-bottom:5px; }
     .about-detail-value { font-size:1rem; font-weight:600; color:var(--text); }
     .about-detail-value .u { color:var(--signal); }
@@ -734,6 +736,7 @@
     .edu { border:1px solid var(--border); border-radius:var(--r-panel); background:var(--bg-elev); padding:var(--s5) var(--s6); margin-top:var(--s5); }
     .edu-head { display:flex; align-items:flex-start; justify-content:space-between; gap:var(--s5); flex-wrap:wrap; padding-bottom:var(--s4); border-bottom:1px solid var(--border); margin-bottom:var(--s4); }
     .edu-degree { font-family:'Fraunces',serif; font-size:var(--fs-600); font-weight:600; color:var(--text); letter-spacing:-.01em; line-height:1.2; }
+    .edu-minor { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); letter-spacing:.06em; text-transform:uppercase; color:var(--text-tertiary); margin-top:7px; }
     .edu-school { font-size:var(--fs-300); color:var(--text-secondary); margin-top:5px; }
     .edu-meta { display:flex; flex-direction:column; align-items:flex-end; gap:6px; text-align:right; flex-shrink:0; }
     .edu-gpa { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); letter-spacing:.06em; text-transform:uppercase; color:var(--text-tertiary); }
@@ -901,6 +904,7 @@
       .ps-item:last-child { margin-bottom:0; }
       .ps-item-top { display:flex; justify-content:space-between; align-items:baseline; gap:5mm; }
       .ps-title { font-family:'Fraunces',serif; font-size:11pt; font-weight:600; line-height:1.16; }
+      .ps-title-min { font-family:'Manrope',system-ui,sans-serif; font-size:8.4pt; font-weight:500; color:#555; letter-spacing:0; }
       .ps-when { font-family:'IBM Plex Mono',monospace; font-size:7pt; color:#666; white-space:nowrap; }
       .ps-org { font-size:8.6pt; font-weight:600; color:#333; margin-top:.5mm; }
       .ps-desc { margin-top:1mm; color:#333; }
@@ -1125,7 +1129,7 @@
         <div class="spec-cell" data-spec="comms"><div class="spec-key">Comms</div><div class="spec-val">4G LTE → live cloud dashboard</div></div>
         <div class="spec-cell" data-spec="sensing"><div class="spec-key">Sensing</div><div class="spec-val">GPS · 9-axis IMU · water-quality pod</div></div>
       </div>
-      <p class="pd-intro reveal">A twin-hull autonomous catamaran that surveys lakes and rivers on its own &mdash; planning a route from a cloud dashboard, dodging obstacles with stereo-camera vision, and lowering an instrumented pod to sample water quality at depth. A Raspberry Pi 5 does the thinking; two microcontrollers handle the real-time work; and the entire stack runs in simulation before it ever touches water.</p>
+      <p class="pd-intro reveal">A twin-hull autonomous catamaran that surveys lakes and rivers on its own &mdash; planning a route from a cloud dashboard, dodging obstacles with stereo-camera vision, and lowering an instrumented pod to sample water quality at depth. A Raspberry Pi 5 does the thinking, two microcontrollers handle the real-time work, and the entire stack runs in simulation before it ever touches water.</p>
       <div class="pd-result reveal">
         <span class="r-key">Result</span>
         <span class="r-text">v1 completed autonomous waypoint surveys on local lakes. v2 rebuilds it around a Pi&nbsp;5 brain, stereo-vision obstacle avoidance, and a 4G cloud command center &mdash; validated end-to-end in simulation and now moving onto the water.</span>
@@ -1155,7 +1159,7 @@
         <div class="pd-split reveal is-portrait">
           <div class="pd-split-text">
             <p>It started as a sketch: a stable, twin-hull platform that could carry sensitive instruments across open water and still sit calm enough to take clean readings.</p>
-            <p>The dual-hull layout keeps the boat steady; each pontoon houses waterproof compartments for batteries and electronics. The winch lowers an instrumented pod on a tethered slip ring until it registers bottom contact, then samples water temperature, conductivity (salinity), and light before retracting and moving to the next waypoint.</p>
+            <p>The dual-hull layout keeps the boat steady. Each pontoon houses waterproof compartments for batteries and electronics. The winch lowers an instrumented pod on a tethered slip ring until it registers bottom contact, then samples water temperature, conductivity (salinity), and light before retracting and moving to the next waypoint.</p>
           </div>
           <figure class="img-fig">
             <img class="img-el img-clickable" data-src="images/web/dreams-v1-sketch.jpg" width="1415" height="2000" alt="D.R.E.A.M.S v1 first concept sketch" loading="lazy" decoding="async" onerror="imgFallback(this)">
@@ -1182,7 +1186,7 @@
             <figcaption class="img-cap">CAD — v1 sensor pod</figcaption>
           </figure>
           <div class="pd-split-text">
-            <p>v1 runs on three Raspberry Pi Picos in MicroPython: a boat controller juggling nine concurrent async tasks: GPS navigation, heading, dual-brushless drive, winch, mission logic, and safety. Alongside it run a shore operator station and the underwater pod.</p>
+            <p>v1 runs on three Raspberry Pi Picos in MicroPython. The boat controller alone juggles nine concurrent async tasks: GPS navigation, heading, dual-brushless drive, winch, mission logic, and safety. Alongside it run a shore operator station and the underwater pod.</p>
             <p>They talk over an HC-12 433&nbsp;MHz half-duplex radio with XOR-checksummed frames and burst/listen timing. The shore station loads a JSON mission, shows live telemetry, logs everything to CSV, and can e-stop or take manual control at any moment.</p>
           </div>
         </div>
@@ -1216,7 +1220,7 @@
     <!-- VERSION 2 -->
     <div class="container" id="boat-v2">
       <div class="reveal pd-section-label"><span class="section-label">Version 2 · In progress</span></div>
-      <p class="pd-closing reveal" style="margin-bottom:var(--s5)">v1 proved the concept on the water &mdash; and showed where it ran out of room. It couldn't see or avoid obstacles, the 433&nbsp;MHz radio was short-range and half-duplex, the hand-wired loom was a tangle of failure points, and a PLA hull isn't built for long days on the water. v2 answers each one:</p>
+      <p class="pd-closing reveal" style="margin-bottom:var(--s5)">v1 proved the concept on the water and showed where it ran out of room. It couldn't see or avoid obstacles, the 433&nbsp;MHz radio was short-range and half-duplex, the hand-wired loom was a tangle of failure points, and a PLA hull isn't built for long days on the water. v2 answers each one:</p>
       <div class="diff-wrap reveal">
         <table class="diff-table">
           <thead><tr><th class="aspect">System</th><th>v1</th><th>v2</th></tr></thead>
@@ -1284,7 +1288,7 @@
           <figcaption class="img-cap">Stereo camera pair — per-object depth for vision-guided avoidance</figcaption>
         </figure>
         <div class="pd-split-text">
-          <p>Two USB cameras form a stereo pair; StereoSGBM turns the disparity into a real per-object distance, so a detected obstacle isn't just a box on a screen &mdash; it has a range.</p>
+          <p>Two USB cameras form a stereo pair. StereoSGBM turns the disparity into a real per-object distance, so a detected obstacle isn't just a box on a screen &mdash; it has a range.</p>
           <p>A three-tier vision pipeline keeps it cheap: a constant water-anomaly screen wakes a YOLOv8-nano detector only when something's there, and a threat score decides what to track and when to steer away.</p>
         </div>
       </div>
@@ -1494,7 +1498,7 @@
           <div class="robot-rank"><svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>4th National · Top 30 US · 2024 · 1 lb plastic AW</div>
           <p class="robot-lead">Achilles (plastic) &mdash; the 1&nbsp;lb belt-driven undercutter that started it all.</p>
           <p>Designed and printed in CAD with a modular plastic chassis for fast, reliable repairs. I handled the CAD, soldering, and wiring, tuning the weight distribution to manage the spinner's gyroscopic forces.</p>
-          <p>It placed 4th at a national plastic-antweight competition and ranked among the top 30 in the U.S. (2024) &mdash; and helped shape the low-profile, belt-driven undercutter meta in the Northern California scene.</p>
+          <p>It placed 4th at a national plastic-antweight competition and ranked among the top 30 in the U.S. (2024). It also helped shape the low-profile, belt-driven undercutter meta in the Northern California scene.</p>
         </div>
       </div>
     </div>
@@ -1510,7 +1514,7 @@
       </div>
       <div class="pd-closing reveal">
         <p>After every match, win or lose, we'd pull the robot apart and work out what broke and why &mdash; every design generation came straight out of that damage analysis, so I learned to design for repairability first.</p>
-        <p>The best part was teaching. As club president I ran workshops on CAD, soldering, physics, and fabrication &mdash; and a few members went on to build and compete with robots of their own.</p>
+        <p>The best part was teaching. As club president I ran workshops on CAD, soldering, physics, and fabrication. A few members went on to build and compete with robots of their own.</p>
       </div>
     </div>
   </div>
@@ -1567,7 +1571,7 @@
         </figure>
         <div class="pd-split-text">
           <p>The chassis is a compact, low-slung tank-drive platform designed in Onshape, with custom mounts I modeled for every board and sensor so nothing rattles loose on the move.</p>
-          <p>Ultrasonic sensors handle distance and obstacle detection while IR sensors follow the line and read proximity; an I2C LCD and status LEDs give live feedback, and a bench potentiometer tunes behavior without a reflash.</p>
+          <p>Ultrasonic sensors handle distance and obstacle detection while IR sensors follow the line and read proximity. An I2C LCD and status LEDs give live feedback, and a bench potentiometer tunes behavior without a reflash.</p>
         </div>
       </div>
     </div>
@@ -1596,7 +1600,7 @@
       <div class="pd-kicker">Project 04 · Assorted</div>
       <h2 class="pd-title">Miscellaneous Builds</h2>
     </div>
-    <p class="pd-intro reveal">Smaller builds that don't need a page of their own. Some solved a real problem for someone; others were just an excuse to learn a process properly.</p>
+    <p class="pd-intro reveal">Smaller builds that don't need a page of their own. Repairs, one-offs, and a few things I made just to learn how.</p>
 
     <a class="maker-cta reveal" href="https://makerworld.com/en/@kylegtran2007" target="_blank" rel="noopener">
       <span class="maker-cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
@@ -1663,6 +1667,7 @@
         <div class="about-details reveal">
           <div class="about-detail"><div class="about-detail-label">University</div><div class="about-detail-value">Northeastern</div></div>
           <div class="about-detail"><div class="about-detail-label">Major</div><div class="about-detail-value">Mechanical Eng.</div></div>
+          <div class="about-detail"><div class="about-detail-label">Minor</div><div class="about-detail-value">Robotics</div></div>
           <div class="about-detail"><div class="about-detail-label">GPA</div><div class="about-detail-value"><span class="u">3.87</span></div></div>
           <div class="about-detail"><div class="about-detail-label">Based in</div><div class="about-detail-value">Burlingame, CA</div></div>
         </div>
@@ -1781,6 +1786,7 @@
       <div class="edu-head">
         <div>
           <div class="edu-degree">B.S. Mechanical Engineering</div>
+          <div class="edu-minor">Minor in Robotics</div>
           <div class="edu-school">Northeastern University · Boston, MA</div>
         </div>
         <div class="edu-meta">
@@ -2015,7 +2021,7 @@
     <div class="ps-sec">
       <div class="ps-h">Education</div>
       <div class="ps-item">
-        <div class="ps-item-top"><div class="ps-title">B.S. Mechanical Engineering</div><div class="ps-when">Sep 2025 — Present · GPA 3.87</div></div>
+        <div class="ps-item-top"><div class="ps-title">B.S. Mechanical Engineering <span class="ps-title-min">· Minor in Robotics</span></div><div class="ps-when">Sep 2025 — Present · GPA 3.87</div></div>
         <div class="ps-org">Northeastern University · Boston, MA</div>
         <div class="ps-tech">Thermodynamics · Materials Science · Statics · Probability &amp; Statistics</div>
       </div>
