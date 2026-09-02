@@ -1226,7 +1226,7 @@
           <thead><tr><th class="aspect">System</th><th>v1</th><th>v2</th></tr></thead>
           <tbody>
             <tr><td class="aspect">Brain</td><td class="v1">3× RP2040 (boat · shore · pod)</td><td class="v2">Raspberry Pi 5 + 2× RP2040 executors <span class="rev">NEW</span></td></tr>
-            <tr><td class="aspect">Hull</td><td class="v1">3D-printed PLA</td><td class="v2">3D-printed ASA · fiberglass + epoxy skin</td></tr>
+            <tr><td class="aspect">Hull</td><td class="v1">3D-printed PLA</td><td class="v2">3D-printed ASA (UV-stable) · fiberglass + epoxy skin</td></tr>
             <tr><td class="aspect">Electronics</td><td class="v1">Hand-wired</td><td class="v2">Custom KiCad PCB</td></tr>
             <tr><td class="aspect">Vision</td><td class="v1">—</td><td class="v2">Stereo depth + YOLOv8 avoidance <span class="rev">NEW</span></td></tr>
             <tr><td class="aspect">Comms</td><td class="v1">HC-12 433 MHz half-duplex</td><td class="v2">4G LTE → PostGIS cloud</td></tr>
@@ -1243,7 +1243,7 @@
           </figure>
         </div>
         <div class="pd-sticky-text">
-          <div class="pd-sticky-step reveal"><div class="step-n">STEP 01 — HULL</div><h3>A hull tuned for the water</h3><p>The twin-hull geometry is refined in CAD for stability and clean flow, then printed in bolt-together sections. v1 printed in PLA; v2 moves to tougher ASA with a fiberglass-and-epoxy skin for stiffness and water resistance.</p></div>
+          <div class="pd-sticky-step reveal"><div class="step-n">STEP 01 — HULL</div><h3>A hull tuned for the water</h3><p>The twin-hull geometry is refined in CAD for stability and clean flow, then printed in bolt-together sections. v1 printed in PLA; v2 moves to ASA, which handles UV and weather where PLA goes soft and brittle, plus a fiberglass-and-epoxy skin for stiffness and water resistance.</p></div>
           <div class="pd-sticky-step reveal"><div class="step-n">STEP 02 — BOARD</div><h3>One board instead of a harness</h3><p>A custom KiCad carrier board replaces v1's hand-wired loom &mdash; consolidating three isolated battery domains, the two drive ESCs, and every sensor header in one place. Fewer failure points, faster to service.</p></div>
           <div class="pd-sticky-step reveal"><div class="step-n">STEP 03 — BRAIN</div><h3>A Pi 5 that can see</h3><p>A Raspberry Pi 5 runs navigation, the mission state machine, and a stereo-camera vision pipeline, with YOLO detection gated by a cheap water-anomaly screen. The two RP2040s stay down at the real-time layer, driving motors and reading sensors.</p></div>
         </div>
