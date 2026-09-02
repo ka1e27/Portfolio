@@ -693,17 +693,6 @@
     .hobby-link svg { width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; transition:transform .35s var(--ease-spring); }
     .hobby-link:hover svg { transform:translate(2px,-2px); }
     @media (hover:none){ .hobby-link { min-height:40px; } }
-    /* photo pair below the grid. Kept 2-up at every width so two portrait
-       shots don't add ~1000px of scroll on a phone; the lightbox has the detail. */
-    .hobby-media { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px;
-      margin-top:var(--s5); align-items:start; }
-    .hobby-media .img-cap { color:var(--text-tertiary); }
-    /* once the cards are 3-up, sit the two photos in card columns 1 and 3. Packed
-       left they left a dead third column; spread, the gap reads as intentional. */
-    @media (min-width:900px){
-      .hobby-media { grid-template-columns:repeat(3,1fr); gap:var(--s5); }
-      .hobby-media figure:last-child { grid-column:3; }
-    }
     @media (min-width:1100px){ .hobbies-grid{ grid-template-columns:repeat(3,1fr); } }
     @media (max-width:820px){ .hobbies-grid{ grid-template-columns:1fr; } }
 
@@ -1732,10 +1721,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="hobby-media reveal">
-        <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/hobby-climbing-shanghai.jpg" width="1200" height="1800" alt="Climbing a rope route up a tower that rises through the full height of a Shanghai mall atrium" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">The tallest indoor route in Shanghai, straight up the middle of a mall</figcaption></figure>
-        <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/hobby-jeans-thrifted.jpg" width="1200" height="1800" alt="Wearing wide-leg jeans sewn from two different thrifted pairs" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">One pair of jeans, made out of two thrifted ones</figcaption></figure>
       </div>
     </div>
   </div>
