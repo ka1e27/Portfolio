@@ -1043,7 +1043,11 @@
           <span class="proj-num" aria-hidden="true">02</span><span class="proj-cat">Competition</span>
           <div class="cover" data-img="images/web/combat-card.jpg" role="img" aria-label="Combat robot"></div>
         </div>
-        <div class="proj-body"><h3 class="proj-title">Combat Robotics — Team DHM</h3>
+        <div class="proj-body">
+          <div>
+            <h3 class="proj-title">Combat Robotics — Team DHM</h3>
+            <p class="proj-desc">Four robots across five weight classes, designed in CAD and printed in-house. 16 podium finishes over 5 events, and 4th nationally in Plastic Antweight.</p>
+          </div>
           <div class="proj-meta"><span class="proj-date">2023 — 2025</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
         </div>
       </article>
@@ -1052,7 +1056,11 @@
           <span class="proj-num" aria-hidden="true">03</span><span class="proj-cat">Mechatronics</span>
           <div class="cover" data-img="images/web/maze-card.jpg" role="img" aria-label="Autonomous maze-solving robot"></div>
         </div>
-        <div class="proj-body"><h3 class="proj-title">Autonomous Maze-Solving Robot</h3>
+        <div class="proj-body">
+          <div>
+            <h3 class="proj-title">Autonomous Maze-Solving Robot</h3>
+            <p class="proj-desc">Maps and solves a maze it has never seen, with sensing, drive, and pathfinding running concurrently on a single Raspberry Pi Pico.</p>
+          </div>
           <div class="proj-meta"><span class="proj-date">Oct — Dec 2025</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
         </div>
       </article>
@@ -1061,7 +1069,11 @@
           <span class="proj-num" aria-hidden="true">04</span><span class="proj-cat">Assorted</span>
           <div class="cover cover-contain" data-img="images/web/plane-v1.png" role="img" aria-label="Assorted smaller builds — 3D-printed plane, ceramics, CAD"></div>
         </div>
-        <div class="proj-body"><h3 class="proj-title">Miscellaneous Builds</h3>
+        <div class="proj-body">
+          <div>
+            <h3 class="proj-title">Miscellaneous Builds</h3>
+            <p class="proj-desc">Ceramics tools published free for anyone to print, a 3D-printed RC plane, a sewing machine reverse-engineered in CAD, and printed climbing gear.</p>
+          </div>
           <div class="proj-meta"><span class="proj-date">2023 — now · ceramics, planes, CAD studies</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
         </div>
       </article>
@@ -1170,7 +1182,7 @@
             <figcaption class="img-cap">CAD — v1 sensor pod</figcaption>
           </figure>
           <div class="pd-split-text">
-            <p>v1 runs on three Raspberry Pi Picos in MicroPython: a boat controller juggling nine concurrent async tasks &mdash; GPS navigation, heading, dual-brushless drive, winch, mission logic, and safety &mdash; plus a shore operator station and the underwater pod.</p>
+            <p>v1 runs on three Raspberry Pi Picos in MicroPython: a boat controller juggling nine concurrent async tasks: GPS navigation, heading, dual-brushless drive, winch, mission logic, and safety. Alongside it run a shore operator station and the underwater pod.</p>
             <p>They talk over an HC-12 433&nbsp;MHz half-duplex radio with XOR-checksummed frames and burst/listen timing. The shore station loads a JSON mission, shows live telemetry, logs everything to CSV, and can e-stop or take manual control at any moment.</p>
           </div>
         </div>
@@ -1229,7 +1241,7 @@
         <div class="pd-sticky-text">
           <div class="pd-sticky-step reveal"><div class="step-n">STEP 01 — HULL</div><h3>A hull tuned for the water</h3><p>The twin-hull geometry is refined in CAD for stability and clean flow, then printed in bolt-together sections. v1 printed in PLA; v2 moves to tougher ASA with a fiberglass-and-epoxy skin for stiffness and water resistance.</p></div>
           <div class="pd-sticky-step reveal"><div class="step-n">STEP 02 — BOARD</div><h3>One board instead of a harness</h3><p>A custom KiCad carrier board replaces v1's hand-wired loom &mdash; consolidating three isolated battery domains, the two drive ESCs, and every sensor header in one place. Fewer failure points, faster to service.</p></div>
-          <div class="pd-sticky-step reveal"><div class="step-n">STEP 03 — BRAIN</div><h3>A Pi 5 that can see</h3><p>A Raspberry Pi 5 runs navigation, the mission state machine, and a stereo-camera vision pipeline &mdash; YOLO detection gated by a cheap water-anomaly screen &mdash; while the two RP2040s stay down at the real-time layer, driving motors and reading sensors.</p></div>
+          <div class="pd-sticky-step reveal"><div class="step-n">STEP 03 — BRAIN</div><h3>A Pi 5 that can see</h3><p>A Raspberry Pi 5 runs navigation, the mission state machine, and a stereo-camera vision pipeline, with YOLO detection gated by a cheap water-anomaly screen. The two RP2040s stay down at the real-time layer, driving motors and reading sensors.</p></div>
         </div>
       </div>
     </div>
@@ -1314,7 +1326,7 @@
 
       <div class="pd-closing reveal">
         <p>The whole stack is simulation-first: navigation, the mission state machine, the vision pipeline, and the cloud uploader all run on a laptop simulator before any hardware is attached. The mission itself is a state machine &mdash; <span class="mono">transit → deploy → sample → retract → advance</span> &mdash; with geo-fenced boundaries and automatic return-to-home on low battery.</p>
-        <p>The platform is modular by design &mdash; the pod bay and winch take payloads beyond water quality: a sonar module for bathymetric mapping, cameras for underwater surveys, sediment or water-collection tools, aquatic-vegetation or debris monitoring. The shore station's JSON missions and live telemetry don't care what's attached, so it works as a general-purpose autonomous surface vessel anyone could adapt by swapping the pod.</p>
+        <p>None of that is specific to water quality. Swap the pod and the same hull can carry sonar for bathymetric mapping, cameras for an underwater survey, or tools for collecting sediment and water samples. The shore station doesn't care what's attached &mdash; it loads a JSON mission and streams telemetry back either way. That makes it a general-purpose survey vessel somebody else could adapt.</p>
         <p>It's ongoing &mdash; finishing hardware bring-up on the custom PCB, tuning the vision-guided avoidance on the water, and, eventually, coordinating multiple boats across a larger survey area.</p>
       </div>
     </div>
@@ -1407,7 +1419,7 @@
       <div class="pd-split reveal">
         <div class="pd-split-text">
           <p>Every robot was designed from scratch in CAD, with weapon systems refined through iterative simulation and real-world testing &mdash; horizontal spinners and vertical drums.</p>
-          <p>Manufacturing paired outsourced CNC-machined aluminum frames with in-house 3D-printed armor in reinforced nylon and polycarbonate.</p>
+          <p>We sent the aluminum frames out for CNC machining and printed the armor ourselves, in reinforced nylon and polycarbonate.</p>
         </div>
         <figure class="img-fig">
           <img class="img-el img-clickable" data-src="images/web/combat-orcus-render.jpg" width="1281" height="1025" alt="CAD render of Orcus combat robot" loading="lazy" decoding="async" onerror="imgFallback(this)">
@@ -1584,7 +1596,7 @@
       <div class="pd-kicker">Project 04 · Assorted</div>
       <h2 class="pd-title">Miscellaneous Builds</h2>
     </div>
-    <p class="pd-intro reveal">Smaller builds and side projects that don't need a page of their own &mdash; each a short write-up with a photo or two.</p>
+    <p class="pd-intro reveal">Smaller builds that don't need a page of their own. Some solved a real problem for someone; others were just an excuse to learn a process properly.</p>
 
     <a class="maker-cta reveal" href="https://makerworld.com/en/@kylegtran2007" target="_blank" rel="noopener">
       <span class="maker-cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
@@ -1703,7 +1715,7 @@
   <div class="container exp-wrap">
     <div class="section-label reveal">Experience</div>
     <h2 class="section-heading reveal" style="margin-bottom:var(--s4)">Leadership &amp; <em>teams</em></h2>
-    <p class="exp-summary reveal">Hardware-first mechanical engineering &mdash; hands-on across CAD, composite fabrication, PCB design, and embedded systems, from nationally ranked combat robots to an autonomous survey vessel built from scratch.</p>
+    <p class="exp-summary reveal">I build hardware end to end &mdash; CAD, composite layup, PCB design, firmware. The combat robots took me to 4th nationally and a top-15 U.S. ranking. The survey boat started as a sketch and now runs a mission on its own.</p>
     <div class="exp-timeline">
       <div class="exp-entry reveal">
         <div class="exp-marker" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div>
@@ -1930,8 +1942,8 @@
           <div class="ps-title">Autonomous Environmental Survey Boat — D.R.E.A.M.S</div>
           <div class="ps-when">Jan 2026 — Present</div>
         </div>
-        <div class="ps-desc">A twin-hull catamaran that surveys lakes and rivers on its own: plans a route from a cloud dashboard, avoids obstacles with stereo-camera vision, and winches an instrumented pod to sample water quality at depth. v1 completed autonomous waypoint surveys on local lakes; v2 rebuilds it around a Raspberry&nbsp;Pi&nbsp;5 brain, a custom PCB, and a 4G command centre, validated end-to-end in simulation first.</div>
-        <div class="ps-tech">Raspberry Pi 5 + 2× RP2040 · MicroPython · StereoSGBM + YOLOv8 · VESC · GPS/IMU fusion · KiCad PCB · ASA + fibreglass hull · FastAPI + PostGIS over 4G</div>
+        <div class="ps-desc">A twin-hull catamaran that surveys lakes and rivers on its own: plans a route from a cloud dashboard, avoids obstacles with stereo-camera vision, and winches an instrumented pod to sample water quality at depth. v1 completed autonomous waypoint surveys on local lakes; v2 rebuilds it around a Raspberry&nbsp;Pi&nbsp;5 brain, a custom PCB, and a 4G command center, validated end-to-end in simulation first.</div>
+        <div class="ps-tech">Raspberry Pi 5 + 2× RP2040 · MicroPython · StereoSGBM + YOLOv8 · VESC · GPS/IMU fusion · KiCad PCB · ASA + fiberglass hull · FastAPI + PostGIS over 4G</div>
       </div>
 
       <div class="ps-item">
@@ -1939,7 +1951,7 @@
           <div class="ps-title">Combat Robotics — Team DHM</div>
           <div class="ps-when">2023 — 2025</div>
         </div>
-        <div class="ps-desc">Designed and built ten competition robots across the 1&nbsp;lb antweight and 3&nbsp;lb beetleweight classes — weapon and drivetrain design, titanium and steel armour, composite layup, and iteration driven by what broke in the arena. 16 podium finishes over 5 events, including 4th nationally.</div>
+        <div class="ps-desc">Designed and built four robots across five weight classes — weapon and drivetrain design, titanium and steel armor, composite layup, and iteration driven by what broke in the arena. 16 podium finishes over 5 events, including 4th nationally.</div>
         <div class="ps-tech">SolidWorks · laser-cut Ti / steel · brushless drive · FDM printing · DFM under a strict weight budget</div>
       </div>
 
@@ -1957,7 +1969,7 @@
           <div class="ps-title">Miscellaneous Builds</div>
           <div class="ps-when">2023 — now</div>
         </div>
-        <div class="ps-desc">10+ custom ceramics tools designed in CAD, printed, and open-sourced for anyone to print; 3D-printed RC aircraft with carbon-fibre spars; a full sewing machine reverse-engineered in CAD; and printed climbing hardware.</div>
+        <div class="ps-desc">10+ custom ceramics tools designed in CAD, printed, and open-sourced for anyone to print; 3D-printed RC aircraft with carbon-fiber spars; a full sewing machine reverse-engineered in CAD; and printed climbing hardware.</div>
         <div class="ps-tech">CAD → FDM · published on MakerWorld · github.com/ka1e27</div>
       </div>
     </div>
@@ -1986,7 +1998,7 @@
       <div class="ps-item">
         <div class="ps-item-top"><div class="ps-title">Ceramic Tools R&amp;D</div><div class="ps-when">Oct 2023 — May 2025</div></div>
         <div class="ps-org">Burlingame High School · Ceramics Program</div>
-        <div class="ps-desc">Researched, modelled, and printed 10+ custom tools for the ceramics classes — trimming tools, ribs, wire guides, stamps — then published them online.</div>
+        <div class="ps-desc">Researched, modeled, and printed 10+ custom tools for the ceramics classes — trimming tools, ribs, wire guides, stamps — then published them online.</div>
       </div>
       <div class="ps-item">
         <div class="ps-item-top"><div class="ps-title">Secretary · Co-founder</div><div class="ps-when">Jan 2024 — May 2025</div></div>
