@@ -320,10 +320,15 @@
     /* it wraps to two lines on phones — a squared badge reads deliberate, a lozenge doesn't */
     @media (max-width:600px){ .hero-eyebrow { border-radius:var(--r-chrome); letter-spacing:.14em; line-height:1.65; padding:8px 14px; margin-bottom:var(--s5); } }
     .hero-title { font-family:'Fraunces',serif; font-optical-sizing:auto; font-weight:600; font-size:var(--fs-hero); line-height:.9; letter-spacing:-.035em; color:var(--text);
-      margin-bottom:var(--s6); font-variation-settings:'opsz' var(--hero-opsz,144),'wght' 600; }
+      --hero-opsz:84;
+      margin-bottom:var(--s6); font-variation-settings:'opsz' var(--hero-opsz,84),'wght' 600; }
     /* surname carries weight contrast instead of italics — same upright roman */
-    .hero-title .hero-last { font-style:normal; font-weight:400; font-variation-settings:'opsz' var(--hero-opsz,144),'wght' 400; }
-    /* opsz 144 is the display cut — too delicate at phone sizes. A hardcoded axis
+    .hero-title .hero-last { font-style:normal; font-weight:400; font-variation-settings:'opsz' var(--hero-opsz,84),'wght' 400; }
+    /* Fraunces' opsz axis drives stroke contrast, not just size: the higher it goes,
+       the thinner the thins. At 144 (the display cut) the K's arm, the y's diagonal and
+       the T's crossbar render as hairlines even at 131px, so the axis is held at 84 and
+       stepped down further as the type shrinks. Weight is the wrong lever here — it
+       thickens stems without touching the hairlines. A hardcoded axis
        value defeats font-optical-sizing, so step it down with the type instead. */
     @media (max-width:900px){ .hero-title { --hero-opsz:72; letter-spacing:-.028em; } }
     @media (max-width:600px){ .hero-title { --hero-opsz:44; letter-spacing:-.02em; } }
