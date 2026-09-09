@@ -790,11 +790,12 @@
     /* The ceramics row mixes three landscape photos with two portrait ones, which
        leaves ragged bottoms once they share a row. A fixed aspect makes every cell
        the same shape at any column width; the lightbox still holds the uncrop.
-       Renders are contained rather than cropped, matching their existing padding.
+       Renders are contained rather than cropped: three of these are .jpg, so the
+       extension is no signal and is-render marks them by hand.
        Skipped below 600px, where a single column has nothing to line up with. */
     @media (min-width:600px){
       .misc-media-row.is-strip .img-el { aspect-ratio:4/3; height:auto; object-fit:cover; }
-      .misc-media-row.is-strip .img-el[data-src$=".png"] { object-fit:contain; }
+      .misc-media-row.is-strip .img-el.is-render { object-fit:contain; }
     }
     .misc-media-row .img-cap::before { content:""; counter-increment:none; } /* misc uses plain caption line */
     /* videos aren't numbered figures. The counter lives on ::before, so an inline
@@ -1658,9 +1659,9 @@
         <div class="misc-entry-head"><h3 class="misc-entry-title">Ceramic Tools R&amp;D</h3><span class="misc-entry-date">Oct 2023 — May 2025</span></div>
         <p class="misc-entry-blurb">Over ten custom 3D-printed tools for ceramics classrooms &mdash; trimming tools, ribs, wire guides, and stamps. Each was iterated with students at Burlingame High School and published online for anyone with an FDM printer.</p>
         <div class="misc-media-row is-strip">
-          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-tools.jpg" width="1196" height="657" alt="3D-printed ceramic tool set" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">The ceramic tool set</figcaption></figure>
-          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-loom.png" width="930" height="563" alt="3D-printed loom for a ceramics class" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">3D-printed loom</figcaption></figure>
-          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-clay-cutter.png" width="1194" height="647" alt="3D-printed clay-cutter stencil" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Clay-cutter stencil</figcaption></figure>
+          <figure class="img-fig"><img class="img-el img-clickable is-render" data-src="images/web/ceramic-tools.jpg" width="1196" height="657" alt="3D-printed ceramic tool set" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">The ceramic tool set</figcaption></figure>
+          <figure class="img-fig"><img class="img-el img-clickable is-render" data-src="images/web/ceramic-loom.png" width="930" height="563" alt="3D-printed loom for a ceramics class" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">3D-printed loom</figcaption></figure>
+          <figure class="img-fig"><img class="img-el img-clickable is-render" data-src="images/web/ceramic-clay-cutter.png" width="1194" height="647" alt="3D-printed clay-cutter stencil" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Clay-cutter stencil</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-stamps.jpg" width="1500" height="2000" alt="3D-printed A to Z and 0 to 9 ceramic stamps" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">3D-printed A–Z &amp; 0–9 stamps</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-casserole.jpg" width="1500" height="2000" alt="Clay casserole dish cut with the clay-cutter" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Casserole dish, cut with the clay-cutter</figcaption></figure>
         </div>
@@ -1677,9 +1678,9 @@
       <article class="misc-entry reveal">
         <div class="misc-entry-head"><h3 class="misc-entry-title">Sewing Machine (CAD)</h3><span class="misc-entry-date">2026</span></div>
         <p class="misc-entry-blurb">A full sewing machine modeled in CAD, from the outer housing down to the internal drive. I sew, so I wanted to understand how one motor shaft becomes a needle stroke, a feed step, and a bobbin rotation, all timed to each other.</p>
-        <div class="misc-media-row">
-          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/sewing-corner.png" width="572" height="595" alt="Corner view of the sewing machine CAD model" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Corner view</figcaption></figure>
-          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/sewing-translucent.jpg" width="923" height="555" alt="Translucent side view showing the internal mechanism" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Translucent side view — internal mechanism</figcaption></figure>
+        <div class="misc-media-row is-strip">
+          <figure class="img-fig"><img class="img-el img-clickable is-render" data-src="images/web/sewing-corner.png" width="572" height="595" alt="Corner view of the sewing machine CAD model" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Corner view</figcaption></figure>
+          <figure class="img-fig"><img class="img-el img-clickable is-render" data-src="images/web/sewing-translucent.jpg" width="923" height="555" alt="Translucent side view showing the internal mechanism" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Translucent side view — internal mechanism</figcaption></figure>
         </div>
       </article>
 
