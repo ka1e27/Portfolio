@@ -679,11 +679,21 @@
     .about-cap { margin-top:12px; font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); color:var(--text-tertiary); letter-spacing:.04em; }
     .about-text p { font-size:var(--fs-400); color:var(--text-secondary); margin-bottom:16px; line-height:1.85; max-width:60ch; }
     .about-text p:first-of-type { color:var(--text); font-size:1.1rem; }
-    .about-details { display:grid; grid-template-columns:1fr 1fr; gap:1px; margin-top:var(--s6); background:var(--border); border:1px solid var(--border); border-radius:var(--r-panel); overflow:hidden; }
+    /* full-width strip below both columns. Inside the bio column it forced the
+       text to run ~230px past the portrait, leaving that much dead space beside it. */
+    .about-details { grid-column:1 / -1; display:grid; grid-template-columns:1fr 1fr; gap:1px; margin-top:0; background:var(--border); border:1px solid var(--border); border-radius:var(--r-panel); overflow:hidden; }
     .about-detail { padding:18px 20px; background:var(--bg); transition:background .25s var(--ease); }
     .about-detail:hover { background:var(--bg-elev); }
     /* odd cell count leaves a hole in the 2-col grid; let the last one span */
     .about-detail:last-child:nth-child(odd) { grid-column:1 / -1; }
+    /* five facts fit one row at width; the odd-cell span would kick the last to its own */
+    @media (min-width:1000px){
+      .about-details { grid-template-columns:repeat(5,1fr); }
+      .about-detail:last-child:nth-child(odd) { grid-column:auto; }
+    }
+    /* under ~380px a 164px cell breaks "Mechanical Eng." onto a second line and
+       leaves its row-mate half empty, so stack instead. */
+    @media (max-width:379px){ .about-details { grid-template-columns:1fr; } }
     .about-detail-label { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); text-transform:uppercase; letter-spacing:.1em; color:var(--text-tertiary); margin-bottom:5px; }
     .about-detail-value { font-size:1rem; font-weight:600; color:var(--text); }
     .about-detail-value .u { color:var(--signal); }
@@ -1676,13 +1686,13 @@
         <p class="reveal">I'm a Mechanical Engineering student at Northeastern, originally from Burlingame, California. Reading about how something works has never been enough for me. I have to build one.</p>
         <p class="reveal">That's turned into combat robots, an autonomous survey boat, and a drawer full of 3D-printed ceramic tools. Whatever it is, the work runs the same way: sketch it in CAD, machine and print the parts, wire it up, write the firmware, then break it and fix it until it holds. Combat robotics is where I learned to like that last part: losing, figuring out why, and coming back with the clock running.</p>
         <p class="reveal">Right now that's a catamaran that surveys water quality in local reservoirs on its own. Nobody handed me a manual for it. That's the part I like.</p>
-        <div class="about-details reveal">
-          <div class="about-detail"><div class="about-detail-label">University</div><div class="about-detail-value">Northeastern</div></div>
-          <div class="about-detail"><div class="about-detail-label">Major</div><div class="about-detail-value">Mechanical Eng.</div></div>
-          <div class="about-detail"><div class="about-detail-label">Minor</div><div class="about-detail-value">Robotics</div></div>
-          <div class="about-detail"><div class="about-detail-label">GPA</div><div class="about-detail-value"><span class="u">3.87</span></div></div>
-          <div class="about-detail"><div class="about-detail-label">Based in</div><div class="about-detail-value">Burlingame, CA</div></div>
-        </div>
+      </div>
+      <div class="about-details reveal">
+        <div class="about-detail"><div class="about-detail-label">University</div><div class="about-detail-value">Northeastern</div></div>
+        <div class="about-detail"><div class="about-detail-label">Major</div><div class="about-detail-value">Mechanical Eng.</div></div>
+        <div class="about-detail"><div class="about-detail-label">Minor</div><div class="about-detail-value">Robotics</div></div>
+        <div class="about-detail"><div class="about-detail-label">GPA</div><div class="about-detail-value"><span class="u">3.87</span></div></div>
+        <div class="about-detail"><div class="about-detail-label">Based in</div><div class="about-detail-value">Burlingame, CA</div></div>
       </div>
     </div>
 
