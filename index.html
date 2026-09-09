@@ -787,6 +787,15 @@
     /* this band would otherwise land on 4 tracks, the one count that strands the
        fifth ceramics photo next to three empty cells. 3 tracks leaves one gap. */
     @media (min-width:960px) and (max-width:1199px){ .misc-media-row{ grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); } }
+    /* The ceramics row mixes three landscape photos with two portrait ones, which
+       leaves ragged bottoms once they share a row. A fixed aspect makes every cell
+       the same shape at any column width; the lightbox still holds the uncrop.
+       Renders are contained rather than cropped, matching their existing padding.
+       Skipped below 600px, where a single column has nothing to line up with. */
+    @media (min-width:600px){
+      .misc-media-row.is-strip .img-el { aspect-ratio:4/3; height:auto; object-fit:cover; }
+      .misc-media-row.is-strip .img-el[data-src$=".png"] { object-fit:contain; }
+    }
     .misc-media-row .img-cap::before { content:""; counter-increment:none; } /* misc uses plain caption line */
     /* videos aren't numbered figures. The counter lives on ::before, so an inline
        counter-increment on the <p> never suppressed it — this does. */
@@ -1648,7 +1657,7 @@
       <article class="misc-entry reveal">
         <div class="misc-entry-head"><h3 class="misc-entry-title">Ceramic Tools R&amp;D</h3><span class="misc-entry-date">Oct 2023 — May 2025</span></div>
         <p class="misc-entry-blurb">Over ten custom 3D-printed tools for ceramics classrooms &mdash; trimming tools, ribs, wire guides, and stamps. Each was iterated with students at Burlingame High School and published online for anyone with an FDM printer.</p>
-        <div class="misc-media-row">
+        <div class="misc-media-row is-strip">
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-tools.jpg" width="1196" height="657" alt="3D-printed ceramic tool set" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">The ceramic tool set</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-loom.png" width="930" height="563" alt="3D-printed loom for a ceramics class" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">3D-printed loom</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/ceramic-clay-cutter.png" width="1194" height="647" alt="3D-printed clay-cutter stencil" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Clay-cutter stencil</figcaption></figure>
