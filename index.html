@@ -783,7 +783,10 @@
     .misc-entry-title { font-family:'Fraunces',serif; font-size:1.42rem; font-weight:600; color:var(--text); line-height:1.2; letter-spacing:-.01em; }
     .misc-entry-date { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); color:var(--signal); letter-spacing:.04em; white-space:nowrap; }
     .misc-entry-blurb { font-size:var(--fs-400); color:var(--text-secondary); line-height:1.8; max-width:80ch; }
-    .misc-media-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:20px; align-items:start; }
+    .misc-media-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-top:20px; align-items:start; }
+    /* this band would otherwise land on 4 tracks, the one count that strands the
+       fifth ceramics photo next to three empty cells. 3 tracks leaves one gap. */
+    @media (min-width:960px) and (max-width:1199px){ .misc-media-row{ grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); } }
     .misc-media-row .img-cap::before { content:""; counter-increment:none; } /* misc uses plain caption line */
     /* videos aren't numbered figures. The counter lives on ::before, so an inline
        counter-increment on the <p> never suppressed it — this does. */
@@ -1107,7 +1110,7 @@
             <h3 class="proj-title">Miscellaneous Builds</h3>
             <p class="proj-desc">Ceramics tools published free for anyone to print, a 3D-printed RC plane, a sewing machine reverse-engineered in CAD, and printed climbing gear.</p>
           </div>
-          <div class="proj-meta"><span class="proj-date">2023 — now · ceramics, planes, CAD studies</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+          <div class="proj-meta"><span class="proj-date">2023 — Present · ceramics, planes, CAD studies</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
         </div>
       </article>
     </div>
@@ -2016,7 +2019,7 @@
       <div class="ps-item">
         <div class="ps-item-top">
           <div class="ps-title">Miscellaneous Builds</div>
-          <div class="ps-when">2023 — now</div>
+          <div class="ps-when">2023 — Present</div>
         </div>
         <div class="ps-desc">10+ custom ceramics tools designed in CAD, printed, and open-sourced for anyone to print; 3D-printed RC aircraft with carbon-fiber spars; a full sewing machine reverse-engineered in CAD; and printed climbing hardware.</div>
         <div class="ps-tech">CAD → FDM · published on MakerWorld · github.com/ka1e27</div>
@@ -2076,10 +2079,10 @@
         <div>
           <div class="ps-skill"><div class="ps-skill-k">Design &amp; CAD</div><div class="ps-skill-v">SolidWorks · Onshape · Fusion 360 · mechanism design · DFM</div></div>
           <div class="ps-skill"><div class="ps-skill-k">Electronics &amp; firmware</div><div class="ps-skill-v">KiCad · custom PCB · Raspberry Pi · RP2040 · MicroPython · soldering</div></div>
-          <div class="ps-skill"><div class="ps-skill-k">Software &amp; AI</div><div class="ps-skill-v">Python/asyncio · MATLAB · Java · AI coding agents · simulation-first development</div></div>
-          <div class="ps-skill"><div class="ps-skill-k">Fabrication</div><div class="ps-skill-v">FDM printing · CNC machining · composite layup (FG/CF) · laser-cut Ti / steel</div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Software &amp; AI</div><div class="ps-skill-v">Python/asyncio · MATLAB · Java · AI coding agents · simulation-first&nbsp;development</div></div>
         </div>
         <div>
+          <div class="ps-skill"><div class="ps-skill-k">Fabrication</div><div class="ps-skill-v">FDM printing · CNC machining · composite layup (FG/CF) · laser-cut&nbsp;Ti&nbsp;/&nbsp;steel</div></div>
           <div class="ps-skill"><div class="ps-skill-k">Robotics &amp; autonomy</div><div class="ps-skill-v">Stereo camera rigs · GPS + IMU fusion · VESC drive · 4G telemetry · state machines</div></div>
           <div class="ps-skill"><div class="ps-skill-k">Leadership</div><div class="ps-skill-v">Club president · workshops · sponsorships · mentoring</div></div>
         </div>
