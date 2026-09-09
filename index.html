@@ -391,7 +391,10 @@
     .proj:hover .proj-media .cover { transform:scale(1.045); }
     .proj-media .cover.cover-contain { background-size:contain; background-repeat:no-repeat; background-position:center; padding:6% 4%; }
     .proj:hover .proj-media { border-color:var(--border-strong); transform:translateY(-5px); box-shadow:var(--shadow-pop); }
-    .proj-num { position:absolute; top:14px; left:15px; z-index:2; font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); letter-spacing:.14em; color:#fff; mix-blend-mode:difference; }
+    /* a difference blend reads on light and dark covers but disappears over a
+       mid-tone one, so this carries the same backdrop chip as .proj-cat. */
+    .proj-num { position:absolute; top:12px; left:12px; z-index:2; font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); letter-spacing:.14em;
+      color:var(--text); background:var(--nav-bg); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); padding:5px 9px; border-radius:var(--r-pill); }
     .proj-cat { position:absolute; top:12px; right:12px; z-index:2; font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.1em; text-transform:uppercase; color:var(--text);
       background:var(--nav-bg); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid var(--border); padding:6px 11px; border-radius:var(--r-pill); }
     .proj-body { display:flex; align-items:flex-start; justify-content:space-between; gap:var(--s5); padding:var(--s4) 2px 0; }
@@ -662,6 +665,9 @@
     .callout:hover .c-dot { transform:scale(1.35); }
     .callout .c-label { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.05em; text-transform:uppercase; color:var(--text); background:var(--nav-bg);
       backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid var(--border-strong); padding:5px 9px; border-radius:6px; white-space:normal; }
+    /* the marker is ~30px tall, under the 44px touch minimum. Expand the hit area
+       with a pseudo-element so the dot stays registered to the CAD feature. */
+    @media (hover:none){ .callout::before { content:''; position:absolute; inset:-8px -10px; } }
     @media (max-width:560px){ .callout .c-label{ font-size:var(--fs-label-sm); padding:4px 7px; } }
 
     /* ================================================================
@@ -1010,9 +1016,9 @@
 
     <div class="marquee" aria-label="Tools and skills">
       <div class="marquee-track" id="marquee-track">
-        <span><b>CAD</b> · SolidWorks · Onshape · Fusion 360 · KiCad · MicroPython · Python · asyncio · Raspberry Pi · VESC · OpenCV · YOLOv8 · FastAPI · PostGIS · CNC machining · FDM printing · Stereo vision · PCB design &nbsp;·&nbsp; </span>
+        <span><b>CAD</b> · SolidWorks · Onshape · Fusion 360 · KiCad · PCB design · MicroPython · Python · asyncio · MATLAB · Java · AI coding agents · Raspberry Pi · VESC · GPS + IMU fusion · Stereo camera rigs · CNC machining · FDM printing · Composite layup &nbsp;·&nbsp; </span>
         <!-- second copy makes the -50% loop seamless; hidden from AT so it isn't read twice -->
-        <span aria-hidden="true"><b>CAD</b> · SolidWorks · Onshape · Fusion 360 · KiCad · MicroPython · Python · asyncio · Raspberry Pi · VESC · OpenCV · YOLOv8 · FastAPI · PostGIS · CNC machining · FDM printing · Stereo vision · PCB design &nbsp;·&nbsp; </span>
+        <span aria-hidden="true"><b>CAD</b> · SolidWorks · Onshape · Fusion 360 · KiCad · PCB design · MicroPython · Python · asyncio · MATLAB · Java · AI coding agents · Raspberry Pi · VESC · GPS + IMU fusion · Stereo camera rigs · CNC machining · FDM printing · Composite layup &nbsp;·&nbsp; </span>
       </div>
     </div>
 
@@ -1186,8 +1192,8 @@
       </div>
 
       <div class="container">
-        <div class="pd-split media-left reveal">
-          <figure class="img-fig is-portrait">
+        <div class="pd-split media-left reveal is-portrait">
+          <figure class="img-fig">
             <img class="img-el img-clickable" data-src="images/web/dreams-v1-cad-pod.png" width="511" height="640" alt="CAD of the v1 sensor pod" loading="lazy" decoding="async" onerror="imgFallback(this)">
             <figcaption class="img-cap">CAD — v1 sensor pod</figcaption>
           </figure>
