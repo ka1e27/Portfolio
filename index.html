@@ -495,6 +495,11 @@
       border:1px solid var(--border); border-left:2px solid var(--signal); border-radius:0 var(--r-panel) var(--r-panel) 0; background:var(--bg-elev); }
     .pd-result .r-key { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.14em; text-transform:uppercase; color:var(--signal); padding-top:3px; flex-shrink:0; }
     .pd-result .r-text { font-size:var(--fs-300); color:var(--text); line-height:1.55; }
+    /* secondary variant, so the Result callout stays the louder of the two */
+    .pd-result.is-note { border-left-color:var(--border-strong); }
+    .pd-result.is-note .r-key { color:var(--text-tertiary); }
+    .pd-result.is-note .r-text { color:var(--text-secondary); }
+    .pd-result:has(+ .pd-result) { margin-bottom:var(--s3); }
     /* project link buttons (CAD / GitHub / live app) */
     .pd-links { display:flex; gap:12px; flex-wrap:wrap; margin:0 0 var(--s9); }
     .pd-result:has(+ .pd-links) { margin-bottom:var(--s4); }
@@ -1125,6 +1130,10 @@
       <div class="pd-result reveal">
         <span class="r-key">Result</span>
         <span class="r-text">v1 completed autonomous waypoint surveys on local lakes. v2 rebuilds it around a Pi&nbsp;5 brain, stereo-vision obstacle avoidance, and a 4G cloud command center &mdash; validated end-to-end in simulation and now moving onto the water.</span>
+      </div>
+      <div class="pd-result is-note reveal">
+        <span class="r-key">Software</span>
+        <span class="r-text">The hull, electronics, custom PCB, and system integration are my own. The software &mdash; firmware, vision pipeline, and cloud dashboard &mdash; was built with AI coding agents. I specified the architecture and did the integration and on-water debugging, not the line-by-line implementation.</span>
       </div>
       <div class="pd-links reveal">
         <a class="pd-link" href="https://dreamsv1.kylegtran2007.workers.dev/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Waypoint planner <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
@@ -1824,7 +1833,7 @@
       </div>
       <div class="cap-cell reveal">
         <div class="cap-k">Software &amp; AI</div>
-        <div class="cap-list"><span class="cap-item">Python · asyncio</span><span class="cap-item">MATLAB</span><span class="cap-item">Java</span><span class="cap-item">AI coding agents</span></div>
+        <div class="cap-list"><span class="cap-item">Python</span><span class="cap-item">MATLAB</span><span class="cap-item">Java</span><span class="cap-item">AI coding agents</span><span class="cap-item">Simulation-first dev</span></div>
       </div>
       <div class="cap-cell reveal">
         <div class="cap-k">Fabrication</div>
@@ -1832,11 +1841,7 @@
       </div>
       <div class="cap-cell reveal">
         <div class="cap-k">Robotics &amp; autonomy</div>
-        <div class="cap-list"><span class="cap-item">Stereo vision</span><span class="cap-item">OpenCV</span><span class="cap-item">YOLOv8</span><span class="cap-item">GPS + IMU fusion</span><span class="cap-item">VESC drive</span><span class="cap-item">State machines</span></div>
-      </div>
-      <div class="cap-cell reveal">
-        <div class="cap-k">Systems &amp; cloud</div>
-        <div class="cap-list"><span class="cap-item">FastAPI</span><span class="cap-item">PostGIS</span><span class="cap-item">4G telemetry</span><span class="cap-item">Simulation-first dev</span></div>
+        <div class="cap-list"><span class="cap-item">Stereo camera rigs</span><span class="cap-item">GPS + IMU fusion</span><span class="cap-item">VESC drive</span><span class="cap-item">4G telemetry</span><span class="cap-item">State machines</span></div>
       </div>
       <div class="cap-cell reveal">
         <div class="cap-k">Leadership</div>
@@ -1937,7 +1942,7 @@
           <div class="ps-title">Autonomous Environmental Survey Boat — D.R.E.A.M.S</div>
           <div class="ps-when">Jan 2026 — Present</div>
         </div>
-        <div class="ps-desc">A twin-hull catamaran that surveys lakes and rivers on its own: plans a route from a cloud dashboard, avoids obstacles with stereo-camera vision, and winches an instrumented pod to sample water quality at depth. v1 completed autonomous waypoint surveys on local lakes; v2 rebuilds it around a Raspberry&nbsp;Pi&nbsp;5 brain, a custom PCB, and a 4G command center, validated end-to-end in simulation first.</div>
+        <div class="ps-desc">A twin-hull catamaran that surveys lakes and rivers on its own: plans a route from a cloud dashboard, avoids obstacles with stereo-camera vision, and winches an instrumented pod to sample water quality at depth. v1 completed autonomous waypoint surveys on local lakes; v2 rebuilds it around a Raspberry&nbsp;Pi&nbsp;5 brain, a custom PCB, and a 4G command center, validated end-to-end in simulation first. Mechanical design, electronics, and integration are my own work; the software stack was built with AI coding agents.</div>
         <div class="ps-tech">Raspberry Pi 5 + 2× RP2040 · MicroPython · StereoSGBM + YOLOv8 · VESC · GPS/IMU fusion · KiCad PCB · ASA + fiberglass hull · FastAPI + PostGIS over 4G</div>
       </div>
 
@@ -2022,12 +2027,11 @@
         <div>
           <div class="ps-skill"><div class="ps-skill-k">Design &amp; CAD</div><div class="ps-skill-v">SolidWorks · Onshape · Fusion 360 · mechanism design · DFM</div></div>
           <div class="ps-skill"><div class="ps-skill-k">Electronics &amp; firmware</div><div class="ps-skill-v">KiCad · custom PCB · Raspberry Pi · RP2040 · MicroPython · soldering</div></div>
-          <div class="ps-skill"><div class="ps-skill-k">Software &amp; AI</div><div class="ps-skill-v">Python/asyncio · MATLAB · Java · AI coding agents</div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Software &amp; AI</div><div class="ps-skill-v">Python · MATLAB · Java · AI coding agents · simulation-first development</div></div>
           <div class="ps-skill"><div class="ps-skill-k">Fabrication</div><div class="ps-skill-v">FDM printing · CNC machining · composite layup (FG/CF) · laser-cut Ti / steel</div></div>
         </div>
         <div>
-          <div class="ps-skill"><div class="ps-skill-k">Robotics &amp; autonomy</div><div class="ps-skill-v">Stereo vision · OpenCV · YOLOv8 · GPS + IMU fusion · VESC drive · state machines</div></div>
-          <div class="ps-skill"><div class="ps-skill-k">Systems &amp; cloud</div><div class="ps-skill-v">FastAPI · PostGIS · 4G telemetry · simulation-first development</div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Robotics &amp; autonomy</div><div class="ps-skill-v">Stereo camera rigs · GPS + IMU fusion · VESC drive · 4G telemetry · state machines</div></div>
           <div class="ps-skill"><div class="ps-skill-k">Leadership</div><div class="ps-skill-v">Club president · workshops · sponsorships · mentoring</div></div>
         </div>
       </div>
