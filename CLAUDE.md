@@ -59,6 +59,7 @@ as the source of truth for how this site is built and how to keep it consistent.
   - **Maze:** built *with a partner* (he led CAD + firmware); ultrasonic + IR line-following; **tank-drive**; asyncio; I2C LCD.
   - **Combat:** Korybantes (3lb beater, top-35 US '25), Achilles metal (1lb, top-15 US '25, **single-cam shuffler on the newest version only** — walks flipped), Achilles plastic (4th nat'l, top-30 US '24, belt-driven undercutter).
 - **Voice:** concrete and specific (real part names/numbers). No vague superlatives ("cutting-edge," "passionate," "innovative solutions").
+- **No mid-sentence bold** (owner, 2026-09). Don't bold words or clauses inside running prose. Where a phrase genuinely needs emphasis, use `var(--signal)` red at normal weight, or a tone shift to `var(--text)` against `--text-secondary` body copy — not weight. Keep the `<strong>`/`<b>` element for screen readers and set `font-weight:inherit` on it, so the emphasis isn't colour-only for assistive tech. This is the one sanctioned use of the accent on prose; everything else in §2 still applies.
 
 ## 7. Images (workflow + traps)
 - Source photos → `images/` (any name, spaces ok). **Optimize** into `images/web/<kebab-slug>.jpg` with **Pillow**:
