@@ -789,6 +789,11 @@
     /* education block */
     .edu { border:1px solid var(--border); border-radius:var(--r-panel); background:var(--bg-elev); padding:var(--s5) var(--s6); margin-top:var(--s5); }
     .edu-head { display:flex; align-items:flex-start; justify-content:space-between; gap:var(--s5); flex-wrap:wrap; padding-bottom:var(--s4); border-bottom:1px solid var(--border); margin-bottom:var(--s4); }
+    /* The husky pairs with the degree block rather than sitting as a third
+       child of .edu-head: that row is justify-content:space-between, and a
+       third item would push the degree text into the middle of the card. */
+    .edu-id { display:flex; align-items:center; gap:var(--s5); min-width:0; }
+    .edu-crest { height:88px; width:auto; flex-shrink:0; }
     .edu-degree { font-family:'Fraunces',serif; font-size:var(--fs-600); font-weight:600; color:var(--text); letter-spacing:-.01em; line-height:1.2; }
     .edu-minor { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); letter-spacing:.06em; text-transform:uppercase; color:var(--text-tertiary); margin-top:7px; }
     .edu-school { font-size:var(--fs-300); color:var(--text-secondary); margin-top:5px; }
@@ -798,7 +803,7 @@
     .edu-date { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); color:var(--text-tertiary); letter-spacing:.04em; }
     .edu-courses { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
     .edu-courses-k { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.14em; text-transform:uppercase; color:var(--text-tertiary); margin-right:4px; }
-    @media (max-width:600px){ .edu-meta{ align-items:flex-start; text-align:left; } }
+    @media (max-width:600px){ .edu-meta{ align-items:flex-start; text-align:left; } .edu-crest{ height:60px; } .edu-id{ gap:var(--s4); } }
 
     /* ================================================================
        MISC
@@ -2009,10 +2014,13 @@
     <h2 class="section-heading reveal">Northeastern <em>University</em></h2>
     <div class="edu reveal">
       <div class="edu-head">
-        <div>
-          <div class="edu-degree">B.S. Mechanical Engineering</div>
-          <div class="edu-minor">Minor in Robotics</div>
-          <div class="edu-school">Northeastern University · Boston, MA</div>
+        <div class="edu-id">
+          <img class="edu-crest" src="images/web/northeastern-husky.png" width="310" height="400" alt="Northeastern University Huskies logo" loading="lazy" decoding="async">
+          <div>
+            <div class="edu-degree">B.S. Mechanical Engineering</div>
+            <div class="edu-minor">Minor in Robotics</div>
+            <div class="edu-school">Northeastern University · Boston, MA</div>
+          </div>
         </div>
         <div class="edu-meta">
           <span class="edu-gpa">GPA <b>3.87</b></span>
