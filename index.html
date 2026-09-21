@@ -68,7 +68,10 @@
        DESIGN TOKENS — "field-instrument editorial"
        Monochrome + ONE cool desaturated hazard-orange signal (functional
        only: status, iteration markers, results, focus, hover cues).
-       No gradients. No second accent.
+       No second accent and no decorative gradient. The gradients that do
+       exist are two masks (hero motif, marquee edge fade), the signal-
+       coloured timeline rule, and the conic on .ig-avatar, which is
+       Instagram's own mark on its own card rather than a palette choice.
        ================================================================ */
     :root {
       color-scheme: dark light;
@@ -92,6 +95,9 @@
       --ease: cubic-bezier(.16,1,.3,1);
       --ease-spring: cubic-bezier(.32,.72,0,1);
       --transition-theme: background .5s var(--ease), color .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+      /* Sticky header height. The mobile menu, the project sub-nav and the
+         top padding of every page wrap are all measured from it. */
+      --header-h: 78px;
       --maxw: 1240px;
       --maxw-wide: 1500px;
       --gutter: 40px;
@@ -238,7 +244,7 @@
     #header { position:fixed; top:0; left:0; right:0; z-index:1000; background:var(--nav-bg);
       backdrop-filter:blur(22px) saturate(1.4); -webkit-backdrop-filter:blur(22px) saturate(1.4);
       border-bottom:1px solid var(--border); transition:var(--transition-theme); }
-    .nav-inner { display:flex; align-items:center; justify-content:space-between; height:78px; }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; height:var(--header-h); }
     .nav-logo { display:flex; flex-direction:column; cursor:pointer; user-select:none; color:var(--text); transition:color .25s var(--ease); }
     .nav-logo:hover { color:var(--accent); }
     .nav-logo-name { font-family:'Fraunces',serif; font-weight:600; font-size:1.68rem; line-height:1.05; letter-spacing:-.02em; }
@@ -275,7 +281,7 @@
       /* Full-height overlay. The header's backdrop-filter makes it the containing block for
          fixed descendants, so `bottom:0` would collapse to the header — size with viewport
          units (immune to that) and never rely on backdrop-filter alone for legibility. */
-      .nav-links{ position:fixed; top:78px; left:0; right:0; height:calc(100vh - 78px); height:calc(100dvh - 78px); overflow-y:auto;
+      .nav-links{ position:fixed; top:var(--header-h); left:0; right:0; height:calc(100vh - var(--header-h)); height:calc(100dvh - var(--header-h)); overflow-y:auto;
         flex-direction:column; padding:28px 32px; gap:4px;
         background:var(--nav-menu-bg); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
         border-top:1px solid var(--border); transform:translateY(-12px); opacity:0; pointer-events:none; transition:.4s var(--ease); z-index:999; }
@@ -468,6 +474,24 @@
     .video-ph-icon svg { width:22px; height:22px; stroke:currentColor; fill:none; stroke-width:1.5; }
     .video-ph-title { font-family:'Fraunces',serif; font-size:1.1rem; font-weight:600; color:var(--text); }
     .video-ph-text { font-size:.86rem; color:var(--text-tertiary); max-width:30ch; line-height:1.6; }
+
+    /* Figure placeholders, for a project that is designed but not yet built or
+       shot. Mirrors .video-ph so an empty frame reads as deliberate rather than
+       as a failed image load. Dashed border is the "nothing here yet" cue. */
+    .fig-ph { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--s3);
+      text-align:center; padding:var(--s6); aspect-ratio:16/10; border:1px dashed var(--border-strong);
+      border-radius:var(--r-frame); background:var(--bg-elev); }
+    .fig-ph.is-tall { aspect-ratio:4/5; }
+    .fig-ph-icon { width:44px; height:44px; border-radius:var(--r-chrome); display:flex; align-items:center;
+      justify-content:center; background:var(--accent-soft); color:var(--accent); }
+    .fig-ph-icon svg { width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+    .fig-ph-title { font-family:'Fraunces',serif; font-size:var(--fs-500); font-weight:600; color:var(--text); }
+    .fig-ph-text { font-size:var(--fs-300); color:var(--text-tertiary); max-width:36ch; line-height:1.6; }
+    /* same idea on a project card cover */
+    .proj-media .cover.cover-ph { background:var(--bg-elev); display:flex; align-items:center; justify-content:center; }
+    .proj-media .cover.cover-ph::after { content:'RENDERS IN PROGRESS'; font-family:'IBM Plex Mono',monospace;
+      font-size:var(--fs-label-sm); letter-spacing:.14em; color:var(--text-tertiary); }
+    .proj:hover .proj-media .cover.cover-ph { transform:none; }
     .vid-block { margin-bottom:var(--s8); }
     .vid-block .section-label { margin-bottom:var(--s5); }
     .vid-grid { display:grid; grid-template-columns:1fr 1fr; gap:var(--s5); }
@@ -476,7 +500,7 @@
     /* ================================================================
        PROJECT DETAIL
        ================================================================ */
-    .pd { padding-top:94px; padding-bottom:var(--s9); counter-reset:fig; }
+    .pd { padding-top:calc(var(--header-h) + var(--s4)); padding-bottom:var(--s9); counter-reset:fig; }
     .pd-back { display:inline-flex; align-items:center; gap:8px; min-height:44px; font-size:.86rem; font-weight:500; color:var(--text-secondary); cursor:pointer;
       background:var(--bg-elev); border:1px solid var(--border); font-family:'Manrope',sans-serif; padding:9px 20px 9px 16px; border-radius:var(--r-pill);
       margin-bottom:var(--s7); box-shadow:var(--shadow-sm); transition:color .25s var(--ease), border-color .25s var(--ease); }
@@ -584,7 +608,7 @@
 
     /* ── collapsible chapter, for case studies that run many screens ──── */
     /* ── in-page nav for long case studies ───────────────────────────── */
-    .pd-nav { position:sticky; top:78px; z-index:900; display:flex; gap:var(--s2); overflow-x:auto;
+    .pd-nav { position:sticky; top:var(--header-h); z-index:900; display:flex; gap:var(--s2); overflow-x:auto;
       scrollbar-width:none; -ms-overflow-style:none;
       max-width:calc(var(--maxw) - (var(--gutter) * 2)); margin:0 auto var(--s7); padding:10px 0;
       background:var(--nav-menu-bg); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
@@ -673,7 +697,7 @@
     /* ================================================================
        ABOUT
        ================================================================ */
-    .about-wrap { padding-top:94px; padding-bottom:var(--s9); }
+    .about-wrap { padding-top:calc(var(--header-h) + var(--s4)); padding-bottom:var(--s9); }
     .about-layout { display:grid; grid-template-columns:.82fr 1.18fr; gap:var(--s8); align-items:start; }
     .about-fig .img-el { border-radius:var(--r-frame); }
     .about-cap { margin-top:12px; font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); color:var(--text-tertiary); letter-spacing:.04em; }
@@ -725,7 +749,7 @@
     /* ================================================================
        EXPERIENCE
        ================================================================ */
-    .exp-wrap { padding-top:94px; padding-bottom:var(--s9); }
+    .exp-wrap { padding-top:calc(var(--header-h) + var(--s4)); padding-bottom:var(--s9); }
     .exp-timeline { position:relative; max-width:880px; }
     .exp-timeline::before { content:''; position:absolute; left:25px; top:10px; bottom:10px; width:1.5px; background:linear-gradient(180deg,var(--signal),var(--border) 22%,var(--border) 78%,var(--signal)); }
     .exp-entry { display:flex; gap:var(--s7); margin-bottom:var(--s7); position:relative; }
@@ -1058,7 +1082,7 @@
 
     <div class="work-head" id="work-grid">
       <h2 class="section-heading reveal">Selected <em>Work</em></h2>
-      <span class="work-count reveal">04 / PROJECTS</span>
+      <span class="work-count reveal">05 / PROJECTS</span>
     </div>
 
     <!-- FEATURED -->
@@ -1092,7 +1116,7 @@
         <div class="proj-body">
           <div>
             <h3 class="proj-title">Combat Robotics — Team DHM</h3>
-            <p class="proj-desc">Four robots across five weight classes, designed in CAD and printed in-house. 16 podium finishes over 5 events, and 4th nationally in Plastic Antweight.</p>
+            <p class="proj-desc">Around ten robots across five weight classes, designed in CAD and printed in-house. 16 podium finishes over 5 events, and 4th nationally in Plastic Antweight.</p>
           </div>
           <div class="proj-meta"><span class="proj-date">2023 — 2025</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
         </div>
@@ -1110,9 +1134,22 @@
           <div class="proj-meta"><span class="proj-date">Oct — Dec 2025</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
         </div>
       </article>
-      <article class="proj reveal col-12" data-goto="project-misc" role="link" tabindex="0" aria-label="Miscellaneous smaller builds">
+      <article class="proj reveal col-5" data-goto="project-arm" role="link" tabindex="0" aria-label="Adaptive compliant robotic arm">
         <div class="proj-media">
-          <span class="proj-num" aria-hidden="true">04</span><span class="proj-cat">Assorted</span>
+          <span class="proj-num" aria-hidden="true">04</span><span class="proj-cat">In design</span>
+          <div class="cover cover-ph" role="img" aria-label="Robotic arm — CAD renders in progress"></div>
+        </div>
+        <div class="proj-body">
+          <div>
+            <h3 class="proj-title">Adaptive Compliant Robotic Arm</h3>
+            <p class="proj-desc">Five axes on cycloidal gearboxes, a TPU gripper that reads its own grip force, and a &plusmn;0.25&deg; positioning target. On paper so far.</p>
+          </div>
+          <div class="proj-meta"><span class="proj-date">2026 — in design</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+        </div>
+      </article>
+      <article class="proj reveal col-7" data-goto="project-misc" role="link" tabindex="0" aria-label="Miscellaneous smaller builds">
+        <div class="proj-media">
+          <span class="proj-num" aria-hidden="true">05</span><span class="proj-cat">Assorted</span>
           <div class="cover cover-contain" data-img="images/web/plane-v1.png" role="img" aria-label="Assorted smaller builds — 3D-printed plane, ceramics, CAD"></div>
         </div>
         <div class="proj-body">
@@ -1633,6 +1670,130 @@
       <div class="pd-closing reveal">
         <p>An asyncio-based control loop runs sensor polling, motor control, and navigation as concurrent tasks on one Raspberry Pi Pico &mdash; responsive obstacle avoidance without ever blocking the main loop. The robot builds an internal map of visited cells and backtracks to explore unvisited branches.</p>
         <p>That same asyncio architecture carried straight into the survey boat's firmware &mdash; concurrent tasks on one Pico, just on water instead of in a maze.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ PROJECT: ARM ═══════════════════════ -->
+<section class="tab-content" data-tab="project-arm">
+  <div class="container-wide pd">
+    <div class="container">
+      <button class="pd-back reveal" data-tab="work"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Work</button>
+      <div class="pd-title-block reveal">
+        <div class="pd-kicker">Project 04 · Robotics &amp; Controls</div>
+        <h2 class="pd-title">Adaptive Compliant Robotic Arm</h2>
+        <div class="pd-tags"><span class="pd-tag">Cycloidal Drives</span><span class="pd-tag">Closed-Loop Steppers</span><span class="pd-tag">TPU Gripper</span><span class="pd-tag">RP2040</span><span class="pd-tag">CAD</span></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="spec-strip reveal">
+        <div class="spec-cell"><div class="spec-key">Status</div><div class="spec-val"><span class="st-dot"></span>In design · nothing built</div></div>
+        <div class="spec-cell"><div class="spec-key">Degrees of freedom</div><div class="spec-val">5 · J1&ndash;J5</div></div>
+        <div class="spec-cell"><div class="spec-key">Reach</div><div class="spec-val">~30 in, shoulder to wrist</div></div>
+        <div class="spec-cell"><div class="spec-key">Target</div><div class="spec-val">&plusmn;0.25&deg; static, per joint</div></div>
+        <div class="spec-cell"><div class="spec-key">Reduction</div><div class="spec-val">17:1 cycloidal · J1&ndash;J4</div></div>
+        <div class="spec-cell"><div class="spec-key">Control</div><div class="spec-val">RP2040 loop · PC for vision</div></div>
+      </div>
+      <p class="pd-intro reveal">A five-axis arm with a compliant TPU gripper that reads its own grip force. Every joint below the wrist runs a cycloidal gearbox with a magnetic encoder on the output shaft rather than the motor, which is what makes a &plusmn;0.25&deg; static target worth aiming at.</p>
+      <div class="pd-result is-note reveal">
+        <span class="r-key">Status</span>
+        <span class="r-text">Nothing is built yet. Joint layout, gear ratios, link lengths and ring sizes are settled; bearing selection, the disc manufacturing route, and real masses from CAD are not. The first prototype gets printed to check motion and tune the loop &mdash; the &plusmn;0.25&deg; figure is for the aluminium version, because printed cycloidal backlash will exceed it on its own.</span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="reveal pd-section-label"><span class="section-label">Joint layout</span></div>
+      <div class="pd-split media-left reveal">
+        <div class="fig-ph">
+            <span class="fig-ph-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7z"/><path d="M12 21.5V11.8"/><path d="M20.5 7 12 11.8 3.5 7"/></svg></span>
+            <span class="fig-ph-title">Arm assembly</span>
+            <span class="fig-ph-text">Full-arm CAD with the five joints and confirmed link lengths. Being modelled now.</span>
+          </div>
+        <div class="pd-split-text">
+          <p>Five joints: base yaw, shoulder pitch, elbow pitch, forearm roll, wrist pitch. Three of them hold gravity, and the shoulder holds everything past it at the longest lever arm, so that is where the torque capacity goes.</p>
+          <p>A sixth joint &mdash; gripper swivel &mdash; got cut as redundant with forearm roll. The cost is that roll sits before the wrist, so changing it also rotates the plane the wrist bends in. For pick-and-place with a symmetric two-jaw gripper that does not matter.</p>
+        </div>
+      </div>
+      <table class="diff-table reveal">
+        <thead><tr><th class="aspect">Joint</th><th>Holds gravity</th><th>Actuator</th></tr></thead>
+        <tbody>
+          <tr><td class="aspect">J1 · base yaw</td><td class="v1">No &mdash; the thrust bearing carries it</td><td class="v2">NEMA17 · 17:1 · 60&nbsp;mm ring</td></tr>
+          <tr><td class="aspect">J2 · shoulder</td><td class="v1">Yes &mdash; longest lever arm</td><td class="v2">NEMA23 · 17:1 · 85&nbsp;mm ring</td></tr>
+          <tr><td class="aspect">J3 · elbow</td><td class="v1">Yes &mdash; shorter lever arm</td><td class="v2">NEMA17, long · 17:1 · 70&nbsp;mm ring</td></tr>
+          <tr><td class="aspect">J4 · forearm roll</td><td class="v1">No &mdash; rotates on its own axis</td><td class="v2">NEMA17 · 17:1 · 60&nbsp;mm ring</td></tr>
+          <tr><td class="aspect">J5 · wrist</td><td class="v1">Yes &mdash; smallest lever arm</td><td class="v2">20&nbsp;kg&middot;cm servo, direct drive</td></tr>
+        </tbody>
+      </table>
+      <div class="pd-closing reveal">
+        <p>On current estimates the shoulder needs about 5.85&nbsp;N&middot;m and has 20&ndash;37&nbsp;N&middot;m available; the elbow needs about 2.25&nbsp;N&middot;m and gets roughly 10&nbsp;N&middot;m from the longer motor. Those masses are estimates rather than CAD figures, and wiring and fasteners always come in heavier than expected.</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="reveal pd-section-label"><span class="section-label">Why the rings are different sizes</span></div>
+      <div class="pd-split reveal">
+        <div class="fig-ph">
+            <span class="fig-ph-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg></span>
+            <span class="fig-ph-title">Cycloidal gearbox</span>
+            <span class="fig-ph-text">Section view of one joint: eccentric input, lobed disc, pinned ring, output flange.</span>
+          </div>
+        <div class="pd-split-text">
+          <p>One gearbox part for all four geared joints would have been the easy call. It is the wrong one. Pin contact stress scales roughly as (1/scale)<sup>1.5</sup>, so a 60&nbsp;mm ring takes around 68&percnt; more stress than the 85&nbsp;mm one at the same torque. Worse, a fixed manufacturing tolerance becomes a larger angular error at a smaller radius, because the error divides by the radius &mdash; shrinking the gear works against the tolerance target, not toward it.</p>
+          <p>So size came down only where there was margin to spend. J1 and J4 carry inertia alone and took 60&nbsp;mm. J3 went to 70&nbsp;mm instead of 60, which holds the stress increase near 34&percnt; rather than 68&percnt;. J2 kept all 85&nbsp;mm of it.</p>
+          <p>The housing has room to lose too. The input shaft is 20&nbsp;mm because of 3D printing, where a torsion check puts the real minimum under 4&nbsp;mm; at 8&ndash;10&nbsp;mm it keeps a wide margin and drops to a far cheaper bearing, taking the shell from about 127&nbsp;mm toward 100&nbsp;mm.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="reveal pd-section-label"><span class="section-label">The tolerance budget</span></div>
+      <p class="pd-intro reveal">Waterjet cuts the lobe profile straight from the DXF and costs less than milling, so the only question is whether its tolerance fits. At the 85&nbsp;mm ring&rsquo;s 42.5&nbsp;mm radius a linear cut error becomes an angular one, and the budget is small enough that the shop&rsquo;s real capability decides the answer.</p>
+      <table class="diff-table reveal">
+        <thead><tr><th class="aspect">Cut tolerance</th><th>Angular error</th><th>Share of the budget</th></tr></thead>
+        <tbody>
+          <tr><td class="aspect">&plusmn;0.05&nbsp;mm · precision</td><td class="v1">&plusmn;0.067&deg;</td><td class="v2">~27&percnt;</td></tr>
+          <tr><td class="aspect">&plusmn;0.10&nbsp;mm · typical</td><td class="v1">&plusmn;0.135&deg;</td><td class="v2">~54&percnt;</td></tr>
+          <tr><td class="aspect">&plusmn;0.15&nbsp;mm · job shop</td><td class="v1">&plusmn;0.20&deg;</td><td class="v2">~80&percnt;</td></tr>
+        </tbody>
+      </table>
+      <div class="pd-closing reveal">
+        <p>At &plusmn;0.05&nbsp;mm there is room left for backlash and structural compliance, which are the larger errors anyway. At &plusmn;0.15&nbsp;mm four fifths of the budget is gone to one source before the arm has moved. That single number decides whether waterjet makes final parts or only validation parts &mdash; and the lobe faces get a finishing pass either way, since waterjet edges are rough exactly where the rolling contact happens.</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="reveal pd-section-label"><span class="section-label">Picking the feedback, and what got rejected</span></div>
+      <div class="pd-closing reveal">
+        <p>The encoder sits on the gearbox output, not the motor. It reads the joint angle directly, so the gear ratio drops out of the precision question and only affects torque and speed. It is a 12-bit AS5600 at 0.09&deg; per count, about 2.8&times; under the target &mdash; thin, but backlash and compliance are the bigger errors at this tolerance, so a 14-bit part would be buying precision in the wrong place.</p>
+        <p>An IMU was the other candidate and does not work here. An IMU measures a link&rsquo;s orientation against gravity, so it is blind to rotation about a vertical axis &mdash; that alone rules out base yaw without leaning on a magnetometer. Even with good fusion an IMU holds roughly 1&ndash;3&deg; statically, against a &plusmn;0.25&deg; target. It may come back as a supplement on the end effector for an absolute level reference or vibration sensing, but not as the joint sensor.</p>
+        <p>Forearm roll has a wiring problem rather than a sensing one. The wire sits untwisted at encoder centre and a single hard stop sits directly opposite, so the joint swings freely between but never accumulates past a half turn of twist. That stop is physical as well as in firmware &mdash; a software limit alone does not protect the wire if the encoder glitches or the board loses position across a power cycle.</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="reveal pd-section-label"><span class="section-label">The gripper</span></div>
+      <div class="pd-split media-left reveal">
+        <div class="fig-ph">
+            <span class="fig-ph-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3v7a5 5 0 0 0 10 0V3"/><path d="M9 21h6"/><path d="M12 15v6"/></svg></span>
+            <span class="fig-ph-title">TPU gripper</span>
+            <span class="fig-ph-text">Flexure fingers, the 1:1 gear mesh, and the load-cell mount behind each fingertip pad.</span>
+          </div>
+        <div class="pd-split-text">
+          <p>Two TPU flexure fingers driven by one servo through a 1:1 gear mesh, so both sides mirror each other. The compliance does the accommodating; a load cell per side does the measuring.</p>
+          <p>The part that matters is the load path. The fingertip pad is rigid, the load cell sits behind it, and it anchors to the stiff base of the finger, so force reaches the sensor without passing through the flexing TPU. The finger still conforms to the object and the reading is not corrupted by the finger&rsquo;s own bending. Closing is position control until the cells hit the target force, then hold.</p>
+          <p>Still open here: TPU shore hardness, and print orientation at the flexure so the bend point does not delaminate over cycles.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="reveal pd-section-label"><span class="section-label">Where the boat comes in</span></div>
+      <div class="pd-closing reveal">
+        <p>Further out, this is the manipulator for the survey boat. A submersible on a tether collects water samples; the arm takes the full container off it, stores it aboard, and puts an empty collector back. That is the reason for grip-force feedback and a compliant gripper rather than a rigid claw &mdash; a tethered submersible under a moving boat will not present itself at a repeatable position.</p>
+        <p>The interface between the two is not defined yet, and the marine side is deliberately deferred: sealed encoder housings, waterproof connectors, marine-rated bearings, anodised rather than bare 6061. None of that gets designed until the mechanism works on a bench.</p>
+        <p>Still open before hardware: bearings for the 70&nbsp;mm and 60&nbsp;mm rings with their load ratings checked, the waterjet shop&rsquo;s actual tolerance, whether the wrist keeps its encoder or accepts a looser spec on that one joint, and real link masses from CAD to replace the estimates above.</p>
       </div>
     </div>
   </div>
@@ -2174,7 +2335,8 @@
   const TITLES = {
     'work':'Kyle Tran — Mechanical Engineer', 'about':'About — Kyle Tran', 'experience':'Experience — Kyle Tran',
     'project-boat':'Autonomous Survey Boat — Kyle Tran', 'project-combat':'Combat Robotics — Kyle Tran',
-    'project-maze':'Maze-Solving Robot — Kyle Tran', 'project-misc':'Miscellaneous Builds — Kyle Tran'
+    'project-maze':'Maze-Solving Robot — Kyle Tran', 'project-arm':'Adaptive Compliant Robotic Arm — Kyle Tran',
+    'project-misc':'Miscellaneous Builds — Kyle Tran'
   };
   function setTitle(tab){ document.title = TITLES[tab] || TITLES['work']; }
 
