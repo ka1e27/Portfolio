@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+  Source for images/web/og-card.jpg, the 1200x630 link-preview card (og:image).
+  It is an image of text, so re-render it when the class year or a stat changes.
+  See tools/README.md for the one-line Chrome command.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600&family=Manrope:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=block">
+<style>
+  *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+  html, body { width:1200px; height:630px; }
+  body { background:#0D0D0C; color:#EDEDEA; font-family:'Manrope',sans-serif; -webkit-font-smoothing:antialiased; overflow:hidden; position:relative; }
+  /* faint drafting grid, same token the arm figures use */
+  body::before { content:''; position:absolute; inset:0;
+    background-image:linear-gradient(rgba(237,237,234,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(237,237,234,.05) 1px, transparent 1px);
+    background-size:30px 30px; background-position:-1px -1px; }
+  .card { position:relative; display:grid; grid-template-columns:1fr 432px; height:100%; }
+  .copy { padding:64px 40px 56px 72px; display:flex; flex-direction:column; }
+  .eyebrow { display:inline-flex; align-self:flex-start; align-items:center; gap:12px; padding:10px 18px; border-radius:999px; background:rgba(255,255,255,.07);
+    font-family:'IBM Plex Mono',monospace; font-size:15px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:#A3A19B; }
+  .eyebrow::before { content:''; width:8px; height:8px; border-radius:99px; background:#E63C52; box-shadow:0 0 0 4px rgba(230,60,82,.15); }
+  h1 { font-family:'Fraunces',serif; font-weight:600; font-size:132px; line-height:.9; letter-spacing:-.035em; margin:40px 0 26px;
+    font-variation-settings:'opsz' 84, 'wght' 600; }
+  h1 span { font-weight:400; font-variation-settings:'opsz' 84, 'wght' 400; }
+  .lead { font-size:29px; line-height:1.4; color:#A3A19B; max-width:21em; }
+  .stats { margin-top:auto; display:flex; border:1px solid #282824; border-radius:10px; overflow:hidden; align-self:flex-start; }
+  .stat { padding:14px 22px 13px; }
+  .stat + .stat { border-left:1px solid #282824; }
+  .n { font-family:'Fraunces',serif; font-weight:600; font-size:34px; line-height:1; letter-spacing:-.02em; }
+  .n .u { color:#E63C52; }
+  .k { font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; color:#8B897F; margin-top:8px; }
+  .media { position:relative; margin:40px 40px 40px 0; border:1px solid #333330; border-radius:3px; overflow:hidden;
+    background:url('../images/web/dreams-v1-lake.jpg') 52% 44% / 128% auto no-repeat; }
+  .tag { position:absolute; left:14px; bottom:14px; font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:#EDEDEA; background:rgba(13,13,12,.72); border:1px solid #3B3A35; padding:7px 12px; border-radius:999px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="copy">
+      <span class="eyebrow">Mechanical Eng. · Robotics · Northeastern &rsquo;29</span>
+      <h1>Kyle <span>Tran</span></h1>
+      <p class="lead">Autonomous survey boats, combat robots, and the embedded systems that run them.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">4<span class="u">th</span></div><div class="k">National</div></div>
+        <div class="stat"><div class="n">16</div><div class="k">Team podiums</div></div>
+        <div class="stat"><div class="n">3.87</div><div class="k">GPA</div></div>
+      </div>
+    </div>
+    <div class="media"><span class="tag">D.R.E.A.M.S v1</span></div>
+  </div>
+</body>
+</html>

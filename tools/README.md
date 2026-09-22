@@ -28,3 +28,26 @@ at roughly 1.8 MB.
 
 To edit the brief's content, edit the `.pdf-sheet` markup — it's deliberately
 independent of the site copy so the two can be tuned separately.
+
+## og-card.html
+
+Source for `images/web/og-card.jpg`, the 1200×630 card that LinkedIn, Slack and
+iMessage show when someone shares the site. It repeats the class year and three
+stats (4th national, 16 team podiums, 3.87 GPA) as pixels, so re-render it when
+any of those change. Chrome needs no install; the page loads Google Fonts, so run
+it online:
+
+```powershell
+& "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --hide-scrollbars `
+  --force-device-scale-factor=2 --window-size=1200,630 --virtual-time-budget=6000 `
+  --screenshot="$PWD\og-card.png" "file:///$PWD/tools/og-card.html"
+```
+
+That writes a 2400×1260 PNG. Downsample it to 1200×630 and save it as a JPEG with
+Pillow, then replace `images/web/og-card.jpg`:
+
+```python
+from PIL import Image
+Image.open('og-card.png').convert('RGB').resize((1200, 630), Image.LANCZOS) \
+     .save('images/web/og-card.jpg', 'JPEG', quality=88, optimize=True, progressive=True)
+```
