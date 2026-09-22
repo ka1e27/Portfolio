@@ -18,18 +18,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kyle Tran — Mechanical Engineer</title>
-  <meta name="description" content="Kyle Tran — Mechanical Engineering, Robotics minor, at Northeastern. Autonomous survey boats, combat robots, embedded systems, and CAD.">
+  <meta name="description" content="Kyle Tran — Mechanical Engineering and Robotics at Northeastern, seeking a Summer 2027 co-op. Autonomous survey boats, combat robots, embedded systems, CAD.">
   <meta name="author" content="Kyle Tran">
   <meta name="theme-color" content="#0E0E0E">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Kyle Tran — Mechanical Engineer">
-  <meta property="og:description" content="Autonomous survey boats, combat robots, embedded systems, and CAD. Mechanical Engineering at Northeastern.">
+  <meta property="og:description" content="Autonomous survey boats, combat robots, embedded systems, and CAD. Mechanical Engineering at Northeastern, seeking a Summer 2027 co-op.">
   <meta name="twitter:card" content="summary_large_image">
   <!-- OG/Twitter images must be absolute URLs — crawlers don't resolve relative paths -->
   <meta property="og:url" content="https://ka1e27.github.io/Portfolio/">
-  <meta property="og:image" content="https://ka1e27.github.io/Portfolio/images/web/dreams-field.jpg">
-  <meta property="og:image:alt" content="Kyle Tran's D.R.E.A.M.S autonomous survey boat on the water">
-  <meta name="twitter:image" content="https://ka1e27.github.io/Portfolio/images/web/dreams-field.jpg">
+  <!-- og-card.jpg is a rendered 1200x630 card (name, school, three stats, the boat).
+       It is an image of text: if the stats or class year change, re-render it. -->
+  <meta property="og:image" content="https://ka1e27.github.io/Portfolio/images/web/og-card.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Kyle Tran, Mechanical Engineering and Robotics at Northeastern, class of 2029. 4th nationally in combat robotics, 16 team podiums, 3.87 GPA. Beside it, the D.R.E.A.M.S survey boat on a dock.">
+  <meta name="twitter:image" content="https://ka1e27.github.io/Portfolio/images/web/og-card.jpg">
+  <meta name="twitter:image:alt" content="Kyle Tran, Mechanical Engineering and Robotics at Northeastern, class of 2029, with the D.R.E.A.M.S survey boat">
   <link rel="canonical" href="https://ka1e27.github.io/Portfolio/">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230E0E0E'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='700' fill='%23EDEDED' text-anchor='middle'%3EKT%3C/text%3E%3C/svg%3E">
   <script type="application/ld+json">
@@ -165,6 +170,14 @@
     .container-wide { width:100%; max-width:var(--maxw-wide); margin:0 auto;
       padding-left:max(var(--gutter),env(safe-area-inset-left)); padding-right:max(var(--gutter),env(safe-area-inset-right)); }
     .full-bleed { width:100vw; position:relative; left:50%; margin-left:-50vw; }
+    /* Case studies nest a reading-width .container inside .container-wide. Both
+       carried gutters, so the text ran 44px in from each edge of a 390 phone
+       (a 302px column). The inner one keeps its measure and drops the padding,
+       so at desktop the text column lands where it did before. A nested
+       .container-wide (the build strip) now spans the outer one, level with
+       the hero image, instead of sitting one gutter further in. */
+    .container-wide .container, .container-wide .container-wide { padding-left:0; padding-right:0; }
+    .container-wide .container { max-width:calc(var(--maxw) - (var(--gutter) * 2)); }
 
     .mono { font-family:'IBM Plex Mono',monospace; }
     /* ── mono label (used site-wide; readable floor) ─────────────────── */
@@ -248,7 +261,7 @@
     .nav-logo { display:flex; flex-direction:column; cursor:pointer; user-select:none; color:var(--text); transition:color .25s var(--ease); }
     .nav-logo:hover { color:var(--accent); }
     .nav-logo-name { font-family:'Fraunces',serif; font-weight:600; font-size:1.68rem; line-height:1.05; letter-spacing:-.02em; }
-    .nav-logo-sub { font-family:'IBM Plex Mono',monospace; font-size:.7rem; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--text-tertiary); transition:color .25s var(--ease); }
+    .nav-logo-sub { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--text-tertiary); transition:color .25s var(--ease); }
     .nav-logo:hover .nav-logo-sub { color:var(--signal); }
     .nav-right { display:flex; align-items:center; gap:var(--s2); }
     .nav-links { display:flex; gap:2px; list-style:none; }
@@ -261,6 +274,11 @@
     }
     .nav-links a:hover { color:var(--text); background:var(--accent-soft); --wght:680; }
     .nav-links a.active { color:var(--accent); background:var(--accent-soft); --wght:680; }
+    /* the one thing a recruiter wants from every page, so it lives in the bar */
+    .nav-links a.nav-resume { display:inline-flex; align-items:center; gap:7px; margin-left:6px; color:var(--text); border:1px solid var(--border-strong); padding:7px 15px; }
+    .nav-links a.nav-resume:hover { border-color:var(--accent); }
+    .nav-resume svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform .4s var(--ease-spring); }
+    .nav-resume:hover svg { transform:translateY(2px); }
     .theme-toggle { width:40px; height:40px; border:1px solid var(--border); border-radius:var(--r-pill); background:var(--bg-elev);
       color:var(--text-secondary); display:flex; align-items:center; justify-content:center; cursor:pointer; margin-left:var(--s2);
       position:relative; overflow:hidden; box-shadow:var(--shadow-sm); transition:var(--transition-theme), border-color .25s var(--ease), color .25s var(--ease); }
@@ -287,6 +305,7 @@
         border-top:1px solid var(--border); transform:translateY(-12px); opacity:0; pointer-events:none; transition:.4s var(--ease); z-index:999; }
       .nav-links.open{ transform:translateY(0); opacity:1; pointer-events:all; }
       .nav-links a{ font-size:1.05rem; padding:14px 18px; }
+      .nav-links a.nav-resume{ display:flex; margin:14px 0 0; padding:13px 18px; justify-content:space-between; }
       :root{ --gutter:22px; }
     }
 
@@ -324,7 +343,7 @@
       font-variation-settings:'wght' var(--wght); transition:--wght .35s var(--ease); }
     /* no hover state: it's a static label, and a weight shift implies it's clickable */
     /* it wraps to two lines on phones — a squared badge reads deliberate, a lozenge doesn't */
-    @media (max-width:600px){ .hero-eyebrow { border-radius:var(--r-chrome); letter-spacing:.14em; line-height:1.65; padding:8px 14px; margin-bottom:var(--s5); } }
+    @media (max-width:640px){ .hero-eyebrow { border-radius:var(--r-chrome); letter-spacing:.14em; line-height:1.65; padding:8px 14px; margin-bottom:var(--s5); } }
     .hero-title { font-family:'Fraunces',serif; font-optical-sizing:auto; font-weight:600; font-size:var(--fs-hero); line-height:.9; letter-spacing:-.035em; color:var(--text);
       --hero-opsz:84;
       margin-bottom:var(--s6); font-variation-settings:'opsz' var(--hero-opsz,84),'wght' 600; }
@@ -347,6 +366,13 @@
     }
     .hero-lead { font-size:clamp(1.12rem,1.7vw,1.34rem); color:var(--text-secondary); line-height:1.7; max-width:42ch; margin-bottom:var(--s6); }
     .hero-cta { display:flex; flex-wrap:wrap; gap:14px; margin-bottom:var(--s7); }
+    /* phones: three pills wrapped as 2 + 1 with "Get in touch" stranded;
+       the primary takes the full row and the other two split the next */
+    @media (max-width:480px){
+      .hero-cta { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+      .hero-cta .btn { justify-content:center; padding-left:14px; padding-right:14px; }
+      .hero-cta .btn-primary { grid-column:1 / -1; justify-content:space-between; padding-left:22px; padding-right:12px; }
+    }
     .hero-telemetry { display:flex; flex-wrap:wrap; gap:0; border:1px solid var(--border); border-radius:var(--r-panel); overflow:hidden; max-width:640px; background:var(--bg-elev); }
     .telem-cell { padding:12px 18px; flex:1; min-width:150px; }
     .telem-cell + .telem-cell { border-left:1px solid var(--border); }
@@ -411,7 +437,11 @@
     .proj:hover .proj-arrow svg { transform:translateX(4px); }
 
     .work-featured { margin-bottom:var(--s6); }
-    .work-featured .proj-media { aspect-ratio:16/9; }
+    /* 16:9 ran 765px tall at 1440 and was mostly grass; 2:1 on the boat's
+       own height keeps it the biggest thing on the page without a full screen */
+    .work-featured .proj-media { aspect-ratio:2/1; }
+    .work-featured .proj-media .cover { background-position:center 56%; }
+    @media (max-width:820px){ .work-featured .proj-media { aspect-ratio:16/10; } }
     .work-featured .proj-title { font-size:var(--fs-700); }
     .work-featured .proj-desc { font-size:var(--fs-400); margin-top:10px; }
     @media (max-width:560px){
@@ -424,15 +454,19 @@
 
     .work-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:var(--s6) var(--s5); padding-bottom:var(--s8); }
     .work-grid .proj-title { font-size:var(--fs-600); }
-    .work-grid .proj-body { flex-direction:column; gap:var(--s3); }
-    .work-grid .proj-meta { flex-direction:row; align-items:center; justify-content:space-between; width:100%; padding-top:0; }
+    /* cards in a row stretch to the row's height; pinning the meta line to the
+       bottom keeps the dates and "View" cues level across the pair */
+    .work-grid .proj { display:flex; flex-direction:column; }
+    .work-grid .proj-body { flex-direction:column; gap:var(--s3); flex:1; }
+    .work-grid .proj-meta { flex-direction:row; align-items:center; justify-content:space-between; width:100%; padding-top:0; margin-top:auto; }
     .col-7 { grid-column:span 7; } .col-5 { grid-column:span 5; } .col-12 { grid-column:span 12; }
-    .work-grid .col-7 .proj-media { aspect-ratio:16/10; }
-    .work-grid .col-5 .proj-media { aspect-ratio:4/3.4; }
+    /* one shared height per row. Separate aspect ratios on a 7- and a 5-column
+       card gave the two images different heights, 20px apart at 1440. */
+    .work-grid .col-7 .proj-media, .work-grid .col-5 .proj-media { height:clamp(300px, 33vw, 480px); }
     .work-grid .col-12 .proj-media { aspect-ratio:24/7; }
     @media (max-width:820px){
       .col-7,.col-5,.col-12{ grid-column:span 12; }
-      .work-grid .col-7 .proj-media,.work-grid .col-5 .proj-media{ aspect-ratio:16/10; }
+      .work-grid .col-7 .proj-media,.work-grid .col-5 .proj-media{ height:auto; aspect-ratio:16/10; }
       .work-grid .col-12 .proj-media{ aspect-ratio:16/9; }
     }
 
@@ -445,13 +479,16 @@
       }
     }
 
-    /* credibility strip */
-    .cred-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r-panel); overflow:hidden; margin-bottom:var(--s10); }
+    /* credibility strip — sits right under the hero so the proof lands in the
+       first screen; at the foot of the page it came after all five projects */
+    .cred-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r-panel); overflow:hidden; }
     .cred-cell { background:var(--bg); padding:var(--s5) var(--s5); }
     .cred-num { font-family:'Fraunces',serif; font-size:var(--fs-700); font-weight:600; color:var(--text); line-height:1; letter-spacing:-.02em; }
     .cred-num .u { color:var(--signal); }
     .cred-label { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.08em; text-transform:uppercase; color:var(--text-tertiary); margin-top:9px; line-height:1.4; }
     @media (max-width:700px){ .cred-strip{ grid-template-columns:repeat(2,1fr);} }
+    /* small phones: the 24px cell padding pushed two-word labels onto three lines */
+    @media (max-width:420px){ .cred-cell{ padding:var(--s4) var(--s4) var(--s4) 18px; } .cred-label{ letter-spacing:.06em; } }
 
     /* ================================================================
        VIDEO (lite YouTube facade)
@@ -459,7 +496,10 @@
     .video-spot { background:var(--bg-elev); border:1px solid var(--border-frame); border-radius:var(--r-frame); padding:8px; }
     .video-frame { position:relative; width:100%; aspect-ratio:16/9; border-radius:calc(var(--r-frame) - 1px); overflow:hidden; border:1px solid var(--border); background:var(--bg-elev-2); }
     .video-frame video, .video-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; display:block; background:#000; }
-    .video-spot.vertical .video-frame { aspect-ratio:9/16; max-width:var(--cap-sm); margin-inline:auto; }
+    /* the frame shrink-wraps a vertical clip; full-width, it framed a 340px
+       video inside a 1,160px dark panel */
+    .video-spot.vertical { max-width:calc(var(--cap-sm) + 18px); margin-inline:auto; }
+    .video-spot.vertical .video-frame { aspect-ratio:9/16; }
     .yt-facade { position:absolute; inset:0; width:100%; height:100%; border:0; padding:0; cursor:pointer; background:#000; display:block; }
     .yt-thumb { width:100%; height:100%; object-fit:cover; opacity:.82; transition:opacity .3s var(--ease), transform .6s var(--ease); }
     .yt-facade:hover .yt-thumb, .yt-facade:focus-visible .yt-thumb { opacity:1; transform:scale(1.03); }
@@ -573,8 +613,14 @@
     /* Two figures sharing one .pd-split media slot. The split is a 2-column
        grid, so stacked figures need a single wrapper to occupy one cell. */
     .fig-stack { display:grid; gap:var(--s4); }
-    .pd-split.is-portrait .img-el { max-width:min(var(--cap-md),100%); margin-inline:auto; }
-    @media (max-width:820px){ .pd-split, .pd-split.media-left{ grid-template-columns:1fr; gap:var(--s6); } }
+    /* cap the figure rather than the image, so the caption starts where the
+       photo does — capping the <img> alone left captions ~90px to its left */
+    .pd-split.is-portrait .img-fig { width:100%; max-width:min(var(--cap-md),100%); margin-inline:auto; }
+    /* two photos side by side: equal columns, tops level */
+    .pd-split.is-pair { grid-template-columns:1fr 1fr; align-items:start; }
+    /* beside a tall stack of figures, centred text starts ~250px down the page */
+    .pd-split:has(> .fig-stack) { align-items:start; }
+    @media (max-width:820px){ .pd-split, .pd-split.media-left, .pd-split.is-pair{ grid-template-columns:1fr; gap:var(--s6); } }
 
     /* sticky build steps */
     .pd-sticky { display:grid; grid-template-columns:1fr 1fr; gap:var(--s8); align-items:start; margin-bottom:var(--s8); }
@@ -622,6 +668,12 @@
     .pd-nav button:hover { color:var(--text); background:var(--accent-soft); }
     .pd-nav button.is-current { color:var(--text); background:var(--accent-soft); border-color:var(--border-strong); }
     @media (hover:none){ .pd-nav button { min-height:40px; } }
+    /* on a phone the chips run off the edge mid-word with no sign there are
+       more; a fade that sticks to the right edge says "scroll" */
+    @media (max-width:768px){
+      .pd-nav::after { content:''; position:sticky; right:0; flex:0 0 40px; pointer-events:none;
+        background:linear-gradient(90deg, transparent, var(--nav-menu-bg) 85%); }
+    }
     /* clear the fixed header + sticky nav when jumping */
     .pd > [id] { scroll-margin-top:150px; }
 
@@ -652,8 +704,11 @@
     .pd-gallery .img-fig { margin:0 0 var(--s5); break-inside:avoid; -webkit-column-break-inside:avoid; }
     .pd-gallery .img-el { transition:transform .5s var(--ease); }
     .pd-gallery .img-fig:hover .img-el { transform:translateY(-4px); }
+    /* for sets with one tall portrait: in three columns it stranded the last
+       column ~600px short */
+    .pd-gallery.cols-2 { columns:2; }
     @media (max-width:900px){ .pd-gallery{ columns:2; } }
-    @media (max-width:560px){ .pd-gallery{ columns:1; } }
+    @media (max-width:560px){ .pd-gallery, .pd-gallery.cols-2{ columns:1; } }
 
     /* chronological build strip (order matters) — grayscale process, color on hover */
     .build-strip { display:grid; grid-auto-flow:column; grid-auto-columns:minmax(300px,38%); gap:var(--s4); overflow-x:auto; scroll-snap-type:x mandatory;
@@ -694,6 +749,37 @@
        with a pseudo-element so the dot stays registered to the CAD feature. */
     @media (hover:none){ .callout::before { content:''; position:absolute; inset:-8px -10px; } }
     @media (max-width:560px){ .callout .c-label{ font-size:var(--fs-label-sm); padding:4px 7px; } }
+
+    /* drawn figures (arm) — inline SVG and HTML on a faint drafting grid, so
+       they follow the theme instead of sitting as a flat render */
+    .kin-svg, .flow { border:1px solid var(--border-frame); border-radius:var(--r-frame); background-color:var(--bg-elev);
+      background-image:linear-gradient(var(--grid-line-strong) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line-strong) 1px, transparent 1px);
+      background-size:24px 24px; background-position:-1px -1px; }
+    .kin-svg { display:block; width:100%; height:auto; }
+    .kin-svg .k-link { stroke:var(--text); stroke-width:5; stroke-linecap:round; fill:none; }
+    .kin-svg .k-body { fill:var(--bg-elev); stroke:var(--text); stroke-width:2.5; }
+    .kin-svg .k-dot { fill:var(--signal); }
+    .kin-svg .k-axis { stroke:var(--text-tertiary); stroke-width:1.2; stroke-dasharray:10 4 2 4; fill:none; }
+    .kin-svg .k-rot { stroke:var(--text-secondary); stroke-width:1.6; fill:none; }
+    .kin-svg .k-arrow { fill:var(--text-secondary); }
+    .kin-svg .k-ground { stroke:var(--text-secondary); stroke-width:2; }
+    .kin-svg .k-hatch { stroke:var(--text-tertiary); stroke-width:1.2; fill:none; }
+    .kin-svg .k-grip { stroke:var(--text); stroke-width:4; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+    /* user units: the SVG scales with its column, and 22 keeps the tags above
+       the 12px label floor down to a 320 phone */
+    .kin-svg .k-tag { font-family:'IBM Plex Mono',monospace; font-size:22px; font-weight:500; letter-spacing:.06em; fill:var(--text); }
+
+    .flow { display:grid; grid-template-columns:1fr 1fr; gap:var(--s6); padding:var(--s6); }
+    .flow-k { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.14em; text-transform:uppercase; color:var(--text-tertiary); margin-bottom:var(--s4); }
+    .flow-steps { list-style:none; display:flex; flex-direction:column; gap:26px; }
+    .flow-steps li { position:relative; display:flex; align-items:center; gap:9px; padding:11px 14px; background:var(--bg); border:1px solid var(--border-strong); border-radius:6px;
+      font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); letter-spacing:.06em; text-transform:uppercase; color:var(--text); line-height:1.35; }
+    /* connector + arrowhead down to the next step */
+    .flow-steps li + li::before { content:''; position:absolute; left:21px; top:-25px; width:1.5px; height:18px; background:var(--text-tertiary); }
+    .flow-steps li + li::after { content:''; position:absolute; left:17px; top:-8px; border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid var(--text-tertiary); }
+    .flow-dot { width:7px; height:7px; border-radius:var(--r-pill); background:var(--signal); flex-shrink:0; }
+    .flow-aside { margin-top:var(--s4); font-size:var(--fs-300); color:var(--text-secondary); line-height:1.55; }
+    @media (max-width:560px){ .flow { grid-template-columns:1fr; padding:var(--s5); } }
 
     /* ================================================================
        ABOUT
@@ -827,6 +913,8 @@
       .misc-media-row.is-strip .img-el { aspect-ratio:4/3; height:auto; object-fit:cover; }
       .misc-media-row.is-strip .img-el.is-render { object-fit:contain; }
     }
+    /* a lone figure stays figure-sized instead of running the full card width */
+    .misc-media-row.is-single { grid-template-columns:minmax(0,720px); }
     .misc-media-row .img-cap::before { content:""; counter-increment:none; } /* misc uses plain caption line */
     /* videos aren't numbered figures. The counter lives on ::before, so an inline
        counter-increment on the <p> never suppressed it — this does. */
@@ -892,7 +980,8 @@
     .footer-link:hover { color:var(--accent); }
     .footer-link svg { width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
     .footer-sep { width:1px; height:14px; background:var(--border); margin:0 4px; }
-    @media (max-width:600px){ .footer-row{ flex-direction:column; align-items:flex-start;} }
+    /* once the links wrap, a rule can land at the start of a line; spacing alone reads cleaner */
+    @media (max-width:600px){ .footer-row{ flex-direction:column; align-items:flex-start;} .footer-sep{ display:none; } .footer-links{ gap:2px 20px; } }
 
     /* ================================================================
        DEV MODE
@@ -938,8 +1027,48 @@
     .contact-cta h2 em { font-style:italic; font-weight:500; }
     .contact-cta-lead strong { color:var(--signal); font-weight:inherit; }
     .contact-cta-lead { font-size:var(--fs-500); color:var(--text-secondary); line-height:1.6; max-width:46ch; margin-top:var(--s4); }
-    .contact-cta-actions { display:flex; flex-wrap:wrap; gap:14px; }
-    @media (max-width:820px){ .contact-cta-inner{ grid-template-columns:1fr; gap:var(--s5); align-items:start; padding-top:var(--s9); } }
+    .contact-cta-actions { display:flex; flex-wrap:wrap; gap:12px; }
+    /* instrument-style field, same vocabulary as the hero telemetry cells */
+    .contact-email { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:3px var(--s4);
+      padding:14px 14px 14px 20px; margin-bottom:var(--s4); border:1px solid var(--border); border-radius:var(--r-panel); background:var(--bg-elev); }
+    .contact-email-k { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.14em; text-transform:uppercase; color:var(--text-tertiary); }
+    /* break-word rather than anywhere: if it ever has to wrap, the <wbr> after
+       the @ is the break it takes, never "gmail.c / om" */
+    .contact-email-addr { grid-column:1; font-family:'IBM Plex Mono',monospace; font-size:clamp(1rem,1.5vw,1.14rem); font-weight:500; color:var(--text); letter-spacing:.01em; overflow-wrap:break-word; }
+    .contact-email-addr:hover { color:var(--signal); }
+    .contact-copy { grid-column:2; grid-row:1 / span 2; display:inline-flex; align-items:center; gap:7px; padding:9px 15px; cursor:pointer;
+      font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label-sm); letter-spacing:.12em; text-transform:uppercase; color:var(--text);
+      background:var(--bg); border:1px solid var(--border-strong); border-radius:var(--r-pill); transition:border-color .25s var(--ease), color .25s var(--ease); }
+    .contact-copy:hover { border-color:var(--accent); }
+    .contact-copy svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+    .contact-copy .ic-done { display:none; color:var(--signal); }
+    .contact-copy.is-copied .ic-copy { display:none; }
+    .contact-copy.is-copied .ic-done { display:block; }
+    @media (hover:none){ .contact-copy { min-height:44px; } }
+    /* phones: the button moves up beside the label so the address gets the full
+       width; beside the address it left ~200px and forced a wrap */
+    @media (max-width:560px){
+      .contact-email { padding:12px 12px 16px 18px; row-gap:8px; }
+      .contact-copy { grid-row:1; }
+      .contact-email-addr { grid-column:1 / -1; }
+    }
+    .contact-pdf { display:inline-flex; align-items:center; gap:8px; margin-top:var(--s4); padding:6px 0; background:none; border:0; cursor:pointer;
+      font-family:'Manrope',sans-serif; font-size:var(--fs-300); font-weight:500; color:var(--text-secondary);
+      text-decoration:underline; text-decoration-color:var(--border-strong); text-underline-offset:5px; transition:color .25s var(--ease), text-decoration-color .25s var(--ease); }
+    .contact-pdf:hover { color:var(--text); text-decoration-color:currentColor; }
+    .contact-pdf:disabled { opacity:.6; cursor:progress; }
+    .contact-pdf svg { width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+    @media (hover:none){ .contact-pdf { min-height:44px; } }
+    @media (max-width:820px){ .contact-cta-inner{ grid-template-columns:1fr; gap:var(--s6); align-items:start; padding-top:var(--s9); } }
+    /* phones: an even 2x2 instead of a ragged wrap */
+    @media (max-width:560px){
+      .contact-cta-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+      .contact-cta-actions .btn { justify-content:center; padding-left:14px; padding-right:14px; }
+      .contact-cta-actions .btn-primary { justify-content:space-between; padding-left:20px; padding-right:10px; }
+    }
+    /* at 320 a half-width cell is too narrow for "Email me" plus its arrow */
+    @media (max-width:359px){ .contact-cta-actions { grid-template-columns:1fr; } }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
     /* ================================================================
        PDF SHEET — a two-page brief, screen-hidden, printed instead of
@@ -1031,6 +1160,7 @@
           <li><a data-tab="work" role="link" tabindex="0">Work</a></li>
           <li><a data-tab="about" role="link" tabindex="0">About</a></li>
           <li><a data-tab="experience" role="link" tabindex="0">Experience</a></li>
+          <li><a class="nav-resume" href="Kyle_Tran_Resume.pdf" target="_blank" rel="noopener">Résumé <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a></li>
         </ul>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
           <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -1061,7 +1191,7 @@
       </div>
       <div class="hero-inner">
         <div class="hero-text stagger">
-          <span class="hero-eyebrow reveal" data-reveal="none">Mechanical Engineer · Northeastern University</span>
+          <span class="hero-eyebrow reveal" data-reveal="none">Mechanical Eng. · Robotics minor · Northeastern&nbsp;&rsquo;29</span>
           <h1 class="hero-title reveal" data-reveal="none"><span class="line"><span class="line-inner">Kyle <span class="hero-last">Tran</span></span></span></h1>
           <p class="hero-lead reveal">I build robots, autonomous vehicles, and embedded systems &mdash; drawn in CAD, machined and printed, wired and coded, then tested until they hold up.</p>
           <div class="hero-cta reveal">
@@ -1076,6 +1206,14 @@
           <div class="telem-cell"><div class="telem-k">Based in</div><div class="telem-v">Boston · Burlingame, CA</div></div>
         </div>
       </div>
+    </div>
+
+    <!-- CREDIBILITY — directly under the hero, where a skim still reaches it -->
+    <div class="cred-strip reveal" aria-label="Highlights">
+      <div class="cred-cell"><div class="cred-num">4<span class="u">th</span></div><div class="cred-label">National · Plastic AW &rsquo;24</div></div>
+      <div class="cred-cell"><div class="cred-num">16</div><div class="cred-label">Team podium finishes</div></div>
+      <div class="cred-cell"><div class="cred-num">10</div><div class="cred-label">Robots designed &amp; built</div></div>
+      <div class="cred-cell"><div class="cred-num">3.87</div><div class="cred-label">GPA · Mechanical Eng.</div></div>
     </div>
 
     <div class="marquee" aria-label="Tools and skills">
@@ -1097,7 +1235,7 @@
         <div class="proj-media">
           <span class="proj-num" aria-hidden="true">01</span>
           <span class="proj-cat">Flagship · Robotics</span>
-          <div class="cover" data-img="images/web/dreams-v1-lake.jpg" role="img" aria-label="D.R.E.A.M.S survey boat on the water"></div>
+          <div class="cover" data-img="images/web/dreams-v1-lake.jpg" role="img" aria-label="D.R.E.A.M.S survey boat on the dock beside the water"></div>
         </div>
         <div class="proj-body">
           <div>
@@ -1163,17 +1301,9 @@
             <h3 class="proj-title">Miscellaneous Builds</h3>
             <p class="proj-desc">Ceramics tools published free for anyone to print, a 3D-printed RC plane, a sewing machine reverse-engineered in CAD, and printed climbing gear.</p>
           </div>
-          <div class="proj-meta"><span class="proj-date">2023 — Present · ceramics, planes, CAD studies</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+          <div class="proj-meta"><span class="proj-date">2023 — Present</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
         </div>
       </article>
-    </div>
-
-    <!-- CREDIBILITY -->
-    <div class="cred-strip reveal">
-      <div class="cred-cell"><div class="cred-num">2<span class="u">+</span></div><div class="cred-label">Years combat robotics</div></div>
-      <div class="cred-cell"><div class="cred-num">10</div><div class="cred-label">Robots designed &amp; built</div></div>
-      <div class="cred-cell"><div class="cred-num">3.87</div><div class="cred-label">GPA · Mechanical Eng.</div></div>
-      <div class="cred-cell"><div class="cred-num">4<span class="u">th</span></div><div class="cred-label">National · Plastic AW '24</div></div>
     </div>
   </div>
 </section>
@@ -1202,7 +1332,7 @@
     </nav>
 
     <figure class="img-fig pd-hero-fig reveal">
-      <img class="img-el img-clickable" data-src="images/web/dreams-v1-lake.jpg" width="1500" height="2000" alt="D.R.E.A.M.S v1 on the lake" loading="lazy" decoding="async" onerror="imgFallback(this)">
+      <img class="img-el img-clickable" data-src="images/web/dreams-v1-lake.jpg" width="1500" height="2000" alt="D.R.E.A.M.S v1 on the dock beside the water" loading="lazy" decoding="async" onerror="imgFallback(this)">
     </figure>
 
     <div class="container" id="boat-overview">
@@ -1340,7 +1470,7 @@
     </div>
 
     <div class="container">
-      <div class="pd-split reveal is-portrait">
+      <div class="pd-split reveal is-portrait is-pair">
         <figure class="img-fig">
           <img class="img-el img-clickable" data-src="images/web/dreams-v2-hull-print.jpg" width="1500" height="2000" alt="First printed section of the v2 hull" loading="lazy" decoding="async" onerror="imgFallback(this)">
           <figcaption class="img-cap">First printed section of the v2 hull</figcaption>
@@ -1396,7 +1526,7 @@
     <div class="container" id="boat-stack">
       <div class="reveal pd-section-label"><span class="section-label">Autonomy stack</span></div>
       <details class="spec-details reveal">
-        <summary>Autonomy stack &amp; key components <svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <summary>Key components &amp; bill of materials <svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
         <div class="spec-strip cols-2 reveal">
           <div class="spec-cell"><div class="spec-key">Brain · Pi 5</div><div class="spec-val">Navigation, mission FSM, the vision pipeline, and the web command center — Python + asyncio</div></div>
           <div class="spec-cell"><div class="spec-key">Executors · 2× RP2040</div><div class="spec-val">Real-time motor control and sensor I/O in MicroPython; a 3 s watchdog trips ESTOP if the brain goes quiet</div></div>
@@ -1459,7 +1589,7 @@
         <div class="spec-cell"><div class="spec-key">Build</div><div class="spec-val">In-house 3D print · outsourced CNC</div></div>
         <div class="spec-cell"><div class="spec-key">Best result</div><div class="spec-val">4th — Nat'l Plastic AW '24</div></div>
       </div>
-      <p class="pd-intro reveal">Two years of competitive combat robotics with Team Dihydrogen Monoxide &mdash; around ten robots that competed across five weight classes, all designed in CAD and 3D-printed in-house (machining outsourced), and tested by getting hit very hard. Four of them are written up below.</p>
+      <p class="pd-intro reveal">Two years of competitive combat robotics with Team Dihydrogen Monoxide &mdash; around ten robots that competed across five weight classes, all designed in CAD and 3D-printed in-house (machining outsourced), and tested by getting hit very hard. The three that ranked nationally are written up below.</p>
       <div class="pd-result reveal">
         <span class="r-key">Result</span>
         <span class="r-text">16 podium finishes across 5 events, and 4th nationally in Plastic Antweight at the 2024 Robot Combat League Championship.</span>
@@ -1474,7 +1604,7 @@
         <span class="section-label">Match footage</span>
         <div class="vid-grid">
           <div class="vid-item">
-            <figure class="video-spot" data-video="https://www.youtube.com/watch?v=q6rDVlaWAPA" data-poster="" aria-label="Achilles at the 2024 RCL National Championship"></figure>
+            <figure class="video-spot" data-video="https://www.youtube.com/watch?v=q6rDVlaWAPA" data-thumb="hq" data-poster="" aria-label="Achilles at the 2024 RCL National Championship"></figure>
             <p class="img-cap">Achilles — 4th, Plastic Antweight · 2024 RCL National Championship</p>
           </div>
           <div class="vid-item">
@@ -1586,7 +1716,7 @@
         <div class="pd-split-text">
           <div class="robot-rank"><svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>4th National · Top 30 US · 2024 · 1 lb plastic AW</div>
           <p class="robot-lead">Achilles (plastic) &mdash; the 1&nbsp;lb belt-driven undercutter that started it all.</p>
-          <p>Designed and printed in CAD with a modular plastic chassis for fast, reliable repairs. I handled the CAD, soldering, and wiring, tuning the weight distribution to manage the spinner's gyroscopic forces.</p>
+          <p>Designed in CAD and printed, with a modular plastic chassis for fast, reliable repairs. I handled the CAD, soldering, and wiring, tuning the weight distribution to manage the spinner's gyroscopic forces.</p>
           <p>It placed 4th at a national plastic-antweight competition and ranked among the top 30 in the U.S. (2024). It also helped shape the low-profile, belt-driven undercutter meta in the Northern California scene.</p>
         </div>
       </div>
@@ -1594,7 +1724,7 @@
 
     <div class="container" id="combat-roster">
       <div class="reveal pd-section-label"><span class="section-label">More of the roster</span></div>
-      <div class="pd-gallery reveal">
+      <div class="pd-gallery cols-2 reveal">
         <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/combat-korybantes-v1.jpg" width="2000" height="1500" alt="Korybantes v1 with trophy" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Korybantes v1, with trophy</figcaption></figure>
         <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/combat-korybantes-v2.jpg" width="1500" height="2000" alt="Korybantes v2" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Korybantes v2</figcaption></figure>
         <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/combat-korybantes-v2-trophy.jpg" width="2000" height="1500" alt="Korybantes v2 with trophy" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Korybantes v2, with trophy</figcaption></figure>
@@ -1693,7 +1823,17 @@
       </div>
     </div>
 
-    <div class="container">
+    <nav class="pd-nav" aria-label="Jump to a section">
+      <button type="button" data-jump="arm-overview">Overview</button>
+      <button type="button" data-jump="arm-joints">Joints</button>
+      <button type="button" data-jump="arm-gearbox">Gearbox</button>
+      <button type="button" data-jump="arm-tolerance">Tolerance</button>
+      <button type="button" data-jump="arm-feedback">Feedback</button>
+      <button type="button" data-jump="arm-gripper">Gripper</button>
+      <button type="button" data-jump="arm-boat">The boat</button>
+    </nav>
+
+    <div class="container" id="arm-overview">
       <div class="spec-strip reveal">
         <div class="spec-cell"><div class="spec-key">Status</div><div class="spec-val"><span class="st-dot"></span>In design · nothing built</div></div>
         <div class="spec-cell"><div class="spec-key">Degrees of freedom</div><div class="spec-val">5 · J1&ndash;J5</div></div>
@@ -1709,20 +1849,53 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="arm-joints">
       <div class="reveal pd-section-label"><span class="section-label">Joint layout</span></div>
       <div class="pd-split media-left reveal">
-        <div class="fig-ph">
-            <span class="fig-ph-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7z"/><path d="M12 21.5V11.8"/><path d="M20.5 7 12 11.8 3.5 7"/></svg></span>
-            <span class="fig-ph-title">Arm assembly</span>
-            <span class="fig-ph-text">Full-arm CAD with the five joints and confirmed link lengths. Being modelled now.</span>
-          </div>
+        <!-- Drawn, not rendered: joint order and type come straight from the table
+             below, and nothing here implies link lengths. Swap for the CAD once it exists. -->
+        <figure class="img-fig kin-fig">
+          <svg class="kin-svg" viewBox="0 64 480 316" role="img" aria-labelledby="kin-title">
+            <title id="kin-title">Schematic of the five joints: base yaw, shoulder pitch, elbow pitch, forearm roll and wrist pitch, ending in a two-jaw gripper</title>
+            <defs>
+              <marker id="k-arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="k-arrow" d="M0 0L10 5L0 10z"/></marker>
+            </defs>
+            <line class="k-ground" x1="44" y1="338" x2="200" y2="338"/>
+            <path class="k-hatch" d="M56 338l-12 13M76 338l-12 13M96 338l-12 13M116 338l-12 13M136 338l-12 13M156 338l-12 13M176 338l-12 13M196 338l-12 13"/>
+            <!-- J1 base yaw: vertical axis -->
+            <line class="k-axis" x1="120" y1="232" x2="120" y2="358"/>
+            <rect class="k-body" x="98" y="282" width="44" height="56" rx="3"/>
+            <path class="k-rot" d="M86 304A34 9 0 0 0 154 304" marker-end="url(#k-arr)"/>
+            <!-- upper arm J2 to J3, forearm J3 to J5 -->
+            <line class="k-link" x1="120" y1="268" x2="212" y2="120"/>
+            <line class="k-link" x1="212" y1="120" x2="380" y2="160"/>
+            <!-- J4 forearm roll: a sleeve on the forearm axis -->
+            <g transform="translate(276 135.2) rotate(13.4)">
+              <rect class="k-body" x="-23" y="-12" width="46" height="24" rx="3"/>
+              <path class="k-rot" d="M31 -15A8 15 0 0 1 31 15" marker-end="url(#k-arr)"/>
+            </g>
+            <!-- two-jaw gripper past the wrist -->
+            <line class="k-link" x1="380" y1="160" x2="396.7" y2="179.9"/>
+            <path class="k-grip" d="M406.1 211.3L400.7 215.8L381.4 192.8L412 167L431.3 190L425.9 194.5"/>
+            <!-- pitch joints, axis into the page: J2 shoulder, J3 elbow, J5 wrist -->
+            <circle class="k-body" cx="120" cy="268" r="14"/><circle class="k-dot" cx="120" cy="268" r="4"/>
+            <circle class="k-body" cx="212" cy="120" r="12"/><circle class="k-dot" cx="212" cy="120" r="3.5"/>
+            <circle class="k-body" cx="380" cy="160" r="10"/><circle class="k-dot" cx="380" cy="160" r="3"/>
+            <text class="k-tag" x="80" y="327" text-anchor="end">J1</text>
+            <text class="k-tag" x="96" y="262" text-anchor="end">J2</text>
+            <text class="k-tag" x="198" y="102" text-anchor="end">J3</text>
+            <text class="k-tag" x="272" y="110" text-anchor="middle">J4</text>
+            <text class="k-tag" x="380" y="137" text-anchor="middle">J5</text>
+          </svg>
+          <figcaption class="img-cap">Joint layout, schematic and not to scale. The circles are the three pitch joints that hold gravity; J1 yaws on its thrust bearing and J4 rolls about the forearm.</figcaption>
+        </figure>
         <div class="pd-split-text">
           <p>Five joints: base yaw, shoulder pitch, elbow pitch, forearm roll, wrist pitch. Three of them hold gravity, and the shoulder holds everything past it at the longest lever arm, so that is where the torque capacity goes.</p>
           <p>A sixth joint &mdash; gripper swivel &mdash; got cut as redundant with forearm roll. The cost is that roll sits before the wrist, so changing it also rotates the plane the wrist bends in. For pick-and-place with a symmetric two-jaw gripper that does not matter.</p>
         </div>
       </div>
-      <table class="diff-table reveal">
+      <div class="diff-wrap reveal">
+      <table class="diff-table">
         <thead><tr><th class="aspect">Joint</th><th>Holds gravity</th><th>Actuator</th></tr></thead>
         <tbody>
           <tr><td class="aspect">J1 · base yaw</td><td class="v1">No &mdash; the thrust bearing carries it</td><td class="v2">NEMA17 · 17:1 · 60&nbsp;mm ring</td></tr>
@@ -1732,12 +1905,13 @@
           <tr><td class="aspect">J5 · wrist</td><td class="v1">Yes &mdash; smallest lever arm</td><td class="v2">20&nbsp;kg&middot;cm servo, direct drive</td></tr>
         </tbody>
       </table>
+      </div>
       <div class="pd-closing reveal">
         <p>On current estimates the shoulder needs about 5.85&nbsp;N&middot;m and has 20&ndash;37&nbsp;N&middot;m available; the elbow needs about 2.25&nbsp;N&middot;m and gets roughly 10&nbsp;N&middot;m from the longer motor. Those masses are estimates rather than CAD figures, and wiring and fasteners always come in heavier than expected.</p>
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="arm-gearbox">
       <div class="reveal pd-section-label"><span class="section-label">Why the rings are different sizes</span></div>
       <div class="pd-split reveal">
         <div class="fig-stack">
@@ -1758,10 +1932,11 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="arm-tolerance">
       <div class="reveal pd-section-label"><span class="section-label">The tolerance budget</span></div>
       <p class="pd-intro reveal">Waterjet cuts the lobe profile straight from the DXF and costs less than milling, so the only question is whether its tolerance fits. At the 85&nbsp;mm ring&rsquo;s 42.5&nbsp;mm radius a linear cut error becomes an angular one, and the budget is small enough that the shop&rsquo;s real capability decides the answer.</p>
-      <table class="diff-table reveal">
+      <div class="diff-wrap reveal">
+      <table class="diff-table">
         <thead><tr><th class="aspect">Cut tolerance</th><th>Angular error</th><th>Share of the budget</th></tr></thead>
         <tbody>
           <tr><td class="aspect">&plusmn;0.05&nbsp;mm · precision</td><td class="v1">&plusmn;0.067&deg;</td><td class="v2">~27&percnt;</td></tr>
@@ -1769,12 +1944,13 @@
           <tr><td class="aspect">&plusmn;0.15&nbsp;mm · job shop</td><td class="v1">&plusmn;0.20&deg;</td><td class="v2">~80&percnt;</td></tr>
         </tbody>
       </table>
+      </div>
       <div class="pd-closing reveal">
         <p>At &plusmn;0.05&nbsp;mm there is room left for backlash and structural compliance, which are the larger errors anyway. At &plusmn;0.15&nbsp;mm four fifths of the budget is gone to one source before the arm has moved. That single number decides whether waterjet makes final parts or only validation parts &mdash; and the lobe faces get a finishing pass either way, since waterjet edges are rough exactly where the rolling contact happens.</p>
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="arm-feedback">
       <div class="reveal pd-section-label"><span class="section-label">Picking the feedback, and what got rejected</span></div>
       <div class="pd-closing reveal">
         <p>The encoder sits on the gearbox output, not the motor. It reads the joint angle directly, so the gear ratio drops out of the precision question and only affects torque and speed. It is a 12-bit AS5600 at 0.09&deg; per count, about 2.8&times; under the target &mdash; thin, but backlash and compliance are the bigger errors at this tolerance, so a 14-bit part would be buying precision in the wrong place.</p>
@@ -1783,14 +1959,33 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="arm-gripper">
       <div class="reveal pd-section-label"><span class="section-label">The gripper</span></div>
       <div class="pd-split media-left reveal">
-        <div class="fig-ph">
-            <span class="fig-ph-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3v7a5 5 0 0 0 10 0V3"/><path d="M9 21h6"/><path d="M12 15v6"/></svg></span>
-            <span class="fig-ph-title">TPU gripper</span>
-            <span class="fig-ph-text">Flexure fingers, the 1:1 gear mesh, and the load-cell mount behind each fingertip pad.</span>
+        <!-- the two sequences the text beside it describes, as a datasheet block -->
+        <figure class="img-fig flow-fig">
+          <div class="flow">
+            <div class="flow-group">
+              <div class="flow-k">Load path</div>
+              <ol class="flow-steps">
+                <li>Object</li>
+                <li>Rigid fingertip pad</li>
+                <li><span class="flow-dot" aria-hidden="true"></span>Load cell</li>
+                <li>Stiff finger base</li>
+              </ol>
+              <p class="flow-aside">The TPU flexure bends beside this path, not in it.</p>
+            </div>
+            <div class="flow-group">
+              <div class="flow-k">Closing</div>
+              <ol class="flow-steps">
+                <li>Position control</li>
+                <li><span class="flow-dot" aria-hidden="true"></span>Cells hit target force</li>
+                <li>Hold</li>
+              </ol>
+            </div>
           </div>
+          <figcaption class="img-cap">How grip force reaches the sensor, and how a grasp closes</figcaption>
+        </figure>
         <div class="pd-split-text">
           <p>Two TPU flexure fingers driven by one servo through a 1:1 gear mesh, so both sides mirror each other. The compliance does the accommodating; a load cell per side does the measuring.</p>
           <p>The part that matters is the load path. The fingertip pad is rigid, the load cell sits behind it, and it anchors to the stiff base of the finger, so force reaches the sensor without passing through the flexing TPU. The finger still conforms to the object and the reading is not corrupted by the finger&rsquo;s own bending. Closing is position control until the cells hit the target force, then hold.</p>
@@ -1799,7 +1994,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="arm-boat">
       <div class="reveal pd-section-label"><span class="section-label">Where the boat comes in</span></div>
       <div class="pd-closing reveal">
         <p>Further out, this is the manipulator for the survey boat. A submersible on a tether collects water samples; the arm takes the full container off it, stores it aboard, and puts an empty collector back. That is the reason for grip-force feedback and a compliant gripper rather than a rigid claw &mdash; a tethered submersible under a moving boat will not present itself at a repeatable position.</p>
@@ -1842,7 +2037,7 @@
       <article class="misc-entry reveal">
         <div class="misc-entry-head"><h3 class="misc-entry-title">3D-Printed Plane</h3><span class="misc-entry-date">2023</span></div>
         <p class="misc-entry-blurb">A first attempt at designing and printing a flyable model plane &mdash; chasing the lightest airframe I could print that would still hold together. It didn't: the wing snapped at the root on the first flight. That joint is where the next version starts.</p>
-        <div class="misc-media-row">
+        <div class="misc-media-row is-single">
           <figure class="img-fig"><img class="img-el img-clickable plane-fig" data-src="images/web/plane-v1.png" width="1075" height="498" alt="First attempt at a 3D-printed model plane" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">First airframe attempt</figcaption></figure>
         </div>
       </article>
@@ -1880,7 +2075,7 @@
         <div class="section-label reveal">About</div>
         <h2 class="section-heading reveal">Engineer, builder,<br><em>competitor</em></h2>
         <p class="reveal">I'm a Mechanical Engineering student at Northeastern, originally from Burlingame, California. Reading about how something works has never been enough for me. I have to build one.</p>
-        <p class="reveal">That's turned into combat robots, an autonomous survey boat, and a drawer full of 3D-printed ceramic tools. Whatever it is, the work runs the same way: sketch it in CAD, machine and print the parts, wire it up, write the firmware, then break it and fix it until it holds. Combat robotics is where I learned to like that last part: losing, figuring out why, and coming back with the clock running.</p>
+        <p class="reveal">That's turned into combat robots, an autonomous survey boat, and a drawer full of 3D-printed ceramic tools. Whatever it is, the work runs the same way: sketch it in CAD, print the parts or send them out to be machined, wire it up, write the firmware, then break it and fix it until it holds. Combat robotics is where I learned to like that last part: losing, figuring out why, and coming back with the clock running.</p>
         <p class="reveal">Right now that's a catamaran that surveys water quality in local reservoirs on its own. Nobody handed me a manual for it. That's the part I like.</p>
       </div>
       <div class="about-details reveal">
@@ -2098,11 +2293,21 @@
       <h2 class="reveal">Let's build <em>something</em>.</h2>
       <p class="contact-cta-lead reveal">Looking for a <strong>Summer 2027 co-op</strong> in hardware and robotics &mdash; or just to talk shop about boats, bots, and stubborn brackets.</p>
     </div>
-    <div class="contact-cta-actions reveal">
-      <a class="btn btn-primary" href="mailto:kylegtran2007@gmail.com">Email me <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
-      <a class="btn btn-ghost" href="Kyle_Tran_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
-      <button type="button" class="btn btn-ghost" id="save-pdf">Save portfolio as PDF <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/kyle-tran-06a18b277/" target="_blank" rel="noopener">LinkedIn</a>
+    <div class="contact-cta-side reveal">
+      <!-- the address as text: a mailto button alone does nothing for anyone on webmail -->
+      <div class="contact-email">
+        <span class="contact-email-k">Email</span>
+        <a class="contact-email-addr" href="mailto:kylegtran2007@gmail.com">kylegtran2007@<wbr>gmail.com</a>
+        <button type="button" class="contact-copy" data-copy="kylegtran2007@gmail.com" aria-label="Copy email address"><svg class="ic-copy" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg><svg class="ic-done" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span class="contact-copy-t">Copy</span></button>
+      </div>
+      <div class="contact-cta-actions">
+        <a class="btn btn-primary" href="mailto:kylegtran2007@gmail.com">Email me <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
+        <a class="btn btn-ghost" href="Kyle_Tran_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/kyle-tran-06a18b277/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/ka1e27" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <button type="button" class="contact-pdf" id="save-pdf">Save a two-page portfolio brief as PDF <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+      <span class="sr-only" id="copy-status" aria-live="polite"></span>
     </div>
   </div>
 </section>
@@ -2111,7 +2316,7 @@
 <footer>
   <div class="container-wide">
     <div class="footer-row">
-      <span class="footer-copy">© 2026 Kyle Tran — designed &amp; built by hand · Updated Jul 2026</span>
+      <span class="footer-copy">© 2026 Kyle Tran · Updated Sep 2026</span>
       <div class="footer-links">
         <a href="mailto:kylegtran2007@gmail.com" class="footer-link"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>Email</a>
         <div class="footer-sep"></div>
@@ -2148,22 +2353,23 @@
     <div class="ps-head">
       <div>
         <div class="ps-name">Kyle Tran</div>
-        <div class="ps-role">Mechanical Engineer · Northeastern University</div>
+        <div class="ps-role">Mechanical Engineering · Robotics minor · Northeastern &rsquo;29</div>
       </div>
       <div class="ps-contact">
         kylegtran2007@gmail.com<br>
         ka1e27.github.io/Portfolio<br>
-        github.com/ka1e27 · Boston / Burlingame, CA
+        github.com/ka1e27<br>
+        Boston · Burlingame, CA
       </div>
     </div>
 
-    <p class="ps-lead">I build robots, autonomous vehicles, and embedded systems &mdash; drawn in CAD, machined and printed, wired and coded, then tested until they hold up. Two years of competitive combat robotics, and an autonomous survey boat built from scratch.</p>
+    <p class="ps-lead">I build robots, autonomous vehicles, and embedded systems &mdash; drawn in CAD, machined and printed, wired and coded, then tested until they hold up. Two years of competitive combat robotics, and an autonomous survey boat built from scratch. Seeking a Summer 2027 co-op in hardware and robotics.</p>
 
     <div class="ps-facts">
       <div class="ps-fact"><div class="ps-fact-k">Major</div><div class="ps-fact-v">Mechanical Eng.</div></div>
       <div class="ps-fact"><div class="ps-fact-k">GPA</div><div class="ps-fact-v">3.87</div></div>
       <div class="ps-fact"><div class="ps-fact-k">Robots built</div><div class="ps-fact-v">10</div></div>
-      <div class="ps-fact"><div class="ps-fact-k">Podium finishes</div><div class="ps-fact-v">16</div></div>
+      <div class="ps-fact"><div class="ps-fact-k">Team podiums</div><div class="ps-fact-v">16</div></div>
     </div>
 
     <div class="ps-strip">
@@ -2189,8 +2395,8 @@
           <div class="ps-title">Combat Robotics — Team DHM</div>
           <div class="ps-when">2023 — 2025</div>
         </div>
-        <div class="ps-desc">Designed and built around ten robots that competed across five weight classes — weapon and drivetrain design, titanium and steel armor, composite layup, and iteration driven by what broke in the arena. 16 podium finishes over 5 events, including 4th nationally.</div>
-        <div class="ps-tech">SolidWorks · laser-cut Ti / steel · brushless drive · FDM printing · DFM under a strict weight budget</div>
+        <div class="ps-desc">Designed and built around ten robots that competed across five weight classes — weapon and drivetrain design, titanium and steel armor, composite layup, and iteration driven by what broke in the arena. 16 podium finishes over 5 events, and 4th nationally in Plastic Antweight.</div>
+        <div class="ps-tech">Onshape · laser-cut Ti / steel · brushless drive · FDM printing · DFM under a strict weight budget</div>
       </div>
 
       <div class="ps-item">
@@ -2198,8 +2404,8 @@
           <div class="ps-title">Autonomous Maze-Solving Robot</div>
           <div class="ps-when">Oct — Dec 2025</div>
         </div>
-        <div class="ps-desc">A mechatronics build that maps and solves a maze unaided — sensor-driven wall following and a decision loop tuned against repeated physical runs rather than simulation alone.</div>
-        <div class="ps-tech">Embedded control · sensor fusion · state machines</div>
+        <div class="ps-desc">A tank-drive robot built with a partner for Northeastern&rsquo;s Cornerstone of Engineering course that maps and solves a maze it has never seen. I led the mechanical CAD and the MicroPython firmware: one asyncio loop runs ultrasonic ranging, IR line-following, drive, and pathfinding concurrently on a single Raspberry&nbsp;Pi&nbsp;Pico.</div>
+        <div class="ps-tech">Onshape · MicroPython · asyncio · RP2040 · ultrasonic + IR sensing · I2C LCD</div>
       </div>
 
       <div class="ps-item">
@@ -2329,6 +2535,32 @@
   // Ctrl/Cmd+P should produce the same document
   window.addEventListener('beforeprint', primeSheet);
 
+  // ── Copy email ──
+  // Clipboard API needs a secure context (fine on Pages and localhost); the
+  // textarea path covers file://, and failing both, the address is selected.
+  const copyStatus = document.getElementById('copy-status');
+  document.querySelectorAll('.contact-copy[data-copy]').forEach(btn => {
+    const label = btn.querySelector('.contact-copy-t');
+    let timer = 0;
+    btn.addEventListener('click', async () => {
+      const text = btn.getAttribute('data-copy');
+      let ok = false;
+      try { await navigator.clipboard.writeText(text); ok = true; } catch (_) {
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+        document.body.appendChild(ta); ta.select();
+        try { ok = document.execCommand('copy'); } catch (_) { ok = false; }
+        ta.remove();
+      }
+      if (!ok) { const addr = btn.parentElement.querySelector('.contact-email-addr'); if (addr) getSelection().selectAllChildren(addr); }
+      btn.classList.toggle('is-copied', ok);
+      label.textContent = ok ? 'Copied' : 'Selected';
+      if (copyStatus) copyStatus.textContent = ok ? 'Email address copied' : 'Email address selected';
+      clearTimeout(timer);
+      timer = setTimeout(() => { btn.classList.remove('is-copied'); label.textContent = 'Copy'; if (copyStatus) copyStatus.textContent = ''; }, 2200);
+    });
+  });
+
   const themeBtn = document.getElementById('theme-toggle');
   // announce what the control will do, not just that it exists
   function labelTheme() {
@@ -2420,6 +2652,8 @@
   // ── Mobile nav ──
   const toggle = document.getElementById('nav-toggle'), links = document.getElementById('nav-links');
   toggle.addEventListener('click', () => { const open = links.classList.toggle('open'); toggle.classList.toggle('open', open); toggle.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  // the résumé opens in a new tab, so the router never closes the menu for it
+  links.querySelectorAll('a:not([data-tab])').forEach(a => a.addEventListener('click', () => { links.classList.remove('open'); toggle.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }));
 
   // ── Image loaders ──
   function loadImg(el) { const src = el.getAttribute('data-img'); if (!src || el.classList.contains('has-img')) return; const img = new Image(); img.onload = () => { el.style.backgroundImage = 'url("' + src + '")'; el.classList.add('has-img'); }; img.src = src; }
@@ -2438,15 +2672,27 @@
   // ── Video facade ──
   function ytId(u){ const m=u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/); return m?m[1]:null; }
   function vimeoId(u){ const m=u.match(/vimeo\.com\/(?:video\/)?(\d+)/); return m?m[1]:null; }
+  // hqdefault is 480x360, blurry once the frame passes ~500px. maxres doesn't
+  // exist for every upload — YouTube answers 404 or a 120px grey stub — so
+  // step down once, then hide rather than show the stub.
+  window.ytThumb = function (img) {
+    if (img.dataset.fallback) { img.style.display = 'none'; return; }
+    img.dataset.fallback = '1';
+    img.src = img.src.replace('/maxresdefault.', '/hqdefault.');
+  };
+  const attr = s => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
   function renderVideo(spot) {
     const raw = (spot.getAttribute('data-video') || '').trim();
     const poster = (spot.getAttribute('data-poster') || '').trim();
+    const label = attr((spot.getAttribute('aria-label') || 'Video').trim());
+    // data-thumb="hq" for uploads known to have no maxres frame (skips a 404)
+    const thumb = spot.getAttribute('data-thumb') === 'hq' ? 'hqdefault' : 'maxresdefault';
     let inner;
     if (!raw) {
       inner = '<div class="video-frame"><div class="video-ph"><span class="video-ph-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20 6 4"/></svg></span><span class="video-ph-title">Footage coming soon</span><span class="video-ph-text">Build and field-test clips are being edited for the web.</span></div></div>';
     } else {
       const yt = ytId(raw), vim = vimeoId(raw);
-      if (yt) inner = '<div class="video-frame"><button type="button" class="yt-facade" data-yt="' + yt + '" aria-label="Play video"><img class="yt-thumb" src="https://i.ytimg.com/vi/' + yt + '/hqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.style.display=\'none\'"><span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><circle class="yt-play-bg" cx="12" cy="12" r="11"/><path d="M10 8l6 4-6 4z" fill="#fff"/></svg></span></button></div>';
+      if (yt) inner = '<div class="video-frame"><button type="button" class="yt-facade" data-yt="' + yt + '" data-title="' + label + '" aria-label="Play video: ' + label + '"><img class="yt-thumb" src="https://i.ytimg.com/vi/' + yt + '/' + thumb + '.jpg" alt="" loading="lazy" decoding="async" onload="if(this.naturalWidth<=120)ytThumb(this)" onerror="ytThumb(this)"><span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><circle class="yt-play-bg" cx="12" cy="12" r="11"/><path d="M10 8l6 4-6 4z" fill="#fff"/></svg></span></button></div>';
       else if (vim) inner = '<div class="video-frame"><iframe src="https://player.vimeo.com/video/' + vim + '" title="Video" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>';
       else if (/\.(mp4|webm|mov)(\?.*)?$/i.test(raw) || /^images\/videos\//i.test(raw)) { const type = /\.webm(\?.*)?$/i.test(raw)?'video/webm':/\.mov(\?.*)?$/i.test(raw)?'video/quicktime':'video/mp4'; inner = '<div class="video-frame"><video controls preload="metadata"'+(poster?' poster="'+poster+'"':'')+'><source src="'+raw+'" type="'+type+'"></video></div>'; }
       else inner = '<div class="video-frame"><div class="video-ph"><span class="video-ph-title">Video</span><span class="video-ph-text">Unrecognized source.</span></div></div>';
@@ -2457,7 +2703,7 @@
   document.addEventListener('click', function (e) {
     const f = e.target.closest('.yt-facade'); if (!f || document.body.classList.contains('edit-mode')) return;
     const id = f.getAttribute('data-yt');
-    const frame = f.closest('.video-frame'); if (frame) frame.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1" title="Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    const frame = f.closest('.video-frame'); if (frame) frame.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1" title="' + attr(f.getAttribute('data-title') || 'Video') + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
   });
 
   // ── Scroll reveal ──
@@ -2615,7 +2861,8 @@
     '.section-label', '.section-heading', '.work-count',
     '.proj-title', '.proj-desc', '.proj-date', '.proj-cat', '.cred-num', '.cred-label',
     '.pd-kicker', '.pd-title', '.pd-intro', '.pd-result .r-text', '.spec-key', '.spec-val', '.pd-tag', '.robot-rank',
-    '.pd-split-text p', '.pd-closing p', '.pd-sticky-step h4', '.pd-sticky-step p',
+    '.pd-split-text p', '.pd-closing p', '.pd-sticky-step h3', '.pd-sticky-step p',
+    '.flow-k', '.flow-steps li', '.flow-aside',
     '.diff-table td', '.bom-row .b-name', '.bom-row .b-note', '.c-label',
     '.about-text p', '.about-detail-value', '.about-cap',
     '.exp-date', '.exp-role', '.exp-org', '.exp-desc',
