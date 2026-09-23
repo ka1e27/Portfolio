@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kyle Tran — Résumé</title>
+<!--
+  Source of Kyle_Tran_Resume.pdf, the file behind the site's Résumé buttons.
+  It replaced a FlowCV export in 2026-09, so edit this file, not FlowCV.
+
+  Regenerate (no installs; Chrome is already on the machine):
+    python -m http.server 8099                     (from the repo root)
+    node tools/print-pdf.mjs http://127.0.0.1:8099/tools/resume.html Kyle_Tran_Resume.pdf
+
+  Rules:
+  - One page, one column, real text. ATS parsers read it top to bottom in
+    source order, so no tables, text boxes or icons, and the link text is the
+    URL itself, since a printed page can't be clicked.
+  - Every fact matches the site (CLAUDE.md §6). The portfolio brief in
+    index.html (.pdf-sheet) says the same things at more length.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=block" rel="stylesheet">
+<style>
+  @page { size: letter; margin: 0.45in 0.6in 0.4in; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Source Sans 3', 'Source Sans Pro', Arial, sans-serif; font-size: 10pt; line-height: 1.26; color: #111; }
+  a { color: inherit; text-decoration: none; }
+  @media screen {
+    body { background: #e6e6e6; }
+    .page { width: 8.5in; min-height: 11in; margin: 24px auto; padding: 0.45in 0.6in 0.4in; background: #fff; box-shadow: 0 2px 14px rgba(0,0,0,.18); }
+  }
+
+  h1 { font-size: 23pt; font-weight: 700; line-height: 1; letter-spacing: -.01em; }
+  .headline { font-size: 11pt; margin-top: 4pt; }
+  .contact { font-size: 9.6pt; margin-top: 3pt; color: #222; }
+  /* literal spaces sit around every separator: they are the line's only break
+     points between awards, and text extractors need them to split the words */
+  .sep { color: #999; margin: 0 2pt; }
+
+  h2 { font-size: 10.4pt; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+       border-bottom: 1.1pt solid #111; padding-bottom: 1.2pt; margin: 9pt 0 3pt; }
+  .entry { margin-top: 4.5pt; }
+  .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 14pt; }
+  .what { font-weight: 700; }
+  .what .org { font-weight: 400; font-style: italic; }
+  .when { white-space: nowrap; }
+  .line { margin-top: 1pt; }
+  ul { margin: 1pt 0 0 12pt; }
+  li { margin-top: .8pt; padding-left: 1.5pt; }
+  .k { font-weight: 700; }
+  .nb { white-space: nowrap; }   /* an award name never splits across lines */
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1>Kyle Tran</h1>
+  <div class="headline">Mechanical Engineering, Robotics minor <span class="sep">·</span> Northeastern &rsquo;29 <span class="sep">·</span> Seeking a Summer 2027 hardware or robotics co-op</div>
+  <div class="contact"><a href="mailto:kylegtran2007@gmail.com">kylegtran2007@gmail.com</a> <span class="sep">·</span> <a href="tel:+16507624160">(650) 762-4160</a> <span class="sep">·</span> Boston, MA and Burlingame, CA</div>
+  <div class="contact"><a href="https://ka1e27.github.io/Portfolio/">ka1e27.github.io/Portfolio</a> <span class="sep">·</span> <a href="https://www.linkedin.com/in/kyle-tran-06a18b277/">linkedin.com/in/kyle-tran-06a18b277</a> <span class="sep">·</span> <a href="https://github.com/ka1e27">github.com/ka1e27</a></div>
+
+  <h2>Education</h2>
+  <div class="entry">
+    <div class="entry-head"><span class="what">Northeastern University <span class="org">— Boston, MA</span></span><span class="when">Expected May 2029</span></div>
+    <div class="line">B.S. Mechanical Engineering, Minor in Robotics <span class="sep">·</span> GPA 3.87 / 4.00</div>
+    <div class="line">Coursework: Cornerstone of Engineering I, Statics, Thermodynamics, Intro to Materials Science, Probability and Statistics</div>
+  </div>
+
+  <h2>Projects</h2>
+  <div class="entry">
+    <div class="entry-head"><span class="what">D.R.E.A.M.S — Autonomous Environmental Survey Boat <span class="org">— personal project</span></span><span class="when">Jan 2026 – Present</span></div>
+    <ul>
+      <li>Designed a twin-hull catamaran in SolidWorks, concept to build: 3D-printed ASA hull, fiberglass-and-epoxy skin</li>
+      <li>v1 completed autonomous waypoint surveys on local lakes: three RP2040 boards on a 433&nbsp;MHz HC-12 radio link, and a winch that lowers a sensor pod to sample the water</li>
+      <li>Designing the v2 KiCad carrier board (second revision, in bring-up) that replaces v1&rsquo;s hand-wired harness with three isolated battery domains, two VESC motor controllers and every sensor header</li>
+      <li>Specified the v2 architecture (Raspberry Pi 5 plus two RP2040s, stereo vision, 4G telemetry) and lead its integration and testing; the software is written with AI coding agents</li>
+    </ul>
+  </div>
+  <div class="entry">
+    <div class="entry-head"><span class="what">Combat Robotics — Team Dihydrogen Monoxide</span><span class="when">Mar 2023 – Jun 2025</span></div>
+    <ul>
+      <li>Designed and built about ten robots across five weight classes in Onshape: spinner and drum weapons, brushless drive, aluminum frames sent out for CNC machining, 3D-printed nylon and polycarbonate armor</li>
+      <li>4th nationally in Plastic Antweight (2024 RCL National Championship); U.S. rankings of top-15 (1&nbsp;lb), top-30 (1&nbsp;lb plastic) and top-35 (3&nbsp;lb); 4 first- and 8 second-place regional finishes</li>
+      <li>Designed a single-cam shuffler drive so the newest version of Achilles (1&nbsp;lb) walks instead of rolling</li>
+    </ul>
+  </div>
+  <div class="entry">
+    <div class="entry-head"><span class="what">Autonomous Maze-Navigating Robot <span class="org">— Cornerstone of Engineering I, team of two</span></span><span class="when">Oct 2025 – Dec 2025</span></div>
+    <ul>
+      <li>Designed a 3D-printed tank-drive chassis in Onshape to replace the class kit, which tipped in fast turns: 1.6&nbsp;in tall, about half the kit&rsquo;s height, and every printed part fit the first time</li>
+      <li>Wrote the MicroPython firmware: proportional wall-centering off two angled ultrasonic sensors, an LCD program menu, and asyncio so the LED and LCD animations never stall the motors</li>
+      <li>Added crowned wheels to keep the rubber-band treads on in hard turns; completed all three challenge courses</li>
+    </ul>
+  </div>
+  <div class="entry">
+    <div class="entry-head"><span class="what">Adaptive Compliant Robotic Arm <span class="org">— personal project, in design</span></span><span class="when">2026 – Present</span></div>
+    <ul>
+      <li>Five-axis arm; four joints run 17:1 cycloidal gearboxes with output-side encoders, designed to hold ±0.25°</li>
+    </ul>
+  </div>
+
+  <h2>Leadership &amp; Activities</h2>
+  <div class="entry">
+    <div class="entry-head"><span class="what">President <span class="org">— Combat Robots Club, Burlingame, CA</span></span><span class="when">Oct 2023 – Jun 2025</span></div>
+    <ul>
+      <li>Taught CAD, soldering, electronics and 3D printing; secured sponsorships and ran club finances and event travel</li>
+      <li>Led the club to 16 podium finishes (4 first, 7 second, 5 third) across 5 events</li>
+    </ul>
+  </div>
+  <div class="entry">
+    <div class="entry-head"><span class="what">Subsystem Lead <span class="org">— Iron Panthers, FRC Team 5026, Burlingame, CA</span></span><span class="when">Sep 2021 – May 2024</span></div>
+    <ul>
+      <li>Designed and prototyped the spindexer mechanism in CAD; led 10+ students, advised by 5 professional mentors</li>
+    </ul>
+  </div>
+  <div class="entry">
+    <div class="entry-head"><span class="what">Ceramic Tools R&amp;D <span class="org">— Burlingame High School</span></span><span class="when">Oct 2023 – May 2025</span></div>
+    <ul>
+      <li>Designed, 3D-printed and published 10+ tools for the ceramics classes, free for anyone to print on MakerWorld</li>
+    </ul>
+  </div>
+
+  <h2>Skills</h2>
+  <div class="line"><span class="k">CAD and design:</span> SolidWorks, Onshape, Fusion 360, KiCad; mechanism design, design for manufacturing</div>
+  <div class="line"><span class="k">Fabrication:</span> 2.5D CNC machining, FDM 3D printing, composite layup (fiberglass, carbon fiber), laser cutting, soldering</div>
+  <div class="line"><span class="k">Electronics:</span> PCB design, Raspberry Pi, RP2040, MicroPython with asyncio, motor and sensor integration</div>
+  <div class="line"><span class="k">Programming:</span> Python, MATLAB, Java; AI coding agents (Claude Code)</div>
+
+  <h2>Awards</h2>
+  <div class="line"><span class="nb">4th, Robot Combat League National Championship, Plastic Antweight (2024)</span> <span class="sep">·</span> <span class="nb">1st, CROS March Madness (2024)</span> <span class="sep">·</span> <span class="nb">1st, BCRC Bell Brawls IV (2024)</span> <span class="sep">·</span> <span class="nb">1st, Spartan Bell Slugfest (2024)</span> <span class="sep">·</span> <span class="nb">1st, NorCal Robotics Expo (2023)</span></div>
+
+</div>
+</body>
+</html>
