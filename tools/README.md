@@ -12,11 +12,19 @@ python -m http.server 8099          # from the repo root; fonts load from Google
 node tools/print-pdf.mjs http://127.0.0.1:8099/tools/resume.html Kyle_Tran_Resume.pdf
 ```
 
-Check that it still says `pages=1`. Two things to watch for:
+Check that it still says `pages=1`. Things to watch for:
 - A line that can't wrap (for example `white-space:nowrap` with no spaces between
   items) makes Chrome shrink the whole page to fit it, so every font goes small.
-- Keep literal spaces around the `·` separators. Text extractors, and so ATS
+- Keep literal spaces around the `|` separators. Text extractors, and so ATS
   parsers, need them to split the words.
+- **Static fonts only.** A variable font (Source Sans 3 from the css2 API) gets
+  embedded as Type 3 glyph drawings that older parsers can't read. The legacy API
+  serves Source Sans Pro one file per weight, which embeds as TrueType. Check that
+  every font on the page is `/Type0`:
+  `python -c "from pypdf import PdfReader; p=PdfReader('Kyle_Tran_Resume.pdf').pages[0]; print({v.get_object()['/Subtype'] for v in p['/Resources']['/Font'].values()})"`
+- **No letter-spacing on headings.** At `.07em`, pdftotext read "E D U C AT I O N",
+  and a parser that can't find the Education heading loses the degree and dates.
+  `pdftotext Kyle_Tran_Resume.pdf -` should show each heading as one word.
 
 ## print-pdf.mjs
 
