@@ -30,46 +30,44 @@ Check that it still says `pages=1`. Things to watch for:
 
 Prints any page to PDF with the Chrome already installed. It needs no npm packages,
 because Node 22+ has the WebSocket that the DevTools protocol needs. The paper size
-comes from the page's own `@page` rule. The script prints the page count and exits
-non-zero if a webfont failed to load. The two-page brief prints the same way:
+comes from the page's own `@page` rule; an optional third argument sets the PDF's
+Title field. It fetches webfonts as Chrome 60, because Google Fonts gives current
+browsers one variable file per family, which Chrome can only embed as Type 3 glyph
+drawings, and gives older browsers one static file per weight, which embeds as
+TrueType. It prints the page count and exits non-zero if a webfont failed to load or
+any Type 3 font got in.
+
+## Kyle_Tran_Portfolio.pdf (the two-page brief)
+
+The brief lives in `index.html` as `<section class="pdf-sheet">`, hidden on screen
+and the only thing `@media print` outputs. The contact band links the committed
+`Kyle_Tran_Portfolio.pdf` rather than printing in the visitor's browser: a browser
+print embeds the variable webfonts as Type 3, and every browser lays text out a
+little differently. **Regenerate it whenever the `.pdf-sheet` markup or its print CSS
+changes**, or the site serves a stale copy:
 
 ```bash
-node tools/print-pdf.mjs http://127.0.0.1:8099/index.html Kyle_Tran_Portfolio.pdf
+node tools/print-pdf.mjs http://127.0.0.1:8099/index.html Kyle_Tran_Portfolio.pdf "Kyle Tran Portfolio"
 ```
 
-## generate-portfolio-pdf.js
+Expect 2 pages at about 1.8 MB with `type3 fonts: 0`. The brief prints on US Letter
+(it was A4 until 2026-09; US recruiters print on Letter). Both pages keep about half
+an inch spare at the bottom, because Ctrl+P in Safari or Firefox sets text slightly
+differently from Chrome. Check that margin after edits, since a page that runs over
+prints a third one.
 
-Renders the **two-page portfolio brief** to a PDF. The brief lives in
-`index.html` as `<section class="pdf-sheet">` — hidden on screen, and the only
-thing `@media print` outputs.
+What keeps it readable to parsers (the résumé rules, applied to the brief):
+- Letter-spacing at `.03em` or less on anything a parser must read. At `.1em` and up,
+  pdfminer reads "M E C H A N I C A L".
+- Each stat is one line, value first ("3.87 GPA"). A label stacked over its value made
+  a line reader pair each label with the wrong number.
+- Skill items are `.nb` (no wrap), so a line never breaks inside a term. pdftotext
+  drops a line-end hyphen and "simulation-first" became "simulationfirst".
+- Standard section names (Projects, Leadership experience, Education, Skills, Awards),
+  straight apostrophes, no `&nbsp;`, "to" instead of arrows.
 
-You usually don't need this: the site's "Save portfolio as PDF" button already
-produces the same two pages through the browser, with the real webfonts. Use the
-script only if you want a static file committed so it can be linked directly.
-
-```bash
-npm i -D playwright-core
-node tools/generate-portfolio-pdf.js Kyle_Tran_Portfolio.pdf
-```
-
-To link the file instead of printing, replace the `<button id="save-pdf">` in
-`index.html` with:
-
-```html
-<a class="btn btn-ghost" href="Kyle_Tran_Portfolio.pdf" download>Portfolio PDF</a>
-```
-
-Run it on a machine with internet access. Without it, Google Fonts can't load and
-the PDF renders in fallback serif/sans instead of Fraunces/Manrope. Expect 2 pages
-at roughly 1.9 MB. `print-pdf.mjs` above does the same job with nothing to install.
-
-The brief prints on US Letter (it was A4 until 2026-09; US recruiters print on
-Letter). Both pages keep about half an inch spare at the bottom on purpose, because
-Safari and Firefox set text slightly differently from Chrome. Check that margin
-after edits, since a page that runs over prints a third one.
-
-To edit the brief's content, edit the `.pdf-sheet` markup — it's deliberately
-independent of the site copy so the two can be tuned separately.
+`generate-portfolio-pdf.js` is the older Playwright route. Don't use it for the
+committed file: it doesn't fetch static fonts, so its PDF has Type 3 fonts.
 
 ## og-card.html
 

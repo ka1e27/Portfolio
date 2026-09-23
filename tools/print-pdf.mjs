@@ -1,21 +1,21 @@
 // Print a page to PDF with the Chrome already on this machine. No installs:
 // Node 22+ has a built-in WebSocket, which is all the DevTools protocol needs.
 //
-//   node tools/print-pdf.mjs <url> <out.pdf>
+//   node tools/print-pdf.mjs <url> <out.pdf> [pdf title]
 //
 // Serve the repo first (python -m http.server 8099) so fonts and images load:
 //   résumé: node tools/print-pdf.mjs http://127.0.0.1:8099/tools/resume.html Kyle_Tran_Resume.pdf
-//   brief:  node tools/print-pdf.mjs http://127.0.0.1:8099/index.html brief.pdf
-// The page's own @page rule sets the paper size. It prints the page count and
-// exits non-zero if the webfonts failed to load, since a fallback-font PDF looks fine at a
-// glance and wrong on paper.
+//   brief:  node tools/print-pdf.mjs http://127.0.0.1:8099/index.html Kyle_Tran_Portfolio.pdf "Kyle Tran Portfolio"
+// The page's own @page rule sets the paper size. It prints the page count, and exits
+// non-zero if a webfont failed to load (a fallback-font PDF looks fine at a glance
+// and wrong on paper) or if any font went in as Type 3 (see LEGACY_UA below).
 import { spawn } from 'node:child_process';
 import { writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
-const [, , url, out] = process.argv;
-if (!url || !out) { console.error('usage: node tools/print-pdf.mjs <url> <out.pdf>'); process.exit(2); }
+const [, , url, out, title] = process.argv;
+if (!url || !out) { console.error('usage: node tools/print-pdf.mjs <url> <out.pdf> [pdf title]'); process.exit(2); }
 const PORT = 9366;
 // Absolute, always: a relative --user-data-dir falls back to the owner's real
 // Chrome profile, which is in use, and Chrome exits at once with code 21.
@@ -48,6 +48,13 @@ const evaluate = async expr => (await send('Runtime.evaluate', { expression: exp
 
 await send('Page.enable'); await send('Network.enable');
 await send('Network.setCacheDisabled', { cacheDisabled: true });
+// Google Fonts gives a current browser one variable font file for every weight, and
+// Chrome can only embed a variable font as Type 3 glyph drawings, which older
+// applicant-tracking parsers can't read. An older browser gets one static file per
+// weight, which embeds as ordinary TrueType. So fetch as Chrome 60; the site's own
+// scripts never read the user agent.
+const LEGACY_UA = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36';
+await send('Network.setUserAgentOverride', { userAgent: LEGACY_UA });
 await send('Emulation.setEmulatedMedia', { media: 'print' });   // lazy images and print CSS both see print
 const loaded = next('Page.loadEventFired');
 await send('Page.navigate', { url: url + (url.includes('?') ? '&' : '?') + 'print=' + Date.now() });
@@ -58,12 +65,16 @@ await evaluate(`(async () => {
   await Promise.race([Promise.all([...document.images].map(i => i.decode().catch(() => {}))), new Promise(r => setTimeout(r, 12000))]);
   await document.fonts.ready; return 1; })()`);
 await sleep(600);
+if (title) await evaluate(`document.title = ${JSON.stringify(title)}; 1`);   // the PDF's Title field
 const fonts = await evaluate(`[...document.fonts].map(f => f.family.replace(/"/g, '') + ' ' + f.weight + ' ' + f.status)`);
 const failed = fonts.filter(f => !/loaded$/.test(f) && !/unloaded$/.test(f));
 const pdf = await send('Page.printToPDF', { printBackground: true, preferCSSPageSize: true });
 const buf = Buffer.from(pdf.data, 'base64');
 writeFileSync(out, buf);
-const pages = (buf.toString('latin1').match(/\/Type\s*\/Page[^s]/g) || []).length;
-console.log(`${out}  pages=${pages}  ${Math.round(buf.length / 1024)} KB  fonts loaded: ${fonts.filter(f => /\bloaded$/.test(f)).length}` + (failed.length ? `  FAILED: ${failed.join(', ')}` : ''));
+const raw = buf.toString('latin1');
+const pages = (raw.match(/\/Type\s*\/Page[^s]/g) || []).length;
+const type3 = (raw.match(/\/Subtype\s*\/Type3/g) || []).length;
+console.log(`${out}  pages=${pages}  ${Math.round(buf.length / 1024)} KB  fonts loaded: ${fonts.filter(f => /\bloaded$/.test(f)).length}` +
+  `  type3 fonts: ${type3}` + (failed.length ? `  FAILED: ${failed.join(', ')}` : ''));
 ws.close();
-done(failed.length ? 1 : 0);
+done(failed.length || type3 ? 1 : 0);
