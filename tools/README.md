@@ -72,14 +72,17 @@ committed file: it doesn't fetch static fonts, so its PDF has Type 3 fonts.
 ## og-card.html
 
 Source for `images/web/og-card.jpg`, the 1200×630 card that LinkedIn, Slack and
-iMessage show when someone shares the site. It repeats the class year and three
+iMessage show when someone shares the site. It uses the light theme (since
+2026-09-23), like the site's default. It repeats the class year and three
 stats (4th national, 16 team podiums, 3.87 GPA) as pixels, so re-render it when
 any of those change. Chrome needs no install; the page loads Google Fonts, so run
-it online:
+it online. Give Chrome its own `--user-data-dir`: without one it tries the owner's
+open profile and exits without a screenshot.
 
 ```powershell
 & "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --hide-scrollbars `
-  --force-device-scale-factor=2 --window-size=1200,630 --virtual-time-budget=6000 `
+  --force-device-scale-factor=2 --window-size=1200,630 --virtual-time-budget=8000 `
+  --user-data-dir="$env:TEMP\og-card-profile" `
   --screenshot="$PWD\og-card.png" "file:///$PWD/tools/og-card.html"
 ```
 
@@ -91,3 +94,7 @@ from PIL import Image
 Image.open('og-card.png').convert('RGB').resize((1200, 630), Image.LANCZOS) \
      .save('images/web/og-card.jpg', 'JPEG', quality=88, optimize=True, progressive=True)
 ```
+
+Then change the `?v=` on the `og:image` and `twitter:image` URLs in `index.html`.
+Link previews are cached by URL, so without a new one the old card keeps showing.
+LinkedIn's Post Inspector re-reads a page on demand.
