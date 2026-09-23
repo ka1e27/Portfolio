@@ -13,14 +13,14 @@
   ╚══════════════════════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kyle Tran — Mechanical Engineer</title>
   <meta name="description" content="Kyle Tran — Mechanical Engineering and Robotics at Northeastern, seeking a Summer 2027 co-op. Autonomous survey boats, combat robots, embedded systems, CAD.">
   <meta name="author" content="Kyle Tran">
-  <meta name="theme-color" content="#0E0E0E">
+  <meta name="theme-color" content="#F3F1EC">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Kyle Tran — Mechanical Engineer">
   <meta property="og:description" content="Autonomous survey boats, combat robots, embedded systems, and CAD. Mechanical Engineering at Northeastern, seeking a Summer 2027 co-op.">
@@ -57,7 +57,7 @@
   </script>
   <script>
     /* Resolve theme before first paint (no flash for light-mode users). */
-    (function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#0E0E0E':'#F3F1EC');}catch(e){}})();
+    (function(){try{var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#0D0D0C':'#F3F1EC');}catch(e){}})();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1141,6 +1141,133 @@
       *,*::before,*::after { transition-duration:.01ms !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; }
     }
   </style>
+  <style id="foam-hero">
+    /* ================================================================
+       THE FOAM CASE — the landing page's first screen, and only that.
+       The work sits in a tool case: each project in foam cut to its
+       outline, a red floor showing through the cut (two-layer "shadow
+       foam", 5S), each pocket opening its case study. Label-maker tape
+       for the case's labels. The rest of the site is unchanged.
+       Foam follows the theme: warm white in light, near-black in dark.
+       Contrast (AA at 12px): case-foot 6.13:1 light / 5.61:1 dark; tape
+       white on #26262A 15.07:1, on #C8102E 5.88:1.
+       ================================================================ */
+    :root {
+      --tape:#C8102E; --tape-ink:#26262A; --floor:#B00E26;
+      --foam-grain-light:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      --foam-grain-dark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    /* theme values come after :root, so they win at equal specificity */
+    [data-theme="dark"] {
+      --shell-top:#20201D; --shell-bot:#171715; --foam:#121211; --on-foam-mute:#8C8C93;
+      --foam-img:var(--foam-grain-light); --foam-grain-opacity:.075; --foam-blend:overlay;
+    }
+    [data-theme="light"] {
+      --shell-top:#FFFFFF; --shell-bot:#FFFFFF; --foam:#F6F5F1; --on-foam-mute:#5E5C56;
+      --foam-img:var(--foam-grain-dark); --foam-grain-opacity:.10; --foam-blend:normal;
+    }
+
+    /* ---------- label-maker tape (the case and the hero labels only) ---------- */
+    .sf-hero .dymo {
+      display:inline-flex; align-items:center; gap:.55em; white-space:nowrap;
+      font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:12px; line-height:1;
+      letter-spacing:.17em; text-transform:uppercase; color:#fff; background:var(--tape-ink);
+      padding:6px 11px 5px; border-radius:3px;
+      text-shadow:0 1px 0 rgba(0,0,0,.45), 0 -1px 0 rgba(255,255,255,.14);
+      box-shadow:0 1px 2px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.10), inset 0 -1px 0 rgba(0,0,0,.35);
+      rotate:-.6deg;
+    }
+    .sf-hero .dymo-red { background:var(--tape); }
+
+    /* ---------- layout: identity left, the case right, facts under the identity ---------- */
+    .sf-hero { display:grid; grid-template-columns:minmax(320px,400px) minmax(0,1fr); grid-template-rows:auto auto;
+      column-gap:var(--s8); align-items:end; padding:calc(var(--header-h) + var(--s5)) 0 var(--s7); }
+    .sf-id { grid-column:1; grid-row:1; }
+    .sf-case { grid-column:2; grid-row:1/3; align-self:center; }
+    .sf-facts { grid-column:1; grid-row:2; align-self:start; }
+    .sf-labels { display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
+    .sf-labels .dymo-red { rotate:.7deg; }
+    .sf-name { font-family:'Fraunces',serif; font-variation-settings:'opsz' 144; font-weight:600;
+      font-size:clamp(3.2rem,5.6vw,5.4rem); line-height:.92; letter-spacing:-.025em; color:var(--text); margin:var(--s5) 0 var(--s4); }
+    .sf-lede { color:var(--text-secondary); font-size:1.12rem; line-height:1.7; margin:0 0 var(--s5); max-width:34ch; }
+    .sf-cta { display:flex; flex-wrap:wrap; gap:10px; }
+    .sf-facts { margin-top:var(--s6); border-top:1px solid var(--border); padding-top:var(--s4); display:grid; gap:9px; }
+    .sf-fact { display:grid; grid-template-columns:104px 1fr; gap:14px; font-size:.92rem; color:var(--text-secondary); }
+    .sf-fact span:first-child { font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--text-tertiary); padding-top:2px; }
+
+    /* ---------- the case ---------- */
+    .sf-case { background:linear-gradient(var(--shell-top),var(--shell-bot)); border-radius:18px; padding:13px;
+      box-shadow:0 40px 70px -34px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.07), inset 0 -1px 0 rgba(0,0,0,.5); }
+    .sf-insert { position:relative; border-radius:10px; background:var(--foam); padding:18px 18px 12px; overflow:hidden;
+      box-shadow:inset 0 0 0 1px rgba(0,0,0,.55), inset 0 18px 26px -18px rgba(0,0,0,.9); }
+    .sf-insert::before { content:''; position:absolute; inset:0; background-image:var(--foam-img);
+      opacity:var(--foam-grain-opacity); mix-blend-mode:var(--foam-blend); pointer-events:none; }
+    .sf-pockets { position:relative; display:grid; grid-template-columns:repeat(12,1fr); grid-auto-rows:122px; gap:12px; }
+    .sf-pocket { position:relative; display:block; border-radius:8px; cursor:pointer; outline:none; }
+    .sf-art { position:absolute; inset:6px 8px 32px; }
+    .sf-art img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+    .sf-ob { filter:drop-shadow(0 2px 1.5px rgba(0,0,0,.7)); transition:transform .45s var(--ease), filter .45s var(--ease); }
+    .sf-pocket:hover .sf-ob, .sf-pocket:focus-visible .sf-ob { transform:translateY(-15px) rotate(-1.4deg) scale(1.03);
+      filter:drop-shadow(0 24px 18px rgba(0,0,0,.72)); }
+    .sf-pocket > .dymo { position:absolute; left:8px; bottom:4px; rotate:-.9deg; transition:background .25s var(--ease); }
+    .sf-pocket:hover > .dymo, .sf-pocket:focus-visible > .dymo { background:var(--tape); }
+    .sf-pocket:focus-visible { box-shadow:0 0 0 2px var(--signal); }
+    /* photo cards sit in rectangular slots with the same red floor and a finger
+       notch. An even red ring reads as a frame, not a cut, so the top wall
+       throws the deep shadow, like the PNG pockets. */
+    .sf-slot .sf-art::before { content:''; position:absolute; inset:-5px; border-radius:6px; background:var(--floor);
+      box-shadow:inset 0 13px 9px -7px rgba(0,0,0,.72), inset 0 0 5px 1px rgba(0,0,0,.42), 0 1px 0 rgba(255,255,255,.07); }
+    .sf-slot .sf-art::after { content:''; position:absolute; left:50%; top:calc(100% + 4px); width:36px; height:17px; margin-left:-18px;
+      border-radius:0 0 18px 18px; background:var(--floor); box-shadow:inset 0 -5px 7px -3px rgba(0,0,0,.5), inset 0 3px 4px -2px rgba(0,0,0,.45); }
+    .sf-card { position:absolute; inset:0; z-index:1; border-radius:4px; overflow:hidden; background:#222;
+      box-shadow:0 2px 2px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.08);
+      transition:transform .45s var(--ease), box-shadow .45s var(--ease); }
+    .sf-card img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .sf-slot:hover .sf-card, .sf-slot:focus-visible .sf-card { transform:translateY(-14px) rotate(-1deg); box-shadow:0 26px 24px -8px rgba(0,0,0,.72); }
+    .p-boat   { grid-column:1/7;   grid-row:1/3; }
+    .p-gear   { grid-column:7/10;  grid-row:1/3; }
+    .p-sew    { grid-column:10/13; grid-row:1/3; }
+    .p-maze   { grid-column:1/5;   grid-row:3/5; }
+    .p-combat { grid-column:5/9;   grid-row:3/5; }
+    .p-plane  { grid-column:9/13;  grid-row:3/5; }
+    .sf-case-foot { position:relative; display:flex; justify-content:space-between; gap:16px; padding:12px 6px 1px;
+      font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--on-foam-mute); }
+
+    /* light: a white shell on the cream page, pale foam with soft shading and a
+       dark hairline on every cut edge (the rim baked into the pocket images is
+       a light one, drawn for black foam) */
+    [data-theme="light"] .sf-case { border:1px solid var(--border-strong);
+      box-shadow:0 30px 50px -30px rgba(0,0,0,.26), 0 2px 4px rgba(0,0,0,.04), inset 0 1px 0 #fff; }
+    [data-theme="light"] .sf-insert { box-shadow:inset 0 0 0 1px rgba(0,0,0,.08), inset 0 14px 18px -14px rgba(0,0,0,.24); }
+    [data-theme="light"] .sf-pk { filter:drop-shadow(0 0 .7px rgba(0,0,0,.6)); }
+    [data-theme="light"] .sf-slot .sf-art::before { box-shadow:inset 0 13px 9px -7px rgba(0,0,0,.6), inset 0 0 5px 1px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.35); }
+    [data-theme="light"] .sf-ob { filter:drop-shadow(0 2px 1.5px rgba(0,0,0,.45)); }
+
+    /* competition results: whose placings these are (owner, 2026-09-23) */
+    .awards-note { color:var(--text-secondary); font-size:.95rem; margin:calc(-1 * var(--s3)) 0 var(--s5); max-width:62ch; }
+
+    @media (prefers-reduced-motion:reduce) { .sf-ob, .sf-card { transition:none; } }
+    @media (max-width:1100px) {
+      .sf-hero { grid-template-columns:1fr; row-gap:var(--s6); }
+      .sf-id, .sf-case, .sf-facts { grid-column:1; grid-row:auto; }
+      .sf-facts { margin-top:0; }
+      .sf-lede { max-width:52ch; }
+    }
+    @media (max-width:640px) {
+      .sf-cta { display:grid; grid-template-columns:1fr 1fr; }
+      .sf-cta .btn-primary { grid-column:1/-1; justify-content:center; }
+      .sf-cta .btn { justify-content:center; }
+      .sf-insert { padding:14px 12px 8px; }
+      .sf-pockets { grid-template-columns:repeat(2,1fr); grid-auto-rows:auto; gap:10px; }
+      .sf-pocket { grid-column:auto; grid-row:auto; aspect-ratio:1/1; }
+      .sf-slot { grid-column:1/-1; aspect-ratio:1.34; }
+      .p-boat { order:1; } .p-gear { order:2; } .p-sew { order:3; } .p-combat { order:4; } .p-maze { order:5; } .p-plane { order:6; }
+      .sf-pocket > .dymo { letter-spacing:.1em; padding:6px 8px 5px; }
+      .sf-case-foot span:last-child { display:none; }
+      .sf-fact { grid-template-columns:118px 1fr; }
+    }
+  </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -1177,34 +1304,61 @@
 <section class="tab-content active" data-tab="work">
   <div class="container-wide">
 
-    <div class="hero">
-      <div class="hero-motif" aria-hidden="true">
-        <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
-          <ellipse cx="200" cy="200" rx="60"  ry="42"  transform="rotate(-18 200 200)"/>
-          <ellipse cx="200" cy="200" rx="104" ry="76"  transform="rotate(-18 200 200)"/>
-          <ellipse cx="200" cy="200" rx="150" ry="112" transform="rotate(-18 200 200)"/>
-          <ellipse cx="200" cy="200" rx="196" ry="150" transform="rotate(-18 200 200)"/>
-          <ellipse cx="200" cy="200" rx="244" ry="190" transform="rotate(-18 200 200)"/>
-          <line x1="0" y1="200" x2="400" y2="200"/><line x1="200" y1="0" x2="200" y2="400"/>
-          <circle cx="200" cy="200" r="3" fill="currentColor"/>
-        </svg>
+    <!-- THE FOAM CASE: the first screen shows the work as objects in a
+         tool case, each in foam cut to its outline over a red floor, and
+         each one opening its case study. Styles: <style id="foam-hero">;
+         cutouts and pockets: tools/foam_assets.py. -->
+    <div class="sf-hero">
+      <div class="sf-id">
+        <div class="sf-labels">
+          <span class="dymo">Mech. Eng. · Robotics minor · NU&nbsp;&rsquo;29</span>
+          <span class="dymo dymo-red">Seeking · Summer 2027 co-op</span>
+        </div>
+        <h1 class="sf-name">Kyle Tran</h1>
+        <p class="sf-lede">I build robots, autonomous vehicles, and embedded systems &mdash; drawn in CAD, machined and printed, wired and coded, then tested until they hold up.</p>
+        <div class="sf-cta">
+          <a class="btn btn-primary" href="Kyle_Tran_Resume.pdf" target="_blank" rel="noopener">R&eacute;sum&eacute; <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+          <a class="btn btn-ghost" href="mailto:kylegtran2007@gmail.com">Email</a>
+          <a class="btn btn-ghost" href="https://github.com/ka1e27" target="_blank" rel="noopener">GitHub</a>
+        </div>
       </div>
-      <div class="hero-inner">
-        <div class="hero-text stagger">
-          <span class="hero-eyebrow reveal" data-reveal="none">Mechanical Eng. · Robotics minor · Northeastern&nbsp;&rsquo;29</span>
-          <h1 class="hero-title reveal" data-reveal="none"><span class="line"><span class="line-inner">Kyle <span class="hero-last">Tran</span></span></span></h1>
-          <p class="hero-lead reveal">I build robots, autonomous vehicles, and embedded systems &mdash; drawn in CAD, machined and printed, wired and coded, then tested until they hold up.</p>
-          <div class="hero-cta reveal">
-            <button type="button" class="btn btn-primary" id="hero-cta-work">View Work <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button>
-            <a class="btn btn-ghost" href="Kyle_Tran_Resume.pdf" target="_blank" rel="noopener">Résumé <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
-            <a class="btn btn-ghost" href="mailto:kylegtran2007@gmail.com">Get in touch</a>
+
+      <div class="sf-case" aria-label="Projects, laid out like a tool case">
+        <div class="sf-insert">
+          <div class="sf-pockets">
+            <article class="sf-pocket sf-slot p-boat" data-goto="project-boat" role="link" tabindex="0" aria-label="01, Survey boat">
+              <span class="sf-art"><span class="sf-card"><img src="images/web/foam/boat-slot.jpg" alt="D.R.E.A.M.S v1 survey boat on the dock beside the water" width="1200" height="800" decoding="async"></span></span>
+              <span class="dymo">01 · Survey boat</span>
+            </article>
+            <article class="sf-pocket p-gear" data-goto="project-arm" role="link" tabindex="0" aria-label="03, Robotic arm">
+              <span class="sf-art"><img class="sf-pk" src="images/web/foam/gearbox-pocket.png" alt="" width="508" height="441" decoding="async"><img class="sf-ob" src="images/web/foam/gearbox.png" alt="Cycloidal gearbox joint for the robotic arm, CAD" width="508" height="441" decoding="async"></span>
+              <span class="dymo">03 · Robotic arm</span>
+            </article>
+            <article class="sf-pocket p-sew" data-goto="project-misc" role="link" tabindex="0" aria-label="05A, Sewing">
+              <span class="sf-art"><img class="sf-pk" src="images/web/foam/sewing-pocket.png" alt="" width="330" height="388" decoding="async"><img class="sf-ob" src="images/web/foam/sewing.png" alt="Sewing machine reverse-engineered in CAD" width="330" height="388" decoding="async"></span>
+              <span class="dymo">05A · Sewing</span>
+            </article>
+            <article class="sf-pocket p-maze" data-goto="project-maze" role="link" tabindex="0" aria-label="04, Maze robot">
+              <span class="sf-art"><img class="sf-pk" src="images/web/foam/maze-pocket.png" alt="" width="518" height="339" decoding="async"><img class="sf-ob" src="images/web/foam/maze.png" alt="Maze-solving robot chassis, CAD" width="518" height="339" decoding="async"></span>
+              <span class="dymo">04 · Maze robot</span>
+            </article>
+            <article class="sf-pocket sf-slot p-combat" data-goto="project-combat" role="link" tabindex="0" aria-label="02, Combat">
+              <span class="sf-art"><span class="sf-card"><img src="images/web/foam/combat-slot.jpg" alt="Three of the combat robots on a concrete floor" width="1200" height="800" decoding="async"></span></span>
+              <span class="dymo">02 · Combat</span>
+            </article>
+            <article class="sf-pocket p-plane" data-goto="project-misc" role="link" tabindex="0" aria-label="05B, RC plane">
+              <span class="sf-art"><img class="sf-pk" src="images/web/foam/plane-pocket.png" alt="" width="789" height="388" decoding="async"><img class="sf-ob" src="images/web/foam/plane.png" alt="3D-printed RC plane, CAD" width="789" height="388" decoding="async"></span>
+              <span class="dymo">05B · RC plane</span>
+            </article>
           </div>
+          <div class="sf-case-foot"><span>6 items · 5 projects</span><span>Lift one out to open it</span></div>
         </div>
-        <div class="hero-telemetry reveal" data-reveal="right" data-reveal-delay="240" aria-label="Current status">
-          <div class="telem-cell"><div class="telem-k"><span class="dot"></span>Currently building</div><div class="telem-v">D.R.E.A.M.S v2 — survey boat</div></div>
-          <div class="telem-cell"><div class="telem-k">Seeking</div><div class="telem-v">Summer 2027 co-op</div></div>
-          <div class="telem-cell"><div class="telem-k">Based in</div><div class="telem-v">Boston · Burlingame, CA</div></div>
-        </div>
+      </div>
+
+      <div class="sf-facts">
+        <div class="sf-fact"><span>Building</span><span>D.R.E.A.M.S v2 &mdash; an autonomous survey boat</span></div>
+        <div class="sf-fact"><span>Best result</span><span>4th nationally, Plastic Antweight &rsquo;24</span></div>
+        <div class="sf-fact"><span>Based</span><span>Boston · Burlingame, CA</span></div>
       </div>
     </div>
 
@@ -1260,7 +1414,7 @@
         <div class="proj-body">
           <div>
             <h3 class="proj-title">Combat Robotics — Team DHM</h3>
-            <p class="proj-desc">Around ten robots across five weight classes, designed in CAD and printed in-house. 16 podium finishes over 5 events, and 4th nationally in Plastic Antweight.</p>
+            <p class="proj-desc">Around ten robots across five weight classes, designed in CAD and printed in-house. 4th nationally in Plastic Antweight; as a club, 16 podiums over 5 events.</p>
           </div>
           <div class="proj-meta"><span class="proj-date">2023 — 2025</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
         </div>
@@ -1332,7 +1486,7 @@
     </nav>
 
     <figure class="img-fig pd-hero-fig reveal">
-      <img class="img-el img-clickable" data-src="images/web/dreams-v1-lake.jpg" width="1500" height="2000" alt="D.R.E.A.M.S v1 on the dock beside the water" loading="lazy" decoding="async" onerror="imgFallback(this)">
+      <img class="img-el img-clickable" data-src="images/web/dreams-v1-dock-wide.jpg" width="1500" height="750" alt="D.R.E.A.M.S v1 on the dock beside the water" loading="lazy" decoding="async" onerror="imgFallback(this)">
     </figure>
 
     <div class="container" id="boat-overview">
@@ -1592,7 +1746,7 @@
       <p class="pd-intro reveal">Two years of competitive combat robotics with Team Dihydrogen Monoxide &mdash; around ten robots that competed across five weight classes, all designed in CAD and 3D-printed in-house (machining outsourced), and tested by getting hit very hard. The three that ranked nationally are written up below.</p>
       <div class="pd-result reveal">
         <span class="r-key">Result</span>
-        <span class="r-text">16 podium finishes across 5 events, and 4th nationally in Plastic Antweight at the 2024 Robot Combat League Championship.</span>
+        <span class="r-text">My own robots took 4 firsts and 8 seconds, and 4th nationally in Plastic Antweight at the 2024 Robot Combat League Championship. As a club, we placed on the podium 16 times across 5 events.</span>
       </div>
       <div class="pd-links reveal">
         <a class="pd-link" href="https://theburlingameb.org/9088/features/juniors-see-success-with-new-combat-robotics-club/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg> Featured in The Burlingame B <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
@@ -1845,7 +1999,7 @@
       <p class="pd-intro reveal">A five-axis arm with a compliant TPU gripper that reads its own grip force. Every joint below the wrist runs a cycloidal gearbox with a magnetic encoder on the output shaft rather than the motor, which is what makes a &plusmn;0.25&deg; static target worth aiming at.</p>
       <div class="pd-result is-note reveal">
         <span class="r-key">Status</span>
-        <span class="r-text">Nothing is built yet. Joint layout, gear ratios, link lengths and ring sizes are settled; bearing selection, the disc manufacturing route, and real masses from CAD are not. The first prototype gets printed to check motion and tune the loop &mdash; the &plusmn;0.25&deg; figure is for the aluminium version, because printed cycloidal backlash will exceed it on its own.</span>
+        <span class="r-text">Nothing is built yet. Joint layout, gear ratios, link lengths and ring sizes are settled; bearing selection, the disc manufacturing route, and real masses from CAD are not. The first prototype gets printed to check motion and tune the loop &mdash; the &plusmn;0.25&deg; figure is for the aluminum version, because printed cycloidal backlash will exceed it on its own.</span>
       </div>
     </div>
 
@@ -1955,7 +2109,7 @@
       <div class="pd-closing reveal">
         <p>The encoder sits on the gearbox output, not the motor. It reads the joint angle directly, so the gear ratio drops out of the precision question and only affects torque and speed. It is a 12-bit AS5600 at 0.09&deg; per count, about 2.8&times; under the target &mdash; thin, but backlash and compliance are the bigger errors at this tolerance, so a 14-bit part would be buying precision in the wrong place.</p>
         <p>An IMU was the other candidate and does not work here. An IMU measures a link&rsquo;s orientation against gravity, so it is blind to rotation about a vertical axis &mdash; that alone rules out base yaw without leaning on a magnetometer. Even with good fusion an IMU holds roughly 1&ndash;3&deg; statically, against a &plusmn;0.25&deg; target. It may come back as a supplement on the end effector for an absolute level reference or vibration sensing, but not as the joint sensor.</p>
-        <p>Forearm roll has a wiring problem rather than a sensing one. The wire sits untwisted at encoder centre and a single hard stop sits directly opposite, so the joint swings freely between but never accumulates past a half turn of twist. That stop is physical as well as in firmware &mdash; a software limit alone does not protect the wire if the encoder glitches or the board loses position across a power cycle.</p>
+        <p>Forearm roll has a wiring problem rather than a sensing one. The wire sits untwisted at encoder center and a single hard stop sits directly opposite, so the joint swings freely between but never accumulates past a half turn of twist. That stop is physical as well as in firmware &mdash; a software limit alone does not protect the wire if the encoder glitches or the board loses position across a power cycle.</p>
       </div>
     </div>
 
@@ -2232,6 +2386,7 @@
 
     <div class="section-label reveal" style="margin-top:72px">Awards</div>
     <h2 class="section-heading reveal">Competition <em>results</em></h2>
+    <p class="awards-note reveal">Placings by robots I designed and built. The club&rsquo;s overall podium count is on the President entry above.</p>
     <div class="awards-table">
       <div class="award-row reveal"><div class="award-place">4<span class="u">th</span></div><div class="award-info"><div class="award-name">Robot Combat League National Championship</div><div class="award-detail">Achilles · 1 lb plastic antweight · National · 2024</div></div></div>
       <div class="award-row reveal"><div class="award-place">1<span class="u">st</span></div><div class="award-info"><div class="award-name">CROS — March Madness</div><div class="award-detail">Achilles (metal) · 1 lb antweight · 2024</div></div></div>
@@ -2395,7 +2550,7 @@
           <div class="ps-title">Combat Robotics — Team DHM</div>
           <div class="ps-when">2023 — 2025</div>
         </div>
-        <div class="ps-desc">Designed and built around ten robots that competed across five weight classes — weapon and drivetrain design, titanium and steel armor, composite layup, and iteration driven by what broke in the arena. 16 podium finishes over 5 events, and 4th nationally in Plastic Antweight.</div>
+        <div class="ps-desc">Designed and built around ten robots that competed across five weight classes — weapon and drivetrain design, titanium and steel armor, composite layup, and iteration driven by what broke in the arena. 4th nationally in Plastic Antweight; the club took 16 podiums over 5 events.</div>
         <div class="ps-tech">Onshape · laser-cut Ti / steel · brushless drive · FDM printing · DFM under a strict weight budget</div>
       </div>
 
@@ -2508,8 +2663,7 @@
 
   // ── Theme ──
   const stored = localStorage.getItem('theme');
-  if (stored) html.setAttribute('data-theme', stored);
-  else if (window.matchMedia('(prefers-color-scheme: light)').matches) html.setAttribute('data-theme', 'light');
+  html.setAttribute('data-theme', stored || 'light');   // light is the main theme; dark is on the toggle
   // Save-as-PDF: printing renders the two-page brief (.pdf-sheet), not the site.
   // Done in the browser so it uses the real webfonts and can never go stale.
   // The sheet's thumbnails are data-src (they'd otherwise download on every visit
@@ -2857,7 +3011,7 @@
   function saveStore() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); } catch (e) {} }
   const store = loadStore(); store.transforms = store.transforms || {}; store.texts = store.texts || {};
   const TEXT_SELECTOR = [
-    '.hero-eyebrow', '.hero-title', '.hero-lead', '.telem-v', '.telem-k',
+    '.sf-name', '.sf-lede', '.sf-labels .dymo', '.sf-fact span',
     '.section-label', '.section-heading', '.work-count',
     '.proj-title', '.proj-desc', '.proj-date', '.proj-cat', '.cred-num', '.cred-label',
     '.pd-kicker', '.pd-title', '.pd-intro', '.pd-result .r-text', '.spec-key', '.spec-val', '.pd-tag', '.robot-rank',
