@@ -1090,7 +1090,7 @@
        ================================================================ */
     .pdf-sheet { display:none; }
     @media print {
-      @page { size:A4; margin:11mm 12mm; }
+      @page { size:letter; margin:11mm 12mm; }
       html, body { background:#fff !important; color:#111 !important; }
       /* print the brief, not the website */
       body > *:not(.pdf-sheet) { display:none !important; }
@@ -2664,17 +2664,18 @@ while True:
         <div class="ps-role">Mechanical Engineering · Robotics minor · Northeastern &rsquo;29</div>
       </div>
       <div class="ps-contact">
-        kylegtran2007@gmail.com<br>
-        ka1e27.github.io/Portfolio<br>
-        github.com/ka1e27<br>
+        <a href="mailto:kylegtran2007@gmail.com">kylegtran2007@gmail.com</a><br>
+        <a href="https://ka1e27.github.io/Portfolio/">ka1e27.github.io/Portfolio</a><br>
+        <a href="https://www.linkedin.com/in/kyle-tran-06a18b277/">linkedin.com/in/kyle-tran-06a18b277</a><br>
+        <a href="https://github.com/ka1e27">github.com/ka1e27</a><br>
         Boston · Burlingame, CA
       </div>
     </div>
 
-    <p class="ps-lead">I build robots, autonomous vehicles, and embedded systems &mdash; drawn in CAD, machined and printed, wired and coded, then tested until they hold up. Two years of competitive combat robotics, and an autonomous survey boat built from scratch. Seeking a Summer 2027 co-op in hardware and robotics.</p>
+    <p class="ps-lead">Seeking a Summer 2027 co-op in hardware and robotics. I build robots, autonomous vehicles, and embedded systems &mdash; drawn in CAD, machined and printed, wired and coded, then tested until they hold up: two years of competitive combat robotics, and an autonomous survey boat built from scratch.</p>
 
     <div class="ps-facts">
-      <div class="ps-fact"><div class="ps-fact-k">Major</div><div class="ps-fact-v">Mechanical Eng.</div></div>
+      <div class="ps-fact"><div class="ps-fact-k">National finish</div><div class="ps-fact-v">4th · RCL 2024</div></div>
       <div class="ps-fact"><div class="ps-fact-k">GPA</div><div class="ps-fact-v">3.87</div></div>
       <div class="ps-fact"><div class="ps-fact-k">Robots built</div><div class="ps-fact-v">10</div></div>
       <div class="ps-fact"><div class="ps-fact-k">Team podiums</div><div class="ps-fact-v">16</div></div>
@@ -2694,8 +2695,8 @@ while True:
           <div class="ps-title">Autonomous Environmental Survey Boat — D.R.E.A.M.S</div>
           <div class="ps-when">Jan 2026 — Present</div>
         </div>
-        <div class="ps-desc">A twin-hull catamaran that surveys lakes and rivers on its own: plans a route from a cloud dashboard, avoids obstacles with stereo-camera vision, and winches an instrumented pod to sample water quality at depth. v1 completed autonomous waypoint surveys on local lakes; v2 rebuilds it around a Raspberry&nbsp;Pi&nbsp;5 brain, a custom PCB, and a 4G command center, validated end-to-end in simulation first. Mechanical design, electronics, and integration are my own work; the software stack was built with AI coding agents.</div>
-        <div class="ps-tech">Raspberry Pi 5 + 2× RP2040 · MicroPython · StereoSGBM + YOLOv8 · VESC · GPS/IMU fusion · KiCad PCB · ASA + fiberglass hull · FastAPI + PostGIS over 4G</div>
+        <div class="ps-desc">A twin-hull catamaran that surveys lakes on its own. v1, built and field-tested, completed autonomous waypoint surveys on local lakes, winching an instrumented pod to the bottom to sample the water. v2, in progress, adds a Raspberry&nbsp;Pi&nbsp;5 with stereo-camera obstacle avoidance, a custom KiCad board in bring-up on its second revision, and 4G telemetry, all validated in simulation first. The hull, electronics, PCB, and integration are my own work; the software was built with AI coding agents.</div>
+        <div class="ps-tech">SolidWorks · ASA + fiberglass hull · KiCad PCB · Pi 5 + 2× RP2040 · MicroPython · YOLOv8 · VESC · GPS/IMU · 4G + PostGIS</div>
       </div>
 
       <div class="ps-item">
@@ -2703,8 +2704,17 @@ while True:
           <div class="ps-title">Combat Robotics — Team DHM</div>
           <div class="ps-when">2023 — 2025</div>
         </div>
-        <div class="ps-desc">Designed and built around ten robots that competed across five weight classes — weapon and drivetrain design, titanium and steel armor, composite layup, and iteration driven by what broke in the arena. 4th nationally in Plastic Antweight; the club took 16 podiums over 5 events.</div>
-        <div class="ps-tech">Onshape · laser-cut Ti / steel · brushless drive · FDM printing · DFM under a strict weight budget</div>
+        <div class="ps-desc">Designed and built around ten robots that competed across five weight classes — weapon and drivetrain design, titanium and steel armor, composite layup, and iteration driven by what broke in the arena. 4th nationally in Plastic Antweight (2024), U.S. rankings of top-15, top-30, and top-35, and 4 firsts and 8 seconds at regional events; the club took 16 podiums over 5 events. The newest Achilles walks on a single-cam shuffler drive I designed.</div>
+        <div class="ps-tech">Onshape · CNC-machined aluminum (outsourced) · laser-cut Ti / steel · brushless drive · FDM · DFM to a weight limit</div>
+      </div>
+
+      <div class="ps-item">
+        <div class="ps-item-top">
+          <div class="ps-title">Adaptive Compliant Robotic Arm</div>
+          <div class="ps-when">2026 — in design</div>
+        </div>
+        <div class="ps-desc">A five-axis arm with a compliant TPU gripper that reads its own grip force. The four joints below the wrist run 17:1 cycloidal gearboxes with magnetic encoders on the output shaft, each ring sized against pin contact stress and a &plusmn;0.25&deg; static accuracy budget. Nothing is built yet: the first prototype gets printed to check motion and tune the control loop.</div>
+        <div class="ps-tech">Cycloidal drives · closed-loop steppers · output-side magnetic encoders · TPU gripper · RP2040 · tolerance budgeting</div>
       </div>
 
       <div class="ps-item">
@@ -2735,8 +2745,17 @@ while True:
         <div class="ps-role">Kyle Tran · page 2 of 2</div>
       </div>
       <div class="ps-contact">
-        kylegtran2007@gmail.com<br>
-        ka1e27.github.io/Portfolio
+        <a href="mailto:kylegtran2007@gmail.com">kylegtran2007@gmail.com</a><br>
+        <a href="https://ka1e27.github.io/Portfolio/">ka1e27.github.io/Portfolio</a>
+      </div>
+    </div>
+
+    <div class="ps-sec">
+      <div class="ps-h">Education</div>
+      <div class="ps-item">
+        <div class="ps-item-top"><div class="ps-title">B.S. Mechanical Engineering <span class="ps-title-min">· Minor in Robotics</span></div><div class="ps-when">Sep 2025 — May 2029 (exp.) · GPA 3.87</div></div>
+        <div class="ps-org">Northeastern University · Boston, MA</div>
+        <div class="ps-tech">Cornerstone of Engineering I · Statics · Thermodynamics · Materials Science · Probability &amp; Statistics</div>
       </div>
     </div>
 
@@ -2750,7 +2769,7 @@ while True:
       <div class="ps-item">
         <div class="ps-item-top"><div class="ps-title">Ceramic Tools R&amp;D</div><div class="ps-when">Oct 2023 — May 2025</div></div>
         <div class="ps-org">Burlingame High School · Ceramics Program</div>
-        <div class="ps-desc">Researched, modeled, and printed 10+ custom tools for the ceramics classes — trimming tools, ribs, wire guides, stamps — then published them online.</div>
+        <div class="ps-desc">Modeled, printed, and published 10+ ceramics tools — trimming tools, ribs, wire guides, stamps — free on MakerWorld.</div>
       </div>
       <div class="ps-item">
         <div class="ps-item-top"><div class="ps-title">Secretary · Co-founder</div><div class="ps-when">Jan 2024 — May 2025</div></div>
@@ -2765,15 +2784,6 @@ while True:
     </div>
 
     <div class="ps-sec">
-      <div class="ps-h">Education</div>
-      <div class="ps-item">
-        <div class="ps-item-top"><div class="ps-title">B.S. Mechanical Engineering <span class="ps-title-min">· Minor in Robotics</span></div><div class="ps-when">Sep 2025 — May 2029 (exp.) · GPA 3.87</div></div>
-        <div class="ps-org">Northeastern University · Boston, MA</div>
-        <div class="ps-tech">Thermodynamics · Materials Science · Statics · Probability &amp; Statistics</div>
-      </div>
-    </div>
-
-    <div class="ps-sec">
       <div class="ps-h">Capabilities</div>
       <div class="ps-cols">
         <div>
@@ -2782,7 +2792,7 @@ while True:
           <div class="ps-skill"><div class="ps-skill-k">Software &amp; AI</div><div class="ps-skill-v">Python/asyncio · MATLAB · Java · AI coding agents · simulation-first&nbsp;development</div></div>
         </div>
         <div>
-          <div class="ps-skill"><div class="ps-skill-k">Fabrication</div><div class="ps-skill-v">FDM printing · CNC machining · composite layup (FG/CF) · laser-cut&nbsp;Ti&nbsp;/&nbsp;steel</div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Fabrication</div><div class="ps-skill-v">2.5D CNC machining · FDM printing · composite layup (FG/CF) · laser-cut&nbsp;Ti&nbsp;/&nbsp;steel</div></div>
           <div class="ps-skill"><div class="ps-skill-k">Robotics &amp; autonomy</div><div class="ps-skill-v">Stereo camera rigs · GPS + IMU fusion · VESC drive · 4G telemetry · state machines</div></div>
           <div class="ps-skill"><div class="ps-skill-k">Leadership</div><div class="ps-skill-v">Club president · workshops · sponsorships · mentoring</div></div>
         </div>
@@ -2800,7 +2810,7 @@ while True:
     </div>
 
     <div class="ps-foot">
-      <span>Full case studies, CAD, and video — ka1e27.github.io/Portfolio</span>
+      <span>Full case studies, CAD, and video — <a href="https://ka1e27.github.io/Portfolio/">ka1e27.github.io/Portfolio</a></span>
       <span>Kyle Tran · Mechanical Engineer</span>
     </div>
   </div>
