@@ -1069,7 +1069,6 @@
       font-family:'Manrope',sans-serif; font-size:var(--fs-300); font-weight:500; color:var(--text-secondary);
       text-decoration:underline; text-decoration-color:var(--border-strong); text-underline-offset:5px; transition:color .25s var(--ease), text-decoration-color .25s var(--ease); }
     .contact-pdf:hover { color:var(--text); text-decoration-color:currentColor; }
-    .contact-pdf:disabled { opacity:.6; cursor:progress; }
     .contact-pdf svg { width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
     @media (hover:none){ .contact-pdf { min-height:44px; } }
     @media (max-width:820px){ .contact-cta-inner{ grid-template-columns:1fr; gap:var(--s6); align-items:start; padding-top:var(--s9); } }
@@ -1104,12 +1103,14 @@
       .ps-head { display:flex; justify-content:space-between; align-items:flex-end; gap:10mm;
         border-bottom:1.4pt solid #111; padding-bottom:2.6mm; margin-bottom:3.4mm; }
       .ps-name { font-family:'Fraunces',serif; font-size:25pt; font-weight:600; line-height:.95; letter-spacing:-.02em; }
-      .ps-role { font-family:'IBM Plex Mono',monospace; font-size:7.6pt; letter-spacing:.16em; text-transform:uppercase; color:#555; margin-top:1.4mm; }
+      .ps-role { font-family:'IBM Plex Mono',monospace; font-size:7.6pt; letter-spacing:.03em; text-transform:uppercase; color:#555; margin-top:1.4mm; }
       /* not nowrap: different font metrics must wrap, never clip off the page */
       .ps-contact { font-family:'IBM Plex Mono',monospace; font-size:7.2pt; line-height:1.62; text-align:right; color:#333; }
       .ps-lead { font-size:9.6pt; line-height:1.5; margin-bottom:4mm; max-width:none; }
 
-      .ps-h { font-family:'IBM Plex Mono',monospace; font-size:7.4pt; letter-spacing:.18em; text-transform:uppercase;
+      /* Letter-spacing stays at .03em or less on anything a parser must read: at .1em
+         and up, pdfminer (under many résumé parsers) reads "M E C H A N I C A L". */
+      .ps-h { font-family:'IBM Plex Mono',monospace; font-size:7.4pt; letter-spacing:.03em; text-transform:uppercase;
         color:#111; border-bottom:.6pt solid #bbb; padding-bottom:1.1mm; margin:0 0 2.6mm; }
       .ps-sec { margin-bottom:4.2mm; }
       .ps-sec:last-child { margin-bottom:0; }
@@ -1130,13 +1131,17 @@
       .ps-strip figcaption { font-family:'IBM Plex Mono',monospace; font-size:6.4pt; color:#666; margin-top:.9mm; letter-spacing:.02em; }
 
       .ps-cols { display:grid; grid-template-columns:1fr 1fr; gap:3mm 7mm; }
+      /* one line per fact, value first: a line-by-line reader then gets "3.87 GPA",
+         where label-over-value cells came out as "NATIONAL FINISH GPA 4th 3.87" */
       .ps-facts { display:grid; grid-template-columns:repeat(4,1fr); gap:2mm; margin-bottom:4mm; border:.5pt solid #ccc; }
-      .ps-fact { padding:1.8mm 2.4mm; border-right:.5pt solid #ccc; }
+      .ps-fact { display:flex; align-items:baseline; gap:1.8mm; padding:2.1mm 2.6mm; border-right:.5pt solid #ccc; }
       .ps-fact:last-child { border-right:0; }
-      .ps-fact-k { font-family:'IBM Plex Mono',monospace; font-size:6.4pt; letter-spacing:.1em; text-transform:uppercase; color:#777; }
-      .ps-fact-v { font-size:9pt; font-weight:700; margin-top:.5mm; }
+      .ps-fact-v { font-size:12pt; font-weight:700; line-height:1; }
+      .ps-fact-k { font-family:'IBM Plex Mono',monospace; font-size:6.6pt; letter-spacing:.03em; text-transform:uppercase; color:#666; }
       .ps-skill { margin-bottom:1.7mm; }
-      .ps-skill-k { font-family:'IBM Plex Mono',monospace; font-size:6.7pt; letter-spacing:.1em; text-transform:uppercase; color:#777; }
+      .ps-skill-k { font-family:'IBM Plex Mono',monospace; font-size:6.7pt; letter-spacing:.03em; text-transform:uppercase; color:#777; }
+      /* a skill never breaks mid-term: pdftotext drops a line-end hyphen ("simulationfirst") */
+      .pdf-sheet .nb { white-space:nowrap; }
       .ps-skill-v { color:#222; }
       .ps-award { display:flex; gap:3mm; align-items:baseline; padding:.85mm 0; border-bottom:.4pt dotted #ccc; }
       .ps-award:last-child { border-bottom:0; }
@@ -1144,7 +1149,7 @@
       .ps-award-n { flex:1; }
       .ps-award-d { font-family:'IBM Plex Mono',monospace; font-size:6.7pt; color:#777; white-space:nowrap; }
       .ps-foot { margin-top:3.6mm; padding-top:1.8mm; border-top:.5pt solid #ccc;
-        font-family:'IBM Plex Mono',monospace; font-size:6.6pt; letter-spacing:.06em; color:#777;
+        font-family:'IBM Plex Mono',monospace; font-size:6.6pt; letter-spacing:.02em; color:#777;
         display:flex; justify-content:space-between; gap:6mm; }
     }
 
@@ -2614,7 +2619,7 @@ while True:
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/kyle-tran-06a18b277/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn btn-ghost" href="https://github.com/ka1e27" target="_blank" rel="noopener">GitHub</a>
       </div>
-      <button type="button" class="contact-pdf" id="save-pdf">Save a two-page portfolio brief as PDF <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+      <a class="contact-pdf" href="Kyle_Tran_Portfolio.pdf" target="_blank" rel="noopener">Two-page portfolio (PDF) <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
       <span class="sr-only" id="copy-status" aria-live="polite"></span>
     </div>
   </div>
@@ -2661,7 +2666,7 @@ while True:
     <div class="ps-head">
       <div>
         <div class="ps-name">Kyle Tran</div>
-        <div class="ps-role">Mechanical Engineering · Robotics minor · Northeastern &rsquo;29</div>
+        <div class="ps-role">Mechanical Engineering · Robotics minor · Northeastern '29</div>
       </div>
       <div class="ps-contact">
         <a href="mailto:kylegtran2007@gmail.com">kylegtran2007@gmail.com</a><br>
@@ -2675,10 +2680,10 @@ while True:
     <p class="ps-lead">Seeking a Summer 2027 co-op in hardware and robotics. I build robots, autonomous vehicles, and embedded systems &mdash; drawn in CAD, machined and printed, wired and coded, then tested until they hold up: two years of competitive combat robotics, and an autonomous survey boat built from scratch.</p>
 
     <div class="ps-facts">
-      <div class="ps-fact"><div class="ps-fact-k">National finish</div><div class="ps-fact-v">4th · RCL 2024</div></div>
-      <div class="ps-fact"><div class="ps-fact-k">GPA</div><div class="ps-fact-v">3.87</div></div>
-      <div class="ps-fact"><div class="ps-fact-k">Robots built</div><div class="ps-fact-v">10</div></div>
-      <div class="ps-fact"><div class="ps-fact-k">Team podiums</div><div class="ps-fact-v">16</div></div>
+      <div class="ps-fact"><span class="ps-fact-v">4th</span> <span class="ps-fact-k">nationally, 2024</span></div>
+      <div class="ps-fact"><span class="ps-fact-v">3.87</span> <span class="ps-fact-k">GPA</span></div>
+      <div class="ps-fact"><span class="ps-fact-v">10</span> <span class="ps-fact-k">robots built</span></div>
+      <div class="ps-fact"><span class="ps-fact-v">16</span> <span class="ps-fact-k">team podiums</span></div>
     </div>
 
     <div class="ps-strip">
@@ -2688,21 +2693,21 @@ while True:
     </div>
 
     <div class="ps-sec">
-      <div class="ps-h">Selected work</div>
+      <div class="ps-h">Projects</div>
 
       <div class="ps-item">
         <div class="ps-item-top">
           <div class="ps-title">Autonomous Environmental Survey Boat — D.R.E.A.M.S</div>
-          <div class="ps-when">Jan 2026 — Present</div>
+          <div class="ps-when">Jan 2026 – Present</div>
         </div>
-        <div class="ps-desc">A twin-hull catamaran that surveys lakes on its own. v1, built and field-tested, completed autonomous waypoint surveys on local lakes, winching an instrumented pod to the bottom to sample the water. v2, in progress, adds a Raspberry&nbsp;Pi&nbsp;5 with stereo-camera obstacle avoidance, a custom KiCad board in bring-up on its second revision, and 4G telemetry, all validated in simulation first. The hull, electronics, PCB, and integration are my own work; the software was built with AI coding agents.</div>
-        <div class="ps-tech">SolidWorks · ASA + fiberglass hull · KiCad PCB · Pi 5 + 2× RP2040 · MicroPython · YOLOv8 · VESC · GPS/IMU · 4G + PostGIS</div>
+        <div class="ps-desc">A twin-hull catamaran that surveys lakes on its own. v1, built and field-tested, completed autonomous waypoint surveys on local lakes, winching an instrumented pod to the bottom to sample the water. v2, in progress, adds a Raspberry Pi 5 with stereo-camera obstacle avoidance, a custom KiCad board in bring-up on its second revision, and 4G telemetry, all validated in simulation first. The hull, electronics, PCB, and integration are my own work; the software was built with AI coding agents.</div>
+        <div class="ps-tech">SolidWorks · ASA + fiberglass hull · KiCad PCB · Pi 5 + 2x RP2040 · MicroPython · YOLOv8 · VESC · GPS/IMU · 4G + PostGIS</div>
       </div>
 
       <div class="ps-item">
         <div class="ps-item-top">
           <div class="ps-title">Combat Robotics — Team DHM</div>
-          <div class="ps-when">2023 — 2025</div>
+          <div class="ps-when">2023 – 2025</div>
         </div>
         <div class="ps-desc">Designed and built around ten robots that competed across five weight classes — weapon and drivetrain design, titanium and steel armor, composite layup, and iteration driven by what broke in the arena. 4th nationally in Plastic Antweight (2024), U.S. rankings of top-15, top-30, and top-35, and 4 firsts and 8 seconds at regional events; the club took 16 podiums over 5 events. The newest Achilles walks on a single-cam shuffler drive I designed.</div>
         <div class="ps-tech">Onshape · CNC-machined aluminum (outsourced) · laser-cut Ti / steel · brushless drive · FDM · DFM to a weight limit</div>
@@ -2711,7 +2716,7 @@ while True:
       <div class="ps-item">
         <div class="ps-item-top">
           <div class="ps-title">Adaptive Compliant Robotic Arm</div>
-          <div class="ps-when">2026 — in design</div>
+          <div class="ps-when">2026 – in design</div>
         </div>
         <div class="ps-desc">A five-axis arm with a compliant TPU gripper that reads its own grip force. The four joints below the wrist run 17:1 cycloidal gearboxes with magnetic encoders on the output shaft, each ring sized against pin contact stress and a &plusmn;0.25&deg; static accuracy budget. Nothing is built yet: the first prototype gets printed to check motion and tune the control loop.</div>
         <div class="ps-tech">Cycloidal drives · closed-loop steppers · output-side magnetic encoders · TPU gripper · RP2040 · tolerance budgeting</div>
@@ -2720,19 +2725,19 @@ while True:
       <div class="ps-item">
         <div class="ps-item-top">
           <div class="ps-title">Autonomous Maze-Navigating Robot</div>
-          <div class="ps-when">Oct — Dec 2025</div>
+          <div class="ps-when">Oct – Dec 2025</div>
         </div>
-        <div class="ps-desc">A 3D-printed tank-drive robot, built with a partner for Northeastern&rsquo;s Cornerstone of Engineering course, that completed all three challenge courses. I did the CAD, the printing and the MicroPython firmware: proportional steering off two angled ultrasonic sensors, with asyncio so the LCD and LEDs never stall the motors.</div>
+        <div class="ps-desc">A 3D-printed tank-drive robot, built with a partner for the Cornerstone of Engineering course at Northeastern, that completed all three challenge courses. I did the CAD, the printing and the MicroPython firmware: proportional steering off two angled ultrasonic sensors, with asyncio so the LCD and LEDs never stall the motors.</div>
         <div class="ps-tech">Onshape · 3D printing · MicroPython · asyncio · RP2040 · ultrasonic + IR · I2C LCD</div>
       </div>
 
       <div class="ps-item">
         <div class="ps-item-top">
           <div class="ps-title">Miscellaneous Builds</div>
-          <div class="ps-when">2023 — Present</div>
+          <div class="ps-when">2023 – Present</div>
         </div>
-        <div class="ps-desc">10+ custom ceramics tools designed in CAD, printed, and open-sourced for anyone to print; 3D-printed RC aircraft with carbon-fiber spars; a full sewing machine reverse-engineered in CAD; and printed climbing hardware.</div>
-        <div class="ps-tech">CAD → FDM · published on MakerWorld · github.com/ka1e27</div>
+        <div class="ps-desc">10+ custom ceramics tools designed in CAD, printed, and open-sourced for anyone to print; 3D-printed RC aircraft with <span class="nb">carbon-fiber</span> spars; a full sewing machine reverse-engineered in CAD; and printed climbing hardware.</div>
+        <div class="ps-tech">CAD to FDM · published on MakerWorld · github.com/ka1e27</div>
       </div>
     </div>
   </div>
@@ -2753,54 +2758,54 @@ while True:
     <div class="ps-sec">
       <div class="ps-h">Education</div>
       <div class="ps-item">
-        <div class="ps-item-top"><div class="ps-title">B.S. Mechanical Engineering <span class="ps-title-min">· Minor in Robotics</span></div><div class="ps-when">Sep 2025 — May 2029 (exp.) · GPA 3.87</div></div>
+        <div class="ps-item-top"><div class="ps-title">B.S. Mechanical Engineering <span class="ps-title-min">· Minor in Robotics</span></div><div class="ps-when">Sep 2025 – May 2029 (exp.) · GPA 3.87</div></div>
         <div class="ps-org">Northeastern University · Boston, MA</div>
         <div class="ps-tech">Cornerstone of Engineering I · Statics · Thermodynamics · Materials Science · Probability &amp; Statistics</div>
       </div>
     </div>
 
     <div class="ps-sec">
-      <div class="ps-h">Leadership &amp; teams</div>
+      <div class="ps-h">Leadership experience</div>
       <div class="ps-item">
-        <div class="ps-item-top"><div class="ps-title">President</div><div class="ps-when">Oct 2023 — Jun 2025</div></div>
+        <div class="ps-item-top"><div class="ps-title">President</div><div class="ps-when">Oct 2023 – Jun 2025</div></div>
         <div class="ps-org">Combat Robots Club, Burlingame</div>
         <div class="ps-desc">Ran workshops on CAD, soldering, physics, materials, and 3D printing; handled sponsorships and club finances. The team placed on the podium 16 times — 4 firsts, 7 seconds, 5 thirds — across 5 events.</div>
       </div>
       <div class="ps-item">
-        <div class="ps-item-top"><div class="ps-title">Ceramic Tools R&amp;D</div><div class="ps-when">Oct 2023 — May 2025</div></div>
+        <div class="ps-item-top"><div class="ps-title">Ceramic Tools R&amp;D</div><div class="ps-when">Oct 2023 – May 2025</div></div>
         <div class="ps-org">Burlingame High School · Ceramics Program</div>
         <div class="ps-desc">Modeled, printed, and published 10+ ceramics tools — trimming tools, ribs, wire guides, stamps — free on MakerWorld.</div>
       </div>
       <div class="ps-item">
-        <div class="ps-item-top"><div class="ps-title">Secretary · Co-founder</div><div class="ps-when">Jan 2024 — May 2025</div></div>
+        <div class="ps-item-top"><div class="ps-title">Secretary · Co-founder</div><div class="ps-when">Jan 2024 – May 2025</div></div>
         <div class="ps-org">Burlingame Aeronautics Club</div>
         <div class="ps-desc">Helped found the club and taught the physics of flight — aerodynamics, lift, drag — then put it into practice designing 3D-printed RC aircraft.</div>
       </div>
       <div class="ps-item">
-        <div class="ps-item-top"><div class="ps-title">Subsystem Lead</div><div class="ps-when">Sep 2021 — May 2024</div></div>
+        <div class="ps-item-top"><div class="ps-title">Subsystem Lead</div><div class="ps-when">Sep 2021 – May 2024</div></div>
         <div class="ps-org">Iron Panthers FRC #5026</div>
         <div class="ps-desc">Designed the spindexer mechanism for the competition robot, working with 10+ team members and 5 professional mentors through design reviews and manufacturing.</div>
       </div>
     </div>
 
     <div class="ps-sec">
-      <div class="ps-h">Capabilities</div>
+      <div class="ps-h">Skills</div>
       <div class="ps-cols">
         <div>
-          <div class="ps-skill"><div class="ps-skill-k">Design &amp; CAD</div><div class="ps-skill-v">SolidWorks · Onshape · Fusion 360 · mechanism design · DFM</div></div>
-          <div class="ps-skill"><div class="ps-skill-k">Electronics &amp; firmware</div><div class="ps-skill-v">KiCad · custom PCB · Raspberry Pi · RP2040 · MicroPython · soldering</div></div>
-          <div class="ps-skill"><div class="ps-skill-k">Software &amp; AI</div><div class="ps-skill-v">Python/asyncio · MATLAB · Java · AI coding agents · simulation-first&nbsp;development</div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Design &amp; CAD</div><div class="ps-skill-v"><span class="nb">SolidWorks</span> · <span class="nb">Onshape</span> · <span class="nb">Fusion 360</span> · <span class="nb">mechanism design</span> · <span class="nb">DFM</span></div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Electronics &amp; firmware</div><div class="ps-skill-v"><span class="nb">KiCad</span> · <span class="nb">custom PCB</span> · <span class="nb">Raspberry Pi</span> · <span class="nb">RP2040</span> · <span class="nb">MicroPython</span> · <span class="nb">soldering</span></div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Software &amp; AI</div><div class="ps-skill-v"><span class="nb">Python/asyncio</span> · <span class="nb">MATLAB</span> · <span class="nb">Java</span> · <span class="nb">AI coding agents</span> · <span class="nb">simulation-first development</span></div></div>
         </div>
         <div>
-          <div class="ps-skill"><div class="ps-skill-k">Fabrication</div><div class="ps-skill-v">2.5D CNC machining · FDM printing · composite layup (FG/CF) · laser-cut&nbsp;Ti&nbsp;/&nbsp;steel</div></div>
-          <div class="ps-skill"><div class="ps-skill-k">Robotics &amp; autonomy</div><div class="ps-skill-v">Stereo camera rigs · GPS + IMU fusion · VESC drive · 4G telemetry · state machines</div></div>
-          <div class="ps-skill"><div class="ps-skill-k">Leadership</div><div class="ps-skill-v">Club president · workshops · sponsorships · mentoring</div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Fabrication</div><div class="ps-skill-v"><span class="nb">2.5D CNC machining</span> · <span class="nb">FDM printing</span> · <span class="nb">composite layup (FG/CF)</span> · <span class="nb">laser-cut Ti / steel</span></div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Robotics &amp; autonomy</div><div class="ps-skill-v"><span class="nb">Stereo camera rigs</span> · <span class="nb">GPS + IMU fusion</span> · <span class="nb">VESC drive</span> · <span class="nb">4G telemetry</span> · <span class="nb">state machines</span></div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Leadership</div><div class="ps-skill-v"><span class="nb">Club president</span> · <span class="nb">workshops</span> · <span class="nb">sponsorships</span> · <span class="nb">mentoring</span></div></div>
         </div>
       </div>
     </div>
 
     <div class="ps-sec">
-      <div class="ps-h">Selected competition results</div>
+      <div class="ps-h">Awards</div>
       <div class="ps-award"><div class="ps-award-p">4th</div><div class="ps-award-n">Robot Combat League National Championship</div><div class="ps-award-d">1 lb plastic antweight · 2024</div></div>
       <div class="ps-award"><div class="ps-award-p">1st</div><div class="ps-award-n">CROS — March Madness</div><div class="ps-award-d">1 lb antweight · 2024</div></div>
       <div class="ps-award"><div class="ps-award-p">1st</div><div class="ps-award-n">BCRC Bell Brawls IV</div><div class="ps-award-d">3 lb beetleweight · 2024</div></div>
@@ -2827,29 +2832,16 @@ while True:
   // ── Theme ──
   const stored = localStorage.getItem('theme');
   html.setAttribute('data-theme', stored || 'light');   // light is the main theme; dark is on the toggle
-  // Save-as-PDF: printing renders the two-page brief (.pdf-sheet), not the site.
-  // Done in the browser so it uses the real webfonts and can never go stale.
-  // The sheet's thumbnails are data-src (they'd otherwise download on every visit
-  // for a section nobody sees), so resolve them before the dialog opens.
+  // The contact band links Kyle_Tran_Portfolio.pdf, printed from the .pdf-sheet by
+  // tools/print-pdf.mjs, so every copy carries fonts that résumé parsers can read
+  // (a visitor's own print would embed the variable webfonts as Type 3). Ctrl/Cmd+P
+  // still prints the same sheet. Its thumbnails are data-src (they'd otherwise
+  // download on every visit for a section nobody sees), so resolve them first.
   function primeSheet() {
     document.querySelectorAll('.pdf-sheet img[data-src]').forEach(i => {
       if (!i.getAttribute('src')) i.src = i.getAttribute('data-src');
     });
   }
-  function sheetReady(ms) {
-    return Promise.all(Array.from(document.querySelectorAll('.pdf-sheet img'))
-      .filter(i => !i.complete)
-      .map(i => new Promise(r => { i.onload = i.onerror = r; setTimeout(r, ms); })));
-  }
-  const savePdf = document.getElementById('save-pdf');
-  if (savePdf) savePdf.addEventListener('click', async () => {
-    savePdf.disabled = true;
-    primeSheet();
-    await sheetReady(4000);
-    window.print();
-    savePdf.disabled = false;
-  });
-  // Ctrl/Cmd+P should produce the same document
   window.addEventListener('beforeprint', primeSheet);
 
   // ── Copy email ──
