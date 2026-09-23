@@ -620,6 +620,18 @@
     .pd-split.is-pair { grid-template-columns:1fr 1fr; align-items:start; }
     /* beside a tall stack of figures, centred text starts ~250px down the page */
     .pd-split:has(> .fig-stack) { align-items:start; }
+    /* two photos side by side in one media slot: the maze page's problem/fix pairs */
+    .fig-stack.is-row { grid-template-columns:1fr 1fr; }
+    @media (max-width:480px){ .fig-stack.is-row { grid-template-columns:1fr; } }
+    /* a real firmware excerpt as a figure: monochrome like everything else, and it
+       scrolls inside its own box. min-width:0 lets the grid track shrink below the
+       longest line, or a phone would scroll the whole page sideways. */
+    .code-fig { min-width:0; }
+    .code-fig pre { margin:0; padding:var(--s5); overflow-x:auto; -webkit-overflow-scrolling:touch; background:var(--bg-elev);
+      border:1px solid var(--border-frame); border-radius:var(--r-frame); font-family:'IBM Plex Mono',monospace;
+      font-size:14px; line-height:1.7; color:var(--text); tab-size:4; }
+    .code-fig code { font:inherit; }
+    @media (max-width:640px){ .code-fig pre { font-size:13px; padding:var(--s4); } }
     @media (max-width:820px){ .pd-split, .pd-split.media-left, .pd-split.is-pair{ grid-template-columns:1fr; gap:var(--s6); } }
 
     /* sticky build steps */
@@ -629,6 +641,7 @@
     .pd-sticky-step .step-n { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); letter-spacing:.12em; color:var(--signal); margin-bottom:8px; }
     .pd-sticky-step h3 { font-family:'Fraunces',serif; font-size:var(--fs-600); font-weight:600; color:var(--text); margin-bottom:8px; letter-spacing:-.01em; }
     .pd-sticky-step p { color:var(--text-secondary); line-height:1.8; max-width:52ch; }
+    .pd-sticky-step p + p { margin-top:var(--s3); }
     @media (max-width:820px){ .pd-sticky{ grid-template-columns:1fr; gap:var(--s6);} .pd-sticky-media{ position:static; } }
 
     /* iteration diff table — scrolls inside its own box rather than widening the page */
@@ -1339,7 +1352,7 @@
               <span class="dymo">05A · Sewing</span>
             </article>
             <article class="sf-pocket p-maze" data-goto="project-maze" role="link" tabindex="0" aria-label="04, Maze robot">
-              <span class="sf-art"><img class="sf-pk" src="images/web/foam/maze-pocket.png" alt="" width="518" height="339" decoding="async"><img class="sf-ob" src="images/web/foam/maze.png" alt="Maze-solving robot chassis, CAD" width="518" height="339" decoding="async"></span>
+              <span class="sf-art"><img class="sf-pk" src="images/web/foam/maze-pocket.png" alt="" width="518" height="339" decoding="async"><img class="sf-ob" src="images/web/foam/maze.png" alt="Maze-navigating robot chassis, CAD" width="518" height="339" decoding="async"></span>
               <span class="dymo">04 · Maze robot</span>
             </article>
             <article class="sf-pocket sf-slot p-combat" data-goto="project-combat" role="link" tabindex="0" aria-label="02, Combat">
@@ -1432,15 +1445,15 @@
           <div class="proj-meta"><span class="proj-date">2026 — in design</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
         </div>
       </article>
-      <article class="proj reveal col-5" data-goto="project-maze" role="link" tabindex="0" aria-label="Autonomous Maze-Solving Robot">
+      <article class="proj reveal col-5" data-goto="project-maze" role="link" tabindex="0" aria-label="Autonomous Maze-Navigating Robot">
         <div class="proj-media">
           <span class="proj-num" aria-hidden="true">04</span><span class="proj-cat">Mechatronics</span>
-          <div class="cover" data-img="images/web/maze-card.jpg" role="img" aria-label="Autonomous maze-solving robot"></div>
+          <div class="cover" data-img="images/web/maze-card.jpg" role="img" aria-label="Autonomous maze-navigating robot"></div>
         </div>
         <div class="proj-body">
           <div>
-            <h3 class="proj-title">Autonomous Maze-Solving Robot</h3>
-            <p class="proj-desc">Maps and solves a maze it has never seen, with sensing, drive, and pathfinding running concurrently on a single Raspberry Pi Pico.</p>
+            <h3 class="proj-title">Autonomous Maze-Navigating Robot</h3>
+            <p class="proj-desc">A 3D-printed tank-drive robot that steers itself through a maze off two angled ultrasonic sensors, with every task on one Raspberry Pi Pico.</p>
           </div>
           <div class="proj-meta"><span class="proj-date">Oct — Dec 2025</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
         </div>
@@ -1900,28 +1913,40 @@
       <button class="pd-back reveal" data-tab="work"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Work</button>
       <div class="pd-title-block reveal">
         <div class="pd-kicker">Project 04 · Mechatronics &amp; Firmware</div>
-        <h2 class="pd-title">Autonomous Maze-Solving Robot</h2>
-        <div class="pd-tags"><span class="pd-tag">Onshape</span><span class="pd-tag">MicroPython</span><span class="pd-tag">asyncio</span><span class="pd-tag">Pathfinding</span></div>
+        <h2 class="pd-title">Autonomous Maze-Navigating Robot</h2>
+        <div class="pd-tags"><span class="pd-tag">Onshape</span><span class="pd-tag">3D Printing</span><span class="pd-tag">MicroPython</span><span class="pd-tag">asyncio</span><span class="pd-tag">Proportional Control</span></div>
       </div>
     </div>
 
+    <nav class="pd-nav" aria-label="Jump to a section">
+      <button type="button" data-jump="maze-overview">Overview</button>
+      <button type="button" data-jump="maze-kit">The kit</button>
+      <button type="button" data-jump="maze-design">Design</button>
+      <button type="button" data-jump="maze-testing">Testing</button>
+      <button type="button" data-jump="maze-firmware">Firmware</button>
+    </nav>
+
     <figure class="img-fig pd-hero-fig reveal">
-      <img class="img-el img-clickable" data-src="images/web/maze-cad.png" width="993" height="612" alt="Onshape CAD model of the maze robot" loading="lazy" decoding="async" onerror="imgFallback(this)">
+      <img class="img-el img-clickable" data-src="images/web/maze-side.jpg" width="2000" height="1000" alt="Side view of the maze robot: an ultrasonic sensor sits recessed between the two runs of a rubber-band tread, with the Pico, breadboard, potentiometer and LED strip on top" loading="lazy" decoding="async" onerror="imgFallback(this)">
     </figure>
 
-    <div class="container">
+    <!-- Sources: the owner's AE1 project report and presentation (Dec 2025) and the
+         firmware in ka1e27/Autonomous-Maze-Navigation-Robot. The maze program is
+         proportional wall-centering off two angled ultrasonics: no mapping, no
+         backtracking, no line-following. Don't put those back. -->
+    <div class="container" id="maze-overview">
       <div class="spec-strip reveal">
         <div class="spec-cell"><div class="spec-key">Course</div><div class="spec-val">Cornerstone of Eng. · NU</div></div>
-        <div class="spec-cell"><div class="spec-key">Team</div><div class="spec-val">Two-person build · led CAD + firmware</div></div>
+        <div class="spec-cell"><div class="spec-key">Team</div><div class="spec-val">Two-person build · my CAD, prints + code</div></div>
         <div class="spec-cell"><div class="spec-key">Control</div><div class="spec-val">1× RPi Pico · MicroPython · asyncio</div></div>
-        <div class="spec-cell"><div class="spec-key">Sensing</div><div class="spec-val">Ultrasonic + IR line-following</div></div>
-        <div class="spec-cell"><div class="spec-key">Drive</div><div class="spec-val">Tank-drive · dual motors</div></div>
-        <div class="spec-cell"><div class="spec-key">Strategy</div><div class="spec-val">Real-time pathfinding + avoidance</div></div>
+        <div class="spec-cell"><div class="spec-key">Sensing</div><div class="spec-val">2× angled ultrasonic · front IR</div></div>
+        <div class="spec-cell"><div class="spec-key">Drive</div><div class="spec-val">Tank drive · 2 geared DC motors</div></div>
+        <div class="spec-cell"><div class="spec-key">Steering</div><div class="spec-val">Proportional wall-centering</div></div>
       </div>
-      <p class="pd-intro reveal">A tank-drive maze-navigation robot built with a partner for Northeastern's Cornerstone of Engineering course &mdash; I led the mechanical CAD and the MicroPython firmware. An asyncio control loop juggles the sensors, drive, an LCD, and real-time pathfinding on a single Raspberry Pi Pico.</p>
+      <p class="pd-intro reveal">A tank-drive robot that steers itself through a maze, built with a partner for Northeastern's Cornerstone of Engineering course. I designed it in Onshape, printed every part, and wrote the MicroPython firmware; my partner built the maze we set for another team and helped with the wiring.</p>
       <div class="pd-result reveal">
         <span class="r-key">Result</span>
-        <span class="r-text">Maps and solves an unknown maze autonomously &mdash; concurrent sensing, motor control, and navigation on one microcontroller.</span>
+        <span class="r-text">Completed all three challenges: a straight run, a preset path of timed turns, and a maze it steered through on its own, off two angled ultrasonic sensors.</span>
       </div>
       <div class="pd-links reveal">
         <a class="pd-link" href="https://cad.onshape.com/documents/9b8fc3ab8fe23ef6042ec63c/w/d19151a11b2c24d0ce20b822/e/751e13f635af431919cfeaf5" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Onshape CAD <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
@@ -1932,33 +1957,161 @@
     <div class="container">
       <div class="vid-block reveal">
         <span class="section-label">Watch</span>
-        <figure class="video-spot vertical" data-video="https://www.youtube.com/shorts/SiweIfkSdVo" data-poster="" aria-label="Maze robot solving the maze"></figure>
+        <figure class="video-spot vertical" data-video="https://www.youtube.com/shorts/SiweIfkSdVo" data-poster="" aria-label="The maze robot running a maze"></figure>
       </div>
     </div>
 
-    <div class="container">
-      <div class="pd-split media-left reveal is-portrait">
-        <figure class="img-fig">
-          <img class="img-el img-clickable" data-src="images/web/maze-sketch.jpg" width="591" height="699" alt="Master sketch of the maze robot layout" loading="lazy" decoding="async" onerror="imgFallback(this)">
-          <figcaption class="img-cap">Master sketch — layout and sensor placement</figcaption>
-        </figure>
+    <div class="container" id="maze-kit">
+      <div class="reveal pd-section-label"><span class="section-label">Why not the kit</span></div>
+      <div class="pd-split reveal is-portrait">
         <div class="pd-split-text">
-          <p>The chassis is a compact, low-slung tank-drive platform designed in Onshape, with custom mounts I modeled for every board and sensor so nothing rattles loose on the move.</p>
-          <p>Ultrasonic sensors handle distance and obstacle detection while IR sensors follow the line and read proximity. An I2C LCD and status LEDs give live feedback, and a bench potentiometer tunes behavior without a reflash.</p>
+          <p>Every team started from the same base kit and had the same brief: get a robot through three courses of varying difficulty, then build a maze for another team to run.</p>
+          <p>The kit sat tall and tipped in fast or sharp turns, its ping-pong-ball caster steered inconsistently, and it had nowhere to mount extra parts. Rather than fix those one at a time, I designed a new robot around them.</p>
+        </div>
+        <figure class="img-fig">
+          <img class="img-el img-clickable" data-src="images/web/maze-vs-kit.jpg" width="1300" height="1718" alt="The printed tank-drive robot in the foreground, with the taller class-kit robot on large rubber wheels behind it" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <figcaption class="img-cap">Our robot in front of the class kit it replaced</figcaption>
+        </figure>
+      </div>
+      <div class="diff-wrap reveal">
+        <table class="diff-table">
+          <thead><tr><th class="aspect">Problem</th><th>Class kit</th><th>Our robot</th></tr></thead>
+          <tbody>
+            <tr><td class="aspect">Steering</td><td class="v1">A ping-pong-ball caster that steered inconsistently</td><td class="v2">Tank drive: turns in place</td></tr>
+            <tr><td class="aspect">Stability</td><td class="v1">Tall enough to tip in fast turns</td><td class="v2">1.6&nbsp;in without the LCD, about half the kit</td></tr>
+            <tr><td class="aspect">Mounting</td><td class="v1">Nowhere to mount extra parts</td><td class="v2">A mount for every board and sensor</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="container" id="maze-design">
+      <div class="reveal pd-section-label"><span class="section-label">Sketch to CAD</span></div>
+      <div class="pd-closing reveal">
+        <p>I started on paper, sketching chassis shapes, sensor placements and drivetrains, then drew the layout that worked as a master sketch in Onshape and modeled every part off it. Checking each dimension and constraint in CAD before exporting meant every printed part fit on the first print.</p>
+      </div>
+      <div class="pd-split reveal is-portrait is-pair">
+        <figure class="img-fig">
+          <img class="img-el img-clickable" data-src="images/web/maze-hand-sketch.jpg" width="942" height="1115" alt="Pen sketch in a pocket notebook of the robot's chassis seen from above" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <figcaption class="img-cap">Notebook sketch: chassis layout and sensor placement</figcaption>
+        </figure>
+        <figure class="img-fig">
+          <img class="img-el img-clickable" data-src="images/web/maze-sketch.jpg" width="591" height="699" alt="Dimensioned Onshape master sketch of the robot, with the sensors' fields of view drawn as cones" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <figcaption class="img-cap">The Onshape master sketch the parts were modeled from, sensor cones drawn in</figcaption>
+        </figure>
+      </div>
+      <div class="pd-split media-left reveal">
+        <div class="fig-stack">
+          <figure class="img-fig">
+            <img class="img-el img-clickable" data-src="images/web/maze-cad.png" width="993" height="612" alt="Onshape CAD model of the maze robot with its top plate on" loading="lazy" decoding="async" onerror="imgFallback(this)">
+            <figcaption class="img-cap">The finished model, top plate on</figcaption>
+          </figure>
+          <figure class="img-fig">
+            <img class="img-el img-clickable" data-src="images/web/maze-cad-open.png" width="844" height="571" alt="The same model with the top plate off, showing the battery pack and the motor driver inside the body" loading="lazy" decoding="async" onerror="imgFallback(this)">
+            <figcaption class="img-cap">Top plate off: the battery pack and motor driver sit inside the body</figcaption>
+          </figure>
+        </div>
+        <div class="pd-split-text">
+          <p>We ranked what mattered: control in slow turns, accurate sensor readings, quick switching between programs, and clean wiring.</p>
+          <p>Two geared DC motors each drive a rubber-band tread around a dead wheel, one motor per side. The battery and motor driver sit inside the body, which keeps the weight low and protects them; the Pico and breadboard stay on top, where uploading code and troubleshooting are easy.</p>
+          <p>The two ultrasonic sensors angle outward to spot turns early, and sit recessed between the treads, so a scrape along a wall hits the tread instead of the sensor.</p>
         </div>
       </div>
     </div>
 
-    <div class="container">
-      <div class="reveal pd-section-label"><span class="section-label">Firmware architecture</span></div>
+    <div class="container" id="maze-testing">
+      <div class="reveal pd-section-label"><span class="section-label">What broke, and what changed</span></div>
+      <div class="pd-closing reveal">
+        <p>Most of the design came out of testing. We took turns: one of us ran the robot through the course while the other watched for what went wrong.</p>
+      </div>
+
+      <div class="pd-split reveal">
+        <div class="pd-sticky-step"><div class="step-n">FIX 01 — TREADS</div><h3>Treads that stay on</h3><p>The treads are rubber bands, and in hard turns they walked off the wheels. Belt drives solve the same problem with crowned pulleys, which keep a belt centered on their own, so I reprinted the wheels with a convex face that brings the band back to the middle as they turn.</p></div>
+        <div class="fig-stack is-row">
+          <figure class="img-fig">
+            <img class="img-el img-clickable" data-src="images/web/maze-tread-off.jpg" width="1500" height="2000" alt="The robot from above with one rubber-band tread slipped off its wheels" loading="lazy" decoding="async" onerror="imgFallback(this)">
+            <figcaption class="img-cap">A tread off its wheels after a hard turn</figcaption>
+          </figure>
+          <figure class="img-fig">
+            <img class="img-el img-clickable" data-src="images/web/maze-crowned-wheel.jpg" width="1000" height="1333" alt="A reprinted black wheel held edge-on against a white wall, showing its convex face" loading="lazy" decoding="async" onerror="imgFallback(this)">
+            <figcaption class="img-cap">The reprinted wheel, edge-on: the convex face keeps the band centered</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="pd-split reveal">
+        <div class="pd-sticky-step"><div class="step-n">FIX 02 — WALLS AHEAD</div><h3>A wall it couldn&rsquo;t see</h3><p>With both ultrasonic sensors angled out to the sides, nothing looked straight ahead, and the robot ran into walls. I added an infrared sensor at the front to detect walls straight ahead.</p></div>
+        <div class="fig-stack is-row">
+          <figure class="img-fig">
+            <img class="img-el img-clickable" data-src="images/web/maze-wall-hit.jpg" width="1500" height="2000" alt="The robot stopped with its nose against a cardboard maze wall" loading="lazy" decoding="async" onerror="imgFallback(this)">
+            <figcaption class="img-cap">Nose-first into a maze wall</figcaption>
+          </figure>
+          <figure class="img-fig">
+            <img class="img-el img-clickable" data-src="images/web/maze-ir-sensor.jpg" width="1500" height="2000" alt="An IR sensor module mounted at the front edge of the printed chassis" loading="lazy" decoding="async" onerror="imgFallback(this)">
+            <figcaption class="img-cap">The IR sensor added at the front</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="pd-split reveal is-portrait">
+        <div class="pd-sticky-step"><div class="step-n">FIX 03 — TUNING</div><h3>Finding the gain</h3><p>Tuning the steering took a lot of testing. Too much correction and the robot jittered and overcorrected; too little and tight turns got harder. We tried a function for pre-set turns, which needed precise sensor readings, and slowing the motors through turns, before finding that the real problem was traction.</p><p>Carpet was harder still: its higher friction made the treads grip unevenly, and the robot struggled to turn. We didn&rsquo;t fix that during testing; turning in place on the tank drive could solve it.</p></div>
+        <figure class="img-fig">
+          <img class="img-el img-clickable" data-src="images/web/maze-overcorrect.jpg" width="900" height="1200" alt="Overhead view of the robot turned sideways across a maze corridor at a corner" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <figcaption class="img-cap">Overcorrecting at a corner</figcaption>
+        </figure>
+      </div>
+
+      <div class="pd-split reveal is-portrait">
+        <div class="pd-sticky-text">
+          <div class="pd-sticky-step"><div class="step-n">FIX 04 — PROGRAMS</div><h3>One robot, three programs</h3><p>Switching between the three challenge programs meant uploading new code over USB every time. I wired a potentiometer and a button to the Pico: turning the knob pages through Forward, Preset Path and Maze on the LCD, and a press starts the run. For problems the LCD couldn&rsquo;t show, print statements reported sensor readings and variable states in real time.</p></div>
+          <div class="pd-sticky-step"><div class="step-n">FIX 05 — FREEZES</div><h3>Animations that froze the motors</h3><p>The LED and LCD animations blocked motor control and froze the robot. After many failed attempts at interleaving them by hand, I restructured the modules around MicroPython&rsquo;s asyncio, so the animations run as their own tasks alongside the steering loop.</p></div>
+        </div>
+        <figure class="img-fig">
+          <img class="img-el img-clickable" data-src="images/web/maze-lcd-menu.jpg" width="1170" height="1560" alt="The robot's LCD reading Forward, with the potentiometer value on the line below, lit by its blue LED strip" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <figcaption class="img-cap">The knob menu: &ldquo;Forward&rdquo; selected, the knob&rsquo;s reading underneath</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="container" id="maze-firmware">
+      <div class="reveal pd-section-label"><span class="section-label">Firmware</span></div>
+      <div class="pd-split reveal">
+        <div class="pd-split-text">
+          <p>The maze program is a proportional controller. Each pass it compares the two side distances and steers by the difference: drift toward the left wall and the left tread speeds up while the right slows, turning the robot back toward the middle.</p>
+          <p>The gain sets how hard it corrects, and a clamp holds both motors between 20 and 100% duty so neither runs too fast or too slow. In the final code that&rsquo;s a 55% base speed and a gain of 4.</p>
+          <p>The sensors, knob, button, LEDs, LCD and motors each have their own module, and <span class="mono">main.py</span> ties them together.</p>
+        </div>
+        <figure class="img-fig code-fig">
+<pre><code>base_speed = 55
+correction_factor = 4
+
+while True:
+    current_left = ultrasonic_sensor.get_distance(6,7)
+    current_right = ultrasonic_sensor.get_distance(26,27)
+
+    error = current_left - current_right
+    correction = error * correction_factor
+
+    left_speed = base_speed - correction
+    right_speed = base_speed + correction
+
+    left_speed = max(20, min(100, left_speed))
+    right_speed = max(20, min(100, right_speed))
+
+    motors(int(left_speed) , int(right_speed))
+
+    await asyncio.sleep (.01)</code></pre>
+          <figcaption class="img-cap">The maze loop, excerpted from motor_control.py</figcaption>
+        </figure>
+      </div>
       <div class="spec-strip cols-2 reveal">
-        <div class="spec-cell"><div class="spec-key">Task · sense</div><div class="spec-val">Ultrasonic ranging + IR line/proximity → shared state</div></div>
-        <div class="spec-cell"><div class="spec-key">Task · drive</div><div class="spec-val">Tank-drive motor control</div></div>
-        <div class="spec-cell"><div class="spec-key">Task · navigate</div><div class="spec-val">Pathfinding + obstacle avoidance over the live map</div></div>
-        <div class="spec-cell"><div class="spec-key">Task · UI</div><div class="spec-val">I2C LCD + status LEDs · potentiometer tuning</div></div>
+        <div class="spec-cell"><div class="spec-key">Task · menu</div><div class="spec-val">Knob menu on the LCD; the button starts the chosen run</div></div>
+        <div class="spec-cell"><div class="spec-key">Task · steer</div><div class="spec-val">Proportional wall-centering, the timed preset path, 1&nbsp;kHz PWM drive</div></div>
+        <div class="spec-cell"><div class="spec-key">Task · sense</div><div class="spec-val">Two ultrasonic ranges in cm (30&nbsp;ms echo timeout) · front IR</div></div>
+        <div class="spec-cell"><div class="spec-key">Task · show</div><div class="spec-val">NeoPixel animations and 16×2 I2C LCD text, each its own asyncio task</div></div>
       </div>
       <div class="pd-closing reveal">
-        <p>An asyncio-based control loop runs sensor polling, motor control, and navigation as concurrent tasks on one Raspberry Pi Pico &mdash; responsive obstacle avoidance without ever blocking the main loop. The robot builds an internal map of visited cells and backtracks to explore unvisited branches.</p>
+        <p>What I&rsquo;d carry forward: prototype early, before committing to prints; structure code as modules from the start instead of untangling it later; and design for the person testing it, even on a prototype. The LCD menu made every test run faster.</p>
         <p>That same asyncio architecture carried straight into the survey boat's firmware &mdash; concurrent tasks on one Pico, just on water instead of in a maze.</p>
       </div>
     </div>
@@ -2530,7 +2683,7 @@
     <div class="ps-strip">
       <figure><img data-src="images/web/dreams-v1-lake.jpg" alt="D.R.E.A.M.S survey boat on the water" onerror="this.style.display='none'"><figcaption>D.R.E.A.M.S — autonomous survey boat</figcaption></figure>
       <figure><img data-src="images/web/combat-card.jpg" alt="Combat robots built for competition" onerror="this.style.display='none'"><figcaption>Combat robots — Team DHM</figcaption></figure>
-      <figure><img data-src="images/web/maze-card.jpg" alt="Autonomous maze-solving robot" onerror="this.style.display='none'"><figcaption>Maze-solving robot</figcaption></figure>
+      <figure><img data-src="images/web/maze-card.jpg" alt="Autonomous maze-navigating robot" onerror="this.style.display='none'"><figcaption>Maze-navigating robot</figcaption></figure>
     </div>
 
     <div class="ps-sec">
@@ -2556,11 +2709,11 @@
 
       <div class="ps-item">
         <div class="ps-item-top">
-          <div class="ps-title">Autonomous Maze-Solving Robot</div>
+          <div class="ps-title">Autonomous Maze-Navigating Robot</div>
           <div class="ps-when">Oct — Dec 2025</div>
         </div>
-        <div class="ps-desc">A tank-drive robot built with a partner for Northeastern&rsquo;s Cornerstone of Engineering course that maps and solves a maze it has never seen. I led the mechanical CAD and the MicroPython firmware: one asyncio loop runs ultrasonic ranging, IR line-following, drive, and pathfinding concurrently on a single Raspberry&nbsp;Pi&nbsp;Pico.</div>
-        <div class="ps-tech">Onshape · MicroPython · asyncio · RP2040 · ultrasonic + IR sensing · I2C LCD</div>
+        <div class="ps-desc">A 3D-printed tank-drive robot, built with a partner for Northeastern&rsquo;s Cornerstone of Engineering course, that completed all three challenge courses. I did the CAD, the printing and the MicroPython firmware: proportional steering off two angled ultrasonic sensors, with asyncio so the LCD and LEDs never stall the motors.</div>
+        <div class="ps-tech">Onshape · 3D printing · MicroPython · asyncio · RP2040 · ultrasonic + IR · I2C LCD</div>
       </div>
 
       <div class="ps-item">
@@ -2736,7 +2889,7 @@
   const TITLES = {
     'work':'Kyle Tran — Mechanical Engineer', 'about':'About — Kyle Tran', 'experience':'Experience — Kyle Tran',
     'project-boat':'Autonomous Survey Boat — Kyle Tran', 'project-combat':'Combat Robotics — Kyle Tran',
-    'project-maze':'Maze-Solving Robot — Kyle Tran', 'project-arm':'Adaptive Compliant Robotic Arm — Kyle Tran',
+    'project-maze':'Maze-Navigating Robot — Kyle Tran', 'project-arm':'Adaptive Compliant Robotic Arm — Kyle Tran',
     'project-misc':'Miscellaneous Builds — Kyle Tran'
   };
   function setTitle(tab){ document.title = TITLES[tab] || TITLES['work']; }
