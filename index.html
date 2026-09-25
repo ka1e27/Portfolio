@@ -1126,7 +1126,8 @@
       .ps-desc { margin-top:1mm; color:#333; }
       .ps-tech { font-family:'IBM Plex Mono',monospace; font-size:6.9pt; letter-spacing:.03em; color:#666; margin-top:1.1mm; }
 
-      .ps-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:2.6mm; margin:0 0 4mm; break-inside:avoid; }
+      /* four across at the same height, so adding the showcase photo cost no page height */
+      .ps-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:2.6mm; margin:0 0 4mm; break-inside:avoid; }
       .ps-strip figure { margin:0; }
       .ps-strip img { display:block; width:100%; height:31mm; object-fit:cover; border:.5pt solid #ccc; }
       .ps-strip figcaption { font-family:'IBM Plex Mono',monospace; font-size:6.4pt; color:#666; margin-top:.9mm; letter-spacing:.02em; }
@@ -2697,7 +2698,8 @@ while True:
     </div>
 
     <div class="ps-strip">
-      <figure><img data-src="images/web/dreams-v1-lake.jpg" alt="D.R.E.A.M.S survey boat on the water" onerror="this.style.display='none'"><figcaption>D.R.E.A.M.S — autonomous survey boat</figcaption></figure>
+      <figure><img data-src="images/web/dreams-v1-lake.jpg" alt="D.R.E.A.M.S survey boat on the water" onerror="this.style.display='none'"><figcaption>D.R.E.A.M.S v1 on the water</figcaption></figure>
+      <figure><img data-src="images/web/dreams-v1-showcase.jpg" alt="D.R.E.A.M.S v1 being explained to visitors at a project showcase" onerror="this.style.display='none'"><figcaption>Showing v1 at a showcase</figcaption></figure>
       <figure><img data-src="images/web/combat-card.jpg" alt="Combat robots built for competition" onerror="this.style.display='none'"><figcaption>Combat robots — Team DHM</figcaption></figure>
       <figure><img data-src="images/web/maze-card.jpg" alt="Autonomous maze-navigating robot" onerror="this.style.display='none'"><figcaption>Maze-navigating robot</figcaption></figure>
     </div>
