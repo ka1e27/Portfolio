@@ -1447,7 +1447,7 @@
         <div class="proj-body">
           <div>
             <h3 class="proj-title">Adaptive Compliant Robotic Arm</h3>
-            <p class="proj-desc">Five axes on cycloidal gearboxes, a TPU gripper that reads its own grip force, and a &plusmn;0.25&deg; positioning target. On paper so far.</p>
+            <p class="proj-desc">Five axes, three on cycloidal gearboxes checked in a simulator I built, a TPU gripper that reads its own grip force, and a &plusmn;0.25&deg; positioning target. On paper so far.</p>
           </div>
           <div class="proj-meta"><span class="proj-date">2026 — in design</span><span class="proj-arrow">View <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
         </div>
@@ -2142,7 +2142,7 @@ while True:
       <div class="pd-title-block reveal">
         <div class="pd-kicker">Project 03 · Robotics &amp; Controls</div>
         <h2 class="pd-title">Adaptive Compliant Robotic Arm</h2>
-        <div class="pd-tags"><span class="pd-tag">Cycloidal Drives</span><span class="pd-tag">Closed-Loop Steppers</span><span class="pd-tag">TPU Gripper</span><span class="pd-tag">RP2040</span><span class="pd-tag">CAD</span></div>
+        <div class="pd-tags"><span class="pd-tag">Cycloidal Drives</span><span class="pd-tag">Gearbox Simulator</span><span class="pd-tag">Closed-Loop Steppers</span><span class="pd-tag">TPU Gripper</span><span class="pd-tag">RP2040</span><span class="pd-tag">CAD</span></div>
       </div>
     </div>
 
@@ -2150,6 +2150,7 @@ while True:
       <button type="button" data-jump="arm-overview">Overview</button>
       <button type="button" data-jump="arm-joints">Joints</button>
       <button type="button" data-jump="arm-gearbox">Gearbox</button>
+      <button type="button" data-jump="arm-sim">Simulator</button>
       <button type="button" data-jump="arm-tolerance">Tolerance</button>
       <button type="button" data-jump="arm-feedback">Feedback</button>
       <button type="button" data-jump="arm-gripper">Gripper</button>
@@ -2160,15 +2161,19 @@ while True:
       <div class="spec-strip reveal">
         <div class="spec-cell"><div class="spec-key">Status</div><div class="spec-val"><span class="st-dot"></span>In design · nothing built</div></div>
         <div class="spec-cell"><div class="spec-key">Degrees of freedom</div><div class="spec-val">5 · J1&ndash;J5</div></div>
-        <div class="spec-cell"><div class="spec-key">Reach</div><div class="spec-val">~30 in, shoulder to wrist</div></div>
+        <div class="spec-cell"><div class="spec-key">Reach</div><div class="spec-val">20 in, shoulder to tool tip</div></div>
         <div class="spec-cell"><div class="spec-key">Target</div><div class="spec-val">&plusmn;0.25&deg; static, per joint</div></div>
-        <div class="spec-cell"><div class="spec-key">Reduction</div><div class="spec-val">17:1 cycloidal · J1&ndash;J4</div></div>
+        <div class="spec-cell"><div class="spec-key">Reduction</div><div class="spec-val">14&ndash;22:1 cycloidal · J1&ndash;J3</div></div>
         <div class="spec-cell"><div class="spec-key">Control</div><div class="spec-val">RP2040 loop · PC for vision</div></div>
       </div>
-      <p class="pd-intro reveal">A five-axis arm with a compliant TPU gripper that reads its own grip force. Every joint below the wrist runs a cycloidal gearbox with a magnetic encoder on the output shaft rather than the motor, which is what makes a &plusmn;0.25&deg; static target worth aiming at.</p>
+      <p class="pd-intro reveal">A five-axis arm with a compliant TPU gripper that reads its own grip force. The base, shoulder and elbow run cycloidal gearboxes with a magnetic encoder on the output shaft rather than the motor, which is what makes a &plusmn;0.25&deg; static target worth aiming at. Forearm roll and the wrist are direct-drive servos with encoders of their own.</p>
       <div class="pd-result is-note reveal">
         <span class="r-key">Status</span>
-        <span class="r-text">Nothing is built yet. Joint layout, gear ratios, link lengths and ring sizes are settled; bearing selection, the disc manufacturing route, and real masses from CAD are not. The first prototype gets printed to check motion and tune the loop &mdash; the &plusmn;0.25&deg; figure is for the aluminum version, because printed cycloidal backlash will exceed it on its own.</span>
+        <span class="r-text">Nothing is built yet. Joint layout, link lengths, gear ratios, ring sizes, disc materials and bearings are set, and all three gearboxes pass every check in the simulator I built for them; the disc manufacturing route and real masses from CAD are not settled. The first prototype gets printed to check motion and tune the loop &mdash; the &plusmn;0.25&deg; figure is for the aluminum version, because printed cycloidal backlash will exceed it on its own.</span>
+      </div>
+      <div class="pd-links reveal">
+        <a class="pd-link" href="https://ka1e27.github.io/Cycloidal-Gearbox-Simulator/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Gearbox simulator <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        <a class="pd-link" href="https://github.com/ka1e27/Cycloidal-Gearbox-Simulator" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg> Simulator source <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
       </div>
     </div>
 
@@ -2221,16 +2226,16 @@ while True:
       <table class="diff-table">
         <thead><tr><th class="aspect">Joint</th><th>Holds gravity</th><th>Actuator</th></tr></thead>
         <tbody>
-          <tr><td class="aspect">J1 · base yaw</td><td class="v1">No &mdash; the thrust bearing carries it</td><td class="v2">NEMA17 · 17:1 · 60&nbsp;mm ring</td></tr>
-          <tr><td class="aspect">J2 · shoulder</td><td class="v1">Yes &mdash; longest lever arm</td><td class="v2">NEMA23 · 17:1 · 85&nbsp;mm ring</td></tr>
-          <tr><td class="aspect">J3 · elbow</td><td class="v1">Yes &mdash; shorter lever arm</td><td class="v2">NEMA17, long · 17:1 · 70&nbsp;mm ring</td></tr>
-          <tr><td class="aspect">J4 · forearm roll</td><td class="v1">No &mdash; rotates on its own axis</td><td class="v2">NEMA17 · 17:1 · 60&nbsp;mm ring</td></tr>
-          <tr><td class="aspect">J5 · wrist</td><td class="v1">Yes &mdash; smallest lever arm</td><td class="v2">20&nbsp;kg&middot;cm servo, direct drive</td></tr>
+          <tr><td class="aspect">J1 · base yaw</td><td class="v1">No &mdash; the thrust bearing carries it</td><td class="v2">NEMA&nbsp;17 · 14:1 · 80&nbsp;mm ring, printed PLA</td></tr>
+          <tr><td class="aspect">J2 · shoulder</td><td class="v1">Yes &mdash; longest lever arm</td><td class="v2">NEMA&nbsp;23 · 15:1 · 85&nbsp;mm ring</td></tr>
+          <tr><td class="aspect">J3 · elbow</td><td class="v1">Yes &mdash; shorter lever arm</td><td class="v2">NEMA&nbsp;17 · 22:1 · 51&nbsp;mm ring</td></tr>
+          <tr><td class="aspect">J4 · forearm roll</td><td class="v1">Only with the wrist bent &mdash; the payload then sits off its axis</td><td class="v2">2.5&nbsp;N&middot;m servo with encoder, direct drive</td></tr>
+          <tr><td class="aspect">J5 · wrist</td><td class="v1">Yes &mdash; smallest lever arm</td><td class="v2">2.5&nbsp;N&middot;m servo with encoder, direct drive</td></tr>
         </tbody>
       </table>
       </div>
       <div class="pd-closing reveal">
-        <p>On current estimates the shoulder needs about 5.85&nbsp;N&middot;m and has 20&ndash;37&nbsp;N&middot;m available; the elbow needs about 2.25&nbsp;N&middot;m and gets roughly 10&nbsp;N&middot;m from the longer motor. Those masses are estimates rather than CAD figures, and wiring and fasteners always come in heavier than expected.</p>
+        <p>Every joint is sized for its worst pose: the arm straight out with a 1.2&nbsp;kg payload at the tip, accelerating at 3&nbsp;rad/s&sup2;. That puts the shoulder at 11.30&nbsp;N&middot;m and the elbow at 4.70&nbsp;N&middot;m, and a 1.5 service factor makes them 16.95 and 7.05&nbsp;N&middot;m to design for. The shoulder&rsquo;s NEMA&nbsp;23, at 1.9&nbsp;N&middot;m, gives about 24&nbsp;N&middot;m through 15:1 at 85&percnt; efficiency, the elbow&rsquo;s NEMA&nbsp;17 about 8.4&nbsp;N&middot;m through 22:1, and each servo needs 0.96&nbsp;N&middot;m of its 2.5. The joint and link masses behind those numbers are estimates rather than CAD figures, and wiring and fasteners always come in heavier than expected.</p>
       </div>
     </div>
 
@@ -2248,10 +2253,46 @@ while True:
           </figure>
         </div>
         <div class="pd-split-text">
-          <p>One gearbox part for all four geared joints would have been the easy call. It is the wrong one. Pin contact stress scales roughly as (1/scale)<sup>1.5</sup>, so a 60&nbsp;mm ring takes around 68&percnt; more stress than the 85&nbsp;mm one at the same torque. Worse, a fixed manufacturing tolerance becomes a larger angular error at a smaller radius, because the error divides by the radius &mdash; shrinking the gear works against the tolerance target, not toward it.</p>
-          <p>So size came down only where there was margin to spend. J1 and J4 carry inertia alone and took 60&nbsp;mm. J3 went to 70&nbsp;mm instead of 60, which holds the stress increase near 34&percnt; rather than 68&percnt;. J2 kept all 85&nbsp;mm of it.</p>
+          <p>One gearbox part for all three geared joints would have been the easy call. It is the wrong one. Pin contact stress scales roughly as (1/scale)<sup>1.5</sup>, so a smaller ring pays for its size in stress: in the simulator the elbow&rsquo;s 51&nbsp;mm ring reaches the same peak contact stress as the shoulder&rsquo;s 85&nbsp;mm one, about 470&nbsp;MPa, at well under half the torque. Worse, a fixed manufacturing tolerance becomes a larger angular error at a smaller radius, because the error divides by the radius &mdash; shrinking the gear works against the tolerance target, not toward it.</p>
+          <p>So each ring is sized to its own joint. J2 kept all 85&nbsp;mm, with two 7075-T6 discs on solid steel pins. J3 carries well under half the shoulder&rsquo;s torque, so it dropped to 51&nbsp;mm and runs 22:1, enough for a NEMA&nbsp;17 to drive it. J1 carries inertia alone, light enough for plastic: for now its 80&nbsp;mm discs and ring are printed PLA, the teeth formed in the housing itself, because it is a large part and aluminum would cost more. It may move to aluminum later. J4 lost its gearbox; it and the wrist are now direct-drive servos.</p>
           <p>The housing has room to lose too. The input shaft is 20&nbsp;mm because of 3D printing, where a torsion check puts the real minimum under 4&nbsp;mm; at 8&ndash;10&nbsp;mm it keeps a wide margin and drops to a far cheaper bearing, taking the shell from about 127&nbsp;mm toward 100&nbsp;mm.</p>
         </div>
+      </div>
+    </div>
+
+    <div class="container" id="arm-sim">
+      <div class="reveal pd-section-label"><span class="section-label">The simulator that checks them</span></div>
+      <div class="pd-split reveal">
+        <div class="pd-split-text">
+          <p>I built a browser tool to size these gearboxes, the Cycloidal Gearbox Simulator. It takes the arm joint by joint (masses, link lengths, the payload), works out what each joint carries in its worst pose, and checks each gearbox against the ways it can fail: contact stress at the ring pins and output holes, for yield and for fatigue; pin and standoff bending; the ligaments between holes; undercut in the lobe profile; and the eccentric bearing&rsquo;s static load and rated life.</p>
+          <p>A check passes below 0.85 of its limit. The torques, ratios and ring sizes on this page come from one saved session, and all three gearboxes pass.</p>
+        </div>
+        <figure class="img-fig">
+          <img class="img-el img-clickable" data-src="images/web/arm-gearbox-simulator.jpg" width="2000" height="1389" alt="Screenshot of the Cycloidal Gearbox Simulator on the shoulder joint: the lobed disc inside its ring of 16 pins with the loaded pins coloured by force, a bar chart of the force on each pin, and the joint passing at 0.83 of its tightest limit" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <figcaption class="img-cap">The simulator on the shoulder joint &mdash; 7 of its 16 ring pins carry load at this input angle, coloured by force at the design torque</figcaption>
+        </figure>
+      </div>
+      <div class="diff-wrap reveal">
+      <table class="diff-table">
+        <thead><tr><th class="aspect">Joint</th><th>Design torque</th><th>Tightest check, share of its limit</th></tr></thead>
+        <tbody>
+          <tr><td class="aspect">J1 · base · 14:1</td><td class="v1">2.00&nbsp;N&middot;m</td><td class="v2">0.66 · ring contact fatigue, in PLA</td></tr>
+          <tr><td class="aspect">J2 · shoulder · 15:1</td><td class="v1">16.95&nbsp;N&middot;m</td><td class="v2">0.83 · ring contact fatigue</td></tr>
+          <tr><td class="aspect">J3 · elbow · 22:1</td><td class="v1">7.05&nbsp;N&middot;m</td><td class="v2">0.84 · ring contact fatigue</td></tr>
+          <tr><td class="aspect">J4, J5 · servos</td><td class="v1">1.43&nbsp;N&middot;m</td><td class="v2">0.57 · servo torque, 2.5&nbsp;N&middot;m rated</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="pd-closing reveal">
+        <p>The tightest bearing check is the shoulder&rsquo;s rated life: 2,522&nbsp;h against a 2,000&nbsp;h target for its 6704. The motors get checked through their gearboxes too. Every ratio here is above the minimum its motor needs, so a stalled motor could push its gearbox past the design torque; the simulator turns that into a driver current limit for each joint, about 37&percnt; of peak current at the base, 70&percnt; at the shoulder and 84&percnt; at the elbow.</p>
+      </div>
+      <div class="pd-result is-note reveal">
+        <span class="r-key">Software</span>
+        <span class="r-text">The simulator was built with AI coding agents. I specified what it models and checks &mdash; the arm load model, each failure check and its limit, and the validation cases its test suite has to match &mdash; and the agents wrote the code.</span>
+      </div>
+      <div class="pd-links reveal">
+        <a class="pd-link" href="https://ka1e27.github.io/Cycloidal-Gearbox-Simulator/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Open the simulator <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        <a class="pd-link" href="https://github.com/ka1e27/Cycloidal-Gearbox-Simulator" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg> Simulator source <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
       </div>
     </div>
 
@@ -2322,7 +2363,7 @@ while True:
       <div class="pd-closing reveal">
         <p>Further out, this is the manipulator for the survey boat. A submersible on a tether collects water samples; the arm takes the full container off it, stores it aboard, and puts an empty collector back. That is the reason for grip-force feedback and a compliant gripper rather than a rigid claw &mdash; a tethered submersible under a moving boat will not present itself at a repeatable position.</p>
         <p>The interface between the two is not defined yet, and the marine side is deliberately deferred: sealed encoder housings, waterproof connectors, marine-rated bearings, anodised rather than bare 6061. None of that gets designed until the mechanism works on a bench.</p>
-        <p>Still open before hardware: bearings for the 70&nbsp;mm and 60&nbsp;mm rings with their load ratings checked, the waterjet shop&rsquo;s actual tolerance, whether the wrist keeps its encoder or accepts a looser spec on that one joint, and real link masses from CAD to replace the estimates above.</p>
+        <p>Still open before hardware: the waterjet shop&rsquo;s actual tolerance, whether J1 moves from printed PLA to aluminum, and real link masses from CAD to replace the estimates above.</p>
       </div>
     </div>
   </div>
@@ -2730,8 +2771,8 @@ while True:
           <div class="ps-title">Adaptive Compliant Robotic Arm</div>
           <div class="ps-when">2026 – in design</div>
         </div>
-        <div class="ps-desc">A five-axis arm with a compliant TPU gripper that reads its own grip force. The four joints below the wrist run 17:1 cycloidal gearboxes with magnetic encoders on the output shaft, each ring sized against pin contact stress and a &plusmn;0.25&deg; static accuracy budget. Nothing is built yet: the first prototype gets printed to check motion and tune the control loop.</div>
-        <div class="ps-tech">Cycloidal drives · closed-loop steppers · output-side magnetic encoders · TPU gripper · RP2040 · tolerance budgeting</div>
+        <div class="ps-desc">A five-axis arm with a &plusmn;0.25&deg; static target and a compliant TPU gripper that reads its own grip force. The base, shoulder and elbow run cycloidal gearboxes (14:1 to 22:1) with <span class="nb">output-side</span> magnetic encoders, and all three pass every check in a gearbox simulator <span class="nb">I specified</span> and built with AI coding agents. Nothing is built yet; a printed prototype comes first.</div>
+        <div class="ps-tech">Cycloidal drives · gearbox simulator · closed-loop steppers · output-side encoders · TPU gripper · tolerance budgeting</div>
       </div>
 
       <div class="ps-item">
