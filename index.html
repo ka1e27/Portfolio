@@ -1392,9 +1392,9 @@
 
     <div class="marquee" aria-label="Tools and skills">
       <div class="marquee-track" id="marquee-track">
-        <span>CAD · SolidWorks · Onshape · Fusion 360 · KiCad · PCB design · MicroPython · Python · asyncio · MATLAB · Java · AI coding agents · Raspberry Pi · VESC · GPS + IMU fusion · Stereo camera rigs · CNC machining · FDM printing · Composite layup &nbsp;·&nbsp; </span>
+        <span>CAD · SolidWorks · Onshape · Fusion 360 · KiCad · PCB design · MicroPython · Python · asyncio · MATLAB · Java · AI coding agents · Raspberry Pi · VESC · GPS + IMU fusion · Stereo camera rigs · CNC machining · CNC router · PCB mill · Waterjet · Laser cutter · FDM printing · Composite layup &nbsp;·&nbsp; </span>
         <!-- second copy makes the -50% loop seamless; hidden from AT so it isn't read twice -->
-        <span aria-hidden="true">CAD · SolidWorks · Onshape · Fusion 360 · KiCad · PCB design · MicroPython · Python · asyncio · MATLAB · Java · AI coding agents · Raspberry Pi · VESC · GPS + IMU fusion · Stereo camera rigs · CNC machining · FDM printing · Composite layup &nbsp;·&nbsp; </span>
+        <span aria-hidden="true">CAD · SolidWorks · Onshape · Fusion 360 · KiCad · PCB design · MicroPython · Python · asyncio · MATLAB · Java · AI coding agents · Raspberry Pi · VESC · GPS + IMU fusion · Stereo camera rigs · CNC machining · CNC router · PCB mill · Waterjet · Laser cutter · FDM printing · Composite layup &nbsp;·&nbsp; </span>
       </div>
     </div>
 
@@ -2169,7 +2169,7 @@ while True:
       <p class="pd-intro reveal">A five-axis arm with a compliant TPU gripper that reads its own grip force. The base, shoulder and elbow run cycloidal gearboxes with a magnetic encoder on the output shaft rather than the motor, which is what makes a &plusmn;0.25&deg; static target worth aiming at. Forearm roll and the wrist are direct-drive servos with encoders of their own.</p>
       <div class="pd-result is-note reveal">
         <span class="r-key">Status</span>
-        <span class="r-text">Nothing is built yet. Joint layout, link lengths, gear ratios, ring sizes, disc materials and bearings are set, and all three gearboxes pass every check in the simulator I built for them; the disc manufacturing route and real masses from CAD are not settled. The first prototype gets printed to check motion and tune the loop &mdash; the &plusmn;0.25&deg; figure is for the aluminum version, because printed cycloidal backlash will exceed it on its own.</span>
+        <span class="r-text">Nothing is built yet. Joint layout, link lengths, gear ratios, ring sizes, materials, bearings and the manufacturing route are set, and all three gearboxes pass every check in the simulator I built for them; real masses from CAD are not in yet. The first prototype gets printed to check motion and tune the loop &mdash; the &plusmn;0.25&deg; figure is for the aluminum version, because printed cycloidal backlash will exceed it on its own.</span>
       </div>
       <div class="pd-links reveal">
         <a class="pd-link" href="https://ka1e27.github.io/Cycloidal-Gearbox-Simulator/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Gearbox simulator <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
@@ -2254,7 +2254,8 @@ while True:
         </div>
         <div class="pd-split-text">
           <p>One gearbox part for all three geared joints would have been the easy call. It is the wrong one. Pin contact stress scales roughly as (1/scale)<sup>1.5</sup>, so a smaller ring pays for its size in stress: in the simulator the elbow&rsquo;s 51&nbsp;mm ring reaches the same peak contact stress as the shoulder&rsquo;s 85&nbsp;mm one, about 470&nbsp;MPa, at well under half the torque. Worse, a fixed manufacturing tolerance becomes a larger angular error at a smaller radius, because the error divides by the radius &mdash; shrinking the gear works against the tolerance target, not toward it.</p>
-          <p>So each ring is sized to its own joint. J2 kept all 85&nbsp;mm, with two 7075-T6 discs on solid steel pins. J3 carries well under half the shoulder&rsquo;s torque, so it dropped to 51&nbsp;mm and runs 22:1, enough for a NEMA&nbsp;17 to drive it. J1 carries inertia alone, light enough for plastic: for now its 80&nbsp;mm discs and ring are printed PLA, the teeth formed in the housing itself, because it is a large part and aluminum would cost more. It may move to aluminum later. J4 lost its gearbox; it and the wrist are now direct-drive servos.</p>
+          <p>So each ring is sized to its own joint. J2 kept all 85&nbsp;mm, with two 7075-T6 discs. J3 carries well under half the shoulder&rsquo;s torque, so it dropped to 51&nbsp;mm and runs 22:1, enough for a NEMA&nbsp;17 to drive it. J1 carries inertia alone, light enough for plastic. For now its 80&nbsp;mm discs and housing are printed in PLA, with the outer pins printed as part of the housing, because it is a large part and aluminum would cost more; it may move to aluminum later. J4 lost its gearbox; it and the wrist are now direct-drive servos.</p>
+          <p>The aluminum gearboxes share one build. Steel outer pins are pressed into the housing, and the output pins are standoffs. SendCutSend laser-cuts the 7075 discs, and I finish them on a Bantam desktop PCB mill for accuracy; the tolerance budget below is why that pass exists.</p>
           <p>The housing has room to lose too. The input shaft is 20&nbsp;mm because of 3D printing, where a torsion check puts the real minimum under 4&nbsp;mm; at 8&ndash;10&nbsp;mm it keeps a wide margin and drops to a far cheaper bearing, taking the shell from about 127&nbsp;mm toward 100&nbsp;mm.</p>
         </div>
       </div>
@@ -2298,19 +2299,19 @@ while True:
 
     <div class="container" id="arm-tolerance">
       <div class="reveal pd-section-label"><span class="section-label">The tolerance budget</span></div>
-      <p class="pd-intro reveal">Waterjet cuts the lobe profile straight from the DXF and costs less than milling, so the only question is whether its tolerance fits. At the 85&nbsp;mm ring&rsquo;s 42.5&nbsp;mm radius a linear cut error becomes an angular one, and the budget is small enough that the shop&rsquo;s real capability decides the answer.</p>
+      <p class="pd-intro reveal">The discs start as laser-cut blanks from SendCutSend, and a finishing pass on a Bantam desktop PCB mill, which I run, sets their final accuracy. At the 85&nbsp;mm ring&rsquo;s 42.5&nbsp;mm radius a linear profile error becomes an angular one, and the budget is small enough that the finished profile, not the cut, decides the answer.</p>
       <div class="diff-wrap reveal">
       <table class="diff-table">
-        <thead><tr><th class="aspect">Cut tolerance</th><th>Angular error</th><th>Share of the budget</th></tr></thead>
+        <thead><tr><th class="aspect">Profile error</th><th>Angular error</th><th>Share of the budget</th></tr></thead>
         <tbody>
-          <tr><td class="aspect">&plusmn;0.05&nbsp;mm · precision</td><td class="v1">&plusmn;0.067&deg;</td><td class="v2">~27&percnt;</td></tr>
-          <tr><td class="aspect">&plusmn;0.10&nbsp;mm · typical</td><td class="v1">&plusmn;0.135&deg;</td><td class="v2">~54&percnt;</td></tr>
-          <tr><td class="aspect">&plusmn;0.15&nbsp;mm · job shop</td><td class="v1">&plusmn;0.20&deg;</td><td class="v2">~80&percnt;</td></tr>
+          <tr><td class="aspect">&plusmn;0.05&nbsp;mm</td><td class="v1">&plusmn;0.067&deg;</td><td class="v2">~27&percnt;</td></tr>
+          <tr><td class="aspect">&plusmn;0.10&nbsp;mm</td><td class="v1">&plusmn;0.135&deg;</td><td class="v2">~54&percnt;</td></tr>
+          <tr><td class="aspect">&plusmn;0.15&nbsp;mm</td><td class="v1">&plusmn;0.20&deg;</td><td class="v2">~80&percnt;</td></tr>
         </tbody>
       </table>
       </div>
       <div class="pd-closing reveal">
-        <p>At &plusmn;0.05&nbsp;mm there is room left for backlash and structural compliance, which are the larger errors anyway. At &plusmn;0.15&nbsp;mm four fifths of the budget is gone to one source before the arm has moved. That single number decides whether waterjet makes final parts or only validation parts &mdash; and the lobe faces get a finishing pass either way, since waterjet edges are rough exactly where the rolling contact happens.</p>
+        <p>At &plusmn;0.05&nbsp;mm there is room left for backlash and structural compliance, which are the larger errors anyway. At &plusmn;0.15&nbsp;mm four fifths of the budget is gone to one source before the arm has moved. That is why the discs get a finishing pass: the laser gets them close, and the mill takes the profile the rest of the way, cleaning up the cut edge exactly where the rolling contact happens.</p>
       </div>
     </div>
 
@@ -2363,7 +2364,7 @@ while True:
       <div class="pd-closing reveal">
         <p>Further out, this is the manipulator for the survey boat. A submersible on a tether collects water samples; the arm takes the full container off it, stores it aboard, and puts an empty collector back. That is the reason for grip-force feedback and a compliant gripper rather than a rigid claw &mdash; a tethered submersible under a moving boat will not present itself at a repeatable position.</p>
         <p>The interface between the two is not defined yet, and the marine side is deliberately deferred: sealed encoder housings, waterproof connectors, marine-rated bearings, anodised rather than bare 6061. None of that gets designed until the mechanism works on a bench.</p>
-        <p>Still open before hardware: the waterjet shop&rsquo;s actual tolerance, whether J1 moves from printed PLA to aluminum, and real link masses from CAD to replace the estimates above.</p>
+        <p>Still open before hardware: the tolerance the finished discs actually hold, whether J1 moves from printed PLA to aluminum, and real link masses from CAD to replace the estimates above.</p>
       </div>
     </div>
   </div>
@@ -2635,7 +2636,7 @@ while True:
       </div>
       <div class="cap-cell reveal">
         <div class="cap-k">Fabrication</div>
-        <div class="cap-list"><span class="cap-item">FDM 3D printing</span><span class="cap-item">CNC machining</span><span class="cap-item">Composite layup (FG/CF)</span><span class="cap-item">Laser-cut Ti / steel</span></div>
+        <div class="cap-list"><span class="cap-item">CNC machining</span><span class="cap-item">CNC router</span><span class="cap-item">PCB mill</span><span class="cap-item">Waterjet</span><span class="cap-item">Laser cutter</span><span class="cap-item">FDM 3D printing</span><span class="cap-item">Composite layup (FG/CF)</span><span class="cap-item">Laser-cut Ti / steel</span></div>
       </div>
       <div class="cap-cell reveal">
         <div class="cap-k">Robotics &amp; autonomy</div>
@@ -2771,7 +2772,7 @@ while True:
           <div class="ps-title">Adaptive Compliant Robotic Arm</div>
           <div class="ps-when">2026 – in design</div>
         </div>
-        <div class="ps-desc">A five-axis arm with a &plusmn;0.25&deg; static target and a compliant TPU gripper that reads its own grip force. The base, shoulder and elbow run cycloidal gearboxes (14:1 to 22:1) with <span class="nb">output-side</span> magnetic encoders, and all three pass every check in a gearbox simulator <span class="nb">I specified</span> and built with AI coding agents. Nothing is built yet; a printed prototype comes first.</div>
+        <div class="ps-desc">A five-axis arm with a &plusmn;0.25&deg; static target and a compliant TPU gripper that reads its own grip force. The base, shoulder and elbow run cycloidal gearboxes (14:1 to 22:1) with <span class="nb">output-side</span> magnetic encoders, and all three pass every check in a gearbox simulator <span class="nb">I specified</span> and built with AI coding agents. Nothing is built yet: a printed prototype comes first, then 7075 discs <span class="nb">laser-cut</span> by SendCutSend and finished on a Bantam PCB mill that I run.</div>
         <div class="ps-tech">Cycloidal drives · gearbox simulator · closed-loop steppers · output-side encoders · TPU gripper · tolerance budgeting</div>
       </div>
 
@@ -2850,7 +2851,7 @@ while True:
           <div class="ps-skill"><div class="ps-skill-k">Software &amp; AI</div><div class="ps-skill-v"><span class="nb">Python/asyncio</span> · <span class="nb">MATLAB</span> · <span class="nb">Java</span> · <span class="nb">AI coding agents</span> · <span class="nb">simulation-first development</span></div></div>
         </div>
         <div>
-          <div class="ps-skill"><div class="ps-skill-k">Fabrication</div><div class="ps-skill-v"><span class="nb">2.5D CNC machining</span> · <span class="nb">FDM printing</span> · <span class="nb">composite layup (FG/CF)</span> · <span class="nb">laser-cut Ti / steel</span></div></div>
+          <div class="ps-skill"><div class="ps-skill-k">Fabrication</div><div class="ps-skill-v"><span class="nb">2.5D CNC machining</span> · <span class="nb">CNC router</span> · <span class="nb">PCB mill</span> · <span class="nb">waterjet</span> · <span class="nb">laser cutter</span> · <span class="nb">FDM printing</span> · <span class="nb">composite layup (FG/CF)</span></div></div>
           <div class="ps-skill"><div class="ps-skill-k">Robotics &amp; autonomy</div><div class="ps-skill-v"><span class="nb">Stereo camera rigs</span> · <span class="nb">GPS + IMU fusion</span> · <span class="nb">VESC drive</span> · <span class="nb">4G telemetry</span> · <span class="nb">state machines</span></div></div>
           <div class="ps-skill"><div class="ps-skill-k">Leadership</div><div class="ps-skill-v"><span class="nb">Club president</span> · <span class="nb">workshops</span> · <span class="nb">sponsorships</span> · <span class="nb">mentoring</span></div></div>
         </div>
