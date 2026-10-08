@@ -1376,7 +1376,7 @@
       </div>
 
       <div class="sf-facts">
-        <div class="sf-fact"><span>Building</span><span>D.R.E.A.M.S v2 &mdash; an autonomous survey boat</span></div>
+        <div class="sf-fact"><span>Building</span><span>D.R.E.A.M.S V3 &mdash; an autonomous survey boat</span></div>
         <div class="sf-fact"><span>Best result</span><span>4th nationally, Plastic Antweight &rsquo;24</span></div>
         <div class="sf-fact"><span>Based</span><span>Boston · Burlingame, CA</span></div>
       </div>
@@ -1414,7 +1414,7 @@
         <div class="proj-body">
           <div>
             <h3 class="proj-title">Autonomous Environmental Survey Boat</h3>
-            <p class="proj-desc">A twin-hull catamaran that surveys lakes and rivers on its own &mdash; stereo-camera obstacle avoidance, a Raspberry Pi 5 brain, and a winch-deployed sensor pod, streamed live to a 4G cloud dashboard. Now on its second, CAD-and-PCB revision.</p>
+            <p class="proj-desc">A twin-hull survey boat I co-founded with Matthew Hong. V1 drove itself to GPS waypoints at St Katharine Docks in London; V3, now in build, runs a Raspberry Pi 5 and a Teensy 4.1 on one custom carrier board.</p>
           </div>
           <div class="proj-meta">
             <span class="proj-date">Jan 2026 — Present</span>
@@ -1491,7 +1491,7 @@
         <div class="pd-kicker">Project 01 · Robotics &amp; Embedded</div>
         <h2 class="pd-title">Autonomous Environmental Survey Boat</h2>
         <div class="pd-tags">
-          <span class="pd-tag">Raspberry Pi 5</span><span class="pd-tag">Computer Vision</span><span class="pd-tag">MicroPython</span><span class="pd-tag">VESC</span><span class="pd-tag">4G · PostGIS Cloud</span><span class="pd-tag">Custom PCB</span>
+          <span class="pd-tag">Raspberry Pi 5</span><span class="pd-tag">Teensy 4.1</span><span class="pd-tag">Custom PCB</span><span class="pd-tag">CAN · VESC</span><span class="pd-tag">Computer Vision</span><span class="pd-tag">MicroPython</span>
         </div>
       </div>
     </div>
@@ -1502,32 +1502,39 @@
       <button type="button" data-jump="boat-v2">Version 2</button>
       <button type="button" data-jump="boat-pcb">PCB</button>
       <button type="button" data-jump="boat-vision">Vision</button>
+      <button type="button" data-jump="boat-v3">Version 3</button>
       <button type="button" data-jump="boat-stack">Stack</button>
     </nav>
 
     <figure class="img-fig pd-hero-fig reveal">
-      <img class="img-el img-clickable" data-src="images/web/dreams-v1-dock-wide.jpg" width="1500" height="750" alt="D.R.E.A.M.S v1 on the dock beside the water" loading="lazy" decoding="async" onerror="imgFallback(this)">
+      <img class="img-el img-clickable" data-src="images/web/dreams-v1-dock-wide.jpg" width="1500" height="750" alt="D.R.E.A.M.S v1 on the dock at St Katharine Docks, London, after its water test" loading="lazy" decoding="async" onerror="imgFallback(this)">
     </figure>
 
     <div class="container" id="boat-overview">
       <div class="spec-strip reveal">
-        <div class="spec-cell" data-spec="status"><div class="spec-key">Status</div><div class="spec-val"><span class="st-dot"></span>In progress · simulation-first</div></div>
+        <div class="spec-cell" data-spec="status"><div class="spec-key">Status</div><div class="spec-val"><span class="st-dot"></span>V3 in build · V1 water-tested</div></div>
         <div class="spec-cell" data-spec="platform"><div class="spec-key">Platform</div><div class="spec-val">Twin-hull catamaran · diff-drive</div></div>
-        <div class="spec-cell" data-spec="compute"><div class="spec-key">Compute</div><div class="spec-val">Raspberry Pi 5 + 2× RP2040</div></div>
-        <div class="spec-cell" data-spec="vision"><div class="spec-key">Vision</div><div class="spec-val">Stereo depth + YOLOv8</div></div>
-        <div class="spec-cell" data-spec="comms"><div class="spec-key">Comms</div><div class="spec-val">4G LTE → live cloud dashboard</div></div>
-        <div class="spec-cell" data-spec="sensing"><div class="spec-key">Sensing</div><div class="spec-val">GPS · 9-axis IMU · water-quality pod</div></div>
+        <div class="spec-cell" data-spec="compute"><div class="spec-key">Compute · V3</div><div class="spec-val">Raspberry Pi 5 + Teensy 4.1</div></div>
+        <div class="spec-cell" data-spec="sensing"><div class="spec-key">Sensing · V3</div><div class="spec-val">pH · DO · TDS · turbidity · temp · sonar depth</div></div>
+        <div class="spec-cell" data-spec="comms"><div class="spec-key">Comms · V3</div><div class="spec-val">4G LTE live map · RC override</div></div>
+        <div class="spec-cell" data-spec="team"><div class="spec-key">Team</div><div class="spec-val">Co-founded with Matthew Hong</div></div>
       </div>
-      <p class="pd-intro reveal">A twin-hull autonomous catamaran that surveys lakes and rivers on its own &mdash; planning a route from a cloud dashboard, dodging obstacles with stereo-camera vision, and lowering an instrumented pod to sample water quality at depth. A Raspberry Pi 5 does the thinking, two microcontrollers handle the real-time work, and the entire stack runs in simulation before it ever touches water.</p>
+      <p class="pd-intro reveal">D.R.E.A.M.S (Data Recovery for Environmental And Marine Surveillance) is a modular twin-hull survey boat for mapping water quality in small bodies of water. Matthew Hong and I started it in our first year at Northeastern, and it is on its third generation: V3, in build now, pairs a Raspberry Pi 5 mission computer with a Teensy 4.1 real-time controller on one custom carrier board.</p>
       <div class="pd-result reveal">
         <span class="r-key">Result</span>
-        <span class="r-text">v1 completed autonomous waypoint surveys on local lakes. v2 rebuilds it around a Pi&nbsp;5 brain, stereo-vision obstacle avoidance, and a 4G cloud command center &mdash; validated end-to-end in simulation and now moving onto the water.</span>
+        <span class="r-text">V1, built in one semester in London, navigated to GPS waypoints on its own in a water test at St Katharine Docks, held a 433&nbsp;MHz radio link of about 1&nbsp;km to shore, and sampled at the bottom. V2 moved the brain to a Pi&nbsp;5 with stereo vision and our first custom PCB, but was never fully built: bench tests exposed flaws in its motor control, power and safety design. V3 is the ground-up redesign; its carrier and pod boards are laid out and checked, and its hull is in CAD.</span>
+      </div>
+      <div class="pd-result is-note reveal">
+        <span class="r-key">Team</span>
+        <span class="r-text">I lead the hardware: the hull and CAD, the electronics and custom PCBs, and integrating it into one system. Matthew co-leads the mechanical and structural design, including a Van Veen grab sediment sampler delivered with a full drawing package and bill of materials, and handles planning and communications.</span>
       </div>
       <div class="pd-result is-note reveal">
         <span class="r-key">Software</span>
-        <span class="r-text">The hull, electronics, custom PCB, and system integration are my own. The software &mdash; firmware, vision pipeline, and cloud dashboard &mdash; was built with AI coding agents. I specified the architecture and did the integration and on-water debugging, not the line-by-line implementation.</span>
+        <span class="r-text">The software &mdash; firmware, vision pipeline and dashboards &mdash; was built with AI coding agents. I specified the architecture and did the integration and testing, not the line-by-line implementation.</span>
       </div>
       <div class="pd-links reveal">
+        <a class="pd-link" href="https://ka1e27.github.io/dreams/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Project website <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        <a class="pd-link" href="https://ka1e27.github.io/dreams/demo/v2-dashboard/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> V2 command center <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         <a class="pd-link" href="https://dreamsv1.kylegtran2007.workers.dev/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Waypoint planner <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         <a class="pd-link" href="https://github.com/ka1e27/D.R.E.A.M.S-V1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg> v1 firmware <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
       </div>
@@ -1562,6 +1569,7 @@
           <div class="pd-split-text">
             <p>It started as a sketch: a stable, twin-hull platform that could carry sensitive instruments across open water and still sit calm enough to take clean readings.</p>
             <p>The dual-hull layout keeps the boat steady. Each pontoon houses waterproof compartments for batteries and electronics. The winch lowers an instrumented pod on a tethered slip ring until it registers bottom contact, then samples water temperature, conductivity (salinity), and light before retracting and moving to the next waypoint.</p>
+            <p>We built it in one semester of our first year, in London, with our room as the workshop, then took it to St Katharine Docks. In that water test it navigated to GPS waypoints on its own and held its radio link out to about 1&nbsp;km.</p>
           </div>
           <figure class="img-fig">
             <img class="img-el img-clickable" data-src="images/web/dreams-v1-sketch.jpg" width="1415" height="2000" alt="D.R.E.A.M.S v1 first concept sketch" loading="lazy" decoding="async" onerror="imgFallback(this)">
@@ -1603,6 +1611,7 @@
           <div class="build-strip">
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-assembly.jpg" width="340" height="450" alt="Getting the v1 boat ready to test outdoors" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Getting ready to test outdoors</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-epoxy.jpg" width="1500" height="2000" alt="Epoxy-sealing the v1 hull" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Epoxy-sealing the hull</figcaption></figure>
+          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-london-workshop.jpg" width="1600" height="1200" alt="Our room in London set up as a workshop: a hull section hanging over a taped-down drop sheet, the winch and wiring on the desk" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Our room in London, set up as the workshop</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-pod-print.jpg" width="363" height="495" alt="Printed v1 sensor pod" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Sensor pod, printed</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-winch.jpg" width="380" height="507" alt="v1 sensor-deployment winch" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Sensor-deployment winch</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-jet.jpg" width="377" height="641" alt="Early jet-propulsion experiment on v1" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Early jet-propulsion experiment — a dead end, but a useful one</figcaption></figure>
@@ -1616,13 +1625,13 @@
     <!-- the ONE full-bleed moment: dedication -->
     <figure class="img-fig pd-bleed reveal">
       <img class="img-el img-clickable" data-src="images/web/dreams-omar.jpg" width="2000" height="1500" alt="D.R.E.A.M.S v1 dedicated in honor of Omar" loading="lazy" decoding="async" onerror="imgFallback(this)">
-      <figcaption class="img-cap">D.R.E.A.M.S v1 — dedicated in honor of Omar</figcaption>
+      <figcaption class="img-cap">D.R.E.A.M.S v1, dedicated in honor of Omar. He helped us build it in London, and his name on the hull is our thanks.</figcaption>
     </figure>
 
     <!-- VERSION 2 -->
     <div class="container" id="boat-v2">
-      <div class="reveal pd-section-label"><span class="section-label">Version 2 · In progress</span></div>
-      <p class="pd-closing reveal" style="margin-bottom:var(--s5)">v1 proved the concept on the water and showed where it ran out of room. It couldn't see or avoid obstacles, the 433&nbsp;MHz radio was short-range and half-duplex, the hand-wired loom was a tangle of failure points, and a PLA hull isn't built for long days on the water. v2 answers each one:</p>
+      <div class="reveal pd-section-label"><span class="section-label">Version 2 · Prototype</span></div>
+      <p class="pd-closing reveal" style="margin-bottom:var(--s5)">v1 proved the concept on the water and showed where it ran out of room. It couldn't see or avoid obstacles, the 433&nbsp;MHz radio was short-range and half-duplex, the hand-wired loom was a tangle of failure points, and a PLA hull isn't built for long days on the water. v2 set out to answer each one:</p>
       <div class="diff-wrap reveal">
         <table class="diff-table">
           <thead><tr><th class="aspect">System</th><th>v1</th><th>v2</th></tr></thead>
@@ -1631,7 +1640,6 @@
             <tr><td class="aspect">Hull</td><td class="v1">3D-printed PLA</td><td class="v2">3D-printed ASA (UV-stable) · fiberglass + epoxy skin</td></tr>
             <tr><td class="aspect">Electronics</td><td class="v1">Hand-wired</td><td class="v2">Custom KiCad PCB</td></tr>
             <tr><td class="aspect">Vision</td><td class="v1">—</td><td class="v2">Stereo depth + YOLOv8 avoidance <span class="rev">NEW</span></td></tr>
-            <tr><td class="aspect">Comms</td><td class="v1">HC-12 433 MHz half-duplex</td><td class="v2">4G LTE → PostGIS cloud</td></tr>
             <tr><td class="aspect">Power</td><td class="v1">LiPo packs</td><td class="v2">M18 for electronics + winch · 12S LiPo drive planned</td></tr>
           </tbody>
         </table>
@@ -1666,7 +1674,7 @@
     </div>
 
     <div class="container" id="boat-pcb">
-      <div class="reveal pd-section-label"><span class="section-label">Custom PCB · rev 01 → rev 02</span></div>
+      <div class="reveal pd-section-label"><span class="section-label">V2 custom PCB · rev 01 → rev 02</span></div>
       <div class="pd-gallery reveal">
         <figure class="img-fig">
           <img class="img-el img-clickable" data-src="images/web/dreams-v2-pcb-r1.jpg" width="559" height="762" alt="v2 custom PCB, first revision" loading="lazy" decoding="async" onerror="imgFallback(this)">
@@ -1706,34 +1714,79 @@
       </div>
     </div>
 
+    <div class="container">
+      <div class="pd-split reveal">
+        <div class="pd-split-text">
+          <p>The command center ran on V2&rsquo;s Pi&nbsp;5: the mission map, live telemetry and the controls in one web page. It now runs in a browser with a simulated boat surveying a pond, so anyone can try it.</p>
+          <p>Then bench testing found the real problem. V2&rsquo;s motor control, power and safety design weren&rsquo;t reliable enough to put on the water, so instead of patching it we redesigned the whole system. V2 was never fully built, and V3 exists because of what it showed us.</p>
+        </div>
+        <figure class="img-fig">
+          <img class="img-el img-clickable" data-src="images/web/dreams-v2-command-center.jpg" width="1600" height="1000" alt="The V2 command center: a simulated survey loop on a pond beside live telemetry and mission controls" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <figcaption class="img-cap">The V2 command center, running a simulated survey on a pond</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- VERSION 3: facts from the project site, ka1e27.github.io/dreams (2026-10-08) -->
+    <div class="container" id="boat-v3">
+      <div class="reveal pd-section-label"><span class="section-label">Version 3 · In build</span></div>
+      <p class="pd-intro reveal">V3 splits the boat into a Raspberry Pi&nbsp;5 mission computer and a Teensy&nbsp;4.1 real-time controller, joined by one custom carrier board, with the sensors in a tethered pod. Its first job is narrower than V2&rsquo;s on purpose: drive itself around small bodies of water and sample at the surface.</p>
+      <figure class="img-fig pd-full-fig reveal">
+        <img class="img-el img-clickable" data-src="images/web/dreams-v3-carrier-top.jpg" width="1800" height="1399" alt="Top view of the D.R.E.A.M.S V3 carrier board, rev D, with the battery inputs, the Raspberry Pi header and the sensor connectors" loading="lazy" decoding="async" onerror="imgFallback(this)">
+        <figcaption class="img-cap">V3 carrier board, rev D &mdash; 130.6 &times; 101.5&nbsp;mm, 4 layers, 126 parts, fully routed</figcaption>
+      </figure>
+      <div class="diff-wrap reveal">
+        <table class="diff-table">
+          <thead><tr><th class="aspect">Where V2 fell short</th><th>The V3 fix</th></tr></thead>
+          <tbody>
+            <tr><td class="aspect">Real-time control</td><td class="v2">A Teensy&nbsp;4.1 core. The Pi&rsquo;s header carries 5&nbsp;V only; every control signal goes through the Teensy</td></tr>
+            <tr><td class="aspect">Motor control</td><td class="v2">Each VESC is its own node on a CAN bus, through a TJA1051 transceiver</td></tr>
+            <tr><td class="aspect">Power</td><td class="v2">Three isolated domains, with separate packs for the electronics and the winch and an INA228 monitor on each</td></tr>
+            <tr><td class="aspect">Safety</td><td class="v2">A hand-held RC override at any time, and a winch cut-off that fails safe if the Teensy resets or loses power</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pd-split media-left reveal is-portrait">
+        <figure class="img-fig">
+          <img class="img-el img-clickable" data-src="images/web/dreams-v3-pod-board.jpg" width="900" height="900" alt="3D render of the D.R.E.A.M.S V3 sensor-pod board with its XIAO ESP32-S3 footprint" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <figcaption class="img-cap">Sensor-pod board, rev B &mdash; 48 &times; 63&nbsp;mm, 2 layers, on an RS&#8209;485 tether</figcaption>
+        </figure>
+        <div class="pd-split-text">
+          <p>The pod board carries a Seeed XIAO ESP32-S3 that measures pH, dissolved oxygen, TDS, turbidity and temperature, and the RS-485 tether that talks to it also powers it. A fish-finder sonar replaces the pod&rsquo;s pressure sensor for depth, and a TCA9548A multiplexer splits one I&sup2;C bus into eight sensor channels. Both boards are laid out in KiCad and checked against their schematics.</p>
+          <p>Two V2 ideas are left out: vision-based obstacle detection, and lowering the pod on a winch for depth profiles. V3 samples at the surface and gets depth from sonar instead. The winch circuit stays on the board for the sample-collection stage that comes later.</p>
+        </div>
+      </div>
+    </div>
+
     <div class="container" id="boat-stack">
-      <div class="reveal pd-section-label"><span class="section-label">Autonomy stack</span></div>
+      <div class="reveal pd-section-label"><span class="section-label">V3 stack</span></div>
       <details class="spec-details reveal">
         <summary>Key components &amp; bill of materials <svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
         <div class="spec-strip cols-2 reveal">
-          <div class="spec-cell"><div class="spec-key">Brain · Pi 5</div><div class="spec-val">Navigation, mission FSM, the vision pipeline, and the web command center — Python + asyncio</div></div>
-          <div class="spec-cell"><div class="spec-key">Executors · 2× RP2040</div><div class="spec-val">Real-time motor control and sensor I/O in MicroPython; a 3 s watchdog trips ESTOP if the brain goes quiet</div></div>
-          <div class="spec-cell"><div class="spec-key">Vision · three tiers</div><div class="spec-val">Water-anomaly screen → YOLOv8-nano detection → threat scoring that aims a panning radar bar</div></div>
-          <div class="spec-cell"><div class="spec-key">Cloud · FastAPI + PostGIS</div><div class="spec-val">Georeferenced readings stream over 4G into a live command center and post-mission heatmaps</div></div>
+          <div class="spec-cell"><div class="spec-key">Mission computer · Pi 5</div><div class="spec-val">Navigation, mission logic, data logging and the cloud link</div></div>
+          <div class="spec-cell"><div class="spec-key">Real-time · Teensy 4.1</div><div class="spec-val">Sensor I/O, motor commands and safety</div></div>
+          <div class="spec-cell"><div class="spec-key">Sensor pod · ESP32-S3</div><div class="spec-val">pH, DO, TDS, turbidity and temperature at the surface, over an RS-485 tether</div></div>
+          <div class="spec-cell"><div class="spec-key">Survey loop</div><div class="spec-val">Plan a route in the web dashboard, upload it over 4G, drive the waypoints, sample at each station, stream geo-tagged readings to a live map</div></div>
         </div>
 
         <div class="bom">
-          <div class="bom-row"><span class="b-name">Raspberry Pi 5</span><span class="b-note">nav · vision · mission · web</span></div>
-          <div class="bom-row"><span class="b-name">2× RP2040 Pico</span><span class="b-note">boat + underwater pod executors</span></div>
-          <div class="bom-row"><span class="b-name">2× VESC ESC + brushless motors</span><span class="b-note">differential drive</span></div>
-          <div class="bom-row"><span class="b-name">Stereo USB camera pair</span><span class="b-note">depth + obstacle avoidance</span></div>
-          <div class="bom-row"><span class="b-name">u-blox M10Q GPS · BNO085 IMU</span><span class="b-note">position + fused heading</span></div>
-          <div class="bom-row"><span class="b-name">SIM7600G-H 4G LTE</span><span class="b-note">primary telemetry link</span></div>
-          <div class="bom-row"><span class="b-name">Instrumented pod on slip-ring tether</span><span class="b-note">salinity · temp · depth · light</span></div>
-          <div class="bom-row"><span class="b-name">Milwaukee M18 (electronics + winch)</span><span class="b-note">+ 12S LiPo drive · 3 isolated domains</span></div>
-          <div class="bom-row"><span class="b-name">Custom KiCad PCB · 3D-printed ASA hull</span><span class="b-note">fiberglass + epoxy skin</span></div>
+          <div class="bom-row"><span class="b-name">Raspberry Pi 5</span><span class="b-note">navigation · missions · logging · cloud link</span></div>
+          <div class="bom-row"><span class="b-name">Teensy 4.1</span><span class="b-note">sensor I/O · motor commands · safety</span></div>
+          <div class="bom-row"><span class="b-name">2× VESC on CAN bus</span><span class="b-note">differential drive · 12S LiPo pack</span></div>
+          <div class="bom-row"><span class="b-name">u-blox M10 GPS · BNO085 IMU</span><span class="b-note">position + heading · plus barometer, high-g accelerometer, light sensor</span></div>
+          <div class="bom-row"><span class="b-name">Fish-finder sonar</span><span class="b-note">water depth</span></div>
+          <div class="bom-row"><span class="b-name">Seeed XIAO ESP32-S3 pod · RS-485 tether</span><span class="b-note">pH · DO · TDS · turbidity · temp</span></div>
+          <div class="bom-row"><span class="b-name">4G LTE</span><span class="b-note">mission upload · live map</span></div>
+          <div class="bom-row"><span class="b-name">SBUS RC receiver</span><span class="b-note">hand-held manual override</span></div>
+          <div class="bom-row"><span class="b-name">Carrier rev D (4-layer) + pod board rev B</span><span class="b-note">three isolated power domains</span></div>
+          <div class="bom-row"><span class="b-name">Modular twin hull</span><span class="b-note">in CAD</span></div>
         </div>
       </details>
 
       <div class="pd-closing reveal">
-        <p>The whole stack is simulation-first: navigation, the mission state machine, the vision pipeline, and the cloud uploader all run on a laptop simulator before any hardware is attached. The mission itself is a state machine &mdash; <span class="mono">transit → deploy → sample → retract → advance</span> &mdash; with geo-fenced boundaries and automatic return-to-home on low battery.</p>
-        <p>None of that is specific to water quality. Swap the pod and the same hull can carry sonar for bathymetric mapping, cameras for an underwater survey, or tools for collecting sediment and water samples. The shore station doesn't care what's attached &mdash; it loads a JSON mission and streams telemetry back either way. That makes it a general-purpose survey vessel somebody else could adapt.</p>
-        <p>It's ongoing &mdash; finishing hardware bring-up on the custom PCB, tuning the vision-guided avoidance on the water, and, eventually, coordinating multiple boats across a larger survey area.</p>
+        <p>The V2 software ran against a laptop simulator before any hardware was attached, and its command center still does, in the browser. Its mission was a state machine &mdash; <span class="mono">transit → deploy → sample → retract → advance</span> &mdash; with geo-fenced boundaries and automatic return-to-home on low battery.</p>
+        <p>V3 is modular by intent: the hull, payload and software are configured for each job, starting with surface water-quality surveys. Swap the pod and the same platform could carry sonar for bathymetric mapping, cameras for an underwater survey, or tools for collecting samples.</p>
+        <p>Next comes fabricating the boards and assembling the electronics, pod and fish finder into the new hull, then firmware for autonomous waypoint navigation, surface sampling and depth logging, and field trials. We&rsquo;re talking with the Charles River Watershed Association about collecting water-quality data for them. The CRWA and the Port of Oakland both told us their teams still collect sediment samples by sending divers down, and that is what my <a href="#project-arm" data-tab="project-arm">robotic arm</a> is for: a deck arm that works with the winch to bring water and sediment samples back.</p>
       </div>
     </div>
   </div>
@@ -2362,7 +2415,7 @@ while True:
     <div class="container" id="arm-boat">
       <div class="reveal pd-section-label"><span class="section-label">Where the boat comes in</span></div>
       <div class="pd-closing reveal">
-        <p>Further out, this is the manipulator for the survey boat. A submersible on a tether collects water samples; the arm takes the full container off it, stores it aboard, and puts an empty collector back. That is the reason for grip-force feedback and a compliant gripper rather than a rigid claw &mdash; a tethered submersible under a moving boat will not present itself at a repeatable position.</p>
+        <p>Further out, this is the deck arm for the <a href="#project-boat" data-tab="project-boat">survey boat</a>, working with its winch to bring water and sediment samples back. Our conversations with the Port of Oakland and the Charles River Watershed Association showed that their teams still collect sediment by sending divers down. A submersible on the tether collects the sample; the arm takes the full container off it, stores it aboard, and puts an empty collector back. That is the reason for grip-force feedback and a compliant gripper rather than a rigid claw &mdash; a tethered submersible under a moving boat will not present itself at a repeatable position.</p>
         <p>The interface between the two is not defined yet, and the marine side is deliberately deferred: sealed encoder housings, waterproof connectors, marine-rated bearings, anodised rather than bare 6061. None of that gets designed until the mechanism works on a bench.</p>
         <p>Still open before hardware: the tolerance the finished discs actually hold, whether J1 moves from printed PLA to aluminum, and real link masses from CAD to replace the estimates above.</p>
       </div>
@@ -2509,7 +2562,7 @@ while True:
   <div class="container exp-wrap">
     <div class="section-label reveal">Experience</div>
     <h2 class="section-heading reveal" style="margin-bottom:var(--s4)">Leadership &amp; <em>teams</em></h2>
-    <p class="exp-summary reveal">I build hardware end to end &mdash; CAD, composite layup, PCB design, firmware. The combat robots took me to 4th nationally and a top-15 U.S. ranking. The survey boat started as a sketch and now runs a mission on its own.</p>
+    <p class="exp-summary reveal">I build hardware end to end &mdash; CAD, composite layup, PCB design, firmware. The combat robots took me to 4th nationally and a top-15 U.S. ranking. The survey boat started as a sketch and drove itself to GPS waypoints on its first water test.</p>
     <div class="exp-timeline">
       <div class="exp-entry reveal">
         <div class="exp-marker" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div>
@@ -2754,8 +2807,8 @@ while True:
           <div class="ps-title">Autonomous Environmental Survey Boat — D.R.E.A.M.S</div>
           <div class="ps-when">Jan 2026 – Present</div>
         </div>
-        <div class="ps-desc">A twin-hull catamaran that surveys lakes on its own. v1, built and field-tested, completed autonomous waypoint surveys on local lakes, winching an instrumented pod to the bottom to sample the water. v2, in progress, adds a Raspberry Pi 5 with stereo-camera obstacle avoidance, a custom KiCad board in bring-up on its second revision, and 4G telemetry, all validated in simulation first. The hull, electronics, PCB, and integration are my own work; the software was built with AI coding agents.</div>
-        <div class="ps-tech">SolidWorks · ASA + fiberglass hull · KiCad PCB · Pi 5 + 2x RP2040 · MicroPython · YOLOv8 · VESC · GPS/IMU · 4G + PostGIS</div>
+        <div class="ps-desc">A twin-hull autonomous survey boat, co-founded with Matthew Hong. V1, built in one semester in London, navigated to GPS waypoints on its own at St Katharine Docks and winched a sensor pod to the bottom to sample. V2 added a Raspberry Pi 5, stereo vision and our first custom PCB, but bench tests exposed flaws in its motor control, power and safety. V3, in build, pairs a Pi 5 with a Teensy 4.1 on a custom 4-layer carrier board. I lead the hardware; the software was built with AI coding agents.</div>
+        <div class="ps-tech">SolidWorks · ASA + fiberglass hull · KiCad 4-layer PCB · Pi 5 + Teensy 4.1 · CAN · VESC · RS-485 · YOLOv8 · GPS/IMU · 4G</div>
       </div>
 
       <div class="ps-item">
