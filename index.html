@@ -946,6 +946,14 @@
     .maker-cta-handle { display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:.84rem; font-weight:500; color:var(--signal); white-space:nowrap; }
     .maker-cta-handle svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2.2; transition:transform .4s var(--ease-spring); }
     .maker-cta:hover .maker-cta-handle svg { transform:translateX(4px); }
+    /* the big variant: the boat's own project site (owner asked for it big, 2026-10-12) */
+    .maker-cta.is-big { padding:30px 34px; gap:26px; margin:var(--s5) 0 var(--s6); border-width:1.5px; }
+    .maker-cta.is-big .maker-cta-icon { width:68px; height:68px; border-radius:16px; }
+    .maker-cta.is-big .maker-cta-icon svg { width:36px; height:36px; }
+    .maker-cta.is-big .maker-cta-title { font-size:clamp(1.55rem, 1.05rem + 1.5vw, 2.25rem); line-height:1.08; }
+    .maker-cta.is-big .maker-cta-sub { font-size:var(--fs-400); margin-top:4px; }
+    .maker-cta.is-big .maker-cta-handle { font-size:.98rem; }
+    @media (max-width:560px){ .maker-cta.is-big { padding:22px 20px; gap:16px; } .maker-cta.is-big .maker-cta-icon { width:54px; height:54px; } }
 
     /* ================================================================
        INSTAGRAM feature (feed-style, links to profile)
@@ -1520,6 +1528,11 @@
         <div class="spec-cell" data-spec="team"><div class="spec-key">Team</div><div class="spec-val">Co-founded with Matthew Hong</div></div>
       </div>
       <p class="pd-intro reveal">D.R.E.A.M.S (Data Recovery for Environmental And Marine Surveillance) is a modular twin-hull survey boat for mapping water quality in small bodies of water. Matthew Hong and I started it in our first year at Northeastern, and it is on its third generation: V3, in build now, pairs a Raspberry Pi 5 mission computer with a Teensy 4.1 real-time controller on one custom carrier board.</p>
+      <a class="maker-cta is-big reveal" href="https://ka1e27.github.io/dreams/" target="_blank" rel="noopener">
+        <span class="maker-cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <span class="maker-cta-text"><span class="maker-cta-title">Visit the D.R.E.A.M.S website</span><span class="maker-cta-sub">The full build log, the V3 board in 3D, the team, and how to partner with us</span></span>
+        <span class="maker-cta-handle">ka1e27.github.io/dreams <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
       <div class="pd-result reveal">
         <span class="r-key">Result</span>
         <span class="r-text">V1, built in one semester in London, navigated to GPS waypoints on its own in a water test at St Katharine Docks, held a 433&nbsp;MHz radio link of about 1&nbsp;km to shore, and sampled at the bottom. V2 moved the brain to a Pi&nbsp;5 with stereo vision and our first custom PCB, but was never fully built: bench tests exposed flaws in its motor control, power and safety design. V3 is the ground-up redesign; its carrier and pod boards are laid out and checked, and its hull is in CAD.</span>
@@ -1533,7 +1546,6 @@
         <span class="r-text">The software &mdash; firmware, vision pipeline and dashboards &mdash; was built with AI coding agents. I specified the architecture and did the integration and testing, not the line-by-line implementation.</span>
       </div>
       <div class="pd-links reveal">
-        <a class="pd-link" href="https://ka1e27.github.io/dreams/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Project website <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         <a class="pd-link" href="https://ka1e27.github.io/dreams/demo/v2-dashboard/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> V2 command center <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         <a class="pd-link" href="https://dreamsv1.kylegtran2007.workers.dev/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Waypoint planner <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         <a class="pd-link" href="https://github.com/ka1e27/D.R.E.A.M.S-V1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg> v1 firmware <svg class="ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
