@@ -123,6 +123,7 @@
       --grain-opacity:.018;
       --shadow-sm:0 1px 2px rgba(20,20,20,.05), 0 4px 12px rgba(20,20,20,.05);
       --shadow-pop:0 8px 20px rgba(20,20,20,.10), 0 34px 66px rgba(20,20,20,.16);
+      --chip-link-bg:#FFFFFF; --chip-link-border:#CDC8BC;
     }
     [data-theme="dark"] {
       --bg:#0D0D0C; --bg-elev:#151513; --bg-elev-2:#1D1D1B;
@@ -138,6 +139,7 @@
       --grain-opacity:.026;
       --shadow-sm:0 1px 2px rgba(0,0,0,.4), 0 4px 12px rgba(0,0,0,.32);
       --shadow-pop:0 10px 24px rgba(0,0,0,.5), 0 40px 80px rgba(0,0,0,.62);
+      --chip-link-bg:#272725; --chip-link-border:#4C4A44;
     }
 
     *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
@@ -689,7 +691,8 @@
         background:linear-gradient(90deg, transparent, var(--nav-menu-bg) 85%); }
     }
     /* clear the fixed header + sticky nav when jumping */
-    .pd > [id] { scroll-margin-top:150px; }
+    .pd [id] { scroll-margin-top:150px; }
+    .exp-entry[id] { scroll-margin-top:calc(var(--header-h) + var(--s5)); }
 
     .pd-chapter { margin:0 0 var(--s8); }
     .pd-chapter > summary { cursor:pointer; list-style:none; display:flex; align-items:center; gap:var(--s4);
@@ -714,6 +717,9 @@
 
     /* galleries */
     .pd-section-label { margin:0 0 var(--s6); }
+    .pd-sub-label { margin-top:var(--s8); }
+    .pd-table-note { font-size:var(--fs-300); }
+    .diff-wrap + .pd-table-note { margin-top:calc(var(--s3) - var(--s8)); }
     .pd-gallery { columns:3; column-gap:var(--s5); margin-bottom:var(--s8); }
     .pd-gallery .img-fig { margin:0 0 var(--s5); break-inside:avoid; -webkit-column-break-inside:avoid; }
     .pd-gallery .img-el { transition:transform .5s var(--ease); }
@@ -1040,6 +1046,27 @@
     .cap-item { font-family:'IBM Plex Mono',monospace; font-size:var(--fs-label); font-weight:500; color:var(--text); background:var(--accent-soft); border-radius:var(--r-pill); padding:6px 13px; letter-spacing:.02em; }
     /* 7 cells in a 2-col grid leaves the last one beside a gap; let it span */
     .cap-cell:last-child:nth-child(odd) { grid-column:1 / -1; }
+    /* A chip with an arrow is a link to the case-study section that shows the skill.
+       The border and arrow say "this goes somewhere" without a hover, for touch;
+       a chip with nothing on the site to point at stays a plain label. */
+    .cap-list .cap-item { border:1px solid transparent; }
+    @media (hover:none){ .cap-list .cap-item { display:inline-flex; align-items:center; min-height:36px; } }
+    .cap-hint { color:var(--text-secondary); font-size:.95rem; line-height:1.7; margin:calc(-1 * var(--s6)) 0 0; max-width:62ch; }
+    .cap-hint-key { display:inline-flex; align-items:center; justify-content:center; width:30px; height:22px; margin:0 3px; vertical-align:-5px;
+      background:var(--chip-link-bg); border:1px solid var(--chip-link-border); border-radius:var(--r-pill); box-shadow:var(--shadow-sm); }
+    .cap-arrow { width:13px; height:13px; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+    .cap-hint .cap-arrow { color:var(--text-secondary); }
+    .cap-list .cap-link { display:inline-flex; align-items:center; gap:7px; color:var(--text); background:var(--chip-link-bg); border-color:var(--chip-link-border); box-shadow:var(--shadow-sm); cursor:pointer;
+      transition:border-color .2s var(--ease), background .2s var(--ease), transform .2s var(--ease); }
+    .cap-list .cap-link .cap-arrow { color:var(--text-secondary); transition:transform .2s var(--ease), color .2s var(--ease); }
+    .cap-list .cap-link:hover { color:var(--text); border-color:var(--signal); transform:translateY(-1px); }
+    .cap-list .cap-link:hover .cap-arrow { color:var(--signal); transform:translateX(3px); }
+    .cap-list .cap-link:active { transform:translateY(1px); }
+    /* where a skill link lands: a red ring that fades, so the reader sees what the chip meant */
+    .jump-landed { outline:2px solid var(--signal); outline-offset:8px; border-radius:var(--r-panel); }
+    .section-label.jump-landed { outline-offset:4px; border-radius:var(--r-pill); }
+    @media (prefers-reduced-motion: no-preference) { .jump-landed { animation:jumpLanded 2.4s var(--ease) forwards; } }
+    @keyframes jumpLanded { 0%, 55% { outline-color:var(--signal); } 100% { outline-color:transparent; } }
     @media (max-width:640px){ .cap-grid{ grid-template-columns:1fr; } }
 
     /* ── closing contact band (global) ────────────────────────────────── */
@@ -1538,7 +1565,7 @@
         <span class="r-key">Result</span>
         <span class="r-text">V1, built in one semester in London, navigated to GPS waypoints on its own in a water test at St Katharine Docks, held a 433&nbsp;MHz radio link of about 1&nbsp;km to shore, and sampled at the bottom. V2 moved the brain to a Pi&nbsp;5 with stereo vision and our first custom PCB, but was never fully built: bench tests exposed flaws in its motor control, power and safety design. V3 is the ground-up redesign; its carrier and pod boards are laid out and checked, PCBWay sponsors their fabrication, and its hull is in CAD, where my first CFD runs back up the drive sizing.</span>
       </div>
-      <div class="pd-result is-note reveal">
+      <div id="boat-team" class="pd-result is-note reveal">
         <span class="r-key">Team</span>
         <span class="r-text">On V1, Matthew built the hull and I did the bridge that ties the hulls together, the propulsion and the winch. On V2 I built and fiberglassed the hull and did all of the electronics. On V3 I&rsquo;m the design lead: I work on every part of the boat, do the PCBs and the machining, and got PCBWay to sponsor our boards. Matthew co-leads the mechanical and structural design, including a Van Veen grab sediment sampler delivered with a full drawing package and bill of materials, and handles planning and communications. Nolan Ting, Caleb Kong and Logan Chen joined in fall 2026: Nolan drew our new logo, and Logan runs our marketing.</span>
       </div>
@@ -1603,7 +1630,7 @@
       </div>
 
       <div class="container">
-        <div class="pd-split media-left reveal is-portrait">
+        <div id="boat-v1-firmware" class="pd-split media-left reveal is-portrait">
           <figure class="img-fig">
             <img class="img-el img-clickable" data-src="images/web/dreams-v1-cad-pod.png" width="511" height="640" alt="CAD of the v1 sensor pod" loading="lazy" decoding="async" onerror="imgFallback(this)">
             <figcaption class="img-cap">CAD — v1 sensor pod</figcaption>
@@ -1674,7 +1701,7 @@
     </div>
 
     <div class="container">
-      <div class="pd-split reveal is-portrait is-pair">
+      <div id="boat-hull-layup" class="pd-split reveal is-portrait is-pair">
         <figure class="img-fig">
           <img class="img-el img-clickable" data-src="images/web/dreams-v2-hull-print.jpg" width="1500" height="2000" alt="First printed section of the v2 hull" loading="lazy" decoding="async" onerror="imgFallback(this)">
           <figcaption class="img-cap">First printed section of the v2 hull</figcaption>
@@ -1748,7 +1775,7 @@
         <img class="img-el img-clickable" data-src="images/web/dreams-v3-carrier-revf-top.jpg" width="1800" height="1408" alt="Top view of the D.R.E.A.M.S V3 carrier board, rev F, with the battery inputs, the Raspberry Pi header and the sensor connectors" loading="lazy" decoding="async" onerror="imgFallback(this)">
         <figcaption class="img-cap">V3 carrier board, rev F &mdash; 122.1 &times; 95.5&nbsp;mm, 4 layers, 140 parts, fully routed, every cable connector on an edge</figcaption>
       </figure>
-      <div class="diff-wrap reveal">
+      <div id="boat-v3-fixes" class="diff-wrap reveal">
         <table class="diff-table">
           <thead><tr><th class="aspect">Where V2 fell short</th><th>The V3 fix</th></tr></thead>
           <tbody>
@@ -1772,7 +1799,7 @@
     </div>
 
     <div class="container">
-      <div class="pd-split reveal">
+      <div id="boat-hull" class="pd-split reveal">
         <div class="pd-split-text">
           <p>The V3 hull lives in SolidWorks: 963 &times; 733 &times; 368&nbsp;mm overall, with 940&nbsp;mm hulls whose tub and lid each print in one piece. The project site shows it in 3D, where you can pull it apart and slice through it.</p>
         </div>
@@ -1784,7 +1811,9 @@
     </div>
 
     <!-- V3 hull CFD: Kyle ran all of it (SolidWorks Flow Simulation, 2026-10-19). Numbers from the project site's
-         week ending Oct 23; model column = the hull-only resistance in mechanical/reports/propulsion_report.md, no margin -->
+         week ending Oct 23; model column = the hull-only resistance in mechanical/reports/propulsion_report.md, no margin.
+         Prop CFD (Oct 19-21, in progress, also his): values read off his Flow Simulation goal tables, from
+         DREAMS_CFD_summary.md + DREAMS_CFD_screenshots.pdf in his Downloads. Thrust is per prop, shaft power = torque x speed. -->
     <div class="container" id="boat-cfd">
       <div class="reveal pd-section-label"><span class="section-label">V3 hull CFD</span></div>
       <div class="pd-split reveal">
@@ -1807,11 +1836,37 @@
           </tbody>
         </table>
       </div>
+      <div class="reveal pd-section-label pd-sub-label" id="boat-props"><span class="section-label">Prop CFD · in progress</span></div>
+      <div class="pd-split media-left reveal is-portrait">
+        <figure class="img-fig">
+          <img class="img-el img-clickable" data-src="images/web/dreams-toroidal-prop-cfd.jpg" width="660" height="660" alt="Flow Simulation of a toroidal propeller seen down its axis: three interlocking loops with flow vectors swirling around them" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <figcaption class="img-cap">One of the toroidal props in Flow Simulation, seen down its axis</figcaption>
+        </figure>
+        <div class="pd-split-text">
+          <p>Now I&rsquo;m running CFD on props for the belt drive, starting with three toroidal designs, 85, 90 and 140&nbsp;mm across. They spin in a rotating region in water, some runs standing still and some with 2&nbsp;m/s of inflow to stand in for the boat moving at about 4 knots. Thrust and torque from each run give the shaft power and the efficiency.</p>
+          <p>Two early results changed what I&rsquo;m looking for. Turning on Flow Simulation&rsquo;s cavitation model cut the 90&nbsp;mm prop&rsquo;s static thrust at 300&nbsp;rad/s from about 33&nbsp;N to 20&nbsp;N, so runs without it overstate thrust. And a bigger prop wasn&rsquo;t more efficient on its own: at similar thrust, each turned only about 20&ndash;28% of its shaft power into thrust. At 300&nbsp;rad/s the 140&nbsp;mm prop makes about 170&nbsp;N and takes about 2&nbsp;kW, far more than the boat needs.</p>
+          <p>Next come cavitation-on runs at lower speeds, a mesh check near the blades, and a conventional three-blade prop through the same setup as a baseline.</p>
+        </div>
+      </div>
+      <div class="diff-wrap reveal">
+        <table class="diff-table">
+          <thead><tr><th class="aspect">Prop · speed</th><th>Condition</th><th>Thrust · shaft power</th></tr></thead>
+          <tbody>
+            <tr><td class="aspect">85&nbsp;mm &middot; 500&nbsp;rad/s</td><td class="v1">2&nbsp;m/s inflow</td><td class="v2">~40&nbsp;N &middot; ~315&nbsp;W</td></tr>
+            <tr><td class="aspect">90&nbsp;mm &middot; 300&nbsp;rad/s</td><td class="v1">Standing still</td><td class="v2">~33&nbsp;N &middot; ~205&nbsp;W</td></tr>
+            <tr><td class="aspect">90&nbsp;mm &middot; 300&nbsp;rad/s</td><td class="v1">Standing still, cavitation on</td><td class="v2">~20&nbsp;N &middot; ~158&nbsp;W</td></tr>
+            <tr><td class="aspect">90&nbsp;mm &middot; 300&nbsp;rad/s</td><td class="v1">2&nbsp;m/s inflow, cavitation on</td><td class="v2">~10&nbsp;N &middot; ~133&nbsp;W</td></tr>
+            <tr><td class="aspect">140&nbsp;mm &middot; 150&nbsp;rad/s</td><td class="v1">2&nbsp;m/s inflow</td><td class="v2">~31&nbsp;N &middot; ~224&nbsp;W</td></tr>
+            <tr><td class="aspect">140&nbsp;mm &middot; 300&nbsp;rad/s</td><td class="v1">2&nbsp;m/s inflow</td><td class="v2">~172&nbsp;N &middot; ~2,020&nbsp;W</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="pd-closing reveal pd-table-note">Per prop, from early runs; cavitation is off unless the row says otherwise.</p>
     </div>
 
     <div class="container" id="boat-stack">
       <div class="reveal pd-section-label"><span class="section-label">V3 stack</span></div>
-      <details class="spec-details reveal">
+      <details id="boat-bom" class="spec-details reveal">
         <summary>Key components &amp; bill of materials <svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
         <div class="spec-strip cols-2 reveal">
           <div class="spec-cell"><div class="spec-key">Mission computer · Pi 5</div><div class="spec-val">Navigation, mission logic, data logging and the cloud link</div></div>
@@ -1834,7 +1889,7 @@
         </div>
       </details>
 
-      <div class="pd-closing reveal">
+      <div id="boat-software" class="pd-closing reveal">
         <p>The V2 software ran against a laptop simulator before any hardware was attached, and its command center still does, in the browser. Its mission was a state machine &mdash; <span class="mono">transit → deploy → sample → retract → advance</span> &mdash; with geo-fenced boundaries and automatic return-to-home on low battery.</p>
         <p>V3 is modular by intent: the hull, payload and software are configured for each job, starting with surface water-quality surveys. Swap the pod and the same platform could carry sonar for bathymetric mapping, cameras for an underwater survey, or tools for collecting samples.</p>
         <p>Next comes fabricating the boards, which PCBWay sponsors, and assembling the electronics, pod and fish finder into the new hull, then firmware for autonomous waypoint navigation, surface sampling and depth logging, and field trials. We&rsquo;re talking with the Charles River Watershed Association about collecting water-quality data for them. The CRWA and the Port of Oakland both told us their teams still collect sediment samples by sending divers down, and that is what my <a href="#project-arm" data-tab="project-arm">robotic arm</a> is for: a deck arm that works with the winch to bring water and sediment samples back.</p>
@@ -1948,7 +2003,7 @@
       <div class="reveal pd-section-label"><span class="section-label">The robots</span></div>
 
       <!-- Korybantes -->
-      <div class="pd-split media-left reveal is-portrait">
+      <div id="combat-korybantes" class="pd-split media-left reveal is-portrait">
         <figure class="img-fig">
           <img class="img-el img-clickable" data-src="images/web/combat-korybantes-v2-internals.jpg" width="1500" height="2000" alt="Korybantes v2 internal layout" loading="lazy" decoding="async" onerror="imgFallback(this)">
           <figcaption class="img-cap">Korybantes v2 — internal layout</figcaption>
@@ -1965,7 +2020,7 @@
       </div>
 
       <!-- Achilles (metal antweight) -->
-      <div class="pd-split reveal is-portrait">
+      <div id="combat-achilles-metal" class="pd-split reveal is-portrait">
         <div class="pd-split-text">
           <div class="robot-rank"><svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>Top 15 US · 2025 · 1 lb metal antweight</div>
           <p class="robot-lead">Achilles (metal) &mdash; a 1&nbsp;lb horizontal spinner, the metal evolution of my plastic antweight.</p>
@@ -1995,7 +2050,7 @@
       </div>
 
       <!-- Achilles (plastic antweight) -->
-      <div class="pd-split media-left reveal">
+      <div id="combat-achilles-plastic" class="pd-split media-left reveal">
         <figure class="img-fig">
           <img class="img-el img-clickable" data-src="images/web/combat-achilles-dog.jpg" width="2000" height="1500" alt="Achilles plastic robot with Kyle's dog Mocha" loading="lazy" decoding="async" onerror="imgFallback(this)">
           <figcaption class="img-cap">Achilles (plastic), with my dog Mocha</figcaption>
@@ -2018,7 +2073,7 @@
         <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/combat-artemis.jpg" width="2000" height="1500" alt="Artemisia combat robot" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Artemisia</figcaption></figure>
         <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/combat-squeak.jpg" width="920" height="577" alt="Squeak combat robot" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Squeak</figcaption></figure>
       </div>
-      <div class="pd-closing reveal">
+      <div id="combat-teaching" class="pd-closing reveal">
         <p>After every match, win or lose, we'd pull the robot apart and work out what broke and why &mdash; every design generation came straight out of that damage analysis, so I learned to design for repairability first.</p>
         <p>The best part was teaching. As club president I ran workshops on CAD, soldering, physics, and fabrication. A few members went on to build and compete with robots of their own.</p>
       </div>
@@ -2615,7 +2670,7 @@ while True:
     <h2 class="section-heading reveal" style="margin-bottom:var(--s4)">Leadership &amp; <em>teams</em></h2>
     <p class="exp-summary reveal">I build hardware end to end &mdash; CAD, composite layup, PCB design, firmware. The combat robots took me to 4th nationally and a top-15 U.S. ranking. The survey boat started as a sketch and drove itself to GPS waypoints on its first water test.</p>
     <div class="exp-timeline">
-      <div class="exp-entry reveal">
+      <div id="exp-president" class="exp-entry reveal">
         <div class="exp-marker" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div>
         <div class="exp-body">
           <div class="exp-date">Oct 2023 — Jun 2025</div>
@@ -2725,30 +2780,31 @@ while True:
 
     <div class="section-label reveal" style="margin-top:72px">Capabilities</div>
     <h2 class="section-heading reveal">Hands-on <em>skills</em></h2>
+    <p class="cap-hint reveal">Click a skill marked <span class="cap-hint-key" aria-hidden="true"><svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><span class="sr-only">with an arrow</span> to jump to the project where I used it.</p>
     <div class="cap-grid stagger">
       <div class="cap-cell reveal">
         <div class="cap-k">Design &amp; CAD</div>
-        <div class="cap-list"><span class="cap-item">SolidWorks</span><span class="cap-item">Onshape</span><span class="cap-item">Fusion 360</span><span class="cap-item">CFD (SolidWorks Flow Simulation)</span><span class="cap-item">Mechanism design</span><span class="cap-item">DFM</span></div>
+        <div class="cap-list"><a class="cap-item cap-link" href="#project-boat" data-section="boat-hull" title="Survey boat · the V3 hull in SolidWorks">SolidWorks<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-maze" data-section="maze-design" title="Maze robot · sketch to CAD">Onshape<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cap-item">Fusion 360</span><a class="cap-item cap-link" href="#project-boat" data-section="boat-cfd" title="Survey boat · CFD of the V3 hull and props">CFD (SolidWorks Flow Simulation)<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-arm" data-section="arm-gearbox" title="Robotic arm · the cycloidal gearboxes">Mechanism design<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-combat" data-section="combat-achilles-metal" title="Combat robots · Achilles, designed around real processes">DFM<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
       </div>
       <div class="cap-cell reveal">
         <div class="cap-k">Electronics &amp; firmware</div>
-        <div class="cap-list"><span class="cap-item">KiCad</span><span class="cap-item">Custom PCB</span><span class="cap-item">Raspberry Pi · RP2040</span><span class="cap-item">MicroPython</span><span class="cap-item">Soldering &amp; wiring</span></div>
+        <div class="cap-list"><a class="cap-item cap-link" href="#project-boat" data-section="boat-v3" title="Survey boat · the V3 boards">KiCad<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-pcb" title="Survey boat · the V2 PCB, rev 01 to rev 02">Custom PCB<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-v2" title="Survey boat · V1 to V2 electronics">Raspberry Pi · RP2040<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-maze" data-section="maze-firmware" title="Maze robot · the firmware">MicroPython<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-combat" data-section="combat-achilles-plastic" title="Combat robots · Achilles (plastic)">Soldering &amp; wiring<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
       </div>
       <div class="cap-cell reveal">
         <div class="cap-k">Software &amp; AI</div>
-        <div class="cap-list"><span class="cap-item">Python · asyncio</span><span class="cap-item">MATLAB</span><span class="cap-item">Java</span><span class="cap-item">AI coding agents</span><span class="cap-item">Simulation-first dev</span></div>
+        <div class="cap-list"><a class="cap-item cap-link" href="#project-boat" data-section="boat-v1-firmware" title="Survey boat · V1 runs nine async tasks">Python · asyncio<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cap-item">MATLAB</span><span class="cap-item">Java</span><a class="cap-item cap-link" href="#project-arm" data-section="arm-sim" title="Robotic arm · the gearbox simulator">AI coding agents<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-software" title="Survey boat · software run on a simulator first">Simulation-first dev<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
       </div>
       <div class="cap-cell reveal">
         <div class="cap-k">Fabrication</div>
-        <div class="cap-list"><span class="cap-item">FDM 3D printing</span><span class="cap-item">Composite layup (FG/CF)</span><span class="cap-item">Laser cutter</span><span class="cap-item">PCB mill</span><span class="cap-item">Laser-cut Ti / steel</span><span class="cap-item">2.5D CNC · beginner</span><span class="cap-item">CNC router · beginner</span><span class="cap-item">Waterjet · beginner</span></div>
+        <div class="cap-list"><a class="cap-item cap-link" href="#project-maze" data-section="maze-design" title="Maze robot · the printed chassis">FDM 3D printing<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-hull-layup" title="Survey boat · fiberglassing the V2 hull">Composite layup (FG/CF)<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cap-item">Laser cutter</span><a class="cap-item cap-link" href="#project-arm" data-section="arm-tolerance" title="Robotic arm · finishing the discs on a Bantam mill">PCB mill<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-combat" data-section="combat-korybantes" title="Combat robots · Korybantes">Laser-cut Ti / steel<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-arm" data-section="arm-gearbox" title="Robotic arm · machining the housings">2.5D CNC · beginner<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cap-item">CNC router · beginner</span><span class="cap-item">Waterjet · beginner</span></div>
       </div>
       <div class="cap-cell reveal">
         <div class="cap-k">Robotics &amp; autonomy</div>
-        <div class="cap-list"><span class="cap-item">Stereo camera rigs</span><span class="cap-item">GPS + IMU fusion</span><span class="cap-item">VESC drive</span><span class="cap-item">4G telemetry</span><span class="cap-item">State machines</span></div>
+        <div class="cap-list"><a class="cap-item cap-link" href="#project-boat" data-section="boat-vision" title="Survey boat · stereo vision">Stereo camera rigs<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-bom" title="Survey boat · V3 components">GPS + IMU fusion<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-v3-fixes" title="Survey boat · V3 motor control">VESC drive<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-bom" title="Survey boat · V3 components">4G telemetry<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-software" title="Survey boat · the V2 mission state machine">State machines<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
       </div>
       <div class="cap-cell reveal">
         <div class="cap-k">Leadership</div>
-        <div class="cap-list"><span class="cap-item">Club president</span><span class="cap-item">Workshops</span><span class="cap-item">Sponsorships</span><span class="cap-item">Mentoring</span></div>
+        <div class="cap-list"><a class="cap-item cap-link" href="#experience" data-section="exp-president" title="President, Combat Robots Club">Club president<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#experience" data-section="exp-president" title="President, Combat Robots Club">Workshops<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-team" title="Survey boat · PCBWay sponsors our boards">Sponsorships<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-combat" data-section="combat-teaching" title="Combat robots · teaching the club">Mentoring<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
       </div>
     </div>
   </div>
@@ -3066,7 +3122,7 @@ while True:
       if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
   }
-  function switchTab(tabId, push) {
+  function switchTab(tabId, push, then) {
     if (tabId === currentTab || transitioning) return;
     const inc = document.querySelector('.tab-content[data-tab="' + tabId + '"]');
     if (!inc) return;
@@ -3076,7 +3132,11 @@ while True:
       inc.classList.add('active');
       currentTab = tabId; setActiveNav(tabId); setTitle(tabId);
       try { window.scrollTo({ top: 0, behavior: 'instant' }); } catch (_) { window.scrollTo(0, 0); }
+      if (then) then();
     };
+    // push before the swap: without a view transition the swap scrolls at once, and the
+    // browser would file that scroll under the entry we are leaving
+    if (push !== false) history.pushState(null, '', '#' + tabId);
     const useVT = !reduce && document.startViewTransition;
     transitioning = true;
     if (useVT) {
@@ -3087,7 +3147,6 @@ while True:
       if (!reduce) { inc.classList.add('vt-fallback'); }
       transitioning = false;
     }
-    if (push !== false) history.pushState(null, '', '#' + tabId);
   }
 
   document.querySelectorAll('[data-tab]:not(.tab-content)').forEach(el => {
@@ -3114,7 +3173,13 @@ while True:
     const target = document.querySelector('.tab-content[data-tab="' + hash + '"]');
     if (target) { const active = document.querySelector('.tab-content.active'); if (active && active !== target) active.classList.remove('active'); target.classList.add('active'); currentTab = hash; setActiveNav(hash); setTitle(hash); }
   })();
-  window.addEventListener('popstate', () => switchTab(location.hash.replace('#', '') || 'work', false));
+  // a skill link saves the scroll position on the entry it leaves, so Back returns to the chip
+  window.addEventListener('popstate', () => {
+    const y = history.state && typeof history.state.y === 'number' ? history.state.y : null;
+    switchTab(location.hash.replace('#', '') || 'work', false, y === null ? null : () => {
+      try { window.scrollTo({ top: y, behavior: 'instant' }); } catch (_) { window.scrollTo(0, y); }
+    });
+  });
 
   // ── Mobile nav ──
   const toggle = document.getElementById('nav-toggle'), links = document.getElementById('nav-links');
@@ -3288,6 +3353,34 @@ while True:
       targets.forEach(t => io.observe(t));
     }
   });
+
+  // ── Skill links ──
+  // Each linked chip in the skills grid opens the case-study section that shows
+  // the skill. Its href is only the project tab (the router owns location.hash,
+  // as with .pd-nav), so a new-tab open still works; a click lands on the
+  // section itself and rings it in red for a moment.
+  function landOn(id, smooth) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const det = el.tagName === 'DETAILS' ? el : el.closest('details');
+    if (det && !det.open) det.open = true;
+    try { el.scrollIntoView({ behavior: smooth && !reduce ? 'smooth' : 'instant', block: 'start' }); } catch (_) { el.scrollIntoView(true); }
+    const mark = el.querySelector(':scope > .pd-section-label .section-label')
+      || (el.classList.contains('container') && el.firstElementChild) || el;
+    mark.classList.remove('jump-landed'); void mark.offsetWidth; mark.classList.add('jump-landed');
+    setTimeout(() => mark.classList.remove('jump-landed'), 2600);
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    el.focus({ preventScroll: true });
+  }
+  document.querySelectorAll('a.cap-link[data-section]').forEach(a => a.addEventListener('click', e => {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    if (document.body.classList.contains('edit-mode')) return;
+    const tab = a.getAttribute('href').slice(1), id = a.dataset.section;
+    if (tab === currentTab) { landOn(id, true); return; }
+    try { history.replaceState({ y: window.scrollY }, ''); } catch (_) {}
+    switchTab(tab, true, () => landOn(id, false));
+  }));
 
   // ── Build-strip scroll arrows (translucent) ──
   document.querySelectorAll('.build-strip-wrap').forEach(wrap => {
