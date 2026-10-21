@@ -1400,9 +1400,9 @@
 
     <div class="marquee" aria-label="Tools and skills">
       <div class="marquee-track" id="marquee-track">
-        <span>CAD · SolidWorks · Onshape · Fusion 360 · KiCad · PCB design · MicroPython · Python · asyncio · MATLAB · Java · AI coding agents · Raspberry Pi · VESC · GPS + IMU fusion · Stereo camera rigs · PCB mill · Laser cutter · FDM printing · Composite layup &nbsp;·&nbsp; </span>
+        <span>CAD · SolidWorks · Onshape · Fusion 360 · CFD · KiCad · PCB design · MicroPython · Python · asyncio · MATLAB · Java · AI coding agents · Raspberry Pi · VESC · GPS + IMU fusion · Stereo camera rigs · PCB mill · Laser cutter · FDM printing · Composite layup &nbsp;·&nbsp; </span>
         <!-- second copy makes the -50% loop seamless; hidden from AT so it isn't read twice -->
-        <span aria-hidden="true">CAD · SolidWorks · Onshape · Fusion 360 · KiCad · PCB design · MicroPython · Python · asyncio · MATLAB · Java · AI coding agents · Raspberry Pi · VESC · GPS + IMU fusion · Stereo camera rigs · PCB mill · Laser cutter · FDM printing · Composite layup &nbsp;·&nbsp; </span>
+        <span aria-hidden="true">CAD · SolidWorks · Onshape · Fusion 360 · CFD · KiCad · PCB design · MicroPython · Python · asyncio · MATLAB · Java · AI coding agents · Raspberry Pi · VESC · GPS + IMU fusion · Stereo camera rigs · PCB mill · Laser cutter · FDM printing · Composite layup &nbsp;·&nbsp; </span>
       </div>
     </div>
 
@@ -1422,7 +1422,7 @@
         <div class="proj-body">
           <div>
             <h3 class="proj-title">Autonomous Environmental Survey Boat</h3>
-            <p class="proj-desc">A twin-hull survey boat I co-founded with Matthew Hong. V1 drove itself to GPS waypoints at St Katharine Docks in London; V3, now in build, runs a Raspberry Pi 5 and a Teensy 4.1 on one custom carrier board.</p>
+            <p class="proj-desc">A twin-hull survey boat I co-founded with Matthew Hong. V1 drove itself to GPS waypoints at St Katharine Docks in London; V3, now in build, runs a Raspberry Pi 5 and two Pico 2 controllers on one custom carrier board.</p>
           </div>
           <div class="proj-meta">
             <span class="proj-date">Jan 2026 — Present</span>
@@ -1499,7 +1499,7 @@
         <div class="pd-kicker">Project 01 · Robotics &amp; Embedded</div>
         <h2 class="pd-title">Autonomous Environmental Survey Boat</h2>
         <div class="pd-tags">
-          <span class="pd-tag">Raspberry Pi 5</span><span class="pd-tag">Teensy 4.1</span><span class="pd-tag">Custom PCB</span><span class="pd-tag">CAN · VESC</span><span class="pd-tag">Computer Vision</span><span class="pd-tag">MicroPython</span>
+          <span class="pd-tag">Raspberry Pi 5</span><span class="pd-tag">Pico 2</span><span class="pd-tag">Custom PCB</span><span class="pd-tag">CAN · VESC</span><span class="pd-tag">Computer Vision</span><span class="pd-tag">MicroPython</span>
         </div>
       </div>
     </div>
@@ -1511,6 +1511,7 @@
       <button type="button" data-jump="boat-pcb">PCB</button>
       <button type="button" data-jump="boat-vision">Vision</button>
       <button type="button" data-jump="boat-v3">Version 3</button>
+      <button type="button" data-jump="boat-cfd">CFD</button>
       <button type="button" data-jump="boat-stack">Stack</button>
     </nav>
 
@@ -1522,12 +1523,12 @@
       <div class="spec-strip reveal">
         <div class="spec-cell" data-spec="status"><div class="spec-key">Status</div><div class="spec-val"><span class="st-dot"></span>V3 in build · V1 water-tested</div></div>
         <div class="spec-cell" data-spec="platform"><div class="spec-key">Platform</div><div class="spec-val">Twin-hull catamaran · diff-drive</div></div>
-        <div class="spec-cell" data-spec="compute"><div class="spec-key">Compute · V3</div><div class="spec-val">Raspberry Pi 5 + Teensy 4.1</div></div>
+        <div class="spec-cell" data-spec="compute"><div class="spec-key">Compute · V3</div><div class="spec-val">Raspberry Pi 5 + 2× Pico 2</div></div>
         <div class="spec-cell" data-spec="sensing"><div class="spec-key">Sensing · V3</div><div class="spec-val">pH · DO · TDS · turbidity · temp · sonar depth</div></div>
         <div class="spec-cell" data-spec="comms"><div class="spec-key">Comms · V3</div><div class="spec-val">4G LTE live map · RC override</div></div>
-        <div class="spec-cell" data-spec="team"><div class="spec-key">Team</div><div class="spec-val">Co-founded with Matthew Hong</div></div>
+        <div class="spec-cell" data-spec="team"><div class="spec-key">Team</div><div class="spec-val">Five students · co-founded with Matthew Hong</div></div>
       </div>
-      <p class="pd-intro reveal">D.R.E.A.M.S (Data Recovery for Environmental And Marine Surveillance) is a modular twin-hull survey boat for mapping water quality in small bodies of water. Matthew Hong and I started it in our first year at Northeastern, and it is on its third generation: V3, in build now, pairs a Raspberry Pi 5 mission computer with a Teensy 4.1 real-time controller on one custom carrier board.</p>
+      <p class="pd-intro reveal">D.R.E.A.M.S (Data Recovery for Environmental And Marine Surveillance) is a modular twin-hull survey boat for mapping water quality in small bodies of water. Matthew Hong and I started it in our first year at Northeastern, and the team is now five students. It is on its third generation: V3, in build now, pairs a Raspberry Pi 5 mission computer with two Raspberry Pi Pico 2 real-time controllers on one custom carrier board.</p>
       <a class="maker-cta is-big reveal" href="https://ka1e27.github.io/dreams/" target="_blank" rel="noopener">
         <span class="maker-cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
         <span class="maker-cta-text"><span class="maker-cta-title">Visit the D.R.E.A.M.S website</span><span class="maker-cta-sub">The full build log, the V3 board in 3D, the team, and how to partner with us</span></span>
@@ -1535,11 +1536,11 @@
       </a>
       <div class="pd-result reveal">
         <span class="r-key">Result</span>
-        <span class="r-text">V1, built in one semester in London, navigated to GPS waypoints on its own in a water test at St Katharine Docks, held a 433&nbsp;MHz radio link of about 1&nbsp;km to shore, and sampled at the bottom. V2 moved the brain to a Pi&nbsp;5 with stereo vision and our first custom PCB, but was never fully built: bench tests exposed flaws in its motor control, power and safety design. V3 is the ground-up redesign; its carrier and pod boards are laid out and checked, and its hull is in CAD.</span>
+        <span class="r-text">V1, built in one semester in London, navigated to GPS waypoints on its own in a water test at St Katharine Docks, held a 433&nbsp;MHz radio link of about 1&nbsp;km to shore, and sampled at the bottom. V2 moved the brain to a Pi&nbsp;5 with stereo vision and our first custom PCB, but was never fully built: bench tests exposed flaws in its motor control, power and safety design. V3 is the ground-up redesign; its carrier and pod boards are laid out and checked, PCBWay sponsors their fabrication, and its hull is in CAD, where my first CFD runs back up the drive sizing.</span>
       </div>
       <div class="pd-result is-note reveal">
         <span class="r-key">Team</span>
-        <span class="r-text">I lead the hardware: the hull and CAD, the electronics and custom PCBs, and integrating it into one system. Matthew co-leads the mechanical and structural design, including a Van Veen grab sediment sampler delivered with a full drawing package and bill of materials, and handles planning and communications.</span>
+        <span class="r-text">On V1, Matthew built the hull and I did the bridge that ties the hulls together, the propulsion and the winch. On V2 I built and fiberglassed the hull and did all of the electronics. On V3 I&rsquo;m the design lead: I work on every part of the boat, do the PCBs and the machining, and got PCBWay to sponsor our boards. Matthew co-leads the mechanical and structural design, including a Van Veen grab sediment sampler delivered with a full drawing package and bill of materials, and handles planning and communications. Nolan Ting, Caleb Kong and Logan Chen joined in fall 2026: Nolan drew our new logo, and Logan runs our marketing.</span>
       </div>
       <div class="pd-result is-note reveal">
         <span class="r-key">Software</span>
@@ -1581,7 +1582,7 @@
           <div class="pd-split-text">
             <p>It started as a sketch: a stable, twin-hull platform that could carry sensitive instruments across open water and still sit calm enough to take clean readings.</p>
             <p>The dual-hull layout keeps the boat steady. Each pontoon houses waterproof compartments for batteries and electronics. The winch lowers an instrumented pod on a tethered slip ring until it registers bottom contact, then samples water temperature, conductivity (salinity), and light before retracting and moving to the next waypoint.</p>
-            <p>We built it in one semester of our first year, in London, with our room as the workshop, then took it to St Katharine Docks. In that water test it navigated to GPS waypoints on its own and held its radio link out to about 1&nbsp;km.</p>
+            <p>We built it in one semester of our first year, in London, with a room there turned into a workshop, then took it to St Katharine Docks. In that water test it navigated to GPS waypoints on its own and held its radio link out to about 1&nbsp;km.</p>
           </div>
           <figure class="img-fig">
             <img class="img-el img-clickable" data-src="images/web/dreams-v1-sketch.jpg" width="1415" height="2000" alt="D.R.E.A.M.S v1 first concept sketch" loading="lazy" decoding="async" onerror="imgFallback(this)">
@@ -1623,7 +1624,7 @@
           <div class="build-strip">
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-assembly.jpg" width="340" height="450" alt="Getting the v1 boat ready to test outdoors" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Getting ready to test outdoors</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-epoxy.jpg" width="1500" height="2000" alt="Epoxy-sealing the v1 hull" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Epoxy-sealing the hull</figcaption></figure>
-          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-london-workshop.jpg" width="1600" height="1200" alt="Our room in London set up as a workshop: a hull section hanging over a taped-down drop sheet, the winch and wiring on the desk" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Our room in London, set up as the workshop</figcaption></figure>
+          <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-london-workshop.jpg" width="1600" height="1200" alt="A room in London set up as a workshop: a hull section hanging over a taped-down drop sheet, the winch and wiring on the desk" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">A room in London, set up as the workshop</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-pod-print.jpg" width="363" height="495" alt="Printed v1 sensor pod" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Sensor pod, printed</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-winch.jpg" width="380" height="507" alt="v1 sensor-deployment winch" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Sensor-deployment winch</figcaption></figure>
           <figure class="img-fig"><img class="img-el img-clickable" data-src="images/web/dreams-v1-jet.jpg" width="377" height="641" alt="Early jet-propulsion experiment on v1" loading="lazy" decoding="async" onerror="imgFallback(this)"><figcaption class="img-cap">Early jet-propulsion experiment — a dead end, but a useful one</figcaption></figure>
@@ -1637,7 +1638,7 @@
     <!-- the ONE full-bleed moment: dedication -->
     <figure class="img-fig pd-bleed reveal">
       <img class="img-el img-clickable" data-src="images/web/dreams-omar.jpg" width="2000" height="1500" alt="D.R.E.A.M.S v1 dedicated in honor of Omar" loading="lazy" decoding="async" onerror="imgFallback(this)">
-      <figcaption class="img-cap">D.R.E.A.M.S v1, dedicated in honor of Omar. He helped us build it in London, and his name on the hull is our thanks.</figcaption>
+      <figcaption class="img-cap">D.R.E.A.M.S v1, dedicated in honor of Omar, the lab technician at Northeastern University London. He helped us build it, and his name on the hull is our thanks.</figcaption>
     </figure>
 
     <!-- VERSION 2 -->
@@ -1742,19 +1743,19 @@
     <!-- VERSION 3: facts from the project site, ka1e27.github.io/dreams (2026-10-08) -->
     <div class="container" id="boat-v3">
       <div class="reveal pd-section-label"><span class="section-label">Version 3 · In build</span></div>
-      <p class="pd-intro reveal">V3 splits the boat into a Raspberry Pi&nbsp;5 mission computer and a Teensy&nbsp;4.1 real-time controller, joined by one custom carrier board, with the sensors in a tethered pod. Its first job is narrower than V2&rsquo;s on purpose: drive itself around small bodies of water and sample at the surface.</p>
+      <p class="pd-intro reveal">V3 splits the boat into a Raspberry Pi&nbsp;5 mission computer and two Raspberry Pi Pico&nbsp;2 real-time controllers, joined by one custom carrier board, with the sensors in a tethered pod. Its first job is narrower than V2&rsquo;s on purpose: drive itself around small bodies of water and sample at the surface. A smaller starter board, V3.1, pairs the Pi with one Pico&nbsp;2 to get the boat on the water sooner and try the electronics first.</p>
       <figure class="img-fig pd-full-fig reveal">
-        <img class="img-el img-clickable" data-src="images/web/dreams-v3-carrier-top.jpg" width="1800" height="1399" alt="Top view of the D.R.E.A.M.S V3 carrier board, rev D, with the battery inputs, the Raspberry Pi header and the sensor connectors" loading="lazy" decoding="async" onerror="imgFallback(this)">
-        <figcaption class="img-cap">V3 carrier board, rev D &mdash; 130.6 &times; 101.5&nbsp;mm, 4 layers, 126 parts, fully routed</figcaption>
+        <img class="img-el img-clickable" data-src="images/web/dreams-v3-carrier-revf-top.jpg" width="1800" height="1408" alt="Top view of the D.R.E.A.M.S V3 carrier board, rev F, with the battery inputs, the Raspberry Pi header and the sensor connectors" loading="lazy" decoding="async" onerror="imgFallback(this)">
+        <figcaption class="img-cap">V3 carrier board, rev F &mdash; 122.1 &times; 95.5&nbsp;mm, 4 layers, 140 parts, fully routed, every cable connector on an edge</figcaption>
       </figure>
       <div class="diff-wrap reveal">
         <table class="diff-table">
           <thead><tr><th class="aspect">Where V2 fell short</th><th>The V3 fix</th></tr></thead>
           <tbody>
-            <tr><td class="aspect">Real-time control</td><td class="v2">A Teensy&nbsp;4.1 core. The Pi&rsquo;s header carries 5&nbsp;V only; every control signal goes through the Teensy</td></tr>
-            <tr><td class="aspect">Motor control</td><td class="v2">Each VESC is its own node on a CAN bus, through a TJA1051 transceiver</td></tr>
-            <tr><td class="aspect">Power</td><td class="v2">Three isolated domains, with separate packs for the electronics and the winch and an INA228 monitor on each</td></tr>
-            <tr><td class="aspect">Safety</td><td class="v2">A hand-held RC override at any time, and a winch cut-off that fails safe if the Teensy resets or loses power</td></tr>
+            <tr><td class="aspect">Real-time control</td><td class="v2">Two Pico&nbsp;2s: one runs the motors, winch and RC, the other the sensors, GPS and the pod link. They talk to the Pi over its header, so its USB ports stay free for cameras</td></tr>
+            <tr><td class="aspect">Motor control</td><td class="v2">Each VESC is its own node on a CAN bus, through a TJA1051 transceiver, driving a Flipsky 5048 200&nbsp;KV sensored outrunner at about 200&ndash;300&nbsp;W per side</td></tr>
+            <tr><td class="aspect">Power</td><td class="v2">One 10S Li-ion bus where every feed gets its own fuse and current monitor, plus an optional 4S backup that keeps the computers and radios on if the main packs go off</td></tr>
+            <tr><td class="aspect">Safety</td><td class="v2">A hand-held RC override at any time, and a winch cut-off that fails safe if the control Pico resets or loses power</td></tr>
           </tbody>
         </table>
       </div>
@@ -1770,35 +1771,73 @@
       </div>
     </div>
 
+    <div class="container">
+      <div class="pd-split reveal">
+        <div class="pd-split-text">
+          <p>The V3 hull lives in SolidWorks: 963 &times; 733 &times; 368&nbsp;mm overall, with 940&nbsp;mm hulls whose tub and lid each print in one piece. The project site shows it in 3D, where you can pull it apart and slice through it.</p>
+        </div>
+        <figure class="img-fig">
+          <img class="img-el img-clickable" data-src="images/web/dreams-v3-hull-cad.jpg" width="1600" height="900" alt="SolidWorks render of the D.R.E.A.M.S V3 twin hulls and bridge, red with white decks" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <figcaption class="img-cap">The V3 hull in SolidWorks &mdash; drives, electronics and the pod aren&rsquo;t in the model yet</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- V3 hull CFD: Kyle ran all of it (SolidWorks Flow Simulation, 2026-10-19). Numbers from the project site's
+         week ending Oct 23; model column = the hull-only resistance in mechanical/reports/propulsion_report.md, no margin -->
+    <div class="container" id="boat-cfd">
+      <div class="reveal pd-section-label"><span class="section-label">V3 hull CFD</span></div>
+      <div class="pd-split reveal">
+        <div class="pd-split-text">
+          <p>I ran CFD on the V3 catamaran in SolidWorks Flow Simulation to check the drive sizing Matthew and I did by hand. With the hulls trimmed 2.5&deg; stern-down, the boat needs about 13&nbsp;N of thrust at 2.5 knots and 36&nbsp;N at 3.5 knots, where its bow wave builds. Both land within about 20% of our sizing model, so the drive, sized at 200&ndash;300&nbsp;W per side, has plenty of headroom.</p>
+          <p>Trim matters: my first run, at 7.5&deg; stern-down, gave about twice the drag at 2.5 knots. At 1 knot the drag is smaller than the simulation&rsquo;s own noise, so the low-speed number is only a bound. Next I&rsquo;m setting the hulls at the depth they really float at and adding a pitching-moment goal about the center of weight, to find the trim the boat actually rides at.</p>
+        </div>
+        <figure class="img-fig">
+          <img class="img-el img-clickable" data-src="images/web/dreams-v3-cfd-3p5kn.jpg" width="1311" height="817" alt="SolidWorks Flow Simulation of the D.R.E.A.M.S V3 catamaran at 3.5 knots, flow arrows running along both hulls over a blue water surface" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <figcaption class="img-cap">CFD of the V3 catamaran at 3.5 knots, hulls trimmed 2.5&deg; stern-down</figcaption>
+        </figure>
+      </div>
+      <div class="diff-wrap reveal">
+        <table class="diff-table">
+          <thead><tr><th class="aspect">Speed</th><th>Sizing model</th><th>CFD at 2.5&deg;</th></tr></thead>
+          <tbody>
+            <tr><td class="aspect">1 kn &middot; 0.51&nbsp;m/s</td><td class="v1">~1&ndash;1.5&nbsp;N</td><td class="v2">~3&nbsp;N, within the noise</td></tr>
+            <tr><td class="aspect">2.5 kn &middot; 1.29&nbsp;m/s</td><td class="v1">~17&nbsp;N</td><td class="v2">~13&nbsp;N</td></tr>
+            <tr><td class="aspect">3.5 kn &middot; 1.80&nbsp;m/s</td><td class="v1">~30&nbsp;N</td><td class="v2">~36&nbsp;N, as the bow wave builds</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <div class="container" id="boat-stack">
       <div class="reveal pd-section-label"><span class="section-label">V3 stack</span></div>
       <details class="spec-details reveal">
         <summary>Key components &amp; bill of materials <svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
         <div class="spec-strip cols-2 reveal">
           <div class="spec-cell"><div class="spec-key">Mission computer · Pi 5</div><div class="spec-val">Navigation, mission logic, data logging and the cloud link</div></div>
-          <div class="spec-cell"><div class="spec-key">Real-time · Teensy 4.1</div><div class="spec-val">Sensor I/O, motor commands and safety</div></div>
+          <div class="spec-cell"><div class="spec-key">Real-time · 2× Pico 2</div><div class="spec-val">One for motors, winch and RC; one for sensors, GPS and the pod link</div></div>
           <div class="spec-cell"><div class="spec-key">Sensor pod · ESP32-S3</div><div class="spec-val">pH, DO, TDS, turbidity and temperature at the surface, over an RS-485 tether</div></div>
           <div class="spec-cell"><div class="spec-key">Survey loop</div><div class="spec-val">Plan a route in the web dashboard, upload it over 4G, drive the waypoints, sample at each station, stream geo-tagged readings to a live map</div></div>
         </div>
 
         <div class="bom">
           <div class="bom-row"><span class="b-name">Raspberry Pi 5</span><span class="b-note">navigation · missions · logging · cloud link</span></div>
-          <div class="bom-row"><span class="b-name">Teensy 4.1</span><span class="b-note">sensor I/O · motor commands · safety</span></div>
-          <div class="bom-row"><span class="b-name">2× VESC on CAN bus</span><span class="b-note">differential drive · 12S LiPo pack</span></div>
-          <div class="bom-row"><span class="b-name">u-blox M10 GPS · BNO085 IMU</span><span class="b-note">position + heading · plus barometer, high-g accelerometer, light sensor</span></div>
+          <div class="bom-row"><span class="b-name">2× Raspberry Pi Pico 2</span><span class="b-note">motors · winch · RC · sensors · GPS · pod link</span></div>
+          <div class="bom-row"><span class="b-name">2× Flipsky VESC on CAN · Flipsky 5048 200 KV</span><span class="b-note">differential drive · ~200–300 W per side</span></div>
+          <div class="bom-row"><span class="b-name">u-blox M10 GPS · BNO085 IMU</span><span class="b-note">position + heading · plus a high-g accelerometer and light sensor</span></div>
           <div class="bom-row"><span class="b-name">Fish-finder sonar</span><span class="b-note">water depth</span></div>
           <div class="bom-row"><span class="b-name">Seeed XIAO ESP32-S3 pod · RS-485 tether</span><span class="b-note">pH · DO · TDS · turbidity · temp</span></div>
           <div class="bom-row"><span class="b-name">4G LTE</span><span class="b-note">mission upload · live map</span></div>
           <div class="bom-row"><span class="b-name">SBUS RC receiver</span><span class="b-note">hand-held manual override</span></div>
-          <div class="bom-row"><span class="b-name">Carrier rev D (4-layer) + pod board rev B</span><span class="b-note">three isolated power domains</span></div>
-          <div class="bom-row"><span class="b-name">Modular twin hull</span><span class="b-note">in CAD</span></div>
+          <div class="bom-row"><span class="b-name">Carrier rev F (4-layer) + pod board rev B</span><span class="b-note">fused 10S Li-ion bus · optional 4S backup</span></div>
+          <div class="bom-row"><span class="b-name">Modular twin hull</span><span class="b-note">in SolidWorks · 963 × 733 × 368 mm</span></div>
         </div>
       </details>
 
       <div class="pd-closing reveal">
         <p>The V2 software ran against a laptop simulator before any hardware was attached, and its command center still does, in the browser. Its mission was a state machine &mdash; <span class="mono">transit → deploy → sample → retract → advance</span> &mdash; with geo-fenced boundaries and automatic return-to-home on low battery.</p>
         <p>V3 is modular by intent: the hull, payload and software are configured for each job, starting with surface water-quality surveys. Swap the pod and the same platform could carry sonar for bathymetric mapping, cameras for an underwater survey, or tools for collecting samples.</p>
-        <p>Next comes fabricating the boards and assembling the electronics, pod and fish finder into the new hull, then firmware for autonomous waypoint navigation, surface sampling and depth logging, and field trials. We&rsquo;re talking with the Charles River Watershed Association about collecting water-quality data for them. The CRWA and the Port of Oakland both told us their teams still collect sediment samples by sending divers down, and that is what my <a href="#project-arm" data-tab="project-arm">robotic arm</a> is for: a deck arm that works with the winch to bring water and sediment samples back.</p>
+        <p>Next comes fabricating the boards, which PCBWay sponsors, and assembling the electronics, pod and fish finder into the new hull, then firmware for autonomous waypoint navigation, surface sampling and depth logging, and field trials. We&rsquo;re talking with the Charles River Watershed Association about collecting water-quality data for them. The CRWA and the Port of Oakland both told us their teams still collect sediment samples by sending divers down, and that is what my <a href="#project-arm" data-tab="project-arm">robotic arm</a> is for: a deck arm that works with the winch to bring water and sediment samples back.</p>
       </div>
     </div>
   </div>
@@ -2689,7 +2728,7 @@ while True:
     <div class="cap-grid stagger">
       <div class="cap-cell reveal">
         <div class="cap-k">Design &amp; CAD</div>
-        <div class="cap-list"><span class="cap-item">SolidWorks</span><span class="cap-item">Onshape</span><span class="cap-item">Fusion 360</span><span class="cap-item">Mechanism design</span><span class="cap-item">DFM</span></div>
+        <div class="cap-list"><span class="cap-item">SolidWorks</span><span class="cap-item">Onshape</span><span class="cap-item">Fusion 360</span><span class="cap-item">CFD (SolidWorks Flow Simulation)</span><span class="cap-item">Mechanism design</span><span class="cap-item">DFM</span></div>
       </div>
       <div class="cap-cell reveal">
         <div class="cap-k">Electronics &amp; firmware</div>
@@ -2819,8 +2858,8 @@ while True:
           <div class="ps-title">Autonomous Environmental Survey Boat — D.R.E.A.M.S</div>
           <div class="ps-when">Jan 2026 – Present</div>
         </div>
-        <div class="ps-desc">A twin-hull autonomous survey boat, co-founded with Matthew Hong. V1, built in one semester in London, navigated to GPS waypoints on its own at St Katharine Docks and winched a sensor pod to the bottom to sample. V2 added a Raspberry Pi 5, stereo vision and our first custom PCB, but bench tests exposed flaws in its motor control, power and safety. V3, in build, pairs a Pi 5 with a Teensy 4.1 on a custom 4-layer carrier board. I lead the hardware; the software was built with AI coding agents.</div>
-        <div class="ps-tech">SolidWorks · ASA + fiberglass hull · KiCad 4-layer PCB · Pi 5 + Teensy 4.1 · CAN · VESC · RS-485 · YOLOv8 · GPS/IMU · 4G</div>
+        <div class="ps-desc">A twin-hull autonomous survey boat, co-founded with Matthew Hong. V1, built in one semester in London, navigated to GPS waypoints on its own at St Katharine Docks and winched a sensor pod to the bottom to sample. V2&rsquo;s Pi 5, stereo vision and first custom PCB failed bench tests on motor control, power and safety. V3, in build, pairs a Pi 5 with two Pico 2s on a 4-layer carrier board; I&rsquo;m its design lead and did the PCBs, which PCBWay sponsors. The software was built with AI coding agents.</div>
+        <div class="ps-tech">SolidWorks + CFD · ASA/fiberglass hull · KiCad 4-layer PCB · Pi 5 + 2x Pico 2 · CAN · VESC · RS-485 · YOLOv8 · GPS/IMU · 4G</div>
       </div>
 
       <div class="ps-item">
