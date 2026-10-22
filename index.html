@@ -406,9 +406,13 @@
     .marquee-track span { font-family:'IBM Plex Mono',monospace; font-size:.82rem; letter-spacing:.12em; text-transform:uppercase; color:var(--text-tertiary); white-space:nowrap; }
     @media (prefers-reduced-motion: no-preference) {
       .marquee-track { animation:marquee 34s linear infinite; }
-      .marquee:hover .marquee-track { animation-play-state:paused; }
+      .marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state:paused; }
     }
     @keyframes marquee { to { transform:translateX(-50%); } }
+    /* a linked tool opens the section that shows it, like the skill chips */
+    .marquee-track a.mq-link { color:var(--text-secondary); cursor:pointer; text-decoration:underline dotted var(--text-tertiary); text-decoration-thickness:1px; text-underline-offset:5px;
+      transition:color .2s var(--ease), text-decoration-color .2s var(--ease); }
+    .marquee-track a.mq-link:hover { color:var(--text); text-decoration-style:solid; text-decoration-color:var(--signal); }
 
     /* ================================================================
        WORK INDEX — bento-broken grid
@@ -1427,9 +1431,11 @@
 
     <div class="marquee" aria-label="Tools and skills">
       <div class="marquee-track" id="marquee-track">
-        <span>CAD · SolidWorks · Onshape · Fusion 360 · CFD · KiCad · PCB design · MicroPython · Python · asyncio · MATLAB · Java · AI coding agents · Raspberry Pi · VESC · GPS + IMU fusion · Stereo camera rigs · PCB mill · Laser cutter · FDM printing · Composite layup &nbsp;·&nbsp; </span>
+        <!-- linked tools open the section that shows them (the same spots as the Experience skill chips);
+             out of the tab order, because a moving strip of tab stops is worse than none and the chips are reachable -->
+        <span><a class="mq-link" href="#project-combat" data-section="combat-design" tabindex="-1">CAD</a> · <a class="mq-link" href="#project-boat" data-section="boat-hull" tabindex="-1">SolidWorks</a> · <a class="mq-link" href="#project-maze" data-section="maze-design" tabindex="-1">Onshape</a> · Fusion 360 · <a class="mq-link" href="#project-boat" data-section="boat-cfd" tabindex="-1">CFD</a> · <a class="mq-link" href="#project-boat" data-section="boat-v3" tabindex="-1">KiCad</a> · <a class="mq-link" href="#project-boat" data-section="boat-pcb" tabindex="-1">PCB design</a> · <a class="mq-link" href="#project-maze" data-section="maze-firmware" tabindex="-1">MicroPython</a> · <a class="mq-link" href="#project-boat" data-section="boat-v1-firmware" tabindex="-1">Python</a> · <a class="mq-link" href="#project-boat" data-section="boat-v1-firmware" tabindex="-1">asyncio</a> · MATLAB · Java · <a class="mq-link" href="#project-arm" data-section="arm-sim" tabindex="-1">AI coding agents</a> · <a class="mq-link" href="#project-boat" data-section="boat-v2" tabindex="-1">Raspberry Pi</a> · <a class="mq-link" href="#project-boat" data-section="boat-v3-fixes" tabindex="-1">VESC</a> · <a class="mq-link" href="#project-boat" data-section="boat-bom" tabindex="-1">GPS + IMU fusion</a> · <a class="mq-link" href="#project-boat" data-section="boat-vision" tabindex="-1">Stereo camera rigs</a> · <a class="mq-link" href="#project-arm" data-section="arm-tolerance" tabindex="-1">PCB mill</a> · Laser cutter · <a class="mq-link" href="#project-maze" data-section="maze-design" tabindex="-1">FDM printing</a> · <a class="mq-link" href="#project-boat" data-section="boat-hull-layup" tabindex="-1">Composite layup</a> &nbsp;·&nbsp; </span>
         <!-- second copy makes the -50% loop seamless; hidden from AT so it isn't read twice -->
-        <span aria-hidden="true">CAD · SolidWorks · Onshape · Fusion 360 · CFD · KiCad · PCB design · MicroPython · Python · asyncio · MATLAB · Java · AI coding agents · Raspberry Pi · VESC · GPS + IMU fusion · Stereo camera rigs · PCB mill · Laser cutter · FDM printing · Composite layup &nbsp;·&nbsp; </span>
+        <span aria-hidden="true"><a class="mq-link" href="#project-combat" data-section="combat-design" tabindex="-1">CAD</a> · <a class="mq-link" href="#project-boat" data-section="boat-hull" tabindex="-1">SolidWorks</a> · <a class="mq-link" href="#project-maze" data-section="maze-design" tabindex="-1">Onshape</a> · Fusion 360 · <a class="mq-link" href="#project-boat" data-section="boat-cfd" tabindex="-1">CFD</a> · <a class="mq-link" href="#project-boat" data-section="boat-v3" tabindex="-1">KiCad</a> · <a class="mq-link" href="#project-boat" data-section="boat-pcb" tabindex="-1">PCB design</a> · <a class="mq-link" href="#project-maze" data-section="maze-firmware" tabindex="-1">MicroPython</a> · <a class="mq-link" href="#project-boat" data-section="boat-v1-firmware" tabindex="-1">Python</a> · <a class="mq-link" href="#project-boat" data-section="boat-v1-firmware" tabindex="-1">asyncio</a> · MATLAB · Java · <a class="mq-link" href="#project-arm" data-section="arm-sim" tabindex="-1">AI coding agents</a> · <a class="mq-link" href="#project-boat" data-section="boat-v2" tabindex="-1">Raspberry Pi</a> · <a class="mq-link" href="#project-boat" data-section="boat-v3-fixes" tabindex="-1">VESC</a> · <a class="mq-link" href="#project-boat" data-section="boat-bom" tabindex="-1">GPS + IMU fusion</a> · <a class="mq-link" href="#project-boat" data-section="boat-vision" tabindex="-1">Stereo camera rigs</a> · <a class="mq-link" href="#project-arm" data-section="arm-tolerance" tabindex="-1">PCB mill</a> · Laser cutter · <a class="mq-link" href="#project-maze" data-section="maze-design" tabindex="-1">FDM printing</a> · <a class="mq-link" href="#project-boat" data-section="boat-hull-layup" tabindex="-1">Composite layup</a> &nbsp;·&nbsp; </span>
       </div>
     </div>
 
@@ -3355,8 +3361,8 @@ while True:
   });
 
   // ── Skill links ──
-  // Each linked chip in the skills grid opens the case-study section that shows
-  // the skill. Its href is only the project tab (the router owns location.hash,
+  // Each linked chip in the skills grid, and each linked tool in the home strip,
+  // opens the case-study section that shows the skill. Its href is only the project tab (the router owns location.hash,
   // as with .pd-nav), so a new-tab open still works; a click lands on the
   // section itself and rings it in red for a moment.
   function landOn(id, smooth) {
@@ -3372,7 +3378,7 @@ while True:
     if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
     el.focus({ preventScroll: true });
   }
-  document.querySelectorAll('a.cap-link[data-section]').forEach(a => a.addEventListener('click', e => {
+  document.querySelectorAll('a.cap-link[data-section], a.mq-link[data-section]').forEach(a => a.addEventListener('click', e => {
     if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
     if (document.body.classList.contains('edit-mode')) return;
