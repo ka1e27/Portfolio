@@ -606,6 +606,25 @@
     .img-ph-label { font-size:.82rem; font-weight:500; color:var(--text-tertiary); max-width:26em; line-height:1.5; }
 
     .pd-full-fig { margin-bottom:var(--s8); }
+    /* V3 system diagram (#boat-system): SVG from Figma with live text. Its fills are the light
+       theme's hex; these rules hand each one to the matching token, so dark mode follows.
+       The wide layout needs about 1100 px to keep its 13 px labels at 12 px or more. */
+    .sys-fig .sys-art svg { display:block; width:100%; height:auto; }
+    .sys-fig .sys-art .sys-narrow { display:none; max-width:420px; margin-inline:auto; }
+    @media (max-width:1179px){ .sys-fig .sys-art .sys-wide { display:none; } .sys-fig .sys-art .sys-narrow { display:block; }
+      .sys-fig .img-cap { max-width:420px; margin-inline:auto; } }
+    .sys-fig svg [fill="#FBFAF7"] { fill:var(--bg-elev); }
+    .sys-fig svg [stroke="#E3DFD6"] { stroke:var(--border); }
+    .sys-fig svg [fill="#F3F1EC"] { fill:var(--bg); }
+    .sys-fig svg [stroke="#CDC8BC"] { stroke:var(--chip-link-border); }
+    .sys-fig svg [fill="white"] { fill:var(--chip-link-bg); }
+    .sys-fig svg [fill="#EFEDE8"] { fill:var(--accent-soft); }
+    .sys-fig svg [fill="#1A1A18"] { fill:var(--text); }
+    .sys-fig svg [fill="#55534E"] { fill:var(--text-secondary); }
+    .sys-fig svg [fill="#6C6A64"] { fill:var(--text-tertiary); }
+    .sys-fig svg [fill="#C8102E"] { fill:var(--signal); }
+    .sys-fig svg [font-family="Manrope"] { font-family:'Manrope', system-ui, sans-serif; }
+    .sys-fig svg [font-family="IBM Plex Mono"] { font-family:'IBM Plex Mono', ui-monospace, monospace; }
     .pd-full-fig.is-portrait .img-el { max-width:min(var(--cap-lg),100%); margin-inline:auto; }
     /* the ONE full-bleed, frameless moment per case study */
     .pd-bleed { margin:0 0 var(--s9); }
@@ -1440,9 +1459,9 @@
       <div class="marquee-track" id="marquee-track">
         <!-- linked tools open the section that shows them (the same spots as the Experience skill chips);
              out of the tab order, because a moving strip of tab stops is worse than none and the chips are reachable -->
-        <span><a class="mq-link" href="#project-combat" data-section="combat-design" tabindex="-1">CAD<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-hull" tabindex="-1">SolidWorks<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-maze" data-section="maze-design" tabindex="-1">Onshape<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · Fusion 360 · <a class="mq-link" href="#project-boat" data-section="boat-cfd" tabindex="-1">CFD<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v3" tabindex="-1">KiCad<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-pcb" tabindex="-1">PCB design<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-maze" data-section="maze-firmware" tabindex="-1">MicroPython<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v1-firmware" tabindex="-1">Python<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v1-firmware" tabindex="-1">asyncio<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · MATLAB · Java · <a class="mq-link" href="#project-arm" data-section="arm-sim" tabindex="-1">AI coding agents<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v2" tabindex="-1">Raspberry Pi<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v3-fixes" tabindex="-1">VESC<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-bom" tabindex="-1">GPS + IMU fusion<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-vision" tabindex="-1">Stereo camera rigs<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-arm" data-section="arm-tolerance" tabindex="-1">PCB mill<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · Laser cutter · <a class="mq-link" href="#project-maze" data-section="maze-design" tabindex="-1">FDM printing<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-hull-layup" tabindex="-1">Composite layup<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> &nbsp;·&nbsp; </span>
+        <span><a class="mq-link" href="#project-combat" data-section="combat-design" tabindex="-1">CAD<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-hull" tabindex="-1">SolidWorks<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-maze" data-section="maze-design" tabindex="-1">Onshape<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · Fusion 360 · <a class="mq-link" href="#project-boat" data-section="boat-cfd" tabindex="-1">CFD<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v3" tabindex="-1">KiCad<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-pcb" tabindex="-1">PCB design<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-maze" data-section="maze-firmware" tabindex="-1">MicroPython<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v1-firmware" tabindex="-1">Python<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v1-firmware" tabindex="-1">asyncio<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · MATLAB · Java · <a class="mq-link" href="#project-arm" data-section="arm-sim" tabindex="-1">AI coding agents<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v2" tabindex="-1">Raspberry Pi<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v3-fixes" tabindex="-1">VESC<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-system" tabindex="-1">GPS + IMU fusion<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-vision" tabindex="-1">Stereo camera rigs<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-arm" data-section="arm-tolerance" tabindex="-1">PCB mill<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · Laser cutter · <a class="mq-link" href="#project-maze" data-section="maze-design" tabindex="-1">FDM printing<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-hull-layup" tabindex="-1">Composite layup<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> &nbsp;·&nbsp; </span>
         <!-- second copy makes the -50% loop seamless; hidden from AT so it isn't read twice -->
-        <span aria-hidden="true"><a class="mq-link" href="#project-combat" data-section="combat-design" tabindex="-1">CAD<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-hull" tabindex="-1">SolidWorks<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-maze" data-section="maze-design" tabindex="-1">Onshape<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · Fusion 360 · <a class="mq-link" href="#project-boat" data-section="boat-cfd" tabindex="-1">CFD<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v3" tabindex="-1">KiCad<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-pcb" tabindex="-1">PCB design<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-maze" data-section="maze-firmware" tabindex="-1">MicroPython<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v1-firmware" tabindex="-1">Python<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v1-firmware" tabindex="-1">asyncio<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · MATLAB · Java · <a class="mq-link" href="#project-arm" data-section="arm-sim" tabindex="-1">AI coding agents<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v2" tabindex="-1">Raspberry Pi<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v3-fixes" tabindex="-1">VESC<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-bom" tabindex="-1">GPS + IMU fusion<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-vision" tabindex="-1">Stereo camera rigs<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-arm" data-section="arm-tolerance" tabindex="-1">PCB mill<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · Laser cutter · <a class="mq-link" href="#project-maze" data-section="maze-design" tabindex="-1">FDM printing<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-hull-layup" tabindex="-1">Composite layup<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> &nbsp;·&nbsp; </span>
+        <span aria-hidden="true"><a class="mq-link" href="#project-combat" data-section="combat-design" tabindex="-1">CAD<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-hull" tabindex="-1">SolidWorks<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-maze" data-section="maze-design" tabindex="-1">Onshape<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · Fusion 360 · <a class="mq-link" href="#project-boat" data-section="boat-cfd" tabindex="-1">CFD<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v3" tabindex="-1">KiCad<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-pcb" tabindex="-1">PCB design<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-maze" data-section="maze-firmware" tabindex="-1">MicroPython<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v1-firmware" tabindex="-1">Python<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v1-firmware" tabindex="-1">asyncio<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · MATLAB · Java · <a class="mq-link" href="#project-arm" data-section="arm-sim" tabindex="-1">AI coding agents<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v2" tabindex="-1">Raspberry Pi<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-v3-fixes" tabindex="-1">VESC<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-system" tabindex="-1">GPS + IMU fusion<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-vision" tabindex="-1">Stereo camera rigs<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-arm" data-section="arm-tolerance" tabindex="-1">PCB mill<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · Laser cutter · <a class="mq-link" href="#project-maze" data-section="maze-design" tabindex="-1">FDM printing<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> · <a class="mq-link" href="#project-boat" data-section="boat-hull-layup" tabindex="-1">Composite layup<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> &nbsp;·&nbsp; </span>
       </div>
     </div>
 
@@ -1879,6 +1898,234 @@
 
     <div class="container" id="boat-stack">
       <div class="reveal pd-section-label"><span class="section-label">V3 stack</span></div>
+      <!-- V3 electronics, designed in Figma ("Kyle Tran Portfolio — figures", page "V3 electronics", frames
+           "V3 electronics — wide" and "— narrow") and exported as SVG with live text. Every connection is from
+           docs/v3/V3_DESIGN_BRIEF.md in ka1e27/dreams. The .sys-fig rules map its light-theme hex to the site tokens. -->
+      <figure class="img-fig pd-full-fig sys-fig reveal" id="boat-system">
+        <div class="sys-art" role="img" aria-label="Diagram of the V3 electronics. On the carrier board, a Raspberry Pi 5 runs navigation, mission logic and data logging, and reaches a 4G LTE modem over USB for the live map and mission upload. It talks to Pico 2 A over a UART on its GPIO header and has a reset line to each Pico. Pico A runs control: two VESCs on CAN driving two Flipsky 5048 motors, the SBUS RC receiver for hand-held override, and the winch&rsquo;s high-side switch, which fails safe off. Pico B, joined to Pico A by a UART, runs the sensors: an IMU, a high-g accelerometer, a light sensor, two temperature sensors and two power monitors through a TCA9548A I2C mux, the u-blox M10 GPS, and the sensor pod, an XIAO ESP32-S3 reading pH, dissolved oxygen, TDS, turbidity and temperature, over an RS-485 tether that also carries 15 volts. Two 10S Li-ion packs make one fused 10S bus, 30 to 42 volts, for the drive, the electronics and the winch, and an optional 4S backup keeps the Pi, Picos, sensors and radios on.">
+          <svg class="sys-wide" aria-hidden="true" focusable="false" viewBox="0 0 1160 629" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="1159" height="628" rx="13.5" fill="#FBFAF7"/>
+          <rect x="0.5" y="0.5" width="1159" height="628" rx="13.5" stroke="#E3DFD6"/>
+          <rect x="29.5" y="29.5" width="1101" height="473" rx="11.5" fill="#F3F1EC"/>
+          <rect x="29.5" y="29.5" width="1101" height="473" rx="11.5" stroke="#CDC8BC" stroke-dasharray="5 4"/>
+          <g>
+          <g>
+          <circle cx="55.5" cy="61" r="3.5" fill="#C8102E"/>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.12em"><tspan x="67" y="65.875">CARRIER BOARD &#xb7; REV F</tspan></text>
+          </g>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="782" y="65.875">122.1 &#xd7; 95.5 MM &#xb7; 4 LAYERS &#xb7; 140 PARTS</tspan></text>
+          </g>
+          <g>
+          <rect x="52.5" y="86.5" width="1055" height="84" rx="9.5" fill="white"/>
+          <rect x="52.5" y="86.5" width="1055" height="84" rx="9.5" stroke="#CDC8BC"/>
+          <g>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="18" font-weight="600" letter-spacing="0em"><tspan x="73" y="124.394">Raspberry Pi 5</tspan></text>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.1em"><tspan x="205" y="122.375">MISSION</tspan></text>
+          </g>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" letter-spacing="0em"><tspan x="73" y="147.362">Navigation, mission logic and data logging</tspan></text>
+          </g>
+          <g>
+          <g>
+          <rect x="687" y="107" width="74" height="24" rx="12" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="711.5" y="123.875">USB</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="15" font-weight="500" letter-spacing="0em"><tspan x="775" y="123.245">4G LTE modem</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" letter-spacing="0em"><tspan x="775" y="145.362">Live map and mission upload</tspan></text>
+          </g>
+          </g>
+          </g>
+          <rect x="294" y="171" width="1.5" height="34" fill="#6C6A64"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="305.5" y="192.875">UART ON THE GPIO HEADER &#xb7; A RESET LINE TO EACH PICO</tspan></text>
+          <g>
+          <rect x="52.5" y="205.5" width="483" height="274" rx="9.5" fill="white"/>
+          <rect x="52.5" y="205.5" width="483" height="274" rx="9.5" stroke="#CDC8BC"/>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="18" font-weight="600" letter-spacing="0em"><tspan x="73" y="243.394">Pico 2 &#xb7; A</tspan></text>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.1em"><tspan x="158" y="241.375">CONTROL</tspan></text>
+          </g>
+          <g>
+          <rect x="73" y="263" width="74" height="24" rx="12" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="97.5" y="279.875">CAN</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="15" font-weight="500" letter-spacing="0em"><tspan x="161" y="279.245">2&#xd7;&#xa0;VESC &#x2192; 2&#xd7;&#xa0;Flipsky 5048 motors</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" letter-spacing="0em"><tspan x="161" y="301.362">200 KV, belt drive</tspan></text>
+          </g>
+          </g>
+          <g>
+          <rect x="73" y="320" width="74" height="24" rx="12" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="93" y="336.875">SBUS</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="15" font-weight="500" letter-spacing="0em"><tspan x="161" y="336.245">RC receiver</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" letter-spacing="0em"><tspan x="161" y="358.362">Hand-held manual override</tspan></text>
+          </g>
+          </g>
+          <g>
+          <rect x="73" y="377" width="74" height="24" rx="12" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="88.5" y="393.875">WINCH</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="15" font-weight="500" letter-spacing="0em"><tspan x="161" y="393.245">High-side switch</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" letter-spacing="0em"><tspan x="161" y="415.362">Fails safe off</tspan></text>
+          </g>
+          </g>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="563" y="343.625">UART</tspan></text>
+          <rect x="536" y="353.75" width="88" height="1.5" fill="#6C6A64"/>
+          <rect x="624.5" y="205.5" width="483" height="274" rx="9.5" fill="white"/>
+          <rect x="624.5" y="205.5" width="483" height="274" rx="9.5" stroke="#CDC8BC"/>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="18" font-weight="600" letter-spacing="0em"><tspan x="645" y="243.394">Pico 2 &#xb7; B</tspan></text>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.1em"><tspan x="730" y="241.375">SENSORS</tspan></text>
+          </g>
+          <g>
+          <rect x="645" y="263" width="74" height="24" rx="12" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="669.5" y="279.875">I&#xb2;C</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="15" font-weight="500" letter-spacing="0em"><tspan x="733" y="279.245">IMU, high-g accelerometer, light sensor, </tspan><tspan x="733" y="300.245">2&#xd7;&#xa0;temperature, 2&#xd7;&#xa0;power monitor</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" letter-spacing="0em"><tspan x="733" y="322.362">Through a TCA9548A mux</tspan></text>
+          </g>
+          </g>
+          <g>
+          <rect x="645" y="341" width="74" height="24" rx="12" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="669.5" y="357.875">GPS</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="15" font-weight="500" letter-spacing="0em"><tspan x="733" y="357.245">u-blox M10</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" letter-spacing="0em"><tspan x="733" y="379.362">Position; heading comes from the IMU</tspan></text>
+          </g>
+          </g>
+          <g>
+          <rect x="645" y="398" width="74" height="24" rx="12" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="656.5" y="414.875">RS-485</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="15" font-weight="500" letter-spacing="0em"><tspan x="733" y="414.245">Sensor pod &#xb7; XIAO ESP32-S3</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" letter-spacing="0em"><tspan x="733" y="436.362">pH, DO, TDS, turbidity and temperature; the tether also </tspan><tspan x="733" y="456.362">carries 15&#xa0;V</tspan></text>
+          </g>
+          </g>
+          </g>
+          </g>
+          <rect x="29.5" y="519.5" width="1101" height="80" rx="9.5" fill="white"/>
+          <rect x="29.5" y="519.5" width="1101" height="80" rx="9.5" stroke="#CDC8BC"/>
+          <g>
+          <rect x="50" y="538" width="74" height="24" rx="12" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="65.5" y="554.875">POWER</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="15" font-weight="500" letter-spacing="0em"><tspan x="138" y="554.245">Two 10S Li-ion packs &#x2192; one fused 10S bus, 30&#x2013;42&#xa0;V</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" letter-spacing="0em"><tspan x="138" y="576.362">Feeds the drive, the electronics and the winch. An optional 4S backup keeps the Pi, Picos, sensors and radios on.</tspan></text>
+          </g>
+          </g>
+          </svg>
+          <svg class="sys-narrow" aria-hidden="true" focusable="false" viewBox="0 0 348 1007" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="347" height="1006" rx="13.5" fill="#FBFAF7"/>
+          <rect x="0.5" y="0.5" width="347" height="1006" rx="13.5" stroke="#E3DFD6"/>
+          <rect x="13.5" y="13.5" width="321" height="824" rx="11.5" fill="#F3F1EC"/>
+          <rect x="13.5" y="13.5" width="321" height="824" rx="11.5" stroke="#CDC8BC" stroke-dasharray="5 4"/>
+          <g>
+          <g>
+          <circle cx="28.5" cy="34" r="3.5" fill="#C8102E"/>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.12em"><tspan x="40" y="38.875">CARRIER BOARD &#xb7; REV F</tspan></text>
+          </g>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="25" y="60.875">122.1 &#xd7; 95.5 MM &#xb7; 4 LAYERS</tspan></text>
+          </g>
+          <g>
+          <rect x="25.5" y="77.5" width="297" height="124" rx="9.5" fill="white"/>
+          <rect x="25.5" y="77.5" width="297" height="124" rx="9.5" stroke="#CDC8BC"/>
+          <g>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="16.5" font-weight="600" letter-spacing="0em"><tspan x="39" y="109.819">Raspberry Pi 5</tspan></text>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.1em"><tspan x="161" y="108.375">MISSION</tspan></text>
+          </g>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="13" letter-spacing="0em"><tspan x="39" y="130.979">Navigation, mission logic and data logging</tspan></text>
+          </g>
+          <g>
+          <g>
+          <rect x="39" y="147" width="68" height="22" rx="11" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="60.5" y="162.875">USB</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" font-weight="500" letter-spacing="0em"><tspan x="117" y="162.362">4G LTE modem</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="13" letter-spacing="0em"><tspan x="117" y="182.979">Live map and mission upload</tspan></text>
+          </g>
+          </g>
+          </g>
+          <rect x="55" y="202" width="1.5" height="46" fill="#6C6A64"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="66.5" y="220.875">UART ON THE GPIO HEADER, PLUS </tspan><tspan x="66.5" y="238.875">A RESET LINE TO EACH PICO</tspan></text>
+          <g>
+          <rect x="25.5" y="248.5" width="297" height="228" rx="9.5" fill="white"/>
+          <rect x="25.5" y="248.5" width="297" height="228" rx="9.5" stroke="#CDC8BC"/>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="16.5" font-weight="600" letter-spacing="0em"><tspan x="39" y="280.819">Pico 2 &#xb7; A</tspan></text>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.1em"><tspan x="118" y="279.375">CONTROL</tspan></text>
+          </g>
+          <g>
+          <rect x="39" y="298" width="68" height="22" rx="11" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="60.5" y="313.875">CAN</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" font-weight="500" letter-spacing="0em"><tspan x="117" y="313.362">2&#xd7;&#xa0;VESC &#x2192; 2&#xd7;&#xa0;Flipsky 5048 </tspan><tspan x="117" y="333.362">motors</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="13" letter-spacing="0em"><tspan x="117" y="353.979">200 KV, belt drive</tspan></text>
+          </g>
+          </g>
+          <g>
+          <rect x="39" y="370" width="68" height="22" rx="11" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="56" y="385.875">SBUS</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" font-weight="500" letter-spacing="0em"><tspan x="117" y="385.362">RC receiver</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="13" letter-spacing="0em"><tspan x="117" y="405.979">Hand-held manual override</tspan></text>
+          </g>
+          </g>
+          <g>
+          <rect x="39" y="422" width="68" height="22" rx="11" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="51.5" y="437.875">WINCH</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" font-weight="500" letter-spacing="0em"><tspan x="117" y="437.362">High-side switch</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="13" letter-spacing="0em"><tspan x="117" y="457.979">Fails safe off</tspan></text>
+          </g>
+          </g>
+          <rect x="55" y="477" width="1.5" height="46" fill="#6C6A64"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="66.5" y="504.875">UART</tspan></text>
+          <rect x="25.5" y="523.5" width="297" height="302" rx="9.5" fill="white"/>
+          <rect x="25.5" y="523.5" width="297" height="302" rx="9.5" stroke="#CDC8BC"/>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="16.5" font-weight="600" letter-spacing="0em"><tspan x="39" y="555.819">Pico 2 &#xb7; B</tspan></text>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.1em"><tspan x="117" y="554.375">SENSORS</tspan></text>
+          </g>
+          <g>
+          <rect x="39" y="573" width="68" height="22" rx="11" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="60.5" y="588.875">I&#xb2;C</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" font-weight="500" letter-spacing="0em"><tspan x="117" y="588.362">IMU, high-g accelerometer, </tspan><tspan x="117" y="608.362">light sensor, 2&#xd7;&#xa0;temperature, </tspan><tspan x="117" y="628.362">2&#xd7;&#xa0;power monitor</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="13" letter-spacing="0em"><tspan x="117" y="648.979">Through a TCA9548A mux</tspan></text>
+          </g>
+          </g>
+          <g>
+          <rect x="39" y="665" width="68" height="22" rx="11" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="60.5" y="680.875">GPS</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" font-weight="500" letter-spacing="0em"><tspan x="117" y="680.362">u-blox M10</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="13" letter-spacing="0em"><tspan x="117" y="700.979">Position; heading comes from </tspan><tspan x="117" y="718.979">the IMU</tspan></text>
+          </g>
+          </g>
+          <g>
+          <rect x="39" y="735" width="68" height="22" rx="11" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="47.5" y="750.875">RS-485</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" font-weight="500" letter-spacing="0em"><tspan x="117" y="750.362">Sensor pod &#xb7; XIAO ESP32-S3</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="13" letter-spacing="0em"><tspan x="117" y="770.979">pH, DO, TDS, turbidity and </tspan><tspan x="117" y="788.979">temperature; the tether also </tspan><tspan x="117" y="806.979">carries 15&#xa0;V</tspan></text>
+          </g>
+          </g>
+          </g>
+          </g>
+          <rect x="13.5" y="850.5" width="321" height="143" rx="9.5" fill="white"/>
+          <rect x="13.5" y="850.5" width="321" height="143" rx="9.5" stroke="#CDC8BC"/>
+          <g>
+          <rect x="27" y="865" width="68" height="22" rx="11" fill="#EFEDE8"/>
+          <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="39.5" y="880.875">POWER</tspan></text>
+          <g>
+          <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" font-weight="500" letter-spacing="0em"><tspan x="105" y="880.362">Two 10S Li-ion packs &#x2192; one </tspan><tspan x="105" y="900.362">fused 10S bus, 30&#x2013;42&#xa0;V</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="13" letter-spacing="0em"><tspan x="105" y="920.979">Feeds the drive, the electronics and </tspan><tspan x="105" y="938.979">the winch. An optional 4S backup </tspan><tspan x="105" y="956.979">keeps the Pi, Picos, sensors and </tspan><tspan x="105" y="974.979">radios on.</tspan></text>
+          </g>
+          </g>
+          </svg>
+        </div>
+        <figcaption class="img-cap">How the V3 electronics connect: the Pi runs the mission, one Pico the drive and the other the sensors</figcaption>
+      </figure>
       <details id="boat-bom" class="spec-details reveal">
         <summary>Key components &amp; bill of materials <svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
         <div class="spec-strip cols-2 reveal">
@@ -2813,7 +3060,7 @@ while True:
       </div>
       <div class="cap-cell reveal">
         <div class="cap-k">Robotics &amp; autonomy</div>
-        <div class="cap-list"><a class="cap-item cap-link" href="#project-boat" data-section="boat-vision" title="Survey boat · stereo vision">Stereo camera rigs<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-bom" title="Survey boat · V3 components">GPS + IMU fusion<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-v3-fixes" title="Survey boat · V3 motor control">VESC drive<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-bom" title="Survey boat · V3 components">4G telemetry<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-software" title="Survey boat · the V2 mission state machine">State machines<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+        <div class="cap-list"><a class="cap-item cap-link" href="#project-boat" data-section="boat-vision" title="Survey boat · stereo vision">Stereo camera rigs<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-system" title="Survey boat · the V3 electronics">GPS + IMU fusion<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-v3-fixes" title="Survey boat · V3 motor control">VESC drive<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-system" title="Survey boat · the V3 electronics">4G telemetry<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="cap-item cap-link" href="#project-boat" data-section="boat-software" title="Survey boat · the V2 mission state machine">State machines<svg class="cap-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
       </div>
       <div class="cap-cell reveal">
         <div class="cap-k">Leadership</div>
