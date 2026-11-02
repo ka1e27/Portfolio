@@ -1599,7 +1599,7 @@
       </div>
       <div id="boat-team" class="pd-result is-note reveal">
         <span class="r-key">Team</span>
-        <span class="r-text">On V1, Matthew built the hull and I did the bridge that ties the hulls together, the propulsion and the winch. On V2 I built and fiberglassed the hull and did all of the electronics. On V3 I&rsquo;m the design lead: I work on every part of the boat, do the PCBs and the machining, and got PCBWay to sponsor our boards. Matthew co-leads the mechanical and structural design, including a Van Veen grab sediment sampler delivered with a full drawing package and bill of materials, and handles planning and communications. Nolan Ting, Caleb Kong and Logan Chen joined in fall 2026: Nolan drew our new logo, and Logan runs our marketing.</span>
+        <span class="r-text">On V1, Matthew built the hull and I did the bridge that ties the hulls together, the propulsion and the winch. On V2 I built and fiberglassed the hull and did all of the electronics. On V3 I&rsquo;m the design lead: I work on every part of the boat, do the PCBs and the machining, and got PCBWay to sponsor our boards. Matthew co-leads the mechanical and structural design, including a Van Veen grab sediment sampler delivered with a full drawing package and bill of materials, and handles planning and communications. Nolan Ting and Caleb Kong joined in fall 2026 as team engineers, and Logan Chen to run our marketing; Nolan also drew our new logo.</span>
       </div>
       <div class="pd-result is-note reveal">
         <span class="r-key">Software</span>
@@ -1812,7 +1812,7 @@
           <thead><tr><th class="aspect">Where V2 fell short</th><th>The V3 fix</th></tr></thead>
           <tbody>
             <tr><td class="aspect">Real-time control</td><td class="v2">Two Pico&nbsp;2s: one runs the motors, winch and RC, the other the sensors, GPS and the pod link. They talk to the Pi over its header, so its USB ports stay free for cameras</td></tr>
-            <tr><td class="aspect">Motor control</td><td class="v2">Each VESC is its own node on a CAN bus, through a TJA1051 transceiver, driving a Flipsky 5048 200&nbsp;KV sensored outrunner at about 200&ndash;300&nbsp;W per side</td></tr>
+            <tr><td class="aspect">Motor control</td><td class="v2">Each VESC is its own node on a CAN bus, through a TJA1051 transceiver, driving a Flipsky 5048 sensored outrunner, wound to 150&nbsp;KV and geared 2:1 to its prop by belt</td></tr>
             <tr><td class="aspect">Power</td><td class="v2">One 10S Li-ion bus where every feed gets its own fuse and current monitor, plus an optional 4S backup that keeps the computers and radios on if the main packs go off</td></tr>
             <tr><td class="aspect">Safety</td><td class="v2">A hand-held RC override at any time, and a winch cut-off that fails safe if the control Pico resets or loses power</td></tr>
           </tbody>
@@ -1833,7 +1833,7 @@
     <div class="container">
       <div id="boat-hull" class="pd-split reveal">
         <div class="pd-split-text">
-          <p>The V3 hull lives in SolidWorks: 963 &times; 733 &times; 368&nbsp;mm overall, with 940&nbsp;mm hulls whose tub and lid each print in one piece. The project site shows it in 3D, where you can pull it apart and slice through it.</p>
+          <p>The V3 hull lives in SolidWorks: 963 &times; 733 &times; 368&nbsp;mm overall, with 940&nbsp;mm hulls set 500&nbsp;mm apart, whose tub and lid each print in one piece. The project site shows it in 3D, where you can pull it apart and slice through it.</p>
         </div>
         <figure class="img-fig">
           <img class="img-el img-clickable" data-src="images/web/dreams-v3-hull-cad.jpg" width="1600" height="900" alt="SolidWorks render of the D.R.E.A.M.S V3 twin hulls and bridge, red with white decks" loading="lazy" decoding="async" onerror="imgFallback(this)">
@@ -1844,8 +1844,8 @@
 
     <!-- V3 hull CFD: Kyle ran all of it (SolidWorks Flow Simulation, 2026-10-19). Numbers from the project site's
          week ending Oct 23; model column = the hull-only resistance in mechanical/reports/propulsion_report.md, no margin.
-         Prop CFD (Oct 19-21, in progress, also his): values read off his Flow Simulation goal tables, from
-         DREAMS_CFD_summary.md + DREAMS_CFD_screenshots.pdf in his Downloads. Thrust is per prop, shaft power = torque x speed. -->
+         Prop CFD (Oct 19-28, also his): early props from DREAMS_CFD_summary.md in his Downloads; F27 and the drive
+         from the site's week ending Oct 30, docs/v3/V3_MECHANICAL.md and his run log (C:\Users\kyleg\tools\dreams_flowsim). -->
     <div class="container" id="boat-cfd">
       <div class="reveal pd-section-label"><span class="section-label">V3 hull CFD</span></div>
       <div class="pd-split reveal">
@@ -1868,32 +1868,26 @@
           </tbody>
         </table>
       </div>
-      <div class="reveal pd-section-label pd-sub-label" id="boat-props"><span class="section-label">Prop CFD · in progress</span></div>
+      <div class="reveal pd-section-label pd-sub-label" id="boat-props"><span class="section-label">Prop design · CFD</span></div>
       <div class="pd-split media-left reveal is-portrait">
         <figure class="img-fig">
-          <img class="img-el img-clickable" data-src="images/web/dreams-toroidal-prop-cfd.jpg" width="660" height="660" alt="Flow Simulation of a toroidal propeller seen down its axis: three interlocking loops with flow vectors swirling around them" loading="lazy" decoding="async" onerror="imgFallback(this)">
-          <figcaption class="img-cap">One of the toroidal props in Flow Simulation, seen down its axis</figcaption>
+          <img class="img-el img-clickable" data-src="images/web/dreams-toroidal-prop-cfd.jpg" width="660" height="660" alt="Flow Simulation of an early toroidal propeller seen down its axis: three interlocking loops with flow vectors swirling around them" loading="lazy" decoding="async" onerror="imgFallback(this)">
+          <figcaption class="img-cap">An early toroidal prop in Flow Simulation, seen down its axis</figcaption>
         </figure>
         <div class="pd-split-text">
-          <p>Now I&rsquo;m running CFD on props for the belt drive, starting with three toroidal designs, 85, 90 and 140&nbsp;mm across. They spin in a rotating region in water, some runs standing still and some with 2&nbsp;m/s of inflow to stand in for the boat moving at about 4 knots. Thrust and torque from each run give the shaft power and the efficiency.</p>
-          <p>Two early results changed what I&rsquo;m looking for. Turning on Flow Simulation&rsquo;s cavitation model cut the 90&nbsp;mm prop&rsquo;s static thrust at 300&nbsp;rad/s from about 33&nbsp;N to 20&nbsp;N, so runs without it overstate thrust. And a bigger prop wasn&rsquo;t more efficient on its own: at similar thrust, each turned only about 20&ndash;28% of its shaft power into thrust. At 300&nbsp;rad/s the 140&nbsp;mm prop makes about 170&nbsp;N and takes about 2&nbsp;kW, far more than the boat needs.</p>
-          <p>Next come cavitation-on runs at lower speeds, a mesh check near the blades, and a conventional three-blade prop through the same setup as a baseline.</p>
+          <p>Then I designed the props. They&rsquo;re toroidal: each blade is a closed loop. Three early designs, 85, 90 and 140&nbsp;mm across, showed that cavitation could cut a prop&rsquo;s thrust by 35&ndash;50%, and that a bigger prop isn&rsquo;t more efficient on its own.</p>
+          <p>So I took one 130&nbsp;mm, three-loop design and refined it over nearly 50 Flow Simulation runs, changing one thing at a time: the section angles, the fin length, the thickness. The power it needs at the 2.5-knot cruise fell from about 47&nbsp;W to about 26&nbsp;W per prop. The final version, F27, makes about 7.7&nbsp;N at 80&nbsp;rad/s, so two of them cover the hulls&rsquo; 13&nbsp;N, and its roots are thick enough to print in tough resin. Each finished run was read through Flow Simulation&rsquo;s automation API and logged into a prop calculator by a script I built with AI coding agents.</p>
+          <p>The bigger, slower prop changed the drive too: I geared it 2:1 on a 15&nbsp;mm belt and picked a custom 150&nbsp;KV winding of the 5048 motor, which cuts the belt&rsquo;s pull at top speed from about 85&nbsp;N to 60&nbsp;N. Caleb, Nolan and I are now designing the propulsion system around F27, starting with printing it and measuring its thrust.</p>
         </div>
       </div>
-      <div class="diff-wrap reveal">
-        <table class="diff-table">
-          <thead><tr><th class="aspect">Prop · speed</th><th>Condition</th><th>Thrust · shaft power</th></tr></thead>
-          <tbody>
-            <tr><td class="aspect">85&nbsp;mm &middot; 500&nbsp;rad/s</td><td class="v1">2&nbsp;m/s inflow</td><td class="v2">~40&nbsp;N &middot; ~315&nbsp;W</td></tr>
-            <tr><td class="aspect">90&nbsp;mm &middot; 300&nbsp;rad/s</td><td class="v1">Standing still</td><td class="v2">~33&nbsp;N &middot; ~205&nbsp;W</td></tr>
-            <tr><td class="aspect">90&nbsp;mm &middot; 300&nbsp;rad/s</td><td class="v1">Standing still, cavitation on</td><td class="v2">~20&nbsp;N &middot; ~158&nbsp;W</td></tr>
-            <tr><td class="aspect">90&nbsp;mm &middot; 300&nbsp;rad/s</td><td class="v1">2&nbsp;m/s inflow, cavitation on</td><td class="v2">~10&nbsp;N &middot; ~133&nbsp;W</td></tr>
-            <tr><td class="aspect">140&nbsp;mm &middot; 150&nbsp;rad/s</td><td class="v1">2&nbsp;m/s inflow</td><td class="v2">~31&nbsp;N &middot; ~224&nbsp;W</td></tr>
-            <tr><td class="aspect">140&nbsp;mm &middot; 300&nbsp;rad/s</td><td class="v1">2&nbsp;m/s inflow</td><td class="v2">~172&nbsp;N &middot; ~2,020&nbsp;W</td></tr>
-          </tbody>
-        </table>
+      <div class="spec-strip reveal">
+        <div class="spec-cell"><div class="spec-key">F27 · shape</div><div class="spec-val">130&nbsp;mm, three loops, 25&nbsp;mm hub</div></div>
+        <div class="spec-cell"><div class="spec-key">Cruise · 2.5 kn</div><div class="spec-val">~26&nbsp;W per prop, down from ~47&nbsp;W</div></div>
+        <div class="spec-cell"><div class="spec-key">Sprint · 3.4 kn</div><div class="spec-val">~19&nbsp;N for ~100&nbsp;W per prop</div></div>
+        <div class="spec-cell"><div class="spec-key">Runs</div><div class="spec-val">Nearly 50, one change at a time</div></div>
+        <div class="spec-cell"><div class="spec-key">Material</div><div class="spec-val">3D-printed tough resin</div></div>
+        <div class="spec-cell"><div class="spec-key">Drive</div><div class="spec-val">2:1 on a 15&nbsp;mm belt · 150&nbsp;KV motor</div></div>
       </div>
-      <p class="pd-closing reveal pd-table-note">Per prop, from early runs; cavitation is off unless the row says otherwise.</p>
     </div>
 
     <div class="container" id="boat-stack">
@@ -1902,7 +1896,7 @@
            "V3 electronics — wide" and "— narrow") and exported as SVG with live text. Every connection is from
            docs/v3/V3_DESIGN_BRIEF.md in ka1e27/dreams. The .sys-fig rules map its light-theme hex to the site tokens. -->
       <figure class="img-fig pd-full-fig sys-fig reveal" id="boat-system">
-        <div class="sys-art" role="img" aria-label="Diagram of the V3 electronics. On the carrier board, a Raspberry Pi 5 runs navigation, mission logic and data logging, and reaches a 4G LTE modem over USB for the live map and mission upload. It talks to Pico 2 A over a UART on its GPIO header and has a reset line to each Pico. Pico A runs control: two VESCs on CAN driving two Flipsky 5048 motors, the SBUS RC receiver for hand-held override, and the winch&rsquo;s high-side switch, which fails safe off. Pico B, joined to Pico A by a UART, runs the sensors: an IMU, a high-g accelerometer, a light sensor, two temperature sensors and two power monitors through a TCA9548A I2C mux, the u-blox M10 GPS, and the sensor pod, an XIAO ESP32-S3 reading pH, dissolved oxygen, TDS, turbidity and temperature, over an RS-485 tether that also carries 15 volts. Two 10S Li-ion packs make one fused 10S bus, 30 to 42 volts, for the drive, the electronics and the winch, and an optional 4S backup keeps the Pi, Picos, sensors and radios on.">
+        <div class="sys-art" role="img" aria-label="Diagram of the V3 electronics. On the carrier board, a Raspberry Pi 5 runs navigation, mission logic and data logging, and reaches a 4G LTE modem over USB for the live map and mission upload. It talks to Pico 2 A over a UART on its GPIO header and has a reset line to each Pico. Pico A runs control: two VESCs on CAN driving two Flipsky 5048 motors, wound to 150 KV and geared 2:1 to the props by belt, the SBUS RC receiver for hand-held override, and the winch&rsquo;s high-side switch, which fails safe off. Pico B, joined to Pico A by a UART, runs the sensors: an IMU, a high-g accelerometer, a light sensor, two temperature sensors and two power monitors through a TCA9548A I2C mux, the u-blox M10 GPS, and the sensor pod, an XIAO ESP32-S3 reading pH, dissolved oxygen, TDS, turbidity and temperature, over an RS-485 tether that also carries 15 volts. Two 10S Li-ion packs make one fused 10S bus, 30 to 42 volts, for the drive, the electronics and the winch, and an optional 4S backup keeps the Pi, Picos, sensors and radios on.">
           <svg class="sys-wide" aria-hidden="true" focusable="false" viewBox="0 0 1160 629" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="0.5" y="0.5" width="1159" height="628" rx="13.5" fill="#FBFAF7"/>
           <rect x="0.5" y="0.5" width="1159" height="628" rx="13.5" stroke="#E3DFD6"/>
@@ -1949,7 +1943,7 @@
           <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="97.5" y="279.875">CAN</tspan></text>
           <g>
           <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="15" font-weight="500" letter-spacing="0em"><tspan x="161" y="279.245">2&#xd7;&#xa0;VESC &#x2192; 2&#xd7;&#xa0;Flipsky 5048 motors</tspan></text>
-          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" letter-spacing="0em"><tspan x="161" y="301.362">200 KV, belt drive</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" letter-spacing="0em"><tspan x="161" y="301.362">150 KV, geared 2:1 by belt</tspan></text>
           </g>
           </g>
           <g>
@@ -2059,7 +2053,7 @@
           <text fill="#6C6A64" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="60.5" y="313.875">CAN</tspan></text>
           <g>
           <text fill="#1A1A18" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="14" font-weight="500" letter-spacing="0em"><tspan x="117" y="313.362">2&#xd7;&#xa0;VESC &#x2192; 2&#xd7;&#xa0;Flipsky 5048 </tspan><tspan x="117" y="333.362">motors</tspan></text>
-          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="13" letter-spacing="0em"><tspan x="117" y="353.979">200 KV, belt drive</tspan></text>
+          <text fill="#55534E" style="white-space: pre" xml:space="preserve" font-family="Manrope" font-size="13" letter-spacing="0em"><tspan x="117" y="353.979">150 KV, geared 2:1 by belt</tspan></text>
           </g>
           </g>
           <g>
@@ -2138,7 +2132,8 @@
         <div class="bom">
           <div class="bom-row"><span class="b-name">Raspberry Pi 5</span><span class="b-note">navigation · missions · logging · cloud link</span></div>
           <div class="bom-row"><span class="b-name">2× Raspberry Pi Pico 2</span><span class="b-note">motors · winch · RC · sensors · GPS · pod link</span></div>
-          <div class="bom-row"><span class="b-name">2× Flipsky VESC on CAN · Flipsky 5048 200 KV</span><span class="b-note">differential drive · ~200–300 W per side</span></div>
+          <div class="bom-row"><span class="b-name">2× Flipsky VESC on CAN · Flipsky 5048, custom 150 KV</span><span class="b-note">2:1 belt to the props · differential drive</span></div>
+          <div class="bom-row"><span class="b-name">2× F27 toroidal prop · 130 mm</span><span class="b-note">3D-printed tough resin</span></div>
           <div class="bom-row"><span class="b-name">u-blox M10 GPS · BNO085 IMU</span><span class="b-note">position + heading · plus a high-g accelerometer and light sensor</span></div>
           <div class="bom-row"><span class="b-name">Fish-finder sonar</span><span class="b-note">water depth</span></div>
           <div class="bom-row"><span class="b-name">Seeed XIAO ESP32-S3 pod · RS-485 tether</span><span class="b-note">pH · DO · TDS · turbidity · temp</span></div>
@@ -2152,7 +2147,7 @@
       <div id="boat-software" class="pd-closing reveal">
         <p>The V2 software ran against a laptop simulator before any hardware was attached, and its command center still does, in the browser. Its mission was a state machine &mdash; <span class="mono">transit → deploy → sample → retract → advance</span> &mdash; with geo-fenced boundaries and automatic return-to-home on low battery.</p>
         <p>V3 is modular by intent: the hull, payload and software are configured for each job, starting with surface water-quality surveys. Swap the pod and the same platform could carry sonar for bathymetric mapping, cameras for an underwater survey, or tools for collecting samples.</p>
-        <p>Next comes fabricating the boards, which PCBWay sponsors, and assembling the electronics, pod and fish finder into the new hull, then firmware for autonomous waypoint navigation, surface sampling and depth logging, and field trials. We&rsquo;re talking with the Charles River Watershed Association about collecting water-quality data for them. The CRWA and the Port of Oakland both told us their teams still collect sediment samples by sending divers down, and that is what my <a href="#project-arm" data-tab="project-arm">robotic arm</a> is for: a deck arm that works with the winch to bring water and sediment samples back.</p>
+        <p>Next comes fabricating the boards, which PCBWay sponsors, and assembling the electronics, pod and fish finder into the new hull, then firmware for autonomous waypoint navigation, surface sampling and depth logging, and field trials. Our first data will be water temperature, depth and GPS position, from sensors tested against national standards (NIST-traceable), in the lab until the boat is ready. We&rsquo;re talking with the Charles River Watershed Association about collecting water-quality data for them, and with the Marine Science Institute in Redwood City about a program with their students. The CRWA and the Port of Oakland both told us their teams still collect sediment samples by sending divers down, and that is what my <a href="#project-arm" data-tab="project-arm">robotic arm</a> is for: a deck arm that works with the winch to bring water and sediment samples back.</p>
       </div>
     </div>
   </div>
